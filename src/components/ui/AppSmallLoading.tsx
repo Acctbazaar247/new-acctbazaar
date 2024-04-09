@@ -1,0 +1,13 @@
+import { Spin } from "antd";
+
+const AppSmallLoading = ({ className }: { className?: string }) => {
+  return (
+    <div
+      className={`w-full h-full bg-inherit flex items-center justify-center ${className}`}
+    >
+      <Spin size="large" className="text-primary app-small " />
+    </div>
+  );
+};
+
+export default AppSmallLoading;
