@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/router";
 import Loading from "@/components/ui/Loading";
@@ -13,7 +13,14 @@ interface PrivateLayoutProps {
 const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
   const { isLoading, user } = useAppSelector((state) => state.user);
   const router = useRouter();
-
+  useEffect(() => {
+    if (!user?.email && !isLoading) {
+      router.push({
+        pathname: "/auth/sign-in",
+        query: { from: router?.pathname },
+      });
+    }
+  }, [user, router, isLoading]);
   if (isLoading) {
     return (
       <div className="flex justify-center">

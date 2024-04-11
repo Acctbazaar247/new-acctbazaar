@@ -55,13 +55,6 @@ const Contactus = (props: Props) => {
         setLoading(false);
       });
   };
-  if (!user?.id) {
-    return (
-      <HomeLayout>
-        <Loading></Loading>
-      </HomeLayout>
-    );
-  }
   return (
     <HomeLayout>
       <PrivateLayout>
@@ -70,7 +63,7 @@ const Contactus = (props: Props) => {
           <div className="mt-10">
             <Form
               submitHandler={handleSubmit}
-              defaultValues={{ name: user.name, email: user?.email }}
+              defaultValues={{ name: user?.name, email: user?.email }}
             >
               <div className="grid gap-3  grid-cols-1 md:grid-cols-2 ">
                 {/* Add the select dropdown here */}
