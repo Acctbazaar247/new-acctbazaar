@@ -22,23 +22,19 @@ import dateFormat from "dateformat";
 import { useGetCurrencyRequestsQuery } from "@/redux/features/currencyRequest/currencyRequestApi";
 const Wallet = () => {
   const [page, setPage] = useState<number>(1);
+  const [page2, setPage2] = useState<number>(1);
   // const debouncedSearch = useDebounce(search, 500);
   const user = useAppSelector((state) => state.user.user);
   const [showWithdraw, setShowWithdraw] = useState(
     user?.role !== UserRole.User ? false : true
   );
   const { data, isLoading } = useGetCurrencyOfLoggedInUserQuery("");
-  const currencyQuery = useGetCurrencyRequestsQuery(`ownById=${user?.id}`);
+
   const queryString = useMemo(() => {
     const info = {
-      // category: selectedCategories.join('-'),
       page,
-      // isSold: false,
-      // minPrice: minPrice,
-      // maxPrice: maxPrice,
-      // approvedForSale: "approved",
       limit: 10,
-      // searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
+      ownById: user?.id,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -48,8 +44,23 @@ const Wallet = () => {
       return pre;
     }, "");
     return queryString;
-  }, [page]);
-
+  }, [page, user]);
+  const queryStringCurrencyRequest = useMemo(() => {
+    const info = {
+      page: page2,
+      limit: 10,
+      ownById: user?.id,
+    };
+    const queryString = Object.keys(info).reduce((pre, key: string) => {
+      const value = info[key as keyof typeof info];
+      if (value) {
+        return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${value}`;
+      }
+      return pre;
+    }, "");
+    return queryString;
+  }, [page2, user]);
+  const currencyQuery = useGetCurrencyRequestsQuery(queryStringCurrencyRequest);
   const queryData = useGetWithdrawFundsQuery(queryString);
 
   const columnsMobile = [
@@ -369,7 +380,7 @@ const Wallet = () => {
                               columns={currencyRequestColumnPc}
                               dataSource={data?.data}
                               pagination={{
-                                onChange: (value) => setPage(value),
+                                onChange: (value) => setPage2(value),
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
@@ -391,7 +402,7 @@ const Wallet = () => {
                               dataSource={data?.data}
                               size="small"
                               pagination={{
-                                onChange: (value) => setPage(value),
+                                onChange: (value) => setPage2(value),
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
