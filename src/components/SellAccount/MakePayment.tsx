@@ -12,7 +12,6 @@ type TMakePayment = {
 };
 
 export default function MakePayment({ updateProgress }: TMakePayment) {
-
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const router = useRouter();
 
@@ -56,8 +55,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
       <div className="py-6 space-y-6 md:w-2/5 mx-auto">
         <div
           onClick={() => setSelectedOption("bank")}
-          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${selectedOption === "bank" ? "border-primary" : "border-[#C5C5C5]"
-            }`}
+          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
+            selectedOption === "bank" ? "border-primary" : "border-[#C5C5C5]"
+          }`}
         >
           <Image
             width={32}
@@ -69,18 +69,16 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
           <div className="space-y-1">
             <h3 className="text-textBlack font-bold">Bank / Card payment</h3>
             <p className="text-sm text-textGrey">
-              Make deposit using either your card or transfer to our local
-              bank
+              Make deposit using either your card or transfer to our local bank
             </p>
           </div>
         </div>
 
         <div
           onClick={() => setSelectedOption("crypto")}
-          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${selectedOption === "crypto"
-            ? "border-primary"
-            : "border-[#C5C5C5]"
-            }`}
+          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
+            selectedOption === "crypto" ? "border-primary" : "border-[#C5C5C5]"
+          }`}
         >
           <Image
             width={32}
@@ -92,8 +90,8 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
           <div className="space-y-1">
             <h3 className="text-textBlack font-bold">Crypto</h3>
             <p className="text-sm text-textGrey">
-              Make payment using any of the crypto exchange platform to
-              deposit to an address
+              Make payment using any of the crypto exchange platform to deposit
+              to an address
             </p>
           </div>
         </div>
@@ -104,7 +102,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         </button>
       ) : (
         <button onClick={handlePayment} className="appBtn">
-          Pay $10 (₦14,500)
+          Pay ${config.sellerPay} (₦{config.sellerPay * config.dollarRate})
         </button>
       )}
     </div>

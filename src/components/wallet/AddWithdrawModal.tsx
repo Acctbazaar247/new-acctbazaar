@@ -98,8 +98,8 @@ export default function AddWithdrawModal() {
     const parseAmount: number = parseFloat(amount) || 0;
     if (!parseAmount) {
       toast.error("Amount is required");
-    } else if (parseAmount < 20) {
-      toast.error("Min withdrawal amount is $20");
+    } else if (parseAmount < config.withdrawalMinMoney) {
+      toast.error("Min withdrawal amount is " + config.withdrawalMinMoney);
     } else if (parseAmount > maxWithdraw) {
       toast.error("Max amount reached!");
     } else if (parseAmount > config.withdrawalMaxMoney) {
@@ -220,7 +220,9 @@ export default function AddWithdrawModal() {
               <div className="flex items-center justify-between textG">
                 <p>
                   Min. withdrawal amount is{" "}
-                  <span className="text-textBlack font-medium">$20</span>
+                  <span className="text-textBlack font-medium">
+                    ${config.withdrawalMinMoney}
+                  </span>
                 </p>
                 <p>
                   Available{" "}
