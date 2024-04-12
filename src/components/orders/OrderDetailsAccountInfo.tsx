@@ -57,7 +57,7 @@ const OrderDetailsAccountInfo = ({
           className="overflow-hidden px-1 space-y-3.5 py-2 text-textBlack"
         >
           <div className="flex items-center justify-between text-sm">
-            <p className="text-textGrey">Email</p>
+            <p className="text-textGrey">Email/UserName</p>
             <p>{account?.email}</p>
           </div>
           <div className="flex items-center justify-between text-sm">
