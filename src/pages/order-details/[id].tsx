@@ -48,7 +48,7 @@ const OrderDetails = () => {
 
   const accountDetailsInfo = {
     id: mainData.id || "",
-    email: mainData.account?.ownBy?.email || "",
+    email: mainData.account.username || "",
     password: mainData.account.password || "",
     preview: mainData.account.preview || "",
     additionalEmail: mainData.account.additionalEmail || "",
