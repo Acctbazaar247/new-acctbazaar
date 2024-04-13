@@ -61,9 +61,9 @@ export default function CartAccountCard({
           <p className="text-textBlack text-xs">
             {account.account?.ownBy?.name}
           </p>
-          {account?.ownBy?.isVerified && (
+          {/* {account?.ownBy?.isVerified && (
             <RiVerifiedBadgeFill className="text-success" />
-          )}
+          )} */}
         </div>
         <h3 className="text-textBlack font-medium text-sm  md:text-base flex items-center justify-between md:justify-normal !line-clamp-1">
           {account?.account?.name}
