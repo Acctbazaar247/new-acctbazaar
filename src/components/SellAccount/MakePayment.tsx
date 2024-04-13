@@ -102,7 +102,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         </button>
       ) : (
         <button onClick={handlePayment} className="appBtn">
-          Pay ${config.sellerPay} (₦{config.sellerPay * config.dollarRate})
+          Pay ${config.sellerPay}
         </button>
       )}
     </div>
