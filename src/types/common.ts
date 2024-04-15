@@ -98,6 +98,7 @@ export enum AccountCategory {
   Reddit = "Reddit",
   Discord = "Discord",
   Pof = "Pof",
+  Hinge = "Hinge",
   // Gaming accounts
   Playstation = "Playstation",
   CallOfDuty = "CallOfDuty",

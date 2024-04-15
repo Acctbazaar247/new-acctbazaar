@@ -119,6 +119,11 @@ export const SocialMediaCategories: IProduct_Category[] = [
     value: AccountCategory.Pof,
     imageUrl: "/assets/product/pof.png",
   },
+  {
+    label: "Hinge",
+    value: AccountCategory.Hinge,
+    imageUrl: "/assets/product/hinge.png",
+  },
 ];
 
 export const GamingAccountCategories = [

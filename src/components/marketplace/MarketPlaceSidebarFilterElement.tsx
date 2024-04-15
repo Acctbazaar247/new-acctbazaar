@@ -56,8 +56,9 @@ const MarketPlaceSidebarFilterElement = ({
             className="size-5"
             width={120}
             height={120}
-            quality={100}
+            quality={1}
             src={sidebar?.imageUrl}
+            unoptimized={true}
             alt="icon image"
           />{" "}
           {sidebar?.label}
@@ -93,7 +94,8 @@ const MarketPlaceSidebarFilterElement = ({
                     width={16}
                     height={16}
                     src={item?.imageUrl}
-                    alt="logo"
+                    alt={item.label}
+                    unoptimized={true}
                   />
                   {item?.label}
                 </label>
