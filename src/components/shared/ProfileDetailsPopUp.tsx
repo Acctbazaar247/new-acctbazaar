@@ -31,7 +31,8 @@ export default function ProfileDetailsPopUp() {
           src={user?.profileImg as string}
           alt="user icon"
         />
-        {user?.isVerified && (
+
+        {/* {user?.isVerified && (
           <Image
             width={16}
             height={16}
@@ -39,7 +40,7 @@ export default function ProfileDetailsPopUp() {
             src={"/assets/icons/verified.png"}
             alt="country icon"
           />
-        )}
+        )} */}
       </div>
       <div className="hidden md:block">
         <AppPopover

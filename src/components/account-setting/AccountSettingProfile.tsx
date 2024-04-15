@@ -82,16 +82,17 @@ const AccountSettingProfile = () => {
       dateOfBirth: string;
       phoneNumber: string;
       id: string | undefined;
-      profileImg?: string;
+      profileImg?: string | null;
     } = {
       id: user?.id,
       ...data,
       country: countryObj?.name,
+      profileImg: url || user?.profileImg,
       //   state: stateObj?.name,
     };
-    if (!readOnly && url) {
-      submittedData.profileImg = url;
-    }
+    // if (!readOnly && url) {
+    //   submittedData.profileImg = url;
+    // }
 
     await editUser(submittedData)
       .unwrap()
@@ -186,7 +187,7 @@ const AccountSettingProfile = () => {
         }))
       : [];
   }, [selectedCountry, selectedState]);
-
+  console.log(url);
   return (
     <form
       className="w-full md:py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
@@ -277,13 +278,14 @@ const AccountSettingProfile = () => {
         {/* this is right side text  */}
         <div className="w-full md:w-[40%] flex items-center justify-between gap-4">
           <img
+            width={400}
+            height={400}
             className="size-20 rounded-full object-cover"
             src={url ? url : (user?.profileImg as string)}
-            alt=""
+            alt="profile"
           />
           <div className="">
             <input
-              disabled={readOnly}
               onChange={(e) =>
                 handleFileUpload(e.target.files && e.target.files[0])
               }
@@ -329,11 +331,6 @@ const AccountSettingProfile = () => {
                 // </label>
               )}
             </div>
-            {readOnly && (
-              <p className="text-xs text-textGrey">
-                You can update your image after {daysLeft} days
-              </p>
-            )}
           </div>
         </div>
       </div>

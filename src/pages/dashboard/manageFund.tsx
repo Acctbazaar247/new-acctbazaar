@@ -166,7 +166,7 @@ const ManageFund = (props: Props) => {
                     }}
                     title="Are you sure to change the status to denied"
                   >
-                    <button className="border rounded px-3 py-1 bg-red-500 text-white ">
+                    <button className="border bg-red rounded px-3 py-1 bg-red-500 text-white ">
                       Denied
                     </button>
                   </Popconfirm>

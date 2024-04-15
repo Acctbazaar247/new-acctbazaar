@@ -74,13 +74,13 @@ const ManageAllUserTableSingleRow = ({
           onConfirm={handleDelete}
           placement="leftTop"
           okButtonProps={{
-            className: "!border !border-blue-300 text-blue-500",
+            className: "!border !border-blue-300  text-blue-500",
           }}
         >
           <button
             disabled={isLoading || isDeleteLoading}
             // onClick={}
-            className="border border-red-300 px-3 leading-0 rounded-md  bg-red-500 transition-all text-white py-2 ml-2"
+            className="border border-red-300 px-3 leading-0 rounded-md bg-red  transition-all text-white py-2 ml-2"
           >
             Delete
           </button>
