@@ -74,7 +74,7 @@ const AccountSettingProfile = () => {
     const stateObj = State.getStateByCodeAndCountry(data.country, data.state);
     const submittedData: {
       country: string | undefined;
-      name: string;
+      name?: string;
       email: string;
       address: string;
       state: string;
@@ -93,18 +93,21 @@ const AccountSettingProfile = () => {
     // if (!readOnly && url) {
     //   submittedData.profileImg = url;
     // }
+    if (submittedData.name === user?.name) {
+      delete submittedData.name;
+    }
 
     await editUser(submittedData)
       .unwrap()
       .then((res: ResponseSuccessType) => {
         if (!res.success) {
-          toast.error(res.message || "Something went wrong");
+          toast.error(res.message || "Something went wrongs");
         } else {
           toast.success("Successfully profile saved");
         }
       })
-      .catch((res: IGenericErrorResponse) => {
-        toast.error(res.message || "Something went wrong");
+      .catch((res: ResponseErrorType) => {
+        toast.error(res?.data?.message || "Something went wrong");
       });
   };
   const handleFileUpload = async (value: any) => {

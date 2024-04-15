@@ -97,7 +97,7 @@ export enum AccountCategory {
   Bumble = "Bumble",
   Reddit = "Reddit",
   Discord = "Discord",
-
+  Pof = "Pof",
   // Gaming accounts
   Playstation = "Playstation",
   CallOfDuty = "CallOfDuty",
@@ -119,6 +119,7 @@ export enum AccountCategory {
   WeChat = "WeChat",
   TextNow = "TextNow",
   TextPlus = "TextPlus",
+  Signal = "Signal",
 
   // VPN accounts
   Windscribe = "Windscribe",

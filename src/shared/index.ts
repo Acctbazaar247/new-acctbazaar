@@ -114,6 +114,11 @@ export const SocialMediaCategories: IProduct_Category[] = [
     value: AccountCategory.Discord,
     imageUrl: "/assets/product/discord.png",
   },
+  {
+    label: "Pof",
+    value: AccountCategory.Pof,
+    imageUrl: "/assets/product/pof.png",
+  },
 ];
 
 export const GamingAccountCategories = [
@@ -209,6 +214,11 @@ export const EmailMessagingCategories: IProduct_Category[] = [
     label: "TextPlus",
     value: AccountCategory.TextPlus,
     imageUrl: "/assets/product/textplus.png",
+  },
+  {
+    label: "Signal",
+    value: AccountCategory.TextPlus,
+    imageUrl: "/assets/product/signal.png",
   },
 ];
 export const VpnCategories: IProduct_Category[] = [
