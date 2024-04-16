@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import AppFormTextarea from "../ui/AppFormTextarea";
 import AppFormSelect from "../ui/AppFormSelect";
 import AppFormInput from "../ui/AppFormInput";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { ACCOUNT_CATEGORIES } from "@/shared";
 import { Avatar } from "antd";
 import { AccountCategory } from "@/types/common";
@@ -53,15 +53,17 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
     dispatch(setAccountCard(data));
   };
 
-  const categoryOptions = ACCOUNT_CATEGORIES.map((single) => ({
-    value: single?.value,
-    label: (
-      <div className="flex gap-2 items-center">
-        <Avatar src={single.imageUrl}></Avatar>
-        <span>{single.label}</span>
-      </div>
-    ),
-  }));
+  const categoryOptions = useMemo(() => {
+    return ACCOUNT_CATEGORIES.map((single) => ({
+      value: single?.value,
+      label: (
+        <div key={single.value} className="flex gap-2 items-center">
+          <Avatar src={single.imageUrl}></Avatar>
+          <span>{single.label}</span>
+        </div>
+      ),
+    }));
+  }, []);
 
   const handleSkipModal = () => {
     setModalOpen(false);

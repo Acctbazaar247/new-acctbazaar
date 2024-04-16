@@ -222,7 +222,7 @@ export const EmailMessagingCategories: IProduct_Category[] = [
   },
   {
     label: "Signal",
-    value: AccountCategory.TextPlus,
+    value: AccountCategory.Signal,
     imageUrl: "/assets/product/signal.png",
   },
 ];
