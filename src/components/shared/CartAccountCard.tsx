@@ -23,6 +23,7 @@ import {
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDeleteCartMutation } from "@/redux/features/cart/cartApi";
 import { findImageUrlByCategory } from "@/shared";
+import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
 
 type TCartAccountCard = {
   account: ICart;
@@ -34,7 +35,7 @@ export default function CartAccountCard({
   isModal,
 }: TCartAccountCard) {
   const dispatch = useAppDispatch();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteCart, { isLoading: isDeleteLoading }] = useDeleteCartMutation();
 
   return (
@@ -89,53 +90,29 @@ export default function CartAccountCard({
                 />
               </div>
             ) : (
-              <AppModal
-                title="Account Details"
-                button={
-                  <button>
-                    <Image
-                      src={"/assets/icons/eye.png"}
-                      width={40}
-                      height={40}
-                      className="size-4 md:size-5"
-                      alt="eye"
-                    />
-                  </button>
-                }
-              >
-                <div className="md:w-[500px] space-y-1">
-                  {/* <MarketplaceAccountCard isModal account={account} /> */}
-                  <div className="flex items-center justify-center flex-col">
-                    <Image
-                      src={findImageUrlByCategory(
-                        account?.account?.category as AccountCategory
-                      )}
-                      className="size-9 md:size-10 lg:size-14 2xl:size-16"
-                      width={70}
-                      height={70}
-                      alt="social icons"
-                    />
-                    <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal">
-                      {account?.account?.name}
-                    </h3>
-                    <p className="text-textGrey pt-0.5 text-xs md:text-sm">
-                      {account?.account?.description}
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <p className="text-textGrey">Owner Email</p>
-                    <p>{account?.ownBy?.email}</p>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <p className="text-textGrey">2FA Email</p>
-                    <p>{account?.account?.additionalEmail}</p>
-                  </div>
-                  <div className="space-y-1.5">
-                    <p className="text-textGrey">Additional Information</p>
-                    <p>{account?.account?.additionalDescription}</p>
-                  </div>
-                </div>
-              </AppModal>
+              <div>
+                <button
+                  className="w-[16px]"
+                  // disabled={isLoading}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <Image
+                    src={"/assets/icons/eye.png"}
+                    width={40}
+                    height={40}
+                    className="size-4 md:size-5"
+                    alt="eye"
+                  />
+                </button>
+                {account?.account ? (
+                  <AccountDetailsModal
+                    {...account.account}
+                    isModalOpen={isModalOpen}
+                    handleCancel={() => setIsModalOpen(false)}
+                    handelOk={() => setIsModalOpen(false)}
+                  ></AccountDetailsModal>
+                ) : null}
+              </div>
             )}
 
             <div className="">
