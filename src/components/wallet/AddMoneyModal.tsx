@@ -96,7 +96,7 @@ export default function AddMoneyModal() {
           value={amount.toString()}
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
-        <button
+        {/* <button
           onClick={() => setSelectedOption("bank")}
           className={`flex gap-5 p-4 border border-[#C5C5C5] rounded-lg transition-all w-full text-left ${
             selectedOption === "bank" ? "border-orange-400" : ""
@@ -115,13 +115,12 @@ export default function AddMoneyModal() {
               Make deposit using either your card or transfer to our local bank
             </p>
           </div>
-        </button>
+        </button> */}
 
         <button
           onClick={() => setSelectedOption("crypto")}
-          className={`flex gap-5 p-4 border border-[#C5C5C5] rounded-lg transition-all w-full text-left ${
-            selectedOption === "crypto" ? "border-orange-400" : ""
-          }`}
+          className={`flex gap-5 p-4 border border-[#C5C5C5] rounded-lg transition-all w-full text-left ${selectedOption === "crypto" ? "border-orange-400" : ""
+            }`}
         >
           <Image
             width={32}
