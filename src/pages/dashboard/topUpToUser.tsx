@@ -42,7 +42,7 @@ const TopUpToUser = (props: Props) => {
   const debouncedSearch = useDebounce(search, 500);
   const queryString = useMemo(() => {
     const info = {
-      // role: UserRole.User,
+      role: UserRole.User,
       page,
       limit: 50,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
