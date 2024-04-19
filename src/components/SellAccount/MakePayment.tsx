@@ -76,8 +76,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
 
         <div
           onClick={() => setSelectedOption("crypto")}
-          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${selectedOption === "crypto" ? "border-primary" : "border-[#C5C5C5]"
-            }`}
+          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
+            selectedOption === "crypto" ? "border-primary" : "border-[#C5C5C5]"
+          }`}
         >
           <Image
             width={32}
@@ -94,6 +95,16 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
             </p>
           </div>
         </div>
+      </div>
+      <div className="mb-4 ">
+        <p className=" ">
+          For naira payment, DM
+          <a href="https://t.me/acctbazaar1" className="text-blue-500">
+            {" "}
+            @acctbazaar1
+          </a>{" "}
+           on telegram
+        </p>
       </div>
       {isLoading ? (
         <button className="appBtn px-10 flex items-center justify-center">

@@ -43,7 +43,7 @@ const Marketplace = () => {
       minPrice: minPriceDe,
       maxPrice: maxPriceDe,
       approvedForSale: "approved",
-      limit: 75,
+      limit: 150,
       page,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
     };
