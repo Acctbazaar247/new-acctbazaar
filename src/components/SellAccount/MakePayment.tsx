@@ -96,16 +96,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
           </div>
         </div>
       </div>
-      <div className="mb-4 ">
-        <p className=" ">
-          For naira payment, DM
-          <a href="https://t.me/acctbazaar1" className="text-blue-500">
-            {" "}
-            @acctbazaar1
-          </a>{" "}
-           on telegram
-        </p>
-      </div>
+
       {isLoading ? (
         <button className="appBtn px-10 flex items-center justify-center">
           <AiOutlineLoading3Quarters className="animate-spin text-white text-2xl" />

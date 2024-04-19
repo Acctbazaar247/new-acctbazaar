@@ -119,8 +119,9 @@ export default function AddMoneyModal() {
 
         <button
           onClick={() => setSelectedOption("crypto")}
-          className={`flex gap-5 p-4 border border-[#C5C5C5] rounded-lg transition-all w-full text-left ${selectedOption === "crypto" ? "border-orange-400" : ""
-            }`}
+          className={`flex gap-5 p-4 border border-[#C5C5C5] rounded-lg transition-all w-full text-left ${
+            selectedOption === "crypto" ? "border-orange-400" : ""
+          }`}
         >
           <Image
             width={32}
@@ -137,6 +138,14 @@ export default function AddMoneyModal() {
             </p>
           </div>
         </button>
+        <p className=" ">
+          For naira payment, DM
+          <a href="https://t.me/acctbazaar1" className="text-blue-500">
+            {" "}
+            @acctbazaar1
+          </a>{" "}
+           on telegram
+        </p>
         <div className="flex justify-center">
           <button
             onClick={handleSubmit}
