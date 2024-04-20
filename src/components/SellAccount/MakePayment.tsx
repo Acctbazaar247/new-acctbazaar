@@ -89,10 +89,10 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
           />
           <div className="space-y-1">
             <h3 className="text-textBlack font-bold">Crypto</h3>
-            {/* <p className="text-sm text-textGrey">
+            <p className="text-sm text-textGrey">
               Make payment using any of the crypto exchange platform to deposit
               to an address
-            </p> */}
+            </p>
           </div>
         </div>
       </div>

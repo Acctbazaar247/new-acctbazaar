@@ -138,14 +138,14 @@ export default function AddMoneyModal() {
             </p>
           </div>
         </button>
-        <p className=" ">
+        {/* <p className=" ">
           For naira payment, DM
           <a href="https://t.me/acctbazaar1" className="text-blue-500">
             {" "}
             @acctbazaar1
           </a>{" "}
            on telegram
-        </p>
+        </p> */}
         <div className="flex justify-center">
           <button
             onClick={handleSubmit}
