@@ -36,6 +36,7 @@
     "react-otp-input": "^3.1.1",
     "react-phone-input-2": "^2.15.1",
     "react-qr-code": "^2.0.12",
+    "react-recaptcha": "^2.3.10",
     "react-redux": "^8.1.1",
     "react-sticky-el": "^2.1.0",
     "react-toastify": "^7.0.4",

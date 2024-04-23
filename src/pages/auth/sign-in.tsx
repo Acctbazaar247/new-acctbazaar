@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "react-phone-input-2/lib/material.css";
 import { toast } from "react-toastify";
-
+// import Recaptcha from "react-recaptcha";
 interface FormData {
   name: string;
   email: string;
@@ -23,7 +23,7 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
 
   const { isLoading, user, error } = useAppSelector((state) => state.user);
@@ -93,6 +93,7 @@ const SignIn = () => {
               placeholder="Type your Password"
               error={errors.password}
             />
+            {/* <Recaptcha sitekey=" f" /> */}
 
             <div className="flex items-center justify-end text-xs text-textGrey hover:text-primary lg:text-sm">
               <Link href={"/auth/forgot-password"}>
