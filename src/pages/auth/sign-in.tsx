@@ -95,12 +95,16 @@ const SignIn = () => {
               placeholder="Type your Password"
               error={errors.password}
             />
-            <ReCAPTCHA
-              onChange={(res) => {
-                console.log({ res });
-              }}
-              sitekey={config.captcha as string}
-            />
+            {config.captcha ? (
+              <ReCAPTCHA
+                onChange={(res) => {
+                  console.log({ res });
+                }}
+                sitekey={config.captcha as string}
+              />
+            ) : (
+              <div>Captcha 303 dev</div>
+            )}
 
             <div className="flex items-center justify-end text-xs text-textGrey hover:text-primary lg:text-sm">
               <Link href={"/auth/forgot-password"}>
