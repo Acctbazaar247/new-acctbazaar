@@ -8,6 +8,8 @@ import Head from "next/head";
 import RootLayout from "@/layout/RootLayout";
 import { ToastContainer } from "react-toastify";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import config from "@/utils/config";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 const plus = Plus_Jakarta_Sans({
   subsets: ["latin"],
