@@ -11,7 +11,10 @@ import "react-phone-input-2/lib/material.css";
 import { toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import config from "@/utils/config";
-
+import {
+  GoogleReCaptchaProvider,
+  GoogleReCaptcha,
+} from "react-google-recaptcha-v3";
 interface FormData {
   name: string;
   email: string;
@@ -96,12 +99,19 @@ const SignIn = () => {
               error={errors.password}
             />
             {config.captcha ? (
-              <ReCAPTCHA
-                onChange={(res) => {
-                  console.log({ res });
-                }}
-                sitekey={config.captcha as string}
-              />
+              // <ReCAPTCHA
+              //   onChange={(res) => {
+              //     console.log({ res });
+              //   }}
+              //   sitekey={config.captcha as string}
+              // />
+              <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}>
+                <GoogleReCaptcha
+                  onVerify={(token) => {
+                    console.log(token);
+                  }}
+                />
+              </GoogleReCaptchaProvider>
             ) : (
               <div>Captcha 303 dev</div>
             )}
