@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                 </button>
               ) : (
                 <button
-                  disabled={!token}
+                  // disabled={!token}
                   type="submit"
                   className="appBtn mt-4 lg:mt-6 w-full"
                 >
