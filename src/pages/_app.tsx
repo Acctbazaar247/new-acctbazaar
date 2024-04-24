@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import config from "@/utils/config";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import OnDeployment from "@/components/OnDeployment/OnDeployment";
 
 const plus = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -34,11 +35,15 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Provider store={store}>
         <RootLayout>
-          <main className={plus.className}>
-            <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}>
-              <Component {...pageProps} />
-            </GoogleReCaptchaProvider>
-          </main>
+          {config.onDevelopment ? (
+            <OnDeployment></OnDeployment>
+          ) : (
+            <main className={plus.className}>
+              <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}>
+                <Component {...pageProps} />
+              </GoogleReCaptchaProvider>
+            </main>
+          )}
         </RootLayout>
       </Provider>
       <ToastContainer
