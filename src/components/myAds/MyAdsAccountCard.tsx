@@ -80,7 +80,7 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
         </div>
         <div>
           {account.approvedForSale === EApprovedForSale.denied ? (
-            <div className="p-2 rounded w-full bg-[#FFFAE6] mt-2 ">
+            <div className="p-2 rounded w-full md:w-1/2 bg-[#FFFAE6] mt-2 ">
               <span className="flex gap-2 items-center  mb-3 text-[#A77207] ">
                 <MdErrorOutline></MdErrorOutline> Reason for denied
               </span>{" "}
