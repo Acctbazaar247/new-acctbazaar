@@ -227,6 +227,7 @@ export interface IAccount {
   price: number;
   accountType: AccountType;
   category: AccountCategory;
+  messageFromAdmin?: String;
   createdAt: Date;
   shouldSendEmail: boolean;
   isApprovedForSeller: boolean;

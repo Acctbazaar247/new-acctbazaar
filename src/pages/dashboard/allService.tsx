@@ -27,6 +27,8 @@ import Form from "@/components/Forms/Form";
 import { optionCreator } from "@/utils";
 import useIsMobile from "@/hooks/useIsMobile";
 import { ACCOUNT_CATEGORIES } from "@/shared";
+import AppModal from "@/components/ui/AppModal";
+import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
 type Props = {};
 type DataType = {} & IAccount;
 
@@ -70,7 +72,11 @@ function AllService({}: Props) {
         <button
           className="app-status-button bg-green-600"
           onClick={() => {
-            editService({ id, approvedForSale: EApprovedForSale.approved });
+            editService({
+              id,
+              approvedForSale: EApprovedForSale.approved,
+              messageFromAdmin: "",
+            });
           }}
         >
           Approve
@@ -95,14 +101,15 @@ function AllService({}: Props) {
   const deniedButton = (id: string) => {
     return (
       <div>
-        <button
-          className="app-status-button bg-yellow-500"
-          onClick={() => {
-            editService({ id, approvedForSale: EApprovedForSale.denied });
+        <AccountDeniedFrom
+          handleEdit={(info) => {
+            editService({
+              id,
+              approvedForSale: EApprovedForSale.denied,
+              messageFromAdmin: info.message,
+            });
           }}
-        >
-          Denied
-        </button>
+        ></AccountDeniedFrom>
       </div>
     );
   };
@@ -195,7 +202,7 @@ function AllService({}: Props) {
                     ) : (
                       <>
                         {approveButton(record.id)}
-                        {deniedButton(record.id)}
+                        {pendingButton(record.id)}
                       </>
                     )}
                   </div>

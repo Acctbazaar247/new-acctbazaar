@@ -82,7 +82,7 @@ const EditServiceForm = ({ data }: Props) => {
           price: hasScientificNotation(data.price) ? 0 : data.price,
         }}
       >
-        <div className="grid gap-3  grid-cols-1 md:grid-cols-2 ">
+        <div className="grid gap-3  grid-cols-1 xl:grid-cols-2 ">
           <div>
             <FormInput label="Name" name="name" required={true} />
           </div>
@@ -108,7 +108,7 @@ const EditServiceForm = ({ data }: Props) => {
               required={true}
             />
           </div>
-          <div className="col-span-2">
+          <div className="xl:col-span-2">
             <FormInput
               label="Preview"
               type="url"
@@ -116,7 +116,7 @@ const EditServiceForm = ({ data }: Props) => {
               name="preview"
             />
           </div>
-          <div className="col-span-2">
+          <div className="xl:col-span-2">
             <FormSelectField
               label="Select category"
               name="category"
@@ -124,31 +124,22 @@ const EditServiceForm = ({ data }: Props) => {
               options={categoryOption}
             ></FormSelectField>
           </div>
-          <div className="col-span-2">
+          <div className="xl:col-span-2">
             <FormTextArea label="Description" name="description" />
           </div>
 
-          <div className="col-span-2">
+          <div className="xl:col-span-2">
             <h2 className="text-xl  mt-2">Additional Info</h2>
           </div>
           <div>
-            <FormInput
-              disabled={true}
-              label="Additional Email"
-              name="additionalEmail"
-            />
+            <FormInput label="Additional Email" name="additionalEmail" />
           </div>
           <div>
-            <FormInput
-              label="Additional password"
-              disabled={true}
-              name="additionalPassword"
-            />
+            <FormInput label="Additional password" name="additionalPassword" />
           </div>
           <div>
             <FormInput
               label="Additional Information"
-              disabled={true}
               name="additionalDescription"
             />
           </div>

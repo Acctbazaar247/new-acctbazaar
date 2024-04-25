@@ -48,14 +48,14 @@ const AppModal = ({
         closeIcon={closeable}
         maskClosable={closeable}
         title={
-          <>
-            <h1 className="title text-xl">{title}</h1>
+          <div>
+            <h1 className="title text-xl ">{title}</h1>
             {subTitle && (
               <p className="text-textGrey text-xs md:text-sm font-normal w-fit">
                 {subTitle}
               </p>
             )}
-          </>
+          </div>
         }
         centered
         width="auto"

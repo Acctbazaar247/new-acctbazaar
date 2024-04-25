@@ -1,6 +1,6 @@
 import { useDeleteAccountMutation } from "@/redux/features/account/accountApi";
 import { findImageUrlByCategory } from "@/shared";
-import { AccountCategory, IAccount } from "@/types/common";
+import { AccountCategory, EApprovedForSale, IAccount } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import { Tooltip } from "antd";
 import Image from "next/image";
@@ -34,7 +34,7 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
             </p>
           </div>
           <p
-            className={`text-sm   py-1 px-2 rounded-full ${
+            className={`text-sm  capitalize  py-1 px-2 rounded-full ${
               (account?.approvedForSale === "pending" &&
                 "text-[#B54708] bg-[#FFFAEB]") ||
               (account?.approvedForSale === "denied" &&
@@ -77,6 +77,14 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
               </>
             ) : null}
           </div>
+        </div>
+        <div>
+          {account.approvedForSale === EApprovedForSale.denied ? (
+            <p className="text-red">
+              <span className="text-black">Admin Message</span>{" "}
+              {account.messageFromAdmin || "No Message"}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
