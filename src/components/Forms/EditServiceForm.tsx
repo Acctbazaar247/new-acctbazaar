@@ -1,5 +1,10 @@
 import { useEditAccountMutation } from "@/redux/features/account/accountApi";
-import { AccountCategory, IAccount, UserRole } from "@/types/common";
+import {
+  AccountCategory,
+  EApprovedForSale,
+  IAccount,
+  UserRole,
+} from "@/types/common";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import Form from "./Form";
@@ -35,7 +40,13 @@ const EditServiceForm = ({ data }: Props) => {
       toast.error("price is not valid");
       return;
     } else {
-      editService({ ...rest, id: data.id })
+      editService({
+        ...rest,
+        id: data.id,
+        username,
+        password,
+        approvedForSale: EApprovedForSale.pending,
+      })
         .unwrap()
         .then((res: any) => {
           if (res.error) {
@@ -63,7 +74,7 @@ const EditServiceForm = ({ data }: Props) => {
     return <Loading></Loading>;
   }
   return (
-    <div>
+    <div className="pb-10">
       <Form
         submitHandler={handleSubmit}
         defaultValues={{
@@ -85,7 +96,6 @@ const EditServiceForm = ({ data }: Props) => {
           </div>
           <div>
             <FormInput
-              disabled={true}
               label="Username/Email of Account"
               name="username"
               required={true}
@@ -94,7 +104,6 @@ const EditServiceForm = ({ data }: Props) => {
           <div>
             <FormInput
               label="Password of Account"
-              disabled={true}
               name="password"
               required={true}
             />
@@ -102,6 +111,7 @@ const EditServiceForm = ({ data }: Props) => {
           <div className="col-span-2">
             <FormInput
               label="Preview"
+              type="url"
               placeholder="Add and preview link"
               name="preview"
             />

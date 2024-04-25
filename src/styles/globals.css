@@ -410,8 +410,10 @@ input[type="range"]::-moz-range-thumb {
 
 
 /* on deploy ment */
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
 
-
+/*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 3.5rem;
 
@@ -465,11 +467,7 @@ img {
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
-.container {
-  max-width: 1024px;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
+ 
 
 .main {
   /* overflow: hidden; For the animations ScrollReveal */
@@ -581,7 +579,7 @@ img {
 }
 
 .home__title {
-  font-size: 2rem !important;
+  font-size: 2.3rem !important;
   line-height: 55px;
   margin: .75rem 0;
 }
@@ -662,150 +660,7 @@ img {
   animation: shadow 1.8s infinite alternate;
 }
 
-
-footer{
-  position: relative;
-  width: 100%;
-  height: auto;
-  padding: 50px 100px;
-  margin-top: 3rem;
-  background: #383838;
-  display: flex;
-  font-family: sans-serif;
-  justify-content: space-between;
-  margin-top: 7.5rem;
-
-}
-
-.footer-container{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.footer-container .sec{
-  margin-right: 30px;
-}
-
-.footer-container .sec.aboutus{
-  width: 40%;
-}
-
-.footer-container h2{
-  position: relative;
-  color: #fff;
-  margin-bottom: 15px;
-}
-
-.footer-container h2::before{
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 50px;
-  height: 2px;
-  background-color: rgb(255, 85, 0);
-}
-
-footer p{
-  color: #fff;
-}
-
-.sci{
-  margin: 20px;
-  display: flex;
-}
-
-.sci li{
-  list-style: none;
-}
-
-.sci li a{
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  background: #222;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: .5s;
-  color: #fff;
-}
-
-.sci li a:hover{  
-  background-color: rgb(255, 85, 0);
-}
-
-.sci i a .bx{
-  color: #fff;
-  font-size: 20px;
-}
-
-.quicklinks{
-  position: relative;
-  width: 25%;
-}
-
-.quicklinks ul li{
-  list-style: none;
-}
-
-.quicklinks ul li a{
-  color: #999;
-  text-decoration: none;
-  margin-bottom: 10px;
-  display: inline-block;
-  transition: .3s;
-}
-
-.quicklinks ul li a:hover{
-  color: #fff;
-}
-
-.footer-container .contactBx{
-  width: calc(35% - 60px);
-  margin-right: 0 !important;
-}
-
-.contactBx .info{
-  position: relative;
-}
-
-.contactBx .info li{
-  display: flex !important;
-  margin-bottom: 16px;
-}
-
-.contactBx .info li span:nth-child(1){
-  color: #fff;
-  font-size: 20px;
-  margin-right: 10px;
-}
-
-.contactBx .info li span{
-  color: #999;
-}
-
-.contactBx .info li a{
-  color: #999;
-  text-decoration: none;
-  transition: .5s;
-}
-
-.contactBx .info li a:hover{
-  color: #fff;
-}
-
-
-
-
-.create_account{
-  background-color: #383838 !important;
-}
+  
 
 /* Animate ghost */
 @keyframes floaty {
@@ -885,16 +740,11 @@ footer p{
     height: 40px;
   }
 
-  h1{
-    font-size: 70px !important;
-  }
+  
 }
 
 @media screen and (min-width: 1048px) {
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-  }
+  
 
   .header .container {
    /* margin-right: 5rem;
@@ -946,37 +796,5 @@ footer p{
     height: 19px;
   }
 
-
-  h1{
-    font-size: 60px !important;
-  }
-}
-
-/* Footer Media Query */
-@media (max-width: 991px){
-  footer{
-      padding: 40px;
-      font-size: 20px;
-  }
-
-  footer .footer-container{
-      flex-direction: column;
-  }
-
-  footer .footer-container .sec{
-      margin-right: 0;
-      margin-bottom: 40px;
-  }
-
-  footer .footer-container .sec.aboutus{
-      width: 100% !important;
-  }
-
-  footer .footer-container .quicklinks{
-      width: 100%;
-  }
-
-  footer .footer-container .contactBx{
-      width: 100%;
-  }
-}
+ 
+} 

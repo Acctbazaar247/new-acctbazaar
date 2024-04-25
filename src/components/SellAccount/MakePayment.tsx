@@ -53,7 +53,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
     <div className="bg-white rounded-2xl w-full min-h-[60vh] md:min-h-[80dvh] flex items-center justify-center flex-col">
       <h3 className="text-xl md:text-3xl font-bold">Make Payment</h3>
       <div className="py-6 space-y-6 md:w-2/5 mx-auto">
-        {/* <div
+        <div
           onClick={() => setSelectedOption("bank")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
             selectedOption === "bank" ? "border-primary" : "border-[#C5C5C5]"
@@ -72,7 +72,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
               Make deposit using either your card or transfer to our local bank
             </p>
           </div>
-        </div> */}
+        </div>
 
         <div
           onClick={() => setSelectedOption("crypto")}

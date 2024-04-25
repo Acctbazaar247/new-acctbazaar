@@ -8,6 +8,7 @@ import { useGetAccountByIdQuery } from "@/redux/features/account/accountApi";
 import { IAccount } from "@/types/common";
 import { useRouter } from "next/router";
 import React from "react";
+import HomeLayout from "@/layout/HomeLayout";
 
 type Props = {};
 
@@ -26,7 +27,7 @@ const EditSingleService = (props: Props) => {
   } else if (data.data) {
     const info = data.data as IAccount;
     content = (
-      <div>
+      <div className="container">
         <h2 className="text-center text-xl font-bold mb-5">Edit Account</h2>
         {/* <EditSingleServiceForm {...info}></EditSingleServiceForm> */}
         <EditServiceForm data={info}></EditServiceForm>
@@ -39,7 +40,11 @@ const EditSingleService = (props: Props) => {
       </div>
     );
   }
-  return <AdminLayout>{content}</AdminLayout>;
+  return (
+    <SellerLayout>
+      <HomeLayout>{content}</HomeLayout>
+    </SellerLayout>
+  );
 };
 
 export default EditSingleService;
