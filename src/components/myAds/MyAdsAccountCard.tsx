@@ -6,7 +6,7 @@ import { Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineDelete } from "react-icons/ai";
-import { MdEdit, MdOutlinePauseCircle } from "react-icons/md";
+import { MdEdit, MdErrorOutline, MdOutlinePauseCircle } from "react-icons/md";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 
 const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
@@ -80,10 +80,14 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
         </div>
         <div>
           {account.approvedForSale === EApprovedForSale.denied ? (
-            <p className="text-red">
-              <span className="text-black">Admin Message</span>{" "}
-              {account.messageFromAdmin || "No Message"}
-            </p>
+            <div className="p-2 rounded w-full bg-[#FFFAE6] mt-2 ">
+              <span className="flex gap-2 items-center  mb-3 text-[#A77207] ">
+                <MdErrorOutline></MdErrorOutline> Reason for denied
+              </span>{" "}
+              <p className="text-[#A77207] ml-2">
+                {account.messageFromAdmin || "No Message"}
+              </p>
+            </div>
           ) : null}
         </div>
       </div>
