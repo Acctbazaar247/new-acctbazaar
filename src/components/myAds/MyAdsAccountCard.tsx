@@ -25,7 +25,7 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
       {/* this is description div  */}
       <div className="w-full ">
         <div className="flex items-center gap-4 justify-between">
-          <div className="">
+          <div className="md:w-full w-[calc(100vw-250px)]">
             <h3 className="text-textBlack line-clamp-1 font-medium text-sm md:text-base">
               {account?.name}
             </h3>

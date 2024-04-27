@@ -18,6 +18,7 @@ type SelectFieldProps = {
   required?: boolean;
   className?: string;
   defaultValue?: SelectOptions;
+  disabled?: boolean;
   handleChange?: (el: string) => void;
 };
 
@@ -32,6 +33,7 @@ const FormSelectField = ({
   required,
   handleChange,
   className,
+  disabled,
 }: SelectFieldProps) => {
   const { control } = useFormContext();
 
@@ -53,6 +55,7 @@ const FormSelectField = ({
             value={value ? value : renderValue}
             style={{ width: "100%" }}
             placeholder={placeholder}
+            disabled={disabled}
           />
         )}
       />

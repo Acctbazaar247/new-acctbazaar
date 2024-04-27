@@ -73,7 +73,9 @@ const AddFunds = (props: Props) => {
         }
       })
       .catch((err) => {
-        toast.error("something went wrong" + err?.message);
+        toast.error(
+          err?.data?.message || "Something went wrong try again letter"
+        );
       });
   };
   const handleSubmit = (data: any): void => {
@@ -150,8 +152,8 @@ const AddFunds = (props: Props) => {
                   <PaySelection
                     onChange={setSelectedOption}
                     isDisabled={isLoading}
-                  // handleCryptoClick={handlePay}
-                  // handleBankClick={handllePayWithPayStack}
+                    // handleCryptoClick={handlePay}
+                    // handleBankClick={handllePayWithPayStack}
                   ></PaySelection>
                 </div>
                 <button

@@ -18,6 +18,7 @@ import { useAppSelector } from "@/redux/hook";
 import ErrorCompo from "../ui/AppErrorComponent";
 import hasScientificNotation from "@/utils/hasScientificNotation";
 import Loading from "../ui/Loading";
+import { MdErrorOutline } from "react-icons/md";
 
 type Props = { data: IAccount };
 
@@ -73,8 +74,19 @@ const EditServiceForm = ({ data }: Props) => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+  const isStatusSuccess = data.approvedForSale === EApprovedForSale.approved;
   return (
     <div className="pb-10">
+      <div>
+        {isStatusSuccess ? (
+          <div className="p-2 rounded w-full md:w-1/2 mb-2 bg-[#FFFAE6] mt-2 ">
+            <span className="flex gap-2 items-center    text-[#A77207] ">
+              <MdErrorOutline></MdErrorOutline> Sorry you can not update active
+              account
+            </span>{" "}
+          </div>
+        ) : null}
+      </div>
       <Form
         submitHandler={handleSubmit}
         defaultValues={{
@@ -84,13 +96,19 @@ const EditServiceForm = ({ data }: Props) => {
       >
         <div className="grid gap-3  grid-cols-1 xl:grid-cols-2 ">
           <div>
-            <FormInput label="Name" name="name" required={true} />
+            <FormInput
+              disabled={isStatusSuccess}
+              label="Name"
+              name="name"
+              required={true}
+            />
           </div>
           <div>
             <FormInputNumber
               label="Price"
               name="price"
               required={true}
+              disabled={isStatusSuccess}
               validation={{ max: 4000 }}
             ></FormInputNumber>
           </div>
@@ -99,6 +117,7 @@ const EditServiceForm = ({ data }: Props) => {
               label="Username/Email of Account"
               name="username"
               required={true}
+              disabled={isStatusSuccess}
             />
           </div>
           <div>
@@ -106,6 +125,7 @@ const EditServiceForm = ({ data }: Props) => {
               label="Password of Account"
               name="password"
               required={true}
+              disabled={isStatusSuccess}
             />
           </div>
           <div className="xl:col-span-2">
@@ -114,6 +134,7 @@ const EditServiceForm = ({ data }: Props) => {
               type="url"
               placeholder="Add and preview link"
               name="preview"
+              disabled={isStatusSuccess}
             />
           </div>
           <div className="xl:col-span-2">
@@ -121,26 +142,40 @@ const EditServiceForm = ({ data }: Props) => {
               label="Select category"
               name="category"
               required={true}
+              disabled={isStatusSuccess}
               options={categoryOption}
             ></FormSelectField>
           </div>
           <div className="xl:col-span-2">
-            <FormTextArea label="Description" name="description" />
+            <FormTextArea
+              disabled={isStatusSuccess}
+              label="Description"
+              name="description"
+            />
           </div>
 
           <div className="xl:col-span-2">
             <h2 className="text-xl  mt-2">Additional Info</h2>
           </div>
           <div>
-            <FormInput label="Additional Email" name="additionalEmail" />
+            <FormInput
+              disabled={isStatusSuccess}
+              label="Additional Email"
+              name="additionalEmail"
+            />
           </div>
           <div>
-            <FormInput label="Additional password" name="additionalPassword" />
+            <FormInput
+              disabled={isStatusSuccess}
+              label="Additional password"
+              name="additionalPassword"
+            />
           </div>
           <div>
             <FormInput
               label="Additional Information"
               name="additionalDescription"
+              disabled={isStatusSuccess}
             />
           </div>
         </div>
