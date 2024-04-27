@@ -8,11 +8,11 @@ type Props = {
 
 const AppCaptcha = (props: Props) => {
   // const token
-  return config.captcha
-    ? // <GoogleReCaptchaProvider  reCaptchaKey={config.captcha as string}>
+  return config.captcha ? (
+    <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}>
       props.children
-    : // </GoogleReCaptchaProvider>
-      null;
+    </GoogleReCaptchaProvider>
+  ) : null;
 };
 
 export default AppCaptcha;
