@@ -10,7 +10,7 @@ const AppCaptcha = (props: Props) => {
   // const token
   return config.captcha ? (
     <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}>
-      props.children
+      {props.children}
     </GoogleReCaptchaProvider>
   ) : null;
 };
