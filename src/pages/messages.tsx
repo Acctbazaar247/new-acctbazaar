@@ -58,8 +58,7 @@ const Messages = () => {
   ) as IOrder[];
   const activeMessageBoxInfo = mainData.find(
     (single) => single.id === activeChatId
-  );
-  console.log({ myOrderData });
+  ); 
   return (
     <HomeLayout>
       <PrivateLayout>

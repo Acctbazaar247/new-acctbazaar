@@ -11,7 +11,6 @@ const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   reader.readAsDataURL(img);
 };
 
-
 type props = {
   name: string;
 };
@@ -28,7 +27,6 @@ const useFormUploadImage = (defaultUrl?: string): output => {
   const handleChange: UploadProps["onChange"] = (
     info: UploadChangeParam<UploadFile>
   ) => {
-    console.log({ info }, "hiiiiiiiiiiiiii");
     if (info.file.status === "uploading") {
       setLoading(true);
       return;

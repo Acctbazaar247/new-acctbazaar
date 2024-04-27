@@ -387,7 +387,6 @@ export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
 ];
 
 export function findImageUrlByCategory(categoryName: AccountCategory): string {
-  console.log({ categoryName });
   return (
     ACCOUNT_CATEGORIES.find((single) => single.value === categoryName)
       ?.imageUrl || ""

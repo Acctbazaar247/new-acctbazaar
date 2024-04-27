@@ -42,7 +42,6 @@ export default function MyPurchase() {
     }, "");
     return queryString;
   }, [activeTab, user?.id]);
-  console.log({ queryString });
   const queryData = useGetMyOrdersQuery("");
 
   return (
