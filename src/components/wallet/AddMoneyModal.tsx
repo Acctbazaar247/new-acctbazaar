@@ -31,7 +31,7 @@ export default function AddMoneyModal() {
       .unwrap()
       .then((res: any) => {
         if (res.error) {
-          toast.error("something went wrong" + res.error);
+          toast.error(res?.data?.message || "something went wrong ");
         } else {
           router.push(res.data?.url);
         }
@@ -56,7 +56,7 @@ export default function AddMoneyModal() {
         }
       })
       .catch((err) => {
-        toast.error("something went wrong" + err?.message);
+        toast.error(err.data?.message || "something went wrong");
       });
   };
   const handleSubmit = (data: any): void => {

@@ -63,6 +63,7 @@ const AddFunds = (props: Props) => {
       toast.error(`Minimum amount is ${config.fundMinMoney}$`);
       return;
     }
+    console.log("paystack");
     addRequestWithPayStack({ amount })
       .unwrap()
       .then((res: any) => {
@@ -73,9 +74,7 @@ const AddFunds = (props: Props) => {
         }
       })
       .catch((err) => {
-        toast.error(
-          err?.data?.message || "Something went wrong try again letter"
-        );
+        toast.error(err?.data?.message || "Something went wrong ");
       });
   };
   const handleSubmit = (data: any): void => {
@@ -88,6 +87,7 @@ const AddFunds = (props: Props) => {
       handllePayWithPayStack();
     } else {
       handlePay();
+      console.log("his");
     }
   };
   if (isLoading || isPayStackLoading) {
