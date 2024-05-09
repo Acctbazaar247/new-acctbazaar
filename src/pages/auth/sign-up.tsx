@@ -1,3 +1,4 @@
+"use client";
 import AppCaptcha from "@/components/AppCaptcha/AppCaptcha";
 import FormInputNumber from "@/components/Forms/FormInputNumber";
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";

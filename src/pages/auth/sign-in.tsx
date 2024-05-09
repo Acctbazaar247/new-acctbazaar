@@ -1,3 +1,5 @@
+"use client";
+
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
 import AppFormInput from "@/components/ui/AppFormInput";
 import AppSmallLoading from "@/components/ui/AppSmallLoading";
