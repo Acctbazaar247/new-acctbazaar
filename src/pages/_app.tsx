@@ -39,9 +39,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <OnDeployment></OnDeployment>
           ) : (
             <main className={plus.className}>
-              <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}>
-                <Component {...pageProps} />
-              </GoogleReCaptchaProvider>
+              {/* <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}> */}
+              <Component {...pageProps} />
+              {/* </GoogleReCaptchaProvider> */}
             </main>
           )}
         </RootLayout>

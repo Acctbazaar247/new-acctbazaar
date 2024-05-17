@@ -103,11 +103,11 @@ const SignIn = () => {
                 error={errors.password}
               />
               {/* {conf  */}
-              <GoogleReCaptcha
+              {/* <GoogleReCaptcha
                 onVerify={(t) => {
                   setToken(t);
                 }}
-              />
+              /> */}
               <div className="flex items-center justify-end text-xs text-textGrey hover:text-primary lg:text-sm">
                 <Link href={"/auth/forgot-password"}>
                   <p>Forgot Password?</p>{" "}
@@ -117,7 +117,7 @@ const SignIn = () => {
                 <AppSmallLoading />
               ) : (
                 <button
-                  disabled={!token}
+                  // disabled={!token}
                   type="submit"
                   className="appBtn mt-4 w-full"
                 >
