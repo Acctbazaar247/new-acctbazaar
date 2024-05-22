@@ -3,6 +3,7 @@ import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import Image from "next/image";
 import { useState } from "react";
+import { AiFillCheckCircle } from "react-icons/ai";
 import { BiSolidCopy } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
@@ -32,7 +33,7 @@ export default function Referral() {
 
     const [activeTab, setActiveTab] = useState(tabs[0].label);
 
-
+    const ReferralMember = [1, 2, 3]
     return (
         <HomeLayout>
             <PrivateLayout>
@@ -81,29 +82,48 @@ export default function Referral() {
                                         }
                                     </p>
                                 </div>
-                                <button className="appBtn px-12">Share Invitation link</button>
+                                <button className="appBtn px-12 mt-4">Share Invitation link</button>
                             </div>
                         </div>
 
                         <div className='hidden md:block border border-[#E1DBDB]'></div>
-                        <div className='w-full md:w-1/2 space-y-4 rounded min-h-full overflow-y-auto bg-white p-2 md:p-4 lg:p-6 2xl:p-6'>
-                            <h4 className="text-lg">Referral Record</h4>
-                            <div className='py-4 p-4 border border-borderColor grid grid-cols-2 rounded-lg'>
+                        <div className='w-full md:w-1/2 space-y-4 border border-borderColor/50 rounded-lg min-h-full overflow-y-auto bg-transparent p-2 md:p-4 lg:p-6 2xl:p-6'>
+                            <h4 className="text-xl font-medium">Referral Record</h4>
+                            <div className='p-4 2xl:p-6 bg-white grid grid-cols-2 rounded-lg'>
                                 <div className='space-y-2'>
                                     <h3 className="flex items-center gap-2"><IoWalletOutline />Total Earned</h3>
                                     <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />0</h2>
                                 </div>
                                 <div className='space-y-2'>
-                                    <h3 className="flex items-center gap-2"><PiUsersThreeLight />Invitees</h3>
+                                    <h3 className="flex items-center gap-2"><PiUsersThreeLight className="lg:text-lg" />Invitees</h3>
                                     <h2 className="text-textBlack font-bold flex items-center">0</h2>
                                 </div>
                             </div>
 
-                            <div className='p-4 border border-borderColor rounded-lg'>
+                            <div className='p-4 2xl:py-5 2xl:px-6 h-[70%] bg-white rounded-lg'>
                                 <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-                                <div className='py-12 px-5'>
+                                {/* <div className='py-12 px-5'>
                                     <Image width={250} height={166} src="/assets/icons/earned.png" alt="" className="mx-auto" />
-                                </div>
+                                </div> */}
+                                {
+                                    ReferralMember.map(referral => (
+                                        <div key={referral} className='border-b border-b-[#E9E4E4] flex justify-between pt-5 pb-2'>
+                                            <div className='flex gap-4'>
+                                                <img src="/assets/home/person2.png" alt="" className="size-12 rounded-full" />
+                                                <div className=''>
+                                                    <h3 className="font-medium text-textBlack pb-1">Jackson Ephraim</h3>
+                                                    <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-green-500" />Completed registration with shared link</p>
+                                                    <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-textGrey/40" />Fund wallet with $50</p>
+                                                    <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-textGrey/40" />Trade one account</p>
+                                                </div>
+                                            </div>
+                                            <div className=''>
+                                                <h2 className="text-textBlack/50 font-medium">$100</h2>
+                                                <div className="text-sm text-textGrey">12th Feb 2024, 12:22:54</div>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
                             </div>
                         </div>
                     </div>
