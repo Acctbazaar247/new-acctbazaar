@@ -3,7 +3,7 @@ import { UseFormRegister } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 type TAppFormInputProps = {
-    label: string;
+    label?: string;
     placeholder?: string;
     type: "text" | "number" | "password" | "url" | "email";
     name: string;

@@ -1,6 +1,7 @@
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
+import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
 import { useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
@@ -12,10 +13,13 @@ import { toast } from "react-toastify";
 
 export default function Referral() {
     const [copied, setCopied] = useState(false);
+    const user = useAppSelector((state) => state?.user);
+    const clientUrlLink = process.env.NEXT_PUBLIC_FRONTEND_URL
+    const referralLink = `${clientUrlLink}/auth/sign-up?referralId=${user?.user?.id}`
 
     const copyText = async () => {
         try {
-            await navigator.clipboard.writeText("Acctbazaar,com/manny/2weydwiuhb");
+            await navigator.clipboard.writeText(referralLink);
             setCopied(true);
             toast.success("copied!");
             setTimeout(() => {
@@ -29,6 +33,7 @@ export default function Referral() {
     const tabs = [
         { label: "In Progress" },
         { label: "Completed" },
+        { label: "Rejected" },
     ];
 
     const [activeTab, setActiveTab] = useState(tabs[0].label);
@@ -71,14 +76,14 @@ export default function Referral() {
                             </div>
 
                             <div className='pt-10 flex items-center flex-col gap-1'>
-                                <div className="border border-[#EDE8E8] rounded-full flex flex-col md:flex-row items-center md:gap-4 py-2 px-4">
-                                    <span className="textG">Your Referral link:</span>
+                                <div className="mx-4 border border-[#EDE8E8] rounded-full flex flex-col md:flex-row items-center py-2 px-4">
+                                    <span className="textG min-w-32">Your Referral link:</span>
                                     <p className="flex textB items-center gap-1">
-                                        <span className="textB">Acctbazaar,com/manny/2weydwiuhb</span>
+                                        <span className="textB line-clamp-1">{referralLink}</span>
                                         {copied ?
-                                            <FiCheck />
+                                            <FiCheck className="text-2xl" />
                                             :
-                                            <BiSolidCopy onClick={copyText} className="cursor-pointer" />
+                                            <BiSolidCopy onClick={copyText} className="cursor-pointer text-xl" />
                                         }
                                     </p>
                                 </div>

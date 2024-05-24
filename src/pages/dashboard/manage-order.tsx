@@ -17,6 +17,7 @@ import AppTable from "@/components/ui/AppTable";
 import AppModal from "@/components/ui/AppModal";
 import { formatDate } from "@/utils/formateDate";
 import Link from "next/link";
+import { useGetOrdersQuery } from "@/redux/features/order/orderApi";
 
 type Props = {};
 
@@ -125,8 +126,9 @@ const ManageAllUser = (props: Props) => {
   }, [role, debouncedSearch, page]);
   const { data, isError, isLoading, isFetching, isSuccess, error } =
     useGetUsersQuery(queryString);
-  const queryInfo = useGetUsersQuery(queryString);
 
+  const queryInfo = useGetOrdersQuery(queryString);
+  console.log(queryInfo);
   let content = null;
 
   if (isLoading || isFetching) {

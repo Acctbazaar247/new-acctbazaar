@@ -159,35 +159,35 @@ const AccountSettingProfile = () => {
   const selectedState = watch("state");
   const stateOptions = useMemo(() => {
     const selectedCountryDetails = Country.getAllCountries().find(
-      (single) => single.name === selectedCountry || single.isoCode
+      (single) => single.isoCode === selectedCountry
     );
 
     return selectedCountryDetails?.isoCode
       ? State.getStatesOfCountry(selectedCountryDetails.isoCode).map(
-          (state) => ({
-            value: state.isoCode,
-            label: state.name,
-          })
-        )
+        (state) => ({
+          value: state.isoCode,
+          label: state.name,
+        })
+      )
       : [];
   }, [selectedCountry]);
 
   const cityOption = useMemo(() => {
     const selectedCountryDetails = Country.getAllCountries().find(
-      (single) => single.name === selectedCountry || single.isoCode
+      (single) => single.isoCode === selectedCountry
     );
     const stateDetails = State.getStatesOfCountry(
       selectedCountryDetails?.isoCode
-    ).find((single) => single.isoCode === selectedState || single.name);
+    ).find((single) => single.isoCode === selectedState);
 
     return selectedCountryDetails?.isoCode && stateDetails?.isoCode
       ? City.getCitiesOfState(
-          selectedCountryDetails.isoCode,
-          stateDetails?.isoCode
-        ).map((city) => ({
-          value: city.name,
-          label: city.name,
-        }))
+        selectedCountryDetails.isoCode,
+        stateDetails?.isoCode
+      ).map((city) => ({
+        value: city.name,
+        label: city.name,
+      }))
       : [];
   }, [selectedCountry, selectedState]);
   console.log(url);
@@ -298,9 +298,8 @@ const AccountSettingProfile = () => {
               className="hidden"
             />
             <div
-              className={`border border-borderColor rounded border-dashed ${
-                loading && "h-20 w-56"
-              }`}
+              className={`border border-borderColor rounded border-dashed ${loading && "h-20 w-56"
+                }`}
             >
               {loading ? (
                 <AppSmallLoading />
@@ -362,25 +361,25 @@ const AccountSettingProfile = () => {
                   : undefined
               }
             />
-            <div className="hidden">
-              {/* <AppFormSelect
+            {/* <div className="hidden">
+              <AppFormSelect
                 control={control}
                 placeholder="Country of residence"
                 name="countryCode"
                 // required={true}
                 options={countryOptions}
-              /> */}
-            </div>
+              />
+            </div> */}
 
-            <div className="hidden">
-              {/* <AppFormSelect
+            {/* <div className="hidden">
+              <AppFormSelect
                 control={control}
                 placeholder="Select State"
                 name="stateCode"
                 required={false}
                 options={stateOptions ? stateOptions : []}
-              /> */}
-            </div>
+              />
+            </div> */}
             <AppFormSelect
               control={control}
               placeholder="Select State"

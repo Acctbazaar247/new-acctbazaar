@@ -38,10 +38,10 @@ export interface IFaq {
   answer: string;
   createAt: string;
 }
+
 export interface IUser {
   id: string;
   name: string;
-  username: string;
   email: string;
   password: string;
   role: UserRole;
@@ -64,6 +64,18 @@ export interface IUser {
   Currency?: {
     amount: number;
   };
+}
+
+export interface TKyc {
+  userName: string;
+  country: string;
+  state: string;
+  address: string;
+  city: string;
+  birthDate: string;
+  meansOfIdentification: string;
+  identificationNumber: string;
+  identityImage: string;
 }
 
 export interface IAllCategoryOfPcService {
