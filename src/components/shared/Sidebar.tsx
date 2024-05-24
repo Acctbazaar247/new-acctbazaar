@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import {
   FontAwesomeIcon,
-  FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { dashboardSidebarItem } from "@/constants/dashboardSidebarItem";
 import { useAppSelector } from "@/redux/hook";
 import { INavItems, UserRole } from "@/types/common";
-import Image from "next/image";
 import Logo from "../ui/Logo";
 
 interface SidebarProps {
@@ -24,8 +22,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
-
-  const [sidebarExpanded, setSidebarExpanded] = useState();
 
   let items: INavItems[] = [];
 

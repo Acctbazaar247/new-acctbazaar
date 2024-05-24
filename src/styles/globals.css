@@ -9,10 +9,13 @@
 
 @layer components {
   .appBtn {
-    @apply bg-primary text-white select-none text-sm 2xl:text-base rounded lg:rounded-md 2xl:rounded-lg font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-2.5 hover:bg-primary/90 border border-primary disabled:bg-slate-600 disabled:border-gray-600 disabled:opacity-70 default:cursor-not-allowed;
+    @apply bg-primary text-white select-none text-sm 2xl:text-base rounded lg:rounded-md 2xl:rounded-lg font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-2.5 hover:bg-primary/90 border border-primary disabled:bg-slate-600 disabled:border-gray-600 disabled:opacity-70 transition-all active:scale-95;
   }
   .appOutlineBtn {
     @apply hover:bg-primary text-primary select-none text-sm 2xl:text-base hover:text-white rounded lg:rounded-md 2xl:rounded-lg font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-2.5 border border-primary;
+  }
+  .roundedBtn {
+    @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-3 px-3 lg:px-6 rounded-full;
   }
   .appOutlineBtnSm {
     @apply hover:bg-primary text-primary select-none text-xs 2xl:text-sm hover:text-white rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-2 md:px-4 2xl:px-6 py-1 2xl:py-2 border border-primary;
@@ -94,6 +97,13 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.float-label-input:focus-within label,
+.float-label-input input:not(:placeholder-shown) + label {
+  transform: translateY(-1.5rem) scale(0.75) translateX(-0.7rem);
+  background-color: white;
+  color: #ff5a35;
 }
 
 .yoursLast:before {
@@ -298,6 +308,34 @@ html {
 }
 .ant-picker:hover {
   border: 1px solid #d0d2d5;
+}
+
+/* this is antd design table change  */
+.ant-table-thead .ant-table-cell {
+  background-color: white !important;
+  border: none;
+}
+.ant-table-thead .ant-table-cell::before {
+  position: absolute !important;
+  top: 50%;
+  inset-inline-end: 0;
+  width: 0px !important;
+  height: 0em !important;
+  background-color: #fff;
+  transform: translateY(-50%);
+  transition: background-color 0.2s;
+  content: "";
+}
+.ant-table-thead .ant-table-cell:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+.ant-table-tbody .ant-table-cell {
+  padding: 12px !important;
+}
+.ant-modal-header .ant-modal-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
 }
 
 /* Assuming your Select component has a className of 'my-select' */

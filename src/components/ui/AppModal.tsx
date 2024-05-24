@@ -73,7 +73,7 @@ const AppModal = ({
                       cancelButtonAction();
                     }
                   }}
-                  className="roundedBtn text-textDark bg-[#E8E8E8] text-sm"
+                  className="roundedBtn text-textBlack bg-[#E8E8E8] hover:bg-textGreyBlack/15 text-sm"
                 >
                   {cancelButtonTitle}
                 </button>
@@ -87,7 +87,7 @@ const AppModal = ({
                       primaryButtonAction();
                     }
                   }}
-                  className="appBtn text-sm"
+                  className="roundedBtn text-sm"
                 >
                   {primaryButtonTitle}
                 </button>

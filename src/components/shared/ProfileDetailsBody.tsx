@@ -35,6 +35,7 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
     setModalOpen(true);
     setOpen(false);
   };
+  console.log(user);
   return (
     <>
       <div className="">
@@ -51,14 +52,14 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
                 </p>
               )}
             </h4>
-            {/* {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
+            {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
               <button
                 onClick={openModal}
                 className="appOutlineBtnSm hidden md:block"
               >
                 Become Verified
               </button>
-            )} */}
+            )}
           </div>
 
           <p className="textG hidden md:block">{user?.email}</p>
@@ -127,9 +128,8 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
               <Link
                 href={nav?.path}
                 key={nav?.label}
-                className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg ${
-                  nav.label === "My Purchase" && "md:hidden"
-                }`}
+                className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg ${nav.label === "My Purchase" && "md:hidden"
+                  }`}
               >
                 <nav.icon /> {nav?.label}
               </Link>

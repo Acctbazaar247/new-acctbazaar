@@ -1,4 +1,3 @@
-import FormSelectField from "@/components/Forms/FormSelectField";
 import AppFormDatePicker from "@/components/ui/AppFormDatePicker";
 import AppFormInput from "@/components/ui/AppFormInput";
 import AppFormSelect from "@/components/ui/AppFormSelect";
@@ -6,16 +5,17 @@ import AppModal from "@/components/ui/AppModal";
 import HomeLayout from "@/layout/HomeLayout";
 import { useEditUserMutation } from "@/redux/features/user/userApi";
 import { useAppSelector } from "@/redux/hook";
-import { IGenericErrorResponse, ResponseErrorType, ResponseSuccessType } from "@/types/common";
+import { ResponseErrorType, ResponseSuccessType } from "@/types/common";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CgFileAdd } from "react-icons/cg";
 import { toast } from "react-toastify";
 
 interface FormData {
     name: string;
+    username: string;
     email: string;
     address: string;
     txId: string;
@@ -23,6 +23,7 @@ interface FormData {
     country: string;
     city: string;
     dateOfBirth: string;
+    identificationNumber: string;
     phoneNumber: string;
     accept?: any;
 }
@@ -38,10 +39,11 @@ const VerifyAccount = () => {
         control,
         handleSubmit,
         formState: { errors },
+        setValue
     } = useForm<FormData>({
         defaultValues: {
             name: user?.name,
-            // username:user?.
+            username: user?.username,
             email: user?.email,
             phoneNumber: user?.phoneNumber,
             state: user?.state,
@@ -82,6 +84,11 @@ const VerifyAccount = () => {
         router.push("/account/dashboard");
     }
 
+    // useEffect(() => {
+    //     setValue("name", user?.name);
+    //     setValue("phoneNumber", user?.phoneNumber);
+    // }, [])
+
     return (
         <HomeLayout>
             <div className='container py-5 md:py-10 2xl:py-12'>
@@ -93,7 +100,7 @@ const VerifyAccount = () => {
 
                 {/* this is main div  */}
                 <div className='bg-white rounded min-h-[80dvh] mt-2 md:mt-4 lg:mt-5 2xl:mt-6'>
-                    <div className='md:w-[80%] md:py-6  md:px-10'>
+                    <div className='md:w-[95%] mx-auto md:py-6  md:px-10'>
                         <form
                             className="w-full py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
                             onSubmit={handleSubmit(onSubmit)}
@@ -127,6 +134,15 @@ const VerifyAccount = () => {
                                         error={errors?.name}
                                         defaultValue={user?.email}
                                         readOnly={true}
+                                    />
+                                    <AppFormInput
+                                        label="Username"
+                                        name="username"
+                                        type="text"
+                                        placeholder="Type your username here"
+                                        register={register}
+                                        error={errors?.name}
+                                        defaultValue={user?.username}
                                     />
                                     <AppFormInput
                                         label="Phone Number"
@@ -207,11 +223,11 @@ const VerifyAccount = () => {
                                     />
                                     <AppFormInput
                                         label="Enter Identification Number"
-                                        name="txId"
+                                        name="identificationNumber"
                                         type="text"
                                         placeholder="Type your Identification Number here"
                                         register={register}
-                                        error={errors?.name}
+                                        error={errors?.identificationNumber}
                                     />
                                     <div className=''>
                                         <input type="file" id="file" className="hidden" />

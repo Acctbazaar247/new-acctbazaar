@@ -41,6 +41,7 @@ export interface IFaq {
 export interface IUser {
   id: string;
   name: string;
+  username: string;
   email: string;
   password: string;
   role: UserRole;

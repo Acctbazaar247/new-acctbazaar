@@ -7,25 +7,17 @@ import {
   faFileLines,
   faGear,
   faUsers,
-  faPersonCircleQuestion,
-  faEnvelopeOpenText,
-  faPenToSquare,
-  faUserGear,
-  faUsersGear,
-  faUserPen,
-  faCartShopping,
-  faCommentMedical,
+  faReorder,
   faUserShield,
   faComment,
   faIcons,
   faRectangleList,
   faUserPlus,
-  faUserSecret,
+  faCartShopping,
   faDollar,
   faHouse,
   faMoneyBill,
   faMoneyBillTransfer,
-  
 } from "@fortawesome/free-solid-svg-icons";
 const common: INavItems[] = [
   {
@@ -90,6 +82,12 @@ const supperItems: INavItems[] = [
     to: "/manageFund",
     matchUrl: "/dashboard/manageFund",
     icon: faDollar,
+  },
+  {
+    name: "Manage Order",
+    to: "/manage-order",
+    matchUrl: "/dashboard/manage-order",
+    icon: faCartShopping,
   },
   common[2],
   {
