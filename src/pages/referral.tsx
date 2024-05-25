@@ -3,6 +3,8 @@ import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetAllReferralQuery } from "@/redux/features/referral/referralApi";
 import { useAppSelector } from "@/redux/hook";
+import { EReferral, TReferral } from "@/types/common";
+import { formatDate, formatDateWithTime } from "@/utils/formateDate";
 import Image from "next/image";
 import { useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
@@ -32,16 +34,20 @@ export default function Referral() {
     };
 
     const tabs = [
-        { label: "In Progress" },
-        { label: "Completed" },
-        { label: "Rejected" },
+        { value: "pending", label: "Pending" },
+        { value: "completed", label: "Completed" },
+        { value: "cancel", label: "Cancel" },
     ];
 
-    const [activeTab, setActiveTab] = useState(tabs[0].label);
+    const [activeTab, setActiveTab] = useState(tabs[0].value);
 
     const { data } = useGetAllReferralQuery(`referralById=${user?.user?.id}`);
-    console.log(data);
-    const ReferralMember = [1, 2, 3]
+
+    const totalAmount = data?.data?.reduce((acc: any, curr: any) => acc + curr?.amount, 0);
+
+    const sortedData = data?.data?.filter((refer: TReferral) => refer?.status === activeTab);
+
+
     return (
         <HomeLayout>
             <PrivateLayout>
@@ -100,38 +106,36 @@ export default function Referral() {
                             <div className='p-4 2xl:p-6 bg-white grid grid-cols-2 rounded-lg'>
                                 <div className='space-y-2'>
                                     <h3 className="flex items-center gap-2"><IoWalletOutline />Total Earned</h3>
-                                    <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />0</h2>
+                                    <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />{totalAmount}</h2>
                                 </div>
                                 <div className='space-y-2'>
                                     <h3 className="flex items-center gap-2"><PiUsersThreeLight className="lg:text-lg" />Invitees</h3>
-                                    <h2 className="text-textBlack font-bold flex items-center">0</h2>
+                                    <h2 className="text-textBlack font-bold flex items-center">{data?.meta?.total}</h2>
                                 </div>
                             </div>
 
-                            <div className='p-4 2xl:py-5 2xl:px-6 h-[70%] bg-white rounded-lg'>
+                            <div className='p-2 md:p-4 2xl:py-5 2xl:px-6 min-h-[70%] bg-white rounded-lg'>
                                 <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-                                {/* <div className='py-12 px-5'>
-                                    <Image width={250} height={166} src="/assets/icons/earned.png" alt="" className="mx-auto" />
-                                </div> */}
-                                {
-                                    ReferralMember.map(referral => (
-                                        <div key={referral} className='border-b border-b-[#E9E4E4] flex justify-between pt-5 pb-2'>
-                                            <div className='flex gap-4'>
-                                                <img src="/assets/home/person2.png" alt="" className="size-12 rounded-full" />
-                                                <div className=''>
-                                                    <h3 className="font-medium text-textBlack pb-1">Jackson Ephraim</h3>
-                                                    <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-green-500" />Completed registration with shared link</p>
-                                                    <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-textGrey/40" />Fund wallet with $50</p>
-                                                    <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-textGrey/40" />Trade one account</p>
+                                <div className='bg-white  max-h-[55dvh] pr-1 md:pr-2 overflow-auto'>
+                                    {
+                                        sortedData?.map((referral: TReferral) => (
+                                            <div key={referral?.id} className='border-b border-b-[#E9E4E4] flex justify-between pt-3 md:pt-5 pb-2'>
+                                                <div className='flex gap-1 md:gap-4'>
+                                                    <img src={referral?.ownBy?.profileImg} alt="" className="size-12 rounded-full" />
+                                                    <div className=''>
+                                                        <h3 className="font-medium text-textBlack pb-1">{referral?.ownBy?.name}</h3>
+                                                        <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-green-500" />Completed registration with shared link</p>
+                                                        <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className={referral?.status === "completed" ? "text-green-500" : "text-textGrey/40"} />Fund wallet with $50</p>
+                                                    </div>
+                                                </div>
+                                                <div className='space-y-2 md:space-y-0'>
+                                                    <h2 className="text-textBlack/50 font-medium text-sm md:text-base">${referral?.amount}</h2>
+                                                    <div className="md:text-sm text-textGrey text-xs">{formatDateWithTime(referral?.createdAt)}</div>
                                                 </div>
                                             </div>
-                                            <div className=''>
-                                                <h2 className="text-textBlack/50 font-medium">$100</h2>
-                                                <div className="text-sm text-textGrey">12th Feb 2024, 12:22:54</div>
-                                            </div>
-                                        </div>
-                                    ))
-                                }
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -302,6 +302,28 @@ export interface IWithdrawalRequest {
 //   pcService: PcService;
 // }
 
+export type TReferral = {
+  amount: number;
+  createdAt: string;
+  id: string;
+  ownBy: {
+    email: string;
+    id: string;
+    name: string;
+    profileImg: string;
+  };
+  ownById: string;
+  referralById: string;
+  status: string;
+  updatedAt: string;
+};
+
+export enum EReferral {
+  pending = "pending",
+  completed = "completed",
+  cancel = "cancel",
+}
+
 export interface IBlog {
   id: string;
   title: string;
