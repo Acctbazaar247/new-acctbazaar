@@ -38,6 +38,7 @@ export interface IFaq {
   answer: string;
   createAt: string;
 }
+
 export interface IUser {
   id: string;
   name: string;
@@ -65,6 +66,18 @@ export interface IUser {
   };
 }
 
+export interface TKyc {
+  userName: string;
+  country: string;
+  state: string;
+  address: string;
+  city: string;
+  birthDate: string;
+  meansOfIdentification: string;
+  identificationNumber: string;
+  identityImage: string;
+}
+
 export interface IAllCategoryOfPcService {
   _count: {
     _all: number;
@@ -74,6 +87,12 @@ export interface IAllCategoryOfPcService {
     thumbnail: string;
   };
   category: string;
+}
+
+export enum KycStatus {
+  PENDING = "pending",
+  APPROVED = "approved",
+  DENIED = "denied",
 }
 
 export enum UserRole {
@@ -193,7 +212,7 @@ export interface IOrder {
   SeenMessage: ISeenMessage[];
 }
 
-enum EOrderStatus {
+export enum EOrderStatus {
   PENDING = "pending",
   COMPLETED = "completed",
   CANCELLED = "cancelled",
@@ -283,6 +302,28 @@ export interface IWithdrawalRequest {
 //   user?: IUser;
 //   pcService: PcService;
 // }
+
+export type TReferral = {
+  amount: number;
+  createdAt: string;
+  id: string;
+  ownBy: {
+    email: string;
+    id: string;
+    name: string;
+    profileImg: string;
+  };
+  ownById: string;
+  referralById: string;
+  status: string;
+  updatedAt: string;
+};
+
+export enum EReferral {
+  pending = "pending",
+  completed = "completed",
+  cancel = "cancel",
+}
 
 export interface IBlog {
   id: string;

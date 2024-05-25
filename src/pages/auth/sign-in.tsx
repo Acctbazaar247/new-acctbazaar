@@ -18,6 +18,7 @@ import {
   GoogleReCaptcha,
 } from "react-google-recaptcha-v3";
 import AppCaptcha from "@/components/AppCaptcha/AppCaptcha";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 interface FormData {
   name: string;
   email: string;
@@ -114,7 +115,9 @@ const SignIn = () => {
                 </Link>
               </div>
               {isLoading ? (
-                <AppSmallLoading />
+                <button className="appBtn px-10 flex items-center justify-center w-full mt-4 lg:mt-6 ">
+                  <AiOutlineLoading3Quarters className="animate-spin text-white text-2xl" />
+                </button>
               ) : (
                 <button
                   // disabled={!token}

@@ -1,8 +1,6 @@
 import AccountReel from "@/components/AccountReel/AccountReel";
-import { SelectOptions } from "@/components/Forms/FormSelectField";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import MarketplaceSidebar from "@/components/marketplace/MarketplaceSidebar";
-import PriceRange from "@/components/marketplace/PriceRange";
 import AppDrawer from "@/components/ui/AppDrawer";
 import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
@@ -20,10 +18,13 @@ import Sticky from "react-sticky-el";
 const Marketplace = () => {
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<number>(1);
+
   const selectedCategories = useAppSelector(
     (state) => state.categories.selectedCategories
   );
+
   const { minPrice, maxPrice } = useAppSelector((state) => state.marketplace);
+
   // console.log(minPrice, maxPrice);
   // const debouncedPrice = useDebounce([minPrice, maxPrice], 500);
   const minPriceDe = useDebounce(minPrice, 500);
@@ -47,6 +48,7 @@ const Marketplace = () => {
       page,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
     };
+
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       if (key === "isSold") {
         return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${false}`;
@@ -69,7 +71,7 @@ const Marketplace = () => {
         <div className="container pb-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
           <div className="flex flex-col md:flex-row justify-between gap-1 pt-5 pb-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-white md:static z-40">
-            <div className="">
+            <div className="md:pl-4">
               <h2 className="title">Marketplace</h2>
               <p className="text-textGrey text-xs md:text-sm">
                 Access all products on the marketplace by our verified sellers

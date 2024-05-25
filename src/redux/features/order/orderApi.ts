@@ -8,6 +8,7 @@ export const orderApi = apiSlice.injectEndpoints({
           url: `/order?${query}`,
         };
       },
+      providesTags: [tagTypes.order],
     }),
     getOrderById: builder.query({
       query: (id) => `/order/${id}`,
@@ -30,14 +31,15 @@ export const orderApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: [tagTypes.cart, tagTypes.order, tagTypes.account],
     }),
-    editOrder: builder.mutation({
+    updateOrder: builder.mutation({
       query: (info) => {
         return {
-          url: `/order/${info._id}`,
+          url: `/order/${info.id}`,
           method: "PATCH",
           body: info,
         };
       },
+      invalidatesTags: [tagTypes.cart, tagTypes.order, tagTypes.account],
     }),
     deleteOrder: builder.mutation({
       query: (id) => {
@@ -53,7 +55,7 @@ export const {
   useGetOrdersQuery,
   useAddOrderMutation,
   useDeleteOrderMutation,
-  useEditOrderMutation,
+  useUpdateOrderMutation,
   useGetOrderByIdQuery,
   useGetMyOrdersQuery,
 } = orderApi;

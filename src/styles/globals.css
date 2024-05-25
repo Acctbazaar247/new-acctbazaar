@@ -9,19 +9,25 @@
 
 @layer components {
   .appBtn {
-    @apply bg-primary text-white select-none text-sm 2xl:text-base rounded lg:rounded-md 2xl:rounded-lg font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-3 hover:bg-primary/90 border border-primary disabled:bg-slate-600 disabled:border-gray-600 disabled:opacity-70 default:cursor-not-allowed;
+    @apply bg-primary text-white select-none text-sm 2xl:text-base rounded lg:rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-2 hover:bg-primary/90 border border-primary disabled:bg-slate-600 disabled:border-gray-600 disabled:opacity-70 transition-all active:scale-95;
   }
   .appOutlineBtn {
-    @apply hover:bg-primary text-primary select-none text-sm 2xl:text-base hover:text-white rounded lg:rounded-md 2xl:rounded-lg font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-3 border border-primary;
+    @apply hover:bg-primary text-primary select-none text-sm 2xl:text-base hover:text-white rounded lg:rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-2 border border-primary;
+  }
+  .appBtnSm {
+    @apply appBtn px-3 py-1 rounded text-xs;
   }
   .appOutlineBtnSm {
-    @apply hover:bg-primary text-primary select-none text-xs 2xl:text-sm hover:text-white rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-2 md:px-4 2xl:px-6 py-1 2xl:py-2 border border-primary;
+    @apply appOutlineBtn px-3 py-1 rounded text-xs;
   }
- .app-small.ant-spin .ant-spin-dot-item {
-  @apply !bg-primary   
+  .roundedBtn {
+    @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-3 px-3 lg:px-6 rounded-full;
   }
-  .app-status-button{
-    @apply p-1 rounded px-2  text-white
+  .app-small.ant-spin .ant-spin-dot-item {
+    @apply !bg-primary;
+  }
+  .app-status-button {
+    @apply p-1 rounded px-2  text-white;
   }
   .title {
     @apply text-textBlack font-semibold text-xl md:text-2xl lg:text-3xl 2xl:text-4xl;
@@ -94,6 +100,13 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.float-label-input:focus-within label,
+.float-label-input input:not(:placeholder-shown) + label {
+  transform: translateY(-1.5rem) scale(0.75) translateX(-0.7rem);
+  background-color: white;
+  color: #ff5a35;
 }
 
 .yoursLast:before {
@@ -300,6 +313,34 @@ html {
   border: 1px solid #d0d2d5;
 }
 
+/* this is antd design table change  */
+.ant-table-thead .ant-table-cell {
+  background-color: white !important;
+  border: none;
+}
+.ant-table-thead .ant-table-cell::before {
+  position: absolute !important;
+  top: 50%;
+  inset-inline-end: 0;
+  width: 0px !important;
+  height: 0em !important;
+  background-color: #fff;
+  transform: translateY(-50%);
+  transition: background-color 0.2s;
+  content: "";
+}
+.ant-table-thead .ant-table-cell:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+.ant-table-tbody .ant-table-cell {
+  padding: 12px !important;
+}
+.ant-modal-header .ant-modal-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+
 /* Assuming your Select component has a className of 'my-select' */
 .my-select .ant-select-selection-placeholder {
   color: #1b1818;
@@ -406,9 +447,6 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
-
-
-
 /* on deploy ment */
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
@@ -424,10 +462,10 @@ input[type="range"]::-moz-range-thumb {
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
-  --body-font: 'Space Grotesk', sans-serif;
+  --body-font: "Space Grotesk", sans-serif;
   --biggest-font-size: 2.375rem;
-  --normal-font-size: .938rem;
-  --smaller-font-size: .75rem;
+  --normal-font-size: 0.938rem;
+  --smaller-font-size: 0.75rem;
 }
 
 /* Responsive typography */
@@ -435,7 +473,7 @@ input[type="range"]::-moz-range-thumb {
   :root {
     --biggest-font-size: 5rem;
     --normal-font-size: 1rem;
-    --smaller-font-size: .813rem;
+    --smaller-font-size: 0.813rem;
   }
 }
 
@@ -467,7 +505,6 @@ img {
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
- 
 
 .main {
   /* overflow: hidden; For the animations ScrollReveal */
@@ -485,7 +522,7 @@ img {
 
 .header.active {
   position: fixed;
-  animation: slideIn 0.5s ease forwards;  
+  animation: slideIn 0.5s ease forwards;
   background-color: #fff;
   box-shadow: 0px 0px 30px 0px hsla(0, 0%, 0%, 0.2);
 }
@@ -497,7 +534,7 @@ img {
   align-items: center;
 }
 
-.nav__logo, 
+.nav__logo,
 .nav__toggle {
   color: var(--text-color);
   display: inline-flex;
@@ -507,7 +544,6 @@ img {
   font-weight: 700;
   width: 200px;
   height: 50px;
-  
 }
 
 .nav__toggle {
@@ -524,8 +560,8 @@ img {
     width: 100%;
     padding: 5rem 0 4rem;
     border-radius: 0 0 1.5rem 1.5rem;
-    box-shadow: 0 2px 4px hsla(38, 4%, 15%, .15);
-    transition: .4s;
+    box-shadow: 0 2px 4px hsla(38, 4%, 15%, 0.15);
+    transition: 0.4s;
   }
 }
 
@@ -549,7 +585,7 @@ img {
   cursor: pointer;
 }
 
-.header .container{
+.header .container {
   /* margin-left: 0.5rem;
   margin-right: 0.5rem; */
 }
@@ -567,7 +603,6 @@ img {
   display: grid;
 }
 
-
 .home__container {
   display: grid;
   align-content: center;
@@ -581,7 +616,7 @@ img {
 .home__title {
   font-size: 2.3rem !important;
   line-height: 55px;
-  margin: .75rem 0;
+  margin: 0.75rem 0;
 }
 
 .home__button {
@@ -589,12 +624,12 @@ img {
   display: inline-block;
   background-color: rgb(255, 85, 0);
   color: #fff;
-  padding: .80rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 3rem;
-  transition: .4s;
+  transition: 0.4s;
 }
 
-.social-icons{
+.social-icons {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -602,16 +637,15 @@ img {
   padding-bottom: 30px;
 }
 
-.social-icon{
+.social-icon {
   width: 30px;
   height: 30px;
 }
 
-.social-icon img{
+.social-icon img {
   width: 100%;
   height: 100%;
 }
-
 
 .time-content {
   display: flex;
@@ -636,9 +670,8 @@ img {
   font-size: 12px;
 }
 
-
 .home__button:hover {
-  box-shadow: 0 4px 12px hsla(38, 69%, 8%, .2);
+  box-shadow: 0 4px 12px hsla(38, 69%, 8%, 0.2);
 }
 
 .home__img img {
@@ -653,14 +686,12 @@ img {
 .home__shadow {
   width: 130px;
   height: 24px;
-  background-color: hsla(38, 21%, 19%, .16);
+  background-color: hsla(38, 21%, 19%, 0.16);
   margin: 0 auto;
   border-radius: 50%;
   filter: blur(7px);
   animation: shadow 1.8s infinite alternate;
 }
-
-  
 
 /* Animate ghost */
 @keyframes floaty {
@@ -677,7 +708,7 @@ img {
     transform: scale(1, 1);
   }
   100% {
-    transform: scale(.85, .85);
+    transform: scale(0.85, 0.85);
   }
 }
 
@@ -694,7 +725,7 @@ img {
   .nav {
     height: calc(var(--header-height) + 1.5rem);
   }
-  .nav__toggle, 
+  .nav__toggle,
   .nav__close {
     display: none;
   }
@@ -713,14 +744,12 @@ img {
     text-align: center;
   }
 
-  .social-icons{
+  .social-icons {
     flex-direction: row;
     align-items: center;
     text-align: center;
   }
 }
-
-
 
 /* For large devices */
 @media screen and (min-width: 1024px) {
@@ -739,15 +768,11 @@ img {
     width: 250px;
     height: 40px;
   }
-
-  
 }
 
 @media screen and (min-width: 1048px) {
-  
-
   .header .container {
-   /* margin-right: 5rem;
+    /* margin-right: 5rem;
    margin-left: 10rem;
    margin: auto; */
   }
@@ -773,7 +798,7 @@ img {
 }
 
 /* For medium devices */
-@media screen and  (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
   .time-content {
     display: flex;
     justify-content: center;
@@ -791,10 +816,8 @@ img {
     gap: 15px;
   }
 
-  .social-icon{
+  .social-icon {
     width: 19px;
     height: 19px;
   }
-
- 
-} 
+}

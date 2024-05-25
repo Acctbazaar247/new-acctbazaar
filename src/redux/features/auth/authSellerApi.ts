@@ -10,6 +10,14 @@ export const authSellerApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    becomeSellerWithWallet: builder.mutation({
+      query: () => {
+        return {
+          url: `/auth/become-seller-with-wallet`,
+          method: "POST",
+        };
+      },
+    }),
     changePassword: builder.mutation({
       query: (info) => {
         return {
@@ -33,6 +41,7 @@ export const authSellerApi = apiSlice.injectEndpoints({
 
 export const {
   useBecomeSellerMutation,
+  useBecomeSellerWithWalletMutation,
   useEnterForgotOtpMutation,
   useChangePasswordMutation,
 } = authSellerApi;

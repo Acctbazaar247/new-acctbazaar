@@ -1,8 +1,13 @@
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
+import { useGetAllReferralQuery } from "@/redux/features/referral/referralApi";
+import { useAppSelector } from "@/redux/hook";
+import { EReferral, TReferral } from "@/types/common";
+import { formatDate, formatDateWithTime } from "@/utils/formateDate";
 import Image from "next/image";
 import { useState } from "react";
+import { AiFillCheckCircle } from "react-icons/ai";
 import { BiSolidCopy } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
@@ -11,10 +16,13 @@ import { toast } from "react-toastify";
 
 export default function Referral() {
     const [copied, setCopied] = useState(false);
+    const user = useAppSelector((state) => state?.user);
+    const clientUrlLink = process.env.NEXT_PUBLIC_FRONTEND_URL
+    const referralLink = `${clientUrlLink}/auth/sign-up?referralId=${user?.user?.id}`
 
     const copyText = async () => {
         try {
-            await navigator.clipboard.writeText("Acctbazaar,com/manny/2weydwiuhb");
+            await navigator.clipboard.writeText(referralLink);
             setCopied(true);
             toast.success("copied!");
             setTimeout(() => {
@@ -26,11 +34,18 @@ export default function Referral() {
     };
 
     const tabs = [
-        { label: "In Progress" },
-        { label: "Completed" },
+        { value: "pending", label: "Pending" },
+        { value: "completed", label: "Completed" },
+        { value: "cancel", label: "Cancel" },
     ];
 
-    const [activeTab, setActiveTab] = useState(tabs[0].label);
+    const [activeTab, setActiveTab] = useState(tabs[0].value);
+
+    const { data } = useGetAllReferralQuery(`referralById=${user?.user?.id}`);
+
+    const totalAmount = data?.data?.reduce((acc: any, curr: any) => acc + curr?.amount, 0);
+
+    const sortedData = data?.data?.filter((refer: TReferral) => refer?.status === activeTab);
 
 
     return (
@@ -70,39 +85,56 @@ export default function Referral() {
                             </div>
 
                             <div className='pt-10 flex items-center flex-col gap-1'>
-                                <div className="border border-[#EDE8E8] rounded-full flex flex-col md:flex-row items-center md:gap-4 py-2 px-4">
-                                    <span className="textG">Your Referral link:</span>
+                                <div className="mx-4 border border-[#EDE8E8] rounded-full flex flex-col md:flex-row items-center py-2 px-4">
+                                    <span className="textG min-w-32">Your Referral link:</span>
                                     <p className="flex textB items-center gap-1">
-                                        <span className="textB">Acctbazaar,com/manny/2weydwiuhb</span>
+                                        <span className="textB line-clamp-1">{referralLink}</span>
                                         {copied ?
-                                            <FiCheck />
+                                            <FiCheck className="text-2xl" />
                                             :
-                                            <BiSolidCopy onClick={copyText} className="cursor-pointer" />
+                                            <BiSolidCopy onClick={copyText} className="cursor-pointer text-xl" />
                                         }
                                     </p>
                                 </div>
-                                <button className="appBtn px-12">Share Invitation link</button>
+                                <button className="appBtn px-12 mt-4">Share Invitation link</button>
                             </div>
                         </div>
 
                         <div className='hidden md:block border border-[#E1DBDB]'></div>
-                        <div className='w-full md:w-1/2 space-y-4 rounded min-h-full overflow-y-auto bg-white p-2 md:p-4 lg:p-6 2xl:p-6'>
-                            <h4 className="text-lg">Referral Record</h4>
-                            <div className='py-4 p-4 border border-borderColor grid grid-cols-2 rounded-lg'>
+                        <div className='w-full md:w-1/2 space-y-4 border border-borderColor/50 rounded-lg min-h-full overflow-y-auto bg-transparent p-2 md:p-4 lg:p-6 2xl:p-6'>
+                            <h4 className="text-xl font-medium">Referral Record</h4>
+                            <div className='p-4 2xl:p-6 bg-white grid grid-cols-2 rounded-lg'>
                                 <div className='space-y-2'>
                                     <h3 className="flex items-center gap-2"><IoWalletOutline />Total Earned</h3>
-                                    <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />0</h2>
+                                    <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />{totalAmount}</h2>
                                 </div>
                                 <div className='space-y-2'>
-                                    <h3 className="flex items-center gap-2"><PiUsersThreeLight />Invitees</h3>
-                                    <h2 className="text-textBlack font-bold flex items-center">0</h2>
+                                    <h3 className="flex items-center gap-2"><PiUsersThreeLight className="lg:text-lg" />Invitees</h3>
+                                    <h2 className="text-textBlack font-bold flex items-center">{data?.meta?.total}</h2>
                                 </div>
                             </div>
 
-                            <div className='p-4 border border-borderColor rounded-lg'>
+                            <div className='p-2 md:p-4 2xl:py-5 2xl:px-6 min-h-[70%] bg-white rounded-lg'>
                                 <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-                                <div className='py-12 px-5'>
-                                    <Image width={250} height={166} src="/assets/icons/earned.png" alt="" className="mx-auto" />
+                                <div className='bg-white  max-h-[55dvh] pr-1 md:pr-2 overflow-auto'>
+                                    {
+                                        sortedData?.map((referral: TReferral) => (
+                                            <div key={referral?.id} className='border-b border-b-[#E9E4E4] flex justify-between pt-3 md:pt-5 pb-2'>
+                                                <div className='flex gap-1 md:gap-4'>
+                                                    <img src={referral?.ownBy?.profileImg} alt="" className="size-12 rounded-full" />
+                                                    <div className=''>
+                                                        <h3 className="font-medium text-textBlack pb-1">{referral?.ownBy?.name}</h3>
+                                                        <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className="text-green-500" />Completed registration with shared link</p>
+                                                        <p className="flex items-center gap-1 text-xs text-textGreyBlack pt-0.5"><AiFillCheckCircle className={referral?.status === "completed" ? "text-green-500" : "text-textGrey/40"} />Fund wallet with $50</p>
+                                                    </div>
+                                                </div>
+                                                <div className='space-y-2 md:space-y-0'>
+                                                    <h2 className="text-textBlack/50 font-medium text-sm md:text-base">${referral?.amount}</h2>
+                                                    <div className="md:text-sm text-textGrey text-xs">{formatDateWithTime(referral?.createdAt)}</div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         </div>

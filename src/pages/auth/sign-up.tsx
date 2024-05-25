@@ -9,6 +9,7 @@ import { createUser, setError } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -27,6 +28,7 @@ interface FormData {
 }
 
 const SignUp = () => {
+
   const {
     register,
     control,
@@ -35,9 +37,12 @@ const SignUp = () => {
   } = useForm<FormData>();
 
   const router = useRouter();
+  // console.log(router?.query);
+  const { referralId } = router?.query;
   const dispatch = useAppDispatch();
   const { isLoading, user, error } = useAppSelector((state) => state.user);
   const [token, setToken] = useState<null | string>(null);
+
   const onSubmit: SubmitHandler<FormData> = (data) => {
     if (data.password.length < 8) {
       toast.error("minimum password value is 8");
@@ -49,7 +54,12 @@ const SignUp = () => {
     }
 
     const { confirmPassword, accept, ...rest } = data;
-    dispatch(createUser({ ...rest, role: UserRole.User } as any));
+    let submittedData = {
+      ...rest, role: UserRole.User,
+      ...(referralId && { referralId }),
+    }
+
+    dispatch(createUser(submittedData as any));
   };
 
   useEffect(() => {

@@ -7,26 +7,20 @@ import {
   faFileLines,
   faGear,
   faUsers,
-  faPersonCircleQuestion,
-  faEnvelopeOpenText,
-  faPenToSquare,
-  faUserGear,
-  faUsersGear,
-  faUserPen,
-  faCartShopping,
-  faCommentMedical,
+  faReorder,
   faUserShield,
   faComment,
   faIcons,
   faRectangleList,
   faUserPlus,
-  faUserSecret,
+  faCartShopping,
   faDollar,
   faHouse,
   faMoneyBill,
   faMoneyBillTransfer,
-  
+  faCertificate,
 } from "@fortawesome/free-solid-svg-icons";
+
 const common: INavItems[] = [
   {
     name: "Overview",
@@ -90,6 +84,18 @@ const supperItems: INavItems[] = [
     to: "/manageFund",
     matchUrl: "/dashboard/manageFund",
     icon: faDollar,
+  },
+  {
+    name: "Manage KYC",
+    to: "/manage-kyc",
+    matchUrl: "/dashboard/manage-kyc",
+    icon: faCertificate,
+  },
+  {
+    name: "Manage Order",
+    to: "/manage-order",
+    matchUrl: "/dashboard/manage-order",
+    icon: faCartShopping,
   },
   common[2],
   {
