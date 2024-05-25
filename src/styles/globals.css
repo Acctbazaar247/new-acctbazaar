@@ -14,11 +14,14 @@
   .appOutlineBtn {
     @apply hover:bg-primary text-primary select-none text-sm 2xl:text-base hover:text-white rounded lg:rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-2 border border-primary;
   }
-  .roundedBtn {
-    @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-3 px-3 lg:px-6 rounded-full;
+  .appBtnSm {
+    @apply appBtn px-3 py-1 rounded text-xs;
   }
   .appOutlineBtnSm {
-    @apply hover:bg-primary text-primary select-none text-xs 2xl:text-sm hover:text-white rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-2 md:px-4 2xl:px-6 py-1 2xl:py-2 border border-primary;
+    @apply appOutlineBtn px-3 py-1 rounded text-xs;
+  }
+  .roundedBtn {
+    @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-3 px-3 lg:px-6 rounded-full;
   }
   .app-small.ant-spin .ant-spin-dot-item {
     @apply !bg-primary;

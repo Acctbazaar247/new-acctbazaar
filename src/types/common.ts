@@ -89,6 +89,12 @@ export interface IAllCategoryOfPcService {
   category: string;
 }
 
+export enum KycStatus {
+  PENDING = "pending",
+  APPROVED = "approved",
+  DENIED = "denied",
+}
+
 export enum UserRole {
   User = "user",
   Admin = "admin",
@@ -206,7 +212,7 @@ export interface IOrder {
   SeenMessage: ISeenMessage[];
 }
 
-enum EOrderStatus {
+export enum EOrderStatus {
   PENDING = "pending",
   COMPLETED = "completed",
   CANCELLED = "cancelled",

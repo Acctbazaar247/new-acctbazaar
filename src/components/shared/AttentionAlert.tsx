@@ -2,10 +2,10 @@ import React from "react";
 
 const AttentionAlert = () => {
     return (
-        <div className="py-10 bg-white dark:bg-dark">
+        <div className="py-6 md:py-10 bg-white dark:bg-dark">
             <div className="container">
-                <div className="border-yellow-500 bg-yellow-50 flex w-full rounded-lg border-l-[6px] px-7 py-8 md:p-9">
-                    <div className="bg-yellow-500 mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md">
+                <div className="border-yellow-500 bg-yellow-50 flex w-full rounded-lg border-l-[6px] p-6 md:p-9">
+                    <div className="bg-yellow-500 mr-3 md:mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md">
                         <svg
                             width="18"
                             height="18"
@@ -28,10 +28,10 @@ const AttentionAlert = () => {
                         </svg>
                     </div>
                     <div className="w-full">
-                        <h5 className="mb-3 text-lg font-semibold text-[#9D5425]">
+                        <h5 className="mb-3 md:text-lg font-semibold text-[#9D5425]">
                             Verification is under processing
                         </h5>
-                        <p className="text-base leading-relaxed text-[#D0915C]">
+                        <p className="text-sm md:text-base leading-relaxed text-[#D0915C]">
                             Your KYC verification is pending. Our team is diligently reviewing your information. Please allow some time for the verification process to complete. We appreciate your patience!
 
                             In the meantime, feel free to explore other features of our platform. If you have any urgent concerns, don&apos;t hesitate to reach out by our contact page.

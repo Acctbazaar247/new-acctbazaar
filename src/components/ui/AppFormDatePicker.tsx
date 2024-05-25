@@ -57,7 +57,7 @@ const AppFormDatePicker = ({
               value={
                 dayjs(field.value).isValid()
                   ? dayjs(field.value)
-                  : dayjs(new Date())
+                  : null
               }
               onChange={(date, dateString) => {
                 console.log(date);

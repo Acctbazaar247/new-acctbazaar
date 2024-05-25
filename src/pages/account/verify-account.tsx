@@ -14,21 +14,23 @@ import { CgFileAdd } from "react-icons/cg";
 import { toast } from "react-toastify";
 import { City, Country, State } from "country-state-city";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useGetSingleUserKycQuery, useMakeKycRequestMutation } from "@/redux/features/kyc/kycApi";
+import { useGetSingleUserKycQuery, useMakeKycRequestMutation, useUpdateKycRequestMutation } from "@/redux/features/kyc/kycApi";
 import AttentionAlert from "@/components/shared/AttentionAlert";
 import SellerLayout from "@/layout/SellerLayout";
 
 
 const VerifyAccount = () => {
     const [kycPending, setKycPending] = useState(false);
+    const [kycDenied, setKycDenied] = useState(false);
     const [loading, setLoading] = useState(false);
     const [identityImage, setIdentityImage] = useState("");
     const router = useRouter();
     const [modalOpen, setModalOpen] = useState(false);
     const user = useAppSelector((state) => state.user.user);
     const [addKycRequest, { isLoading }] = useMakeKycRequestMutation();
+    const [updateKyc, { isLoading: updateLoading }] = useUpdateKycRequestMutation();
     const [uploadImage, { isLoading: imageLoading }] = useUploadImageMutation();
-    const { data } = useGetSingleUserKycQuery("");
+    const { data, refetch } = useGetSingleUserKycQuery("");
 
     const {
         register,
@@ -42,22 +44,34 @@ const VerifyAccount = () => {
         if (identityImage === "") {
             return toast.error("Please upload your identity image and try again", { toastId: 1 });
         }
-        const submittedData = {
-            id: user?.id, ...data, identityImage
-        }
-        console.log(submittedData);
-        await addKycRequest(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
 
-            if (!res.data?.success) {
+        const submittedData = {
+            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending" }),
+        }
+
+        if (!kycDenied) {
+            await addKycRequest(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
+
+                if (!res.data?.success) {
+                    toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
+                }
+                toast.success("KYC request send successfully!", { toastId: 1 });
+                setModalOpen(true);
+            }).catch((res: ResponseErrorType | ResponseSuccessType) => {
+                if (!res.data?.success) {
+                    toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
+                }
+            });
+        } else if (kycDenied) {
+            await updateKyc(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
+                console.log(res);
+                toast.success("KYC request updated successfully!", { toastId: 1 });
+                setModalOpen(true);
+            }).catch((res: ResponseErrorType | ResponseSuccessType) => {
+                console.log(res);
                 toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
-            }
-            toast.success("Account are updated successfully!", { toastId: 1 });
-            setModalOpen(true);
-        }).catch((res: ResponseErrorType | ResponseSuccessType) => {
-            if (!res.data?.success) {
-                toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
-            }
-        });
+            });
+        }
     };
 
     const countryOptions = useMemo(
@@ -111,6 +125,7 @@ const VerifyAccount = () => {
     const handleModal = () => {
         setModalOpen(false);
         router.push("/marketplace");
+        refetch();
     }
 
     const handleFileUpload = async (value: any) => {
@@ -151,6 +166,12 @@ const VerifyAccount = () => {
             if (data?.data?.status === "pending") {
                 setKycPending(true)
             }
+            if (data?.data?.status === "denied") {
+                setKycDenied(true)
+            }
+            if (data?.data?.status === "approved") {
+                router?.push("/marketplace");
+            }
 
             setValue("address", data?.data?.address)
             setValue("birthDate", data?.data?.birthDate)
@@ -162,7 +183,7 @@ const VerifyAccount = () => {
             setValue("meansOfIdentification", data?.data?.meansOfIdentification)
             setIdentityImage(data?.data?.identityImage);
         }
-    }, [data, kycPending, setValue])
+    }, [data, kycPending, router, setValue])
 
     return (
         <HomeLayout>
@@ -328,13 +349,13 @@ const VerifyAccount = () => {
                                                     <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
                                                     :
                                                     <>
-                                                        {identityImage !== "" ?
-                                                            <img src={identityImage} alt="identity image" className="w-full rounded max-h-44 object-cover" />
-                                                            :
+                                                        {identityImage === ("" || undefined) ?
                                                             <div className="flex items-center justify-between p-3 w-full">
                                                                 <h2 className="text-[#7D7878] flex items-center gap-1 text-sm"><CgFileAdd />Upload Valid Identity Document</h2>
                                                                 <p className="text-primary text-xs font-medium">Select File</p>
                                                             </div>
+                                                            :
+                                                            <img src={identityImage} alt="identity image" className="w-full rounded min-h-40 max-h-44 object-cover" />
                                                         }
                                                     </>
                                                 }
@@ -347,7 +368,7 @@ const VerifyAccount = () => {
                                 {
                                     !kycPending &&
                                     <div className='flex items-center justify-end'>
-                                        {isLoading || loading ? (
+                                        {isLoading || loading || updateLoading ? (
                                             <button type="button" className="appBtn px-14 flex items-center justify-center">
                                                 <AiOutlineLoading3Quarters className="animate-spin text-white text-2xl" />
                                             </button>

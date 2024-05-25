@@ -18,7 +18,9 @@ import {
   faHouse,
   faMoneyBill,
   faMoneyBillTransfer,
+  faCertificate,
 } from "@fortawesome/free-solid-svg-icons";
+
 const common: INavItems[] = [
   {
     name: "Overview",
@@ -82,6 +84,12 @@ const supperItems: INavItems[] = [
     to: "/manageFund",
     matchUrl: "/dashboard/manageFund",
     icon: faDollar,
+  },
+  {
+    name: "Manage KYC",
+    to: "/manage-kyc",
+    matchUrl: "/dashboard/manage-kyc",
+    icon: faCertificate,
   },
   {
     name: "Manage Order",

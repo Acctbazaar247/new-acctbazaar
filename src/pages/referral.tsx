@@ -1,6 +1,7 @@
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
+import { useGetAllReferralQuery } from "@/redux/features/referral/referralApi";
 import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
 import { useState } from "react";
@@ -38,6 +39,8 @@ export default function Referral() {
 
     const [activeTab, setActiveTab] = useState(tabs[0].label);
 
+    const { data } = useGetAllReferralQuery(`referralById=${user?.user?.id}`);
+    console.log(data);
     const ReferralMember = [1, 2, 3]
     return (
         <HomeLayout>
