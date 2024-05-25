@@ -39,7 +39,7 @@ export default function SellYourAccount() {
     <HomeLayout>
       <PrivateLayout>
         <WelcomeModal />
-        {/* {UserRole.User === user?.role ? <WelcomeModal /> : null} */}
+        {/* {UserRole.User === user?.role ? <WelcomeModsal /> : null} */}
         <div className="container py-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
           <div className="flex flex-col md:flex-row gap-1 justify-between">
