@@ -11,16 +11,16 @@ import {
   AccountCategory,
   EApprovedForSale,
   IAccount,
-  IUser,
+  IUser
 } from "@/types/common";
 // import ServiceCard from "@/components/ServiceCard/ServiceCard";
 import {
   useDeleteAccountMutation,
   useEditAccountMutation,
-  useGetAccountsQuery,
+  useGetAccountsQuery
 } from "@/redux/features/account/accountApi";
 import FormSelectField, {
-  SelectOptions,
+  SelectOptions
 } from "@/components/Forms/FormSelectField";
 import useDebounce from "@/hooks/useDebounce";
 import Form from "@/components/Forms/Form";
@@ -51,7 +51,7 @@ function AllService({}: Props) {
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
       approvedForSale: approvedForSale.value.length
         ? approvedForSale.value
-        : undefined,
+        : undefined
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -75,7 +75,7 @@ function AllService({}: Props) {
             editService({
               id,
               approvedForSale: EApprovedForSale.approved,
-              messageFromAdmin: "",
+              messageFromAdmin: ""
             });
           }}
         >
@@ -106,7 +106,7 @@ function AllService({}: Props) {
             editService({
               id,
               approvedForSale: EApprovedForSale.denied,
-              messageFromAdmin: info.message,
+              messageFromAdmin: info.message
             });
           }}
         ></AccountDeniedFrom>
@@ -118,7 +118,7 @@ function AllService({}: Props) {
       title: "Category",
       dataIndex: "category",
       key: "category",
-      className: "text-[12px] lg:text-md",
+      className: "text-[12px] lg:text-md"
     },
     {
       title: "Name",
@@ -140,7 +140,7 @@ function AllService({}: Props) {
             )}
           </div>
         );
-      },
+      }
     },
     {
       title: "Price",
@@ -150,7 +150,7 @@ function AllService({}: Props) {
 
       render: (price) => {
         return <span>{price}$</span>;
-      },
+      }
     },
 
     {
@@ -169,7 +169,7 @@ function AllService({}: Props) {
             </div>
           </div>
         );
-      },
+      }
     },
     {
       title: "Status",
@@ -211,7 +211,7 @@ function AllService({}: Props) {
             </div>
           </div>
         );
-      },
+      }
     },
     {
       title: "Action",
@@ -230,7 +230,7 @@ function AllService({}: Props) {
                 placement="leftTop"
                 onConfirm={() => deleteService(record.id)}
                 okButtonProps={{
-                  className: "!border !border-blue-300 text-blue-500",
+                  className: "!border !border-blue-300 text-blue-500"
                 }}
               >
                 <Button danger>Delete</Button>
@@ -238,13 +238,13 @@ function AllService({}: Props) {
             </>
           )}
         </div>
-      ),
-    },
+      )
+    }
   ];
   if (isMobile) {
     columns.splice(3, 1);
   }
-  if (isFetching || isLoading || isEditLoading) {
+  if (isFetching || isLoading) {
     content = <Loading></Loading>;
   } else if (isError) {
     content = <ErrorCompo></ErrorCompo>;
@@ -281,7 +281,7 @@ function AllService({}: Props) {
         <Avatar src={single.imageUrl}></Avatar>
         <span>{single.label}</span>
       </div>
-    ),
+    )
   }));
   const approvedStatusOption =
     Object.values(EApprovedForSale).map(optionCreator);
