@@ -4,7 +4,7 @@ import Loading from "@/components/ui/Loading";
 import {
   resendEmail,
   userLoggedOut,
-  verifyUserWithToken,
+  verifyUserWithToken
 } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/router";
@@ -22,7 +22,7 @@ const EnterOtp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
 
   const { isLoading, user, error } = useAppSelector((state) => state.user);
@@ -165,15 +165,15 @@ const EnterOtp = () => {
                   {isDisabled ? <p>{countdown}</p> : null}
                 </div>
               </div>
-              <GoogleReCaptcha
+              {/* <GoogleReCaptcha
                 onVerify={(t) => {
                   setToken(t);
                 }}
-              />
+              /> */}
               <button
                 onClick={onSubmit}
                 type="submit"
-                disabled={!token}
+                // disabled={!token}
                 className="appBtn mt-4 w-full"
               >
                 Verify code

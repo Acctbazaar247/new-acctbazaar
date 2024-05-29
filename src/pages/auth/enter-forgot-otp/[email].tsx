@@ -6,7 +6,7 @@ import { useEnterForgotOtpMutation } from "@/redux/features/auth/authSellerApi";
 import {
   resendEmail,
   userLoggedOut,
-  verifyUserWithToken,
+  verifyUserWithToken
 } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { ResponseSuccessType } from "@/types/common";
@@ -27,7 +27,7 @@ const EnterForgotOtp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
   const router = useRouter();
   const email = router.query.email;
@@ -106,14 +106,14 @@ const EnterForgotOtp = () => {
                   </p>
                 </div>
               </div>
-              <GoogleReCaptcha
+              {/* <GoogleReCaptcha
                 onVerify={(t) => {
                   setToken(t);
                 }}
-              />
+              /> */}
               <button
                 onClick={onSubmit}
-                disabled={isLoading || !token}
+                // disabled={isLoading || !token}
                 type="submit"
                 className="appBtn mt-4 w-full"
               >

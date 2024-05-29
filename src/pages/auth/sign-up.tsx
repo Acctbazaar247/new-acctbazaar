@@ -28,12 +28,11 @@ interface FormData {
 }
 
 const SignUp = () => {
-
   const {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
 
   const router = useRouter();
@@ -55,9 +54,10 @@ const SignUp = () => {
 
     const { confirmPassword, accept, ...rest } = data;
     let submittedData = {
-      ...rest, role: UserRole.User,
-      ...(referralId && { referralId }),
-    }
+      ...rest,
+      role: UserRole.User,
+      ...(referralId && { referralId })
+    };
 
     dispatch(createUser(submittedData as any));
   };
@@ -123,7 +123,7 @@ const SignUp = () => {
               <Controller
                 name="phoneNumber"
                 rules={{
-                  required: true,
+                  required: true
                 }}
                 control={control}
                 render={({ field: { name, onBlur, onChange, ref, value } }) => (
@@ -138,7 +138,7 @@ const SignUp = () => {
                       name,
                       onBlur,
                       ref,
-                      onChange,
+                      onChange
                     }}
                   />
                 )}
@@ -183,7 +183,7 @@ const SignUp = () => {
                 <div className=" contact-input-label   flex items-center">
                   <input
                     {...register("accept", {
-                      required: true,
+                      required: true
                     })}
                     required
                     type="checkbox"
@@ -212,17 +212,17 @@ const SignUp = () => {
                     Must accept our privacy policy
                   </span>
                 )}
-                <GoogleReCaptcha
+                {/* <GoogleReCaptcha
                   onVerify={(t) => {
                     setToken(t);
                   }}
-                />
+                /> */}
               </div>
               {isLoading ? (
                 <AppSmallLoading></AppSmallLoading>
               ) : (
                 <button
-                  disabled={!token}
+                  // disabled={!token}
                   type="submit"
                   className="appBtn mt-4 w-full"
                 >

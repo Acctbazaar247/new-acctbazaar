@@ -21,7 +21,7 @@ const ForgotPassword = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
   const [token, setToken] = useState<null | string>(null);
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -70,11 +70,11 @@ const ForgotPassword = () => {
                 placeholder="Type your Email address"
                 error={errors.email}
               />
-              <GoogleReCaptcha
+              {/* <GoogleReCaptcha
                 onVerify={(t) => {
                   setToken(t);
                 }}
-              />
+              /> */}
               {isLoading ? (
                 <button className="appBtn px-10 flex items-center justify-center w-full mt-4 lg:mt-6 ">
                   <AiOutlineLoading3Quarters className="animate-spin text-white text-2xl" />
