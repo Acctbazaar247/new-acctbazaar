@@ -1,6 +1,7 @@
 import AccountReel from "@/components/AccountReel/AccountReel";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import MarketplaceSidebar from "@/components/marketplace/MarketplaceSidebar";
+import AccountLoading from "@/components/shared/AccountLoading";
 import AppDrawer from "@/components/ui/AppDrawer";
 import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
@@ -117,6 +118,7 @@ const Marketplace = () => {
                 <h2 className="text-xl font-bold">Latest account</h2>
                 <AppRenderReduxData
                   queryData={queryData}
+                  loadingComponent={<AccountLoading />}
                   showData={(data) => {
                     // console.log(data);
                     return (

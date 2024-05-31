@@ -10,6 +10,7 @@ type TTableProps = {
   inputPlaceholder?: string;
   columns: any;
   button?: ReactNode;
+  loadingComponent?: ReactNode;
   header?: boolean;
   infoQuery?: any;
   isLoading?: boolean;
@@ -26,6 +27,7 @@ const AppTable = ({
   button,
   columns,
   onInputChange,
+  loadingComponent,
   setPage,
   tabs
 }: TTableProps) => {
@@ -72,7 +74,7 @@ const AppTable = ({
         {infoQuery && (
           <AppRenderReduxData
             loadingComponent={
-              <AppTableSkeleton />
+              loadingComponent || <AppTableSkeleton />
             }
             queryData={infoQuery}
             showData={(data) => {

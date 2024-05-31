@@ -1,5 +1,6 @@
 import OrderAccountCard from "@/components/orders/OrderAccountCard";
 import OrdersMain from "@/components/orders/OrdersMain";
+import AccountLoading from "@/components/shared/AccountLoading";
 import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
@@ -80,6 +81,7 @@ const Orders = () => {
                 <AppRenderReduxData
                   isEmptyComponentHave
                   queryData={orderQuery}
+                  loadingComponent={<AccountLoading />}
                   showData={(data) => {
                     return (
                       <div className="py-4 md:py-6 space-y-6">

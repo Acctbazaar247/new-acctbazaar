@@ -100,6 +100,10 @@ const Plans = () => {
     ];
 
     const handleTakeAPlan = async (value: string) => {
+        if (currentPlan?.data?.days > 0) {
+            return toast.error(`Now active ${currentPlan?.data?.planType} plan and after ${currentPlan?.data?.days} days you can change your plan!`, { toastId: 1 });
+        };
+
         await takeAPlan({ planType: value }).unwrap().then((res: ResponseSuccessType) => {
             toast.success("Plan updated successfully!", { toastId: 1 });
         }).catch((res: any) => {

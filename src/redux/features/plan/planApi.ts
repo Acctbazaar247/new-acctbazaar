@@ -28,22 +28,11 @@ export const planApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: [tagTypes.plan],
     }),
-    updateKycRequest: builder.mutation({
-      query: (info) => {
-        return {
-          url: `/kyc/${info?.id}`,
-          method: "PATCH",
-          body: info,
-        };
-      },
-      invalidatesTags: [tagTypes.kyc],
-    }),
   }),
 });
 
 export const {
   useGetCurrentPlanQuery,
-  useUpdateKycRequestMutation,
   useGetAllPlanQuery,
   useTakeAPlanMutation,
   useGetUploadLeftOnCurrentPlanQuery,

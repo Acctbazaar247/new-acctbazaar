@@ -1,4 +1,5 @@
 import MyAdsMain from "@/components/myAds/MyAdsMain";
+import AccountLoading from "@/components/shared/AccountLoading";
 import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
@@ -63,6 +64,7 @@ const MyAds = () => {
                         <AppRenderReduxData
                             queryData={queryData}
                             isEmptyComponentHave
+                            loadingComponent={<AccountLoading />}
                             showData={(data) => {
                                 return (<>
                                     {

@@ -10,7 +10,7 @@ import { useGetOrdersQuery, useUpdateOrderMutation } from "@/redux/features/orde
 import AppPopover from "@/components/ui/AppPopover";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
-
+import TableLoading from "@/components/shared/TableLoading";
 
 const ManageAllUser = () => {
   const [search, setSearch] = useState<string>("");
@@ -94,7 +94,7 @@ const ManageAllUser = () => {
       render: (orderBy: any) => {
         return (
           <div className='flex items-center gap-1 text-base'>
-            <img src={orderBy?.profileImg} alt="" className="rounded-full object-cover size-9" />
+            <img src={orderBy?.profileImg} alt="profile Image" className="rounded-full object-cover size-9" />
             <p className="line-clamp-1">{orderBy?.name}</p>
           </div>
         )
@@ -207,6 +207,9 @@ const ManageAllUser = () => {
         infoQuery={queryInfo}
         columns={columns}
         setPage={setPage}
+        loadingComponent={
+          <TableLoading columnNumber={columns.length} />
+        }
       />
     </SuperAdminLayout>
   );

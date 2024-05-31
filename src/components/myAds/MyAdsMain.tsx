@@ -1,7 +1,3 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import AppTabs from "../ui/AppTabs";
-import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
-import OrderDetailsAccountInfo from "../orders/OrderDetailsAccountInfo";
 import MyAdsAccountCard from "./MyAdsAccountCard";
 import { IAccount } from "@/types/common";
 

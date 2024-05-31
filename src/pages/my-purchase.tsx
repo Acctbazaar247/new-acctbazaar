@@ -1,5 +1,6 @@
 import MyAdsMain from "@/components/myAds/MyAdsMain";
 import MyPurchaseMain from "@/components/myAds/MyPurchaseMain";
+import AccountLoading from "@/components/shared/AccountLoading";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
@@ -61,6 +62,7 @@ export default function MyPurchase() {
             {/* <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} /> */}
             <AppRenderReduxData
               queryData={queryData}
+              loadingComponent={<AccountLoading />}
               isEmptyComponentHave
               showData={(data) => {
                 return (

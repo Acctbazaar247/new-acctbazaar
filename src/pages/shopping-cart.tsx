@@ -7,6 +7,7 @@ import { useAddOrderMutation } from "@/redux/features/order/orderApi";
 import { ICart } from "@/types/common";
 import config from "@/utils/config";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CiWallet } from "react-icons/ci";
@@ -14,6 +15,7 @@ import { PiCurrencyDollarBold } from "react-icons/pi";
 import { toast } from "react-toastify";
 
 export default function ShoppingCart() {
+  const router = useRouter()
   const { data: cartsInfo, isLoading: isCartLoading } = useGetMyCartsQuery("");
   const myCarts = (cartsInfo?.data as ICart[]) || ([] as ICart[]);
 
@@ -49,19 +51,19 @@ export default function ShoppingCart() {
   const handleClick = () => {
     const currency = data?.data?.amount;
     if (currency < mainPrice) {
-      toast.error("Sorry you don't have enough money", { toastId: 1 });
-      return;
+      return toast.error("Sorry you don't have enough money", { toastId: 1 });
     } else {
       setSuccessStatus({ isDone: true, totalItems: mainData.length });
       toast.success("Order placed successful", { toastId: 1 });
       mainData.forEach((ele) => {
         makeOrder({ accountId: ele.accountId })
           .unwrap()
-          .then((res) => {})
+          .then((res) => { })
           .catch((err) => {
             toast.error(err.message);
           });
       });
+      router.push('/marketplace');
     }
   };
 
