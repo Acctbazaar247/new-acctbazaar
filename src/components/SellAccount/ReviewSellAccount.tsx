@@ -85,13 +85,17 @@ export default function ReviewSellAccount({
           account={accountCard}
         />
         <div className="border border-[#EFECEC]"></div>
-        {accountCredentials.map((account, index) => (
-          <OrderDetailsAccountInfo
-            key={index}
-            index={index}
-            account={account}
-          />
-        ))}
+
+        <div className='w-full max-h-[50dvh] overflow-auto space-y-3'>
+          {accountCredentials.map((account, index) => (
+            <OrderDetailsAccountInfo
+              key={index}
+              index={index}
+              account={account}
+            />
+          ))}
+        </div>
+
         <div className="pt-3 md:pt-6 flex items-center justify-center">
           {isLoading ? (
             <button className="appBtn px-10 flex items-center justify-center">

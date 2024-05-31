@@ -8,41 +8,41 @@ export const accountApi = apiSlice.injectEndpoints({
       query: (query) => {
         addCacheKey(query); // Track the query string
         return {
-          url: `/accounts?${query}`
+          url: `/accounts?${query}`,
         };
       },
-      providesTags: [tagTypes.account]
+      providesTags: [tagTypes.account],
     }),
     getAccountById: builder.query({
       query: (id) => `/accounts/${id}`,
-      providesTags: [tagTypes.account]
+      providesTags: [tagTypes.account],
     }),
     addAccount: builder.mutation({
       query: (info) => {
         return {
           url: "/accounts",
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.account]
+      invalidatesTags: [tagTypes.account, tagTypes.plan],
     }),
     addMultiAccount: builder.mutation({
       query: (info) => {
         return {
           url: "/accounts/multi-upload",
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.account]
+      invalidatesTags: [tagTypes.account, tagTypes.plan],
     }),
     editAccount: builder.mutation({
       query: (info) => {
         return {
           url: `/accounts/${info.id}`,
           method: "PATCH",
-          body: info
+          body: info,
         };
       },
       async onQueryStarted(arg, { queryFulfilled, dispatch, getCacheEntry }) {
@@ -67,18 +67,18 @@ export const accountApi = apiSlice.injectEndpoints({
         } catch (err) {
           patchResults.forEach((patchResult) => patchResult.undo()); // Revert optimistic update if the request fails
         }
-      }
+      },
     }),
     deleteAccount: builder.mutation({
       query: (id) => {
         return {
           url: `/accounts/${id}`,
-          method: "DELETE"
+          method: "DELETE",
         };
       },
-      invalidatesTags: [tagTypes.account]
-    })
-  })
+      invalidatesTags: [tagTypes.account],
+    }),
+  }),
 });
 export const {
   useGetAccountsQuery,
@@ -86,5 +86,5 @@ export const {
   useDeleteAccountMutation,
   useEditAccountMutation,
   useGetAccountByIdQuery,
-  useAddMultiAccountMutation
+  useAddMultiAccountMutation,
 } = accountApi;

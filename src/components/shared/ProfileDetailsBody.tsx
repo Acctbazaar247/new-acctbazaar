@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import AvatarComponent from "./AvatarComponent";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 type ProfileDetailsBody = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -85,12 +86,14 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
             <h4 className="text-sm md:text-base flex items-center gap-1">
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
-                <p
-                  className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
-                >
-                  <GoDotFill />
-                  verified merchant
-                </p>
+                <div className='flex items-center gap-1'>
+                  <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+                  <p
+                    className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                  >
+                    verified merchant
+                  </p>
+                </div>
               )}
             </h4>
             {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
@@ -110,13 +113,15 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
               <div className="w-full flex items-center justify-between">
                 <h4 className="text-sm md:text-base flex items-center gap-1">
                   {user?.name}
-                  {user?.isVerifiedByAdmin && (
-                    <p
-                      className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
-                    >
-                      <GoDotFill />
-                      verified merchant
-                    </p>
+                  {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
+                    <div className='flex items-center gap-1'>
+                      <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+                      <p
+                        className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] leading-4 md:leading-3 md:text-xs text-primary bg-primary/5 border border-primary h-fit py-0`}
+                      >
+                        verified merchant
+                      </p>
+                    </div>
                   )}
                 </h4>
                 {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
@@ -161,6 +166,7 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
           )}
         </div>
 
+        {/* this is for mobile  */}
         <div className="md:hidden p-4">
           <Link
             href={"/account/sell-your-account"}

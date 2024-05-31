@@ -10,12 +10,14 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setAccountCard } from "@/redux/features/account/accountSlice";
 import AppModal from "../ui/AppModal";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
 
 interface FormData {
   category: AccountCategory;
   name: string;
   description: string;
-  price: number;
+  price: string | number;
 }
 
 type TAddSellAccount = {
@@ -23,15 +25,21 @@ type TAddSellAccount = {
 };
 
 export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
-  const [modalOpen, setModalOpen] = useState(true);
+  const { data } = useGetAccountsQuery("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [userGuide, setUserGuide] = useState(1);
   const user = useAppSelector((state) => state.user.user);
   const { accountCard } = useAppSelector((state) => state.account);
+
   useEffect(() => {
+    if (data?.meta?.total > 0) {
+      setModalOpen(false);
+    }
     if (!user?.isPaidForSeller) {
       setModalOpen(true);
     }
-  }, [user?.isPaidForSeller]);
+
+  }, [data?.meta?.total, user?.isPaidForSeller]);
 
   const dispatch = useAppDispatch();
   const {
@@ -49,8 +57,18 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    updateProgress(3);
-    dispatch(setAccountCard(data));
+    const floatValue = parseFloat(data?.price as string);
+    if (!isNaN(floatValue) && floatValue > 0) {
+      const submittedData = {
+        ...data, price: floatValue
+      }
+      dispatch(setAccountCard(submittedData));
+      updateProgress(3);
+    } else {
+      return toast.error("Please set a valid price", {
+        toastId: 1,
+      });
+    }
   };
 
   const categoryOptions = useMemo(() => {
@@ -340,12 +358,12 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
           <AppFormInput
             label="Enter your price"
             name="price"
-            type="number"
-            required
+            type="text"
             placeholder="Enter amount"
             register={register}
-            error={errors?.name}
+            error={errors?.price}
           />
+
           <div className="flex items-center justify-center">
             <button type="submit" className="appBtn px-10">
               Continue

@@ -15,11 +15,13 @@ import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { useGetUploadLeftOnCurrentPlanQuery } from "@/redux/features/plan/planApi";
 
 export default function SellYourAccount() {
   const [sellAccountState, setSellAccountState] = useState(1);
   const { user } = useAppSelector((state) => state.user);
   const router = useRouter();
+  const { data: UploadLeftOnCurrentPlan, refetch } = useGetUploadLeftOnCurrentPlanQuery("");
 
   useEffect(() => {
     if (user?.role && sellAccountState === 1) {
@@ -33,7 +35,8 @@ export default function SellYourAccount() {
         router.push("/");
       }
     }
-  }, [user, router, sellAccountState]);
+    refetch();
+  }, [user, router, sellAccountState, refetch]);
 
   return (
     <HomeLayout>
@@ -64,67 +67,56 @@ export default function SellYourAccount() {
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <TbWallet
-                      className={`text-2xl ${
-                        sellAccountState === 1 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 1 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
                 <div
-                  className={`border w-12 md:w-20 ${
-                    sellAccountState === 1
-                      ? "border-primary"
-                      : "border-textBlack"
-                  }`}
+                  className={`border w-12 md:w-20 ${sellAccountState === 1
+                    ? "border-primary"
+                    : "border-textBlack"
+                    }`}
                 ></div>
                 <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
                   {sellAccountState > 2 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <FiPlusCircle
-                      className={`text-2xl ${
-                        sellAccountState === 2 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 2 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
                 <div
-                  className={`border w-12 md:w-20 ${
-                    sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
-                  } ${
-                    sellAccountState > 2 && "border-textBlack border-solid"
-                  }  ${
-                    sellAccountState === 2 && "border-primary border-dashed"
-                  }`}
+                  className={`border w-12 md:w-20 ${sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
+                    } ${sellAccountState > 2 && "border-textBlack border-solid"
+                    }  ${sellAccountState === 2 && "border-primary border-dashed"
+                    }`}
                 ></div>
                 <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
                   {sellAccountState > 3 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <BiMessageSquareDetail
-                      className={`text-2xl ${
-                        sellAccountState === 3 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 3 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
                 <div
-                  className={`border w-12 md:w-20 ${
-                    sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
-                  } ${
-                    sellAccountState > 3 && "border-textBlack border-solid"
-                  }  ${
-                    sellAccountState === 3 && "border-primary border-dashed"
-                  }`}
+                  className={`border w-12 md:w-20 ${sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
+                    } ${sellAccountState > 3 && "border-textBlack border-solid"
+                    }  ${sellAccountState === 3 && "border-primary border-dashed"
+                    }`}
                 ></div>
                 <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
                   {sellAccountState > 4 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <TbMessage2Search
-                      className={`text-2xl ${
-                        sellAccountState === 4 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 4 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
@@ -132,30 +124,26 @@ export default function SellYourAccount() {
 
               <div className="flex text-xs md:text-sm items-center justify-between md:gap-6 font-medium">
                 <p
-                  className={`${sellAccountState === 1 && "text-primary"} ${
-                    sellAccountState > 1 && "text-textBlack"
-                  }  min-w-[80px]`}
+                  className={`${sellAccountState === 1 && "text-primary"} ${sellAccountState > 1 && "text-textBlack"
+                    }  min-w-[80px]`}
                 >
                   Make Payment
                 </p>
                 <p
-                  className={`${sellAccountState === 2 && "text-primary"} ${
-                    sellAccountState > 2 && "text-textBlack"
-                  } min-w-20 md:min-w-24 text-center ml-4`}
+                  className={`${sellAccountState === 2 && "text-primary"} ${sellAccountState > 2 && "text-textBlack"
+                    } min-w-20 md:min-w-24 text-center ml-4`}
                 >
                   Add account
                 </p>
                 <p
-                  className={`${sellAccountState === 3 && "text-primary"} ${
-                    sellAccountState > 3 && "text-textBlack"
-                  } min-w-16 md:min-w-24 text-end mx-2`}
+                  className={`${sellAccountState === 3 && "text-primary"} ${sellAccountState > 3 && "text-textBlack"
+                    } min-w-16 md:min-w-24 text-end mx-2`}
                 >
                   Credentials
                 </p>
                 <p
-                  className={`${sellAccountState === 4 && "text-primary"} ${
-                    sellAccountState > 4 && "text-textBlack"
-                  } min-w-16 md:min-w-24 text-end md:pr-2`}
+                  className={`${sellAccountState === 4 && "text-primary"} ${sellAccountState > 4 && "text-textBlack"
+                    } min-w-16 md:min-w-24 text-end md:pr-2`}
                 >
                   Review
                 </p>
@@ -180,7 +168,7 @@ export default function SellYourAccount() {
                 <AddSellAccount updateProgress={setSellAccountState} />
               )}
               {sellAccountState === 3 && (
-                <AccountCredentials updateProgress={setSellAccountState} />
+                <AccountCredentials UploadLeftOnCurrentPlan={UploadLeftOnCurrentPlan} updateProgress={setSellAccountState} />
               )}
               {sellAccountState === 4 && (
                 <ReviewSellAccount updateProgress={setSellAccountState} />

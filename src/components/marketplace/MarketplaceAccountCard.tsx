@@ -1,4 +1,4 @@
-import { AccountCategory, IAccount, ICart } from "@/types/common";
+import { AccountCategory, IAccount, ICart, IUser } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -19,6 +19,7 @@ import Link from "next/link";
 import { GoDotFill } from "react-icons/go";
 import { findImageUrlByCategory } from "@/shared";
 import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
+import AvatarComponent from "../shared/AvatarComponent";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -73,9 +74,8 @@ const MarketplaceAccountCard = ({
 
   return (
     <div
-      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${
-        existOnCart && "bg-[#FBFAFA] opacity-50"
-      }`}
+      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${existOnCart && "bg-[#FBFAFA] opacity-50"
+        }`}
     >
       {/* this is image and description div  */}
       <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -89,41 +89,19 @@ const MarketplaceAccountCard = ({
         {/* this is description div  */}
         <div className="">
           <h3
-            className={`text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal ${
-              !isModal && "line-clamp-1"
-            }`}
+            className={`text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal ${!isModal && "line-clamp-1"
+              }`}
           >
             {account?.name}
           </h3>
           <p
-            className={`text-textGrey pt-0.5 text-xs md:text-sm ${
-              !isModal && "line-clamp-1"
-            }`}
+            className={`text-textGrey pt-0.5 text-xs md:text-sm ${!isModal && "line-clamp-1"
+              }`}
           >
             {account?.description}
           </p>
           {/* this is profile div  */}
-          <div className="flex items-center gap-1 pt-1 md:pt-2">
-            <Image
-              width={20}
-              height={20}
-              src={account?.ownBy?.profileImg as string}
-              className="size-5 rounded-full"
-              alt="avatar image"
-            />
-            <p className="text-textBlack text-xs">{account?.ownBy?.name}</p>
-            {/* {account?.ownBy?.isVerified && (
-              <RiVerifiedBadgeFill className="text-success" />
-            )} */}
-            {account?.ownBy?.isVerifiedByAdmin && (
-              <p
-                className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
-              >
-                <GoDotFill />
-                verified merchant
-              </p>
-            )}
-          </div>
+          <AvatarComponent withName user={account?.ownBy as IUser} />
         </div>
       </div>
 

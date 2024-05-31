@@ -22,10 +22,10 @@ export default function AccountCredentialCard({
   account,
   updateProgress,
 }: TAccountCredentialCard) {
-  console.log(
-    findImageUrlByCategory(account?.category as AccountCategory)
-    // account.category
-  );
+  // console.log(
+  //   findImageUrlByCategory(account?.category as AccountCategory)
+  //   // account.category
+  // );
   return (
     <div
       className={` flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg p-2 md:p-3 2xl:p-4 bg-[#FBFAFA]`}

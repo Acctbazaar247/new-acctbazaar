@@ -2,6 +2,7 @@ import { BsClipboardCheck } from "react-icons/bs";
 import { FiHome } from "react-icons/fi";
 import { IoSettingsOutline, IoWalletOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
+import { MdWorkspacePremium } from "react-icons/md";
 import { PiUsersThreeLight } from "react-icons/pi";
 import {
   TbClipboardList,
@@ -108,6 +109,11 @@ export const popupNavbarLinks = [
     label: "Referral",
     path: "/referral",
     icon: PiUsersThreeLight,
+  },
+  {
+    label: "Plans",
+    path: "/seller/plans",
+    icon: MdWorkspacePremium,
   },
   {
     label: "My Purchase",

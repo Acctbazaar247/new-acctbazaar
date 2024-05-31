@@ -1,20 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
 import AccountCredentialCard from "./AccountCredentialCard";
-import MyAdsAccountCard from "../myAds/MyAdsAccountCard";
 import OrderDetailsAccountInfo from "../orders/OrderDetailsAccountInfo";
 import AppFormInput from "../ui/AppFormInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import AppFormTextarea from "../ui/AppFormTextarea";
-import { CgFileAdd } from "react-icons/cg";
-import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import AppRenderReduxData from "../ui/AppRenderReduxData";
-import { IAccount } from "@/types/common";
 import { setAccountCredentials } from "@/redux/features/account/accountSlice";
 import { toast } from "react-toastify";
+import { GoAlert } from "react-icons/go";
+import { useGetCurrentPlanQuery } from "@/redux/features/plan/planApi";
+import Link from "next/link";
 
 type TAccountCredentials = {
   updateProgress: Dispatch<SetStateAction<number>>;
+  UploadLeftOnCurrentPlan: any
 };
 
 interface FormData {
@@ -27,13 +26,17 @@ interface FormData {
 }
 
 export default function AccountCredentials({
-  updateProgress,
+  updateProgress, UploadLeftOnCurrentPlan
 }: TAccountCredentials) {
+  const { data: currentPlan } = useGetCurrentPlanQuery("");
+
   const { user } = useAppSelector((state) => state.user);
   const { accountCard, accountCredentials } = useAppSelector(
     (state) => state.account
   );
+
   const dispatch = useAppDispatch();
+
   const {
     register,
     control,
@@ -45,6 +48,13 @@ export default function AccountCredentials({
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     const randomId = Math.random().toString(36).substr(2, 8);
+
+    if ((UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length) === 0) {
+      return toast.error("Your upload limit has finished for today, want to more upload account? Please upgrade your plan", {
+        toastId: 1,
+      });
+    };
+
     dispatch(
       setAccountCredentials({ ...data, username: user?.name, id: randomId })
     );
@@ -62,6 +72,10 @@ export default function AccountCredentials({
 
   return (
     <div className="bg-white rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
+      <div className="border-yellow-500 bg-yellow-50 flex gap-2 w-full rounded-lg border-l-[6px] p-2 md:p-4">
+        <GoAlert className="text-yellow-500 text-xl" /> You are in <span className="font-bold">{currentPlan?.data?.planType} plan,</span> your account upload limit number for today is <span className="font-bold">{UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length},</span> if you want to upload more account, upgrade your plan. <Link href={"/seller/plans"} className="appOutlineBtnSm">Choose Your Plan Here</Link>
+      </div>
+
       <h2 className="subTitle pt-4 md:pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
         Account Credentials
       </h2>

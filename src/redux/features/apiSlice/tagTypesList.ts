@@ -7,5 +7,6 @@ export enum tagTypes {
   withdraw = "withdraw",
   kyc = "kyc",
   referral = "referral",
+  plan = "plan",
 }
 export const tagTypesList = Object.values(tagTypes);

@@ -11,6 +11,7 @@ import { Tooltip } from "antd";
 import AppModal from "../ui/AppModal";
 import OrderSecretViewPop from "./OrderSecretViewPop";
 import { findImageUrlByCategory } from "@/shared";
+import AvatarComponent from "../shared/AvatarComponent";
 
 type props = {
   orderInfo: IOrder;
@@ -75,18 +76,7 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo, notShowDetails }) => {
             </p>
             {/* this is profile div  */}
             {orderInfo.orderBy?.id ? (
-              <div className="flex items-center gap-1 pt-1 md:pt-2">
-                <Image
-                  src={orderInfo.orderBy.profileImg || ""}
-                  width={12}
-                  height={12}
-                  alt="avatar image"
-                />
-                <p className="text-textBlack text-xs">
-                  {orderInfo.orderBy.name}
-                </p>
-                <RiVerifiedBadgeFill className="text-success" />
-              </div>
+              <AvatarComponent user={orderInfo?.orderBy} withName />
             ) : null}
           </div>
         </div>
@@ -102,24 +92,24 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo, notShowDetails }) => {
             {notShowDetails
               ? null
               : orderInfo.status === "completed" && (
-                  <AppModal
-                    button={
-                      <Tooltip title="Open account details">
-                        <Image
-                          src={"/assets/icons/eye.png"}
-                          width={40}
-                          height={40}
-                          className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
-                          alt="eye"
-                        />
-                      </Tooltip>
-                    }
-                  >
-                    <OrderSecretViewPop
-                      account={accountInfo}
-                    ></OrderSecretViewPop>
-                  </AppModal>
-                )}
+                <AppModal
+                  button={
+                    <Tooltip title="Open account details">
+                      <Image
+                        src={"/assets/icons/eye.png"}
+                        width={40}
+                        height={40}
+                        className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                        alt="eye"
+                      />
+                    </Tooltip>
+                  }
+                >
+                  <OrderSecretViewPop
+                    account={accountInfo}
+                  ></OrderSecretViewPop>
+                </AppModal>
+              )}
             <Link href={`/order-details/${orderInfo.id}`}>
               <Tooltip title="Message vendor">
                 <Image
