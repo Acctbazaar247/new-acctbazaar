@@ -19,7 +19,7 @@ export default function Dashboard() {
     {
       title: "Total amount",
       icon: <RiCoinsLine className="text-xl text-textGrey" />,
-      amount: data?.data?.totalMoney,
+      amount: data?.data?.totalMoney?.toFixed(2)
       // rate: 10,
       // increase: false,
       // timeRange: "month"
@@ -27,7 +27,7 @@ export default function Dashboard() {
     {
       title: "Total accounts",
       icon: <TbUserCircle className="text-xl text-textGrey" />,
-      amount: data?.data?.totalAccount,
+      amount: data?.data?.totalAccount
       // rate: 40,
       // increase: true,
       // timeRange: "month"
@@ -35,7 +35,7 @@ export default function Dashboard() {
     {
       title: "Accounts sold",
       icon: <TbUserDollar className="text-xl text-textGrey" />,
-      amount: data?.data?.totalSoldAccount,
+      amount: data?.data?.totalSoldAccount
       // rate: 40,
       // increase: true,
       // timeRange: "month"
@@ -43,11 +43,11 @@ export default function Dashboard() {
     {
       title: "Accounts approved",
       icon: <LiaUserCheckSolid className="text-xl text-textGrey" />,
-      amount: data?.data?.totalAccountApprove,
+      amount: data?.data?.totalAccountApprove
       // rate: 40,
       // increase: true,
       // timeRange: "month"
-    },
+    }
   ];
 
   return (
