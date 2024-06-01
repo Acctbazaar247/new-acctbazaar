@@ -1,19 +1,16 @@
 import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
 import AdminLayout from "@/layout/AdminLayout";
-import DashboardLayout from "@/layout/DashboardLayout";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { Avatar, Button, Input, Pagination, Popconfirm } from "antd";
-import { Space, Table, Tag } from "antd";
+import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import {
-  AccountCategory,
   EApprovedForSale,
   IAccount,
   IUser
 } from "@/types/common";
-// import ServiceCard from "@/components/ServiceCard/ServiceCard";
 import {
   useDeleteAccountMutation,
   useEditAccountMutation,
@@ -27,22 +24,28 @@ import Form from "@/components/Forms/Form";
 import { optionCreator } from "@/utils";
 import useIsMobile from "@/hooks/useIsMobile";
 import { ACCOUNT_CATEGORIES } from "@/shared";
-import AppModal from "@/components/ui/AppModal";
 import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
-type Props = {};
+import AppInput from "@/components/ui/AppInput";
+import AppTable from "@/components/ui/AppTable";
+import TableLoading from "@/components/shared/TableLoading";
+
 type DataType = {} & IAccount;
 
-function AllService({}: Props) {
+function AllService() {
+
   const [page, setPage] = useState<number>(1);
   const [deleteService] = useDeleteAccountMutation();
-  const [editService, { isLoading: isEditLoading }] = useEditAccountMutation();
-  const defaultValue = { value: "", label: "" };
   const [search, setSearch] = useState<string>("");
-  const debouncedSearch = useDebounce(search, 500); // 500ms debounce delay
-  const isMobile = useIsMobile();
+  const [denyMessage, setDenyMessage] = useState<string>("");
+
+  const defaultValue = { value: "", label: "" };
   const [category, setCategory] = useState<SelectOptions>(defaultValue);
   const [approvedForSale, setApprovedForSale] =
     useState<SelectOptions>(defaultValue);
+
+  const debouncedSearch = useDebounce(search, 500);
+  const [editService, { isLoading: isEditLoading }] = useEditAccountMutation();
+
   const queryString = useMemo(() => {
     const info = {
       category: category.value.length ? category.value : undefined,
@@ -62,45 +65,54 @@ function AllService({}: Props) {
     }, "");
     return queryString;
   }, [category, debouncedSearch, page, approvedForSale]);
-  const { data, isFetching, isLoading, isError } =
-    useGetAccountsQuery(queryString);
-  let content = null;
+
+  const queryInfo = useGetAccountsQuery(queryString);
 
   const approveButton = (id: string) => {
     return (
-      <div>
-        <button
-          className="app-status-button bg-green-600"
+      <button
+        className="app-status-button text-xs lg:text-sm bg-green-600"
+        onClick={() => {
+          editService({
+            id,
+            approvedForSale: EApprovedForSale.approved,
+            messageFromAdmin: ""
+          });
+        }}
+      >
+        Approve
+      </button>
+    );
+  };
+
+  const pendingButton = (id: string) => {
+    return (
+      <button
+        className="app-status-button text-xs lg:text-sm bg-blue-600"
+        onClick={() => {
+          editService({ id, approvedForSale: EApprovedForSale.pending });
+        }}
+      >
+        Pending
+      </button>
+    );
+  };
+
+  const deniedButton = (id: string) => {
+    return (
+      denyMessage.length > 0 ?
+        <button className="app-status-button bg-yellow-500  text-xs lg:text-sm"
           onClick={() => {
             editService({
               id,
-              approvedForSale: EApprovedForSale.approved,
-              messageFromAdmin: ""
+              approvedForSale: EApprovedForSale.denied,
+              messageFromAdmin: denyMessage
             });
           }}
         >
-          Approve
+          Denied
         </button>
-      </div>
-    );
-  };
-  const pendingButton = (id: string) => {
-    return (
-      <div>
-        <button
-          className="app-status-button bg-blue-600"
-          onClick={() => {
-            editService({ id, approvedForSale: EApprovedForSale.pending });
-          }}
-        >
-          Pending
-        </button>
-      </div>
-    );
-  };
-  const deniedButton = (id: string) => {
-    return (
-      <div>
+        :
         <AccountDeniedFrom
           handleEdit={(info) => {
             editService({
@@ -110,15 +122,44 @@ function AllService({}: Props) {
             });
           }}
         ></AccountDeniedFrom>
-      </div>
     );
   };
+
+  const categoryOption = ACCOUNT_CATEGORIES.map((single) => ({
+    value: single.value,
+    label: (
+      <div className="flex gap-2 items-center">
+        <Avatar src={single.imageUrl}></Avatar>
+        <span>{single.label}</span>
+      </div>
+    )
+  }));
+
+  const approvedStatusOption =
+    Object.values(EApprovedForSale).map(optionCreator);
+
+  const handleCategoryChange = (el: string) => {
+    setCategory({ value: el, label: el });
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handleDenyMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDenyMessage(e.target.value);
+  };
+
+  const handleApprovedChange = (el: string) => {
+    setApprovedForSale({ value: el, label: el });
+  };
+
   const columns: ColumnsType<DataType> = [
     {
       title: "Category",
       dataIndex: "category",
       key: "category",
-      className: "text-[12px] lg:text-md"
+      className: "text-sm lg:text-base"
     },
     {
       title: "Name",
@@ -131,12 +172,12 @@ function AllService({}: Props) {
               <Link
                 target="_blank"
                 href={current.preview}
-                className="hover:underline underline text-[12px] lg:text-md"
+                className="hover:underline underline text-sm lg:text-base"
               >
                 {current.name}
               </Link>
             ) : (
-              <p className="text-[12px] lg:text-md">{current.name}</p>
+              <p className="text-sm lg:text-base">{current.name}</p>
             )}
           </div>
         );
@@ -146,10 +187,10 @@ function AllService({}: Props) {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      className: "text-[12px] lg:text-md",
+      className: "text-sm lg:text-base",
 
       render: (price) => {
-        return <span>{price}$</span>;
+        return <span>${price}</span>;
       }
     },
 
@@ -157,14 +198,14 @@ function AllService({}: Props) {
       title: "Owner",
       dataIndex: "ownBy",
       key: "ownBy",
-      className: "text-[12px] lg:text-md",
+      className: "text-sm lg:text-base",
 
       render: (ownBy: IUser) => {
         return (
           <div className="flex gap-2 items-center">
             <Avatar src={ownBy?.profileImg}></Avatar>
             <div>
-              <span className="font-bold capitalize">{ownBy.name}</span>
+              <span className=" text-xs lg:text-sm capitalize">{ownBy.name}</span>
               <p className="text-xs">{ownBy.email}</p>
             </div>
           </div>
@@ -175,19 +216,21 @@ function AllService({}: Props) {
       title: "Status",
       dataIndex: "approvedForSale",
       key: "approvedForSale",
-      className: "text-[12px] lg:text-md",
+      className: "text-sm lg:text-base",
 
       render: (current, record) => {
         return (
           <div className="flex gap-2 items-center">
             <div className="w-[120px] capitalize ">
               {record.isSold ? (
-                <p className="font-bold">Sold</p>
+                <p className="font-bold text-center">Sold</p>
               ) : (
                 <div>
-                  <span className="border rounded-full p-1 px-2">
-                    {current}
-                  </span>
+                  <div className='flex items-center justify-center'>
+                    <span className="border text-xs rounded-full py-0.5 px-2">
+                      {current}
+                    </span>
+                  </div>
                   <div className="flex gap-2 mt-2">
                     {current === EApprovedForSale.pending ? (
                       <>
@@ -215,7 +258,7 @@ function AllService({}: Props) {
     },
     {
       title: "Action",
-      className: "text-[12px] lg:text-md",
+      className: "text-sm lg:text-base",
 
       key: "action",
       render: (_, record) => (
@@ -241,123 +284,74 @@ function AllService({}: Props) {
       )
     }
   ];
-  if (isMobile) {
-    columns.splice(3, 1);
-  }
-  if (isFetching || isLoading) {
-    content = <Loading></Loading>;
-  } else if (isError) {
-    content = <ErrorCompo></ErrorCompo>;
-  } else if (data?.data.length) {
-    content = (
-      <div>
-        <div className=" ">
-          <Table pagination={false} columns={columns} dataSource={data.data} />
-        </div>
-        <div className="flex justify-center mt-5">
-          <Pagination
-            showSizeChanger={false}
-            pageSize={data.meta.limit}
-            total={data.meta.total}
-            current={data.meta.page}
-            onChange={(value) => {
-              setPage(value);
-            }}
-          ></Pagination>
-        </div>
-      </div>
-    );
-  } else {
-    content = (
-      <div>
-        <h2 className="text-center capitalize">No account found!</h2>
-      </div>
-    );
-  }
-  const categoryOption = ACCOUNT_CATEGORIES.map((single) => ({
-    value: single.value,
-    label: (
-      <div className="flex gap-2 items-center">
-        <Avatar src={single.imageUrl}></Avatar>
-        <span>{single.label}</span>
-      </div>
-    )
-  }));
-  const approvedStatusOption =
-    Object.values(EApprovedForSale).map(optionCreator);
-
-  const handleCategoryChange = (el: string) => {
-    setCategory({ value: el, label: el });
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-  const handleApprovedChange = (el: string) => {
-    setApprovedForSale({ value: el, label: el });
-  };
 
   return (
-    <>
-      <AdminLayout>
-        <div>
-          <h2 className="text-xl text-center font-bold mb-5">
-            Manage Accounts
-          </h2>
-          <div className="mt-5 mb-10">
-            <div className="flex flex-col md:flex-row items-center gap-4 mb-5 justify-between">
-              <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                <div className="w-[200px] ">
-                  <Form submitHandler={() => {}}>
-                    <FormSelectField
-                      name="category"
-                      handleChange={handleCategoryChange}
-                      placeholder="Filter By category"
-                      options={categoryOption}
-                      value={category.value}
-                    ></FormSelectField>
-                  </Form>
-                </div>
-                <div className="w-[230px] ">
-                  <Form submitHandler={() => {}}>
-                    <FormSelectField
-                      name="approvedForSale"
-                      handleChange={handleApprovedChange}
-                      placeholder="Filter By Approved status"
-                      options={approvedStatusOption}
-                      value={approvedForSale.value}
-                    ></FormSelectField>
-                  </Form>
-                </div>
-                <Input
-                  className="max-w-[350px] xl:w-[400px] w-full h-[40px] inline-block"
-                  type="search"
-                  name="search"
-                  onChange={handleSearchChange}
-                  placeholder="Search by name or description"
-                  value={search}
-                />
-              </div>
-              <div>
-                <button
-                  className="px-4 py-2 bg-blue-500 text-white leading-0 rounded"
-                  onClick={() => {
-                    setCategory(defaultValue);
-                    setSearch("");
-                    setApprovedForSale(defaultValue);
-                  }}
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="overflow-x-auto overflow-y-clip">{content}</div>
-          </div>
+    <AdminLayout>
+      <h2 className="title text-center mb-5">Manage Accounts</h2>
+
+      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
+        <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5">
+          <Form submitHandler={() => { }}>
+            <FormSelectField
+              name="category"
+              handleChange={handleCategoryChange}
+              placeholder="Filter By category"
+              options={categoryOption}
+              value={category.value}
+            ></FormSelectField>
+          </Form>
+
+          <Form submitHandler={() => { }}>
+            <FormSelectField
+              name="approvedForSale"
+              handleChange={handleApprovedChange}
+              placeholder="Filter By Approved status"
+              options={approvedStatusOption}
+              value={approvedForSale.value}
+            ></FormSelectField>
+          </Form>
+
+          <AppInput
+            onChange={handleSearchChange}
+            type="text"
+            value={search}
+            placeholder="Search by name or description"
+            className="min-w-64 2xl:min-w-72 2xl:!py-2 !rounded"
+          />
+
+          <AppInput
+            onChange={handleDenyMessageChange}
+            type="text"
+            value={denyMessage}
+            placeholder="Enter Your Deny Message"
+            className="min-w-68 2xl:min-w-96 2xl:!py-2 !rounded"
+          />
         </div>
-      </AdminLayout>
-    </>
+
+        <button
+          className="appBtn"
+          onClick={() => {
+            setCategory(defaultValue);
+            setSearch("");
+            setDenyMessage("");
+            setApprovedForSale(defaultValue);
+          }}
+        >
+          Reset
+        </button>
+      </div>
+
+      <div className='max-h-[70dvh] overflow-auto'>
+        <AppTable
+          infoQuery={queryInfo}
+          columns={columns}
+          setPage={setPage}
+          loadingComponent={
+            <TableLoading columnNumber={columns.length} />
+          }
+        />
+      </div>
+    </AdminLayout>
   );
 }
 

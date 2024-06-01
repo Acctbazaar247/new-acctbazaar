@@ -1,7 +1,6 @@
 import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
 import { EOrderStatus, ResponseSuccessType } from "@/types/common";
-import { Input } from "antd";
 import React, { useState, useMemo } from "react";
 import AppTable from "@/components/ui/AppTable";
 import AppModal from "@/components/ui/AppModal";
@@ -11,11 +10,16 @@ import AppPopover from "@/components/ui/AppPopover";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
 import TableLoading from "@/components/shared/TableLoading";
+import AppInput from "@/components/ui/AppInput";
 
 const ManageAllUser = () => {
-  const [search, setSearch] = useState<string>("");
+  const [orderId, setOrderId] = useState<string>("");
+  const [buyerEmail, setBuyerEmail] = useState<string>("");
+  const [sellerEmail, setSellerEmail] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const debouncedSearch = useDebounce(search, 500);
+  const debouncedBuyerEmail = useDebounce(buyerEmail, 500);
+  const debouncedSellerEmail = useDebounce(sellerEmail, 500);
+  const debouncedOrderId = useDebounce(orderId, 500);
 
   const [updateOrder] = useUpdateOrderMutation();
 
@@ -45,6 +49,39 @@ const ManageAllUser = () => {
       return toast.error(res?.data.message || "Something went wrong!", { toastId: 1 });
     });
   }
+
+  const queryString = useMemo(() => {
+    const info = {
+      page,
+      limit: 50,
+      id: debouncedOrderId.length ? debouncedOrderId : undefined,
+      buyerEmail: debouncedBuyerEmail.length ? debouncedBuyerEmail : undefined,
+      sellerEmail: debouncedSellerEmail.length ? debouncedSellerEmail : undefined,
+    };
+
+    const queryString = Object.keys(info).reduce((pre, key: string) => {
+      const value = info[key as keyof typeof info];
+      if (value) {
+        return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${value}`;
+      }
+      return pre;
+    }, "");
+    return queryString;
+  }, [debouncedBuyerEmail, debouncedOrderId, debouncedSellerEmail, page]);
+
+  const queryInfo = useGetOrdersQuery(queryString);
+
+  const handleBuyerEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBuyerEmail(e.target.value);
+  };
+
+  const handleSellerEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSellerEmail(e.target.value);
+  };
+
+  const handleOrderIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOrderId(e.target.value);
+  };
 
   const columns = [
     {
@@ -157,60 +194,59 @@ const ManageAllUser = () => {
     },
   ];
 
-  const queryString = useMemo(() => {
-    const info = {
-      page,
-      limit: 50,
-      buyerEmail: debouncedSearch.length ? debouncedSearch : undefined,
-      sellerEmail: debouncedSearch.length ? debouncedSearch : undefined,
-    };
-
-    const queryString = Object.keys(info).reduce((pre, key: string) => {
-      const value = info[key as keyof typeof info];
-      if (value) {
-        return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${value}`;
-      }
-      return pre;
-    }, "");
-    return queryString;
-  }, [debouncedSearch, page]);
-
-  const queryInfo = useGetOrdersQuery(queryString);
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-
   return (
     <SuperAdminLayout>
       <h2 className="title text-center mb-5">Manage orders</h2>
-      <div className="flex flex-col md:flex-row items-center gap-4 my-10 justify-between">
-        <Input
-          className="max-w-[300px] w-full inline-block"
-          type="search"
-          name="search"
-          onChange={handleSearchChange}
-          placeholder="Search by sellerEmail or buyerEmail"
-          value={search}
-        />
+
+      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
+        <div className='flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5'>
+          <AppInput
+            onChange={handleBuyerEmailChange}
+            type="text"
+            value={buyerEmail}
+            placeholder="Search by Buyer Email"
+            className="min-w-60 2xl:!py-2"
+          />
+
+          <AppInput
+            onChange={handleSellerEmailChange}
+            type="text"
+            value={sellerEmail}
+            placeholder="Search by Seller Email"
+            className="min-w-60 2xl:!py-2"
+          />
+
+          <AppInput
+            onChange={handleOrderIdChange}
+            type="text"
+            value={orderId}
+            placeholder="Search by Order ID"
+            className="min-w-60 2xl:!py-2"
+          />
+        </div>
+
         <button
           className="appBtn"
           onClick={() => {
-            setSearch("");
+            setBuyerEmail("");
+            setSellerEmail("");
+            setOrderId("");
           }}
         >
           Reset
         </button>
       </div>
 
-      <AppTable
-        infoQuery={queryInfo}
-        columns={columns}
-        setPage={setPage}
-        loadingComponent={
-          <TableLoading columnNumber={columns.length} />
-        }
-      />
+      <div className='max-h-[70dvh] overflow-auto'>
+        <AppTable
+          infoQuery={queryInfo}
+          columns={columns}
+          setPage={setPage}
+          loadingComponent={
+            <TableLoading columnNumber={columns.length} />
+          }
+        />
+      </div>
     </SuperAdminLayout>
   );
 };

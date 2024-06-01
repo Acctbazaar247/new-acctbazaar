@@ -20,6 +20,7 @@ import { GoDotFill } from "react-icons/go";
 import { findImageUrlByCategory } from "@/shared";
 import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
 import AvatarComponent from "../shared/AvatarComponent";
+import { FaRegEye } from "react-icons/fa6";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -109,10 +110,12 @@ const MarketplaceAccountCard = ({
       <div className="flex flex-col gap-1 md:gap-4 justify-between">
         <h2 className="text-textBlack font-bold flex items-center justify-end">
           <PiCurrencyDollarBold />
-          {account?.price}
+          <span>
+            {account?.price}
+          </span>
         </h2>
         {/* this is icons div view cart message  */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex justify-between gap-4">
           {!existOnCart?.accountId && (
             <Tooltip title="Add to cart">
               <Image
@@ -137,19 +140,14 @@ const MarketplaceAccountCard = ({
             <></>
           ) : (
             <div>
-              <button
-                className="w-[16px]"
-                disabled={isLoading}
-                onClick={() => setIsModalOpen(true)}
-              >
-                <Image
-                  src={"/assets/icons/eye.png"}
-                  width={40}
-                  height={40}
-                  className="size-4 md:size-5"
-                  alt="eye"
-                />
-              </button>
+              <Tooltip title="View account details">
+                <button
+                  disabled={isLoading}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <FaRegEye className="text-textGrey text-lg" />
+                </button>
+              </Tooltip>
 
               <AccountDetailsModal
                 {...account}

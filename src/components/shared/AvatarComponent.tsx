@@ -5,20 +5,21 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 type TAvatar = {
     user: IUser | null;
     withName?: boolean;
+    size?: "large"
 }
-const AvatarComponent = ({ user, withName }: TAvatar) => {
-    console.log(user);
+const AvatarComponent = ({ user, withName, size }: TAvatar) => {
+
     return (
         withName ?
             <div className="flex items-center gap-1 pt-1 md:pt-2">
                 <Image
-                    width={20}
-                    height={20}
+                    width={40}
+                    height={40}
                     src={user?.profileImg as string}
-                    className="size-5 rounded-full"
+                    className={`rounded-full ${size === "large" ? "size-8" : "size-5"}`}
                     alt="avatar image"
                 />
-                <p className="text-textBlack text-xs md:text-sm">{user?.name}</p>
+                <p className={`text-textBlack ${size === "large" ? "text-sm md:text-base font-medium" : "text-xs md:text-sm"}`}>{user?.name}</p>
 
                 {user?.isVerifiedByAdmin && (
                     <div className='flex items-center gap-1'>

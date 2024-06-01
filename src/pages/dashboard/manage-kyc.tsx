@@ -18,6 +18,7 @@ import AppPopover from "@/components/ui/AppPopover";
 import { toast } from "react-toastify";
 import { IoIosArrowDown } from "react-icons/io";
 import ViewUser from "@/components/dashboard/ViewUser";
+import TableLoading from "@/components/shared/TableLoading";
 
 const ManageKYC = () => {
   const defaultValue = { value: "", label: "" };
@@ -239,11 +240,17 @@ const ManageKYC = () => {
           Reset
         </button>
       </div>
-      <AppTable
-        infoQuery={queryInfo}
-        columns={columns}
-        setPage={setPage}
-      />
+
+      <div className='max-h-[70dvh] overflow-auto'>
+        <AppTable
+          infoQuery={queryInfo}
+          columns={columns}
+          setPage={setPage}
+          loadingComponent={
+            <TableLoading columnNumber={columns.length} />
+          }
+        />
+      </div>
     </SuperAdminLayout>
   );
 };

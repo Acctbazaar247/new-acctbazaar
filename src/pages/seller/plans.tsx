@@ -115,11 +115,11 @@ const Plans = () => {
         <HomeLayout>
             <PrivateLayout>
                 <section className='min-h-[91dvh] container py-5 md:py-10 2xl:py-12'>
-                    <h2 className="text-center text-2xl lg:text-4xl font-serif font-bold">Upload Packages and pricing</h2>
-                    <div className="flex flex-col items-center justify-center my-8 lg:my-24 space-y-6 md:items-end md:-mx-5 md:space-y-0 md:flex-row">
+                    <h2 className="text-center text-2xl lg:text-4xl font-bold">Upload Packages and pricing</h2>
+                    <div className="flex flex-col items-center justify-center my-8 lg:my-24 space-y-16 md:items-end md:-mx-5 md:space-y-0 md:flex-row">
                         {
                             plans.map(plan => (
-                                <div onClick={() => setActive(plan?.name)} key={plan?.id} className={`w-ful relative cursor-pointer px-6 py-6 transition-colors duration-300 transform rounded-2xl md:mx-5 md:w-96 border border-primary ${plan.name === active ? "bg-primary" : "bg-white"}`}>
+                                <div onClick={() => setActive(plan?.name)} key={plan?.id} className={`w-full relative cursor-pointer px-6 py-6 transition-colors duration-300 transform rounded-2xl md:mx-5 md:w-96 border border-primary ${plan.name === active ? "bg-primary" : "bg-white"}`}>
                                     <div className="text-center">
                                         <h2 className={`text-3xl font-bold uppercase ${plan.name === active ? "text-white" : "text-textBlack"}`}>{plan.name === "proPlus" ? "pro Plus" : plan.name}</h2>
                                         <p className="my-4 border-borderColor border"></p>

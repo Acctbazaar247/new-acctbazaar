@@ -13,6 +13,7 @@ const TableLoading = ({ columnNumber = 4 }: {
     }
 
     const columnItems = createNumberArray(columnNumber);
+    const rowItems = createNumberArray(columnNumber + 5);
 
     return (
         <div className=''>
@@ -23,7 +24,7 @@ const TableLoading = ({ columnNumber = 4 }: {
             </div>
             <hr />
             {
-                columnItems.map(row => (
+                rowItems.map(row => (
                     <div key={row + "a"} className='flex items-center px-4 py-3 gap-12 justify-between w-full'>
                         {columnItems.map(item => (
                             <Skeleton.Button key={item} size="default" block={true} active={true} />

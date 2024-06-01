@@ -15,7 +15,7 @@ import {
   IUser,
 } from "@/types/common";
 import { FiMinus, FiPlus } from "react-icons/fi";
-import { Checkbox } from "antd";
+import { Checkbox, Tooltip } from "antd";
 import {
   removeItemFromCart,
   toggleCart,
@@ -24,6 +24,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useDeleteCartMutation } from "@/redux/features/cart/cartApi";
 import { findImageUrlByCategory } from "@/shared";
 import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
+import { FaRegEye } from "react-icons/fa6";
 
 type TCartAccountCard = {
   account: ICart;
@@ -81,29 +82,18 @@ export default function CartAccountCard({
           <div className="text-lg flex items-center gap-3">
             {isModal ? (
               <div>
-                <Image
-                  src={"/assets/icons/eye.png"}
-                  width={40}
-                  height={40}
-                  className="size-4 md:size-5"
-                  alt="eye"
-                />
+                <FaRegEye className="text-textGrey text-lg" />
               </div>
             ) : (
               <div>
-                <button
-                  className="w-[16px]"
-                  // disabled={isLoading}
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  <Image
-                    src={"/assets/icons/eye.png"}
-                    width={40}
-                    height={40}
-                    className="size-4 md:size-5"
-                    alt="eye"
-                  />
-                </button>
+                <Tooltip title="View account details">
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    <FaRegEye className="text-textGrey text-lg" />
+                  </button>
+                </Tooltip>
+
                 {account?.account ? (
                   <AccountDetailsModal
                     {...account.account}
@@ -116,13 +106,15 @@ export default function CartAccountCard({
             )}
 
             <div className="">
-              <button
-                disabled={isModal}
-                onClick={() => deleteCart(account?.id)}
-                className={`text-textGrey ${!isModal && "hover:text-red"}`}
-              >
-                <AiOutlineDelete />
-              </button>
+              <Tooltip title="Delete Account">
+                <button
+                  disabled={isModal}
+                  onClick={() => deleteCart(account?.id)}
+                  className={`text-textGrey ${!isModal && "hover:text-red"}`}
+                >
+                  <AiOutlineDelete />
+                </button>
+              </Tooltip>
             </div>
           </div>
         </div>

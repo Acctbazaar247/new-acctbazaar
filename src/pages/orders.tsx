@@ -1,11 +1,8 @@
 import OrderAccountCard from "@/components/orders/OrderAccountCard";
-import OrdersMain from "@/components/orders/OrdersMain";
 import AccountLoading from "@/components/shared/AccountLoading";
-import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
-import PrivateLayout from "@/layout/PrivateLayout";
 import SellerLayout from "@/layout/SellerLayout";
 import { useGetOrdersQuery } from "@/redux/features/order/orderApi";
 import { useAppSelector } from "@/redux/hook";
@@ -48,7 +45,7 @@ const Orders = () => {
   return (
     <HomeLayout>
       <SellerLayout>
-        <div className="container py-5 md:py-10 2xl:py-12">
+        <div className="container py-5 md:py-10 2xl:py-10">
           {/* this is top section div  */}
           <div className="flex justify-between">
             <div className="">
@@ -72,7 +69,7 @@ const Orders = () => {
           {/* this is main div  */}
           <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
             <div>
-              <div className="bg-white rounded-2xl w-full min-h-[90vh] md:p-6 2xl:p-8">
+              <div className="bg-white rounded-2xl w-full min-h-[80vh] md:p-6 2xl:p-8">
                 <AppTabs
                   tabs={tabs}
                   activeTab={activeTab}

@@ -1,4 +1,5 @@
 import AppTabs from "@/components/ui/AppTabs";
+import { config } from "@/config";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetAllReferralQuery } from "@/redux/features/referral/referralApi";
@@ -43,8 +44,14 @@ export default function Referral() {
 
     const { data } = useGetAllReferralQuery(`referralById=${user?.user?.id}`);
 
-    const totalAmount = data?.data?.reduce((acc: any, curr: any) => acc + curr?.amount, 0);
-
+    const totalAmount = data?.data?.reduce((acc: number, curr: any) => {
+        if (curr?.status === "completed") {
+            return acc + curr?.amount
+        } else {
+            return acc;
+        }
+    }, 0);
+    console.log(totalAmount);
     const sortedData = data?.data?.filter((refer: TReferral) => refer?.status === activeTab);
 
 
@@ -63,8 +70,8 @@ export default function Referral() {
                         <div className='rounded md:w-1/2 min-h-full pb-8 bg-white'>
                             <div className='flex items-center justify-center flex-col md:px-16 gap-1 text-center py-6 lg:py-8'>
                                 <Image width={200} height={160} src="/assets/icons/gift-box.png" alt="" className="mx-auto size-28 mb-4" />
-                                <h2 className="subTitle">Receive $100 reward instantly</h2>
-                                <p className="textG">When your friend registers, funds wallet with minimum of <span className="textB">$50</span> and purchases at least <span className="textB">one account</span>, you get rewarded instantly.</p>
+                                <h2 className="subTitle">Receive ${config.referralBonus} reward instantly</h2>
+                                <p className="textG">When your friend registers, funds wallet with minimum of <span className="textB">${config.referralPurchaseAmount}</span> and purchases at least <span className="textB">one account</span>, you get rewarded instantly.</p>
                             </div>
 
                             <div className='px-4'>
@@ -79,8 +86,8 @@ export default function Referral() {
 
                                 <div className='flex items-center gap-2 text-xs md:text-sm md:gap-6 text-center'>
                                     <p className="textB">Share invitation link/code with friends</p>
-                                    <p className="textB">Let friends sign up and fund wallet with minimum of $50</p>
-                                    <p className="textB">Receive $100 reward instantly</p>
+                                    <p className="textB">Let friends sign up and fund wallet with minimum of ${config.referralPurchaseAmount}</p>
+                                    <p className="textB">Receive ${config.referralBonus} reward instantly</p>
                                 </div>
                             </div>
 

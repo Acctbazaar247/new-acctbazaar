@@ -6,11 +6,9 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
 import React from "react";
-import { useSelector } from "react-redux";
 
-type Props = {};
+const Dashboard = () => {
 
-const Dashboard = (props: Props) => {
   const user = useAppSelector((state) => state.user.user);
   let content = null;
   if (!user) {

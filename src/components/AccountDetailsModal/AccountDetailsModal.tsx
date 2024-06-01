@@ -1,5 +1,5 @@
 import { findImageUrlByCategory } from "@/shared";
-import { IAccount } from "@/types/common";
+import { IAccount, IUser } from "@/types/common";
 import { Avatar, Modal, Popconfirm } from "antd";
 import Image from "next/image";
 import React from "react";
@@ -10,6 +10,7 @@ import { useAppSelector } from "@/redux/hook";
 import Link from "next/link";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Swal from "sweetalert2";
+import AvatarComponent from "../shared/AvatarComponent";
 
 type Props = {
   isModalOpen: boolean;
@@ -61,11 +62,11 @@ const AccountDetailsModal = ({
       title={name + " details"}
       open={isModalOpen}
       onOk={handelOk}
-      width={600}
       onCancel={handleCancel}
       footer={null}
+      centered
     >
-      <div className="flex flex-col gap-5 items-start mt-5">
+      <div className="flex flex-col gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">
         <Image
           src={findImageUrlByCategory(category)}
           className="rounded-xl w-[30%]"
@@ -81,11 +82,7 @@ const AccountDetailsModal = ({
         </div>
       </div>
       <div className="flex items-center gap-4 flex-wrap justify-between amt-10">
-        <div className="flex items-center font-bold gap-2">
-          <Avatar src={ownBy?.profileImg}></Avatar>
-          <span>{ownBy?.name}</span>
-          {/* <RiVerifiedBadgeFill className="text-success" /> */}
-        </div>
+        <AvatarComponent user={ownBy as IUser} withName size="large" />
         <div className="flex gap-5 items-center">
           <div className="font-bold text-lg text-orange-500">
             <CurrencyLogo amount={price} className="w-[24px]"></CurrencyLogo>

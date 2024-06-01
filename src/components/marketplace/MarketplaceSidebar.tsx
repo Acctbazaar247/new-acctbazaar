@@ -73,7 +73,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
         <h3 className="border-b border-b-[#E4E4E4] px-4 md:px-5 pb-2 md:pb4- text-textBlack font-medium">
           Account Category
         </h3>
-        <div className="pt-2 max-h-[45dvh] overflow-auto">
+        <div className="pt-2 max-h-[43dvh] 2xl:max-h-[45dvh] overflow-auto">
           {sidebarMenu.map((sidebar: any) => (
             <MarketPlaceSidebarFilterElement
               key={sidebar?.label}

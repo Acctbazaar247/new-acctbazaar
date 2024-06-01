@@ -20,6 +20,9 @@
   .appOutlineBtnSm {
     @apply appOutlineBtn px-3 py-1 rounded text-xs;
   }
+  .appOutlineBtnSmDelete {
+    @apply appOutlineBtn px-3 py-1 rounded text-xs hover:bg-red text-red;
+  }
   .roundedBtn {
     @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-3 px-3 lg:px-6 rounded-full;
   }
@@ -341,6 +344,21 @@ html {
   font-weight: 700 !important;
 }
 
+.ant-modal-content {
+  border-radius: 16px !important;
+  width: fit-content !important;
+  margin: auto !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .ant-modal-header .ant-modal-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+  }
+  .ant-modal-content {
+    border-radius: 8px !important;
+  }
+}
 /* Assuming your Select component has a className of 'my-select' */
 .my-select .ant-select-selection-placeholder {
   color: #1b1818;

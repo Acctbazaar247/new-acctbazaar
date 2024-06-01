@@ -26,7 +26,7 @@ const DashboardLayout: React.FC<props> = ({ children }) => {
 
             {/* <!-- ===== Main Content Start ===== --> */}
             <main>
-              <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 bg-main-white min-h-screen">
+              <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 bg-main-white min-h-[90dvh]">
                 {children}
               </div>
             </main>

@@ -11,10 +11,10 @@ type Props = {
 const AccountDeniedFrom = (props: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleSubmit = (data: { message: string }) => {
-    console.log(data);
     setModalOpen(false);
     props.handleEdit(data);
   };
+
   return (
     <div>
       <AppModal
@@ -24,10 +24,10 @@ const AccountDeniedFrom = (props: Props) => {
         modalOpen={modalOpen}
         button={
           <button
-            className="app-status-button bg-yellow-500"
-            //  onClick={() => {
-            //    editService({ id, approvedForSale: EApprovedForSale.denied });
-            //  }}
+            className="app-status-button bg-yellow-500  text-xs lg:text-sm"
+          //  onClick={() => {
+          //    editService({ id, approvedForSale: EApprovedForSale.denied });
+          //  }}
           >
             Denied
           </button>
