@@ -221,217 +221,219 @@ const WithdrawFund = () => {
       });
   };
   return (
-    <SellerLayout>
-      <div className="container py-5 md:py-10">
-        <h2 className="text-center text-xl font-bold">Withdraw Fund</h2>
-        <div className="flex gap-5 justify-between max-w-[900px] mx-auto mt-5">
-          <div className="p-3 lg:p-5 shadow-orange-50 shadow-xl border rounded max-w-[300px] w-full flex-col items-center justify-center flex ">
-            <CurrencyLogo className="max-w-[60px]"></CurrencyLogo>
-            <span className="text-md lg:text-2xl font-bold mt-4">
-              {currency?.data?.amount}
-            </span>
+    <DashboardLayout>
+      <SellerLayout>
+        <div className="container py-5 md:py-10">
+          <h2 className="text-center text-xl font-bold">Withdraw Fund</h2>
+          <div className="flex gap-5 justify-between max-w-[900px] mx-auto mt-5">
+            <div className="p-3 lg:p-5 shadow-orange-50 shadow-xl border rounded max-w-[300px] w-full flex-col items-center justify-center flex ">
+              <CurrencyLogo className="max-w-[60px]"></CurrencyLogo>
+              <span className="text-md lg:text-2xl font-bold mt-4">
+                {currency?.data?.amount}
+              </span>
+            </div>
+            <button
+              onClick={() => setOpen(true)}
+              className="p-3 lg:p-5 shadow-gray-300 shadow-xl border rounded border-orange-500 max-w-[300px] w-full flex-col items-center justify-center flex bg-orange-500 "
+            >
+              <FontAwesomeIcon
+                icon={faMoneyBillTransfer}
+                className="text-5xl text-white/95"
+              ></FontAwesomeIcon>
+              <span className="text-md lg:text-2xl font-bold mt-4">
+                Withdraw Funds
+              </span>
+            </button>
           </div>
-          <button
-            onClick={() => setOpen(true)}
-            className="p-3 lg:p-5 shadow-gray-300 shadow-xl border rounded border-orange-500 max-w-[300px] w-full flex-col items-center justify-center flex bg-orange-500 "
+          <div className="mt-5 overflow-x-auto">{content}</div>
+          <Modal
+            okButtonProps={{
+              className: "bg-orange-500",
+              disabled: isAddFoundRequestLoading,
+            }}
+            title="Make withdraw fund request"
+            open={open}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={null}
           >
-            <FontAwesomeIcon
-              icon={faMoneyBillTransfer}
-              className="text-5xl text-white/95"
-            ></FontAwesomeIcon>
-            <span className="text-md lg:text-2xl font-bold mt-4">
-              Withdraw Funds
-            </span>
-          </button>
-        </div>
-        <div className="mt-5 overflow-x-auto">{content}</div>
-        <Modal
-          okButtonProps={{
-            className: "bg-orange-500",
-            disabled: isAddFoundRequestLoading,
-          }}
-          title="Make withdraw fund request"
-          open={open}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={null}
-        >
-          <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <p className="mb-3 flex gap-1">
-                <span> Minimum withdraw amount is </span>
-                <span className="flex gap-1">
-                  <CurrencyLogo className="max-w-[20px]"></CurrencyLogo>
-                  {config.withdrawalMinMoney}
-                </span>{" "}
-                <br />
-                When placing crypto withdrawal, the network fee will be from your payment.
-              </p>
-              <FormInput
-                name="amount"
-                required
-                type="number"
-                //   onChange={(e) => setAmount(parseFloat(e.target.value))}
-                placeholder="Enter amount"
-              ></FormInput>
+            <FormProvider {...methods}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <p className="mb-3 flex gap-1">
+                  <span> Minimum withdraw amount is </span>
+                  <span className="flex gap-1">
+                    <CurrencyLogo className="max-w-[20px]"></CurrencyLogo>
+                    {config.withdrawalMinMoney}
+                  </span>{" "}
+                  <br />
+                  When placing crypto withdrawal, the network fee will be from your payment.
+                </p>
+                <FormInput
+                  name="amount"
+                  required
+                  type="number"
+                  //   onChange={(e) => setAmount(parseFloat(e.target.value))}
+                  placeholder="Enter amount"
+                ></FormInput>
 
-              <div>
                 <div>
-                  <div className=" ">
-                    <div className=" mt-2">
-                      <h1 className="text-xl font-semibold mb-1">
-                        Choose Payment Option
-                      </h1>
-                      {/* Radio buttons for payment options */}
-                      <div className="flex gap-4 mt-4">
-                        <button
-                          type="button"
-                          //   disabled={isDisabled}
-                          onClick={() => {
-                            setSelectedOption("bank");
-                            // router.push("https://nowpayments.io/payment/?iid=4613115863");
-                          }}
-                          className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${selectedOption === "bank"
-                            ? "border-orange-300 bg-orange-500 text-white"
-                            : "text-orange-500 border-orange-300"
-                            }`}
-                        >
-                          <div>
-                            {/* <img src="" alt="" /> */}
-                            <FontAwesomeIcon
-                              className="text-5xl"
-                              icon={faBank}
-                            ></FontAwesomeIcon>
-                            <p className="mt-2 ">Widthdraw Via Bank</p>
-                          </div>
-                        </button>
-                        <button
-                          type="button"
-                          //   disabled={isDisabled}
-                          onClick={() => {
-                            setSelectedOption("crypto");
-                            // router.push("https://nowpayments.io/payment/?iid=4613115863");
-                          }}
-                          className={`w-full py-4 px-2 border rounded transition-all ${selectedOption === "crypto"
-                            ? "border-orange-300 bg-orange-500 text-white"
-                            : "text-orange-500 border-orange-300"
-                            }`}
-                        >
-                          <div>
-                            {/* <img src="" alt="" /> */}
-                            <FontAwesomeIcon
-                              className="text-5xl"
-                              icon={faCoins}
-                            ></FontAwesomeIcon>
-                            <p className="mt-2 ">Widthdraw Via Crypto</p>
-                          </div>
-                        </button>
-                      </div>
-
-                      {/* Content based on the selected option */}
-                      {selectedOption === "bank" && (
-                        <div className="border p-4 flex flex-col gap-4 rounded text-center bg-white">
-                          <div className="text-left">
-                            <FormInput
-                              label="Enter full name"
-                              type="text"
-                              name="fullName"
-                              placeholder="Full name"
-                              required={selectedOption === "bank"}
-                            ></FormInput>
-                          </div>
-                          <div className="text-left">
-                            <FormInput
-                              label="Enter account number"
-                              type="text"
-                              name="accountNumber"
-                              placeholder="Account number"
-                              required={selectedOption === "bank"}
-                            ></FormInput>
-                          </div>
-                          <div className="text-left">
-                            <FormInput
-                              label="Enter bank name"
-                              type="text"
-                              name="bankName"
-                              placeholder="bank name"
-                              required={selectedOption === "bank"}
-                            ></FormInput>
-                          </div>
+                  <div>
+                    <div className=" ">
+                      <div className=" mt-2">
+                        <h1 className="text-xl font-semibold mb-1">
+                          Choose Payment Option
+                        </h1>
+                        {/* Radio buttons for payment options */}
+                        <div className="flex gap-4 mt-4">
+                          <button
+                            type="button"
+                            //   disabled={isDisabled}
+                            onClick={() => {
+                              setSelectedOption("bank");
+                              // router.push("https://nowpayments.io/payment/?iid=4613115863");
+                            }}
+                            className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${selectedOption === "bank"
+                              ? "border-orange-300 bg-orange-500 text-white"
+                              : "text-orange-500 border-orange-300"
+                              }`}
+                          >
+                            <div>
+                              {/* <img src="" alt="" /> */}
+                              <FontAwesomeIcon
+                                className="text-5xl"
+                                icon={faBank}
+                              ></FontAwesomeIcon>
+                              <p className="mt-2 ">Widthdraw Via Bank</p>
+                            </div>
+                          </button>
+                          <button
+                            type="button"
+                            //   disabled={isDisabled}
+                            onClick={() => {
+                              setSelectedOption("crypto");
+                              // router.push("https://nowpayments.io/payment/?iid=4613115863");
+                            }}
+                            className={`w-full py-4 px-2 border rounded transition-all ${selectedOption === "crypto"
+                              ? "border-orange-300 bg-orange-500 text-white"
+                              : "text-orange-500 border-orange-300"
+                              }`}
+                          >
+                            <div>
+                              {/* <img src="" alt="" /> */}
+                              <FontAwesomeIcon
+                                className="text-5xl"
+                                icon={faCoins}
+                              ></FontAwesomeIcon>
+                              <p className="mt-2 ">Widthdraw Via Crypto</p>
+                            </div>
+                          </button>
                         </div>
-                      )}
 
-                      {selectedOption === "crypto" && (
-                        <div className="border p-4 rounded bg-white">
-                          <p className="text-lg">Chose your USDT</p>
-                          <div className="flex gap-4 mt-2">
-                            <button
-                              type="button"
-                              //   disabled={isDisabled}
-                              onClick={() => {
-                                setSelectCrypto("trc");
-                                // router.push("https://nowpayments.io/payment/?iid=4613115863");
-                              }}
-                              className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${selectCrypto === "trc"
-                                ? "border-orange-300 bg-orange-500 text-white"
-                                : "text-orange-500 border-orange-300"
-                                }`}
-                            >
-                              <div>
-                                {/* <img src="" alt="" /> */}
-
-                                <p>TRC 20</p>
-                              </div>
-                            </button>
-                            <button
-                              type="button"
-                              //   disabled={isDisabled}
-                              onClick={() => {
-                                setSelectCrypto("bep");
-                                // router.push("https://nowpayments.io/payment/?iid=4613115863");
-                              }}
-                              className={`w-full py-4 px-2 border rounded transition-all ${selectCrypto === "bep"
-                                ? "border-orange-300 bg-orange-500 text-white"
-                                : "text-orange-500 border-orange-300"
-                                }`}
-                            >
-                              <div>
-                                {/* <img src="" alt="" /> */}
-                                <p>BEP 20</p>
-                              </div>
-                            </button>
-                          </div>
-                          <div className="text-left mt-2">
-                            {selectCrypto && (
+                        {/* Content based on the selected option */}
+                        {selectedOption === "bank" && (
+                          <div className="border p-4 flex flex-col gap-4 rounded text-center bg-white">
+                            <div className="text-left">
                               <FormInput
-                                label={`Enter your ${selectCrypto?.toLocaleUpperCase()} wallet address`}
+                                label="Enter full name"
                                 type="text"
-                                name="walletAddress"
-                                placeholder=" wallet address"
-                                required={Boolean(selectCrypto)}
+                                name="fullName"
+                                placeholder="Full name"
+                                required={selectedOption === "bank"}
                               ></FormInput>
-                            )}
+                            </div>
+                            <div className="text-left">
+                              <FormInput
+                                label="Enter account number"
+                                type="text"
+                                name="accountNumber"
+                                placeholder="Account number"
+                                required={selectedOption === "bank"}
+                              ></FormInput>
+                            </div>
+                            <div className="text-left">
+                              <FormInput
+                                label="Enter bank name"
+                                type="text"
+                                name="bankName"
+                                placeholder="bank name"
+                                required={selectedOption === "bank"}
+                              ></FormInput>
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
+
+                        {selectedOption === "crypto" && (
+                          <div className="border p-4 rounded bg-white">
+                            <p className="text-lg">Chose your USDT</p>
+                            <div className="flex gap-4 mt-2">
+                              <button
+                                type="button"
+                                //   disabled={isDisabled}
+                                onClick={() => {
+                                  setSelectCrypto("trc");
+                                  // router.push("https://nowpayments.io/payment/?iid=4613115863");
+                                }}
+                                className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${selectCrypto === "trc"
+                                  ? "border-orange-300 bg-orange-500 text-white"
+                                  : "text-orange-500 border-orange-300"
+                                  }`}
+                              >
+                                <div>
+                                  {/* <img src="" alt="" /> */}
+
+                                  <p>TRC 20</p>
+                                </div>
+                              </button>
+                              <button
+                                type="button"
+                                //   disabled={isDisabled}
+                                onClick={() => {
+                                  setSelectCrypto("bep");
+                                  // router.push("https://nowpayments.io/payment/?iid=4613115863");
+                                }}
+                                className={`w-full py-4 px-2 border rounded transition-all ${selectCrypto === "bep"
+                                  ? "border-orange-300 bg-orange-500 text-white"
+                                  : "text-orange-500 border-orange-300"
+                                  }`}
+                              >
+                                <div>
+                                  {/* <img src="" alt="" /> */}
+                                  <p>BEP 20</p>
+                                </div>
+                              </button>
+                            </div>
+                            <div className="text-left mt-2">
+                              {selectCrypto && (
+                                <FormInput
+                                  label={`Enter your ${selectCrypto?.toLocaleUpperCase()} wallet address`}
+                                  type="text"
+                                  name="walletAddress"
+                                  placeholder=" wallet address"
+                                  required={Boolean(selectCrypto)}
+                                ></FormInput>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="mt-[30px]   flex justify-end">
-                <button
-                  disabled={isAddFoundRequestLoading}
-                  type="submit"
-                  className="px-3 text-orange-500 disabled:bg-gray-600 rounded hover:bg-orange-500 hover:text-white transition-all py-1 border border-orange-500 "
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </FormProvider>
-        </Modal>
-      </div>
-    </SellerLayout>
+                <div className="mt-[30px]   flex justify-end">
+                  <button
+                    disabled={isAddFoundRequestLoading}
+                    type="submit"
+                    className="px-3 text-orange-500 disabled:bg-gray-600 rounded hover:bg-orange-500 hover:text-white transition-all py-1 border border-orange-500 "
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </FormProvider>
+          </Modal>
+        </div>
+      </SellerLayout>
+    </DashboardLayout>
   );
 };
 

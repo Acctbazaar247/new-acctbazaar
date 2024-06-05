@@ -1,5 +1,6 @@
 import { message } from "antd";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IconType } from "react-icons";
 
 export interface IMeta {
   limit: number;
@@ -347,6 +348,17 @@ export interface INavItems {
   matchUrl: string;
   name: string;
   icon: IconDefinition;
+}
+
+export interface TNavItems {
+  label: string;
+  path: string;
+  Icon: IconType;
+}
+
+export interface TNavItemsList {
+  item: string;
+  navItems: TNavItems[];
 }
 
 export interface IOverviewCategoryStatus {

@@ -44,7 +44,7 @@ const AddService = (props: Props) => {
   };
 
   return (
-    <>
+    <DashboardLayout>
       <SellerLayout>
         <div className="container py-5 md:py-10">
           <h2 className="text-center text-2xl font-bold pb-4">
@@ -110,7 +110,7 @@ const AddService = (props: Props) => {
           </div>
         </div>
       </SellerLayout>
-    </>
+    </DashboardLayout>
   );
 };
 
