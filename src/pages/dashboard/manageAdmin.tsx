@@ -49,7 +49,7 @@ function ManageAdmin({ }: Props) {
   }
   return (
     <SuperAdminLayout>
-      <h2 className="text-center text-xl font-bold">All Admin</h2>
+      <h2 className="title text-center mb-5">All Admin</h2>
       {content}
     </SuperAdminLayout>
   );

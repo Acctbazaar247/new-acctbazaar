@@ -1,194 +1,143 @@
-import { INavItems } from "@/types/common";
+import { TNavItems, TNavItemsList } from "@/types/common";
+import { BiMoneyWithdraw } from "react-icons/bi";
+import { FaUsers } from "react-icons/fa";
+import { FaCartShopping, FaTicket } from "react-icons/fa6";
+import { IoHome, IoPersonAddSharp, IoSettingsSharp } from "react-icons/io5";
 import {
-  faCoffee,
-  faBorderAll,
-  faTags,
-  faBox,
-  faFileLines,
-  faGear,
-  faUsers,
-  faReorder,
-  faUserShield,
-  faComment,
-  faIcons,
-  faRectangleList,
-  faUserPlus,
-  faCartShopping,
-  faDollar,
-  faHouse,
-  faMoneyBill,
-  faMoneyBillTransfer,
-  faCertificate,
-  faReceipt,
-} from "@fortawesome/free-solid-svg-icons";
+  MdAddToPhotos,
+  MdAdminPanelSettings,
+  MdSwitchAccount,
+  MdVerified,
+} from "react-icons/md";
+import { RiRefund2Fill } from "react-icons/ri";
+import { RxDashboard } from "react-icons/rx";
 
-const common: INavItems[] = [
+const common: any[] = [
   {
-    name: "Overview",
-    to: "",
-    matchUrl: "/dashboard",
-    icon: faBorderAll,
+    label: "Overview",
+    path: "/dashboard",
+    Icon: RxDashboard,
   },
   {
-    name: "profile settings",
-    to: "/profileSetting",
-    matchUrl: "/dashboard/profileSetting",
-    icon: faGear,
+    label: "profile settings",
+    path: "/dashboard/profileSetting",
+    Icon: IoSettingsSharp,
   },
   {
-    name: "Withdraw Fund",
-    to: "/withdrawFund",
-    matchUrl: "/dashboard/withdrawFund",
-    icon: faMoneyBillTransfer,
+    label: "Withdraw Fund",
+    path: "/dashboard/withdrawFund",
+    Icon: BiMoneyWithdraw,
   },
   {
-    name: "Home",
-    to: "/",
-    matchUrl: "/",
-    icon: faHouse,
+    label: "Home",
+    path: "/",
+    Icon: IoHome,
   },
 ];
 
-const adminItems: INavItems[] = [
-  common[3],
+const adminItems: TNavItemsList[] = [
   {
-    name: "All Account",
-    to: "/allService",
-    matchUrl: "/dashboard/allService",
-    icon: faTags,
-  },
-  // common[2],
-  {
-    name: "Manage Fund",
-    to: "/manageFund",
-    matchUrl: "/dashboard/manageFund",
-    icon: faDollar,
-  },
-];
-const supperItems: INavItems[] = [
-  common[3],
-  common[0],
-  {
-    name: "Manage Account",
-    to: "/allService",
-    matchUrl: "/dashboard/allService",
-    icon: faReceipt,
+    item: "",
+    navItems: [common[3]],
   },
   {
-    name: "Add Accounts",
-    to: "/addService",
-    matchUrl: "/dashboard/addService",
-    icon: faBox,
+    item: "Account",
+    navItems: [
+      {
+        label: "All Account",
+        path: "/dashboard/allService",
+        Icon: MdSwitchAccount,
+      },
+    ],
   },
   {
-    name: "Manage Fund",
-    to: "/manageFund",
-    matchUrl: "/dashboard/manageFund",
-    icon: faDollar,
+    item: "Fund",
+    navItems: [
+      {
+        label: "Manage Fund",
+        path: "/dashboard/manageFund",
+        Icon: RiRefund2Fill,
+      },
+      common[2],
+    ],
   },
-  {
-    name: "Manage KYC",
-    to: "/manage-kyc",
-    matchUrl: "/dashboard/manage-kyc",
-    icon: faCertificate,
-  },
-  {
-    name: "Manage Order",
-    to: "/manage-order",
-    matchUrl: "/dashboard/manage-order",
-    icon: faCartShopping,
-  },
-  common[2],
-  {
-    name: "Manage Users",
-    to: "/manageAllUser",
-    matchUrl: "/dashboard/manageAllUser",
-    icon: faUsers,
-  },
-  {
-    name: "Topup User",
-    to: "/topUpToUser",
-    matchUrl: "/dashboard/topUpToUser",
-    icon: faMoneyBill,
-  },
-  {
-    name: "Manage Admin",
-    to: "/manageAdmin",
-    matchUrl: "/dashboard/manageAdmin",
-    icon: faUserShield,
-  },
-  {
-    name: "Make Admin",
-    to: "/addAdmin",
-    matchUrl: "/dashboard/addAdmin",
-    icon: faUserPlus,
-  },
-  common[1],
 ];
 
-const userItems = [
-  common[3],
-  common[0],
+export const supperItems: TNavItemsList[] = [
   {
-    name: "My Orders",
-    to: "/myOrders",
-    matchUrl: "/dashboard/myOrders",
-    icon: faRectangleList,
+    item: "",
+    navItems: [common[3], common[0]],
   },
-  // {
-  //   name: "My carts",
-  //   to: "/myCarts",
-  //   matchUrl: "/dashboard/myCarts",
-  //   icon: faCartShopping,
-  // },
   {
-    name: "Add Funds",
-    to: "/addFunds",
-    matchUrl: "/dashboard/addFunds",
-    icon: faDollar,
+    item: "Account",
+    navItems: [
+      {
+        label: "Add Accounts",
+        path: "/dashboard/addService",
+        Icon: MdAddToPhotos,
+      },
+      {
+        label: "Manage Account",
+        path: "/dashboard/allService",
+        Icon: MdSwitchAccount,
+      },
+    ],
   },
+  {
+    item: "Manage User",
+    navItems: [
+      {
+        label: "Manage Users",
+        path: "/dashboard/manageAllUser",
+        Icon: FaUsers,
+      },
+      {
+        label: "Topup User",
+        path: "/dashboard/topUpToUser",
+        Icon: FaTicket,
+      },
+      {
+        label: "Manage Admin",
+        path: "/dashboard/manageAdmin",
+        Icon: MdAdminPanelSettings,
+      },
+      {
+        label: "Make Admin",
+        path: "/dashboard/addAdmin",
+        Icon: IoPersonAddSharp,
+      },
+    ],
+  },
+  {
+    item: "Fund",
+    navItems: [
+      {
+        label: "Manage Fund",
+        path: "/dashboard/manageFund",
+        Icon: RiRefund2Fill,
+      },
+      common[2],
+    ],
+  },
+  {
+    item: "Others",
+    navItems: [
+      {
+        label: "Manage KYC",
+        path: "/dashboard/manage-kyc",
+        Icon: MdVerified,
+      },
+      {
+        label: "Manage Order",
+        path: "/dashboard/manage-order",
+        Icon: FaCartShopping,
+      },
+      common[1],
+    ],
+  },
+];
 
-  common[1],
-];
-const sellerItems: INavItems[] = [
-  common[3],
-  common[0],
-  {
-    name: "Accounts",
-    to: "/myCreatedAccounts",
-    matchUrl: "/dashboard/myCreatedAccounts",
-    icon: faIcons,
-  },
-  {
-    name: "Add Accounts",
-    to: "/addService",
-    matchUrl: "/dashboard/addService",
-    icon: faBox,
-  },
-  {
-    name: "Add Funds",
-    to: "/addFunds",
-    matchUrl: "/dashboard/addFund",
-    icon: faDollar,
-  },
-  common[2],
-  {
-    name: "My Orders",
-    to: "/myOrders",
-    matchUrl: "/dashboard/myOrders",
-    icon: faRectangleList,
-  },
-  // {
-  //   name: "My carts",
-  //   to: "/myCarts",
-  //   matchUrl: "/dashboard/myCarts",
-  //   icon: faCartShopping,
-  // },
-  common[1],
-];
 export const dashboardSidebarItem = {
   adminItems: [common[0], ...adminItems, common[1]],
-  sellerItems,
-  userItems,
   supperItems,
 };

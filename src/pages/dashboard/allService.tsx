@@ -2,7 +2,7 @@ import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
 import AdminLayout from "@/layout/AdminLayout";
 import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import React, { ChangeEvent, useMemo, useState } from "react";
 import { Avatar, Button, Input, Pagination, Popconfirm } from "antd";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
@@ -146,7 +146,7 @@ function AllService() {
     setSearch(e.target.value);
   };
 
-  const handleDenyMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDenyMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setDenyMessage(e.target.value);
   };
 
@@ -289,7 +289,7 @@ function AllService() {
     <AdminLayout>
       <h2 className="title text-center mb-5">Manage Accounts</h2>
 
-      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
+      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-6 2xl:my-8 justify-between">
         <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5">
           <Form submitHandler={() => { }}>
             <FormSelectField
@@ -318,14 +318,6 @@ function AllService() {
             placeholder="Search by name or description"
             className="min-w-64 2xl:min-w-72 2xl:!py-2 !rounded"
           />
-
-          <AppInput
-            onChange={handleDenyMessageChange}
-            type="text"
-            value={denyMessage}
-            placeholder="Enter Your Deny Message"
-            className="min-w-68 2xl:min-w-96 2xl:!py-2 !rounded"
-          />
         </div>
 
         <button
@@ -341,7 +333,16 @@ function AllService() {
         </button>
       </div>
 
-      <div className='max-h-[70dvh] overflow-auto'>
+      <div className="mb-5 lg:mb-8">
+        <textarea
+          value={denyMessage}
+          onChange={handleDenyMessageChange}
+          placeholder="Enter Your Deny Message"
+          className={`w-full h-fit flex items-center gap-1 outline-none md:gap-2 text-sm md:text-base border  rounded md:rounded-md  2xl:rounded-lg px-2 py-1.5 md:px-4 md:py-1.5 lg:py-2 2xl:px-4 2xl:py-2.5 border-borderColor`}
+        />
+      </div>
+
+      <div className='h-[55dvh] overflow-auto'>
         <AppTable
           infoQuery={queryInfo}
           columns={columns}

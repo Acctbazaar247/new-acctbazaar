@@ -1,15 +1,8 @@
-import Image from "next/image";
 import AppPopover from "../ui/AppPopover";
 import { motion } from "framer-motion";
 import { SlArrowDown } from "react-icons/sl";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { loggedUserPopupNavbarLinks, popupNavbarLinks } from "./NavbarData";
-import Link from "next/link";
-import { userLoggedOut } from "@/redux/features/auth/authSlice";
-import AppModal from "../ui/AppModal";
-import { useRouter } from "next/navigation";
-import { UserRole } from "@/types/common";
+import { useAppSelector } from "@/redux/hook";
 import ProfileDetailsBody from "./ProfileDetailsBody";
 import AvatarComponent from "./AvatarComponent";
 

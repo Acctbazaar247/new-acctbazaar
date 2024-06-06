@@ -44,10 +44,10 @@ const AddService = (props: Props) => {
   };
 
   return (
-    <>
+    <DashboardLayout>
       <SellerLayout>
-        <div className="container py-5 md:py-10">
-          <h2 className="text-center text-2xl font-bold pb-4">
+        <div className='overflow-y-auto h-full'>
+          <h2 className="title text-center pb-5">
             Add an Account
           </h2>
           <div className="mt-5">
@@ -110,7 +110,7 @@ const AddService = (props: Props) => {
           </div>
         </div>
       </SellerLayout>
-    </>
+    </DashboardLayout>
   );
 };
 

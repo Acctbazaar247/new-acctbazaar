@@ -13,7 +13,7 @@ const TableLoading = ({ columnNumber = 4 }: {
     }
 
     const columnItems = createNumberArray(columnNumber);
-    const rowItems = createNumberArray(columnNumber + 5);
+    const rowItems = createNumberArray(columnNumber + 3);
 
     return (
         <div className=''>

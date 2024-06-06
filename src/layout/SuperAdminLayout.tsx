@@ -4,7 +4,6 @@ import { UserRole } from "@/types/common";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import DashboardLayout from "./DashboardLayout";
-import Link from "next/link";
 
 type Props = { children: ReactNode };
 
