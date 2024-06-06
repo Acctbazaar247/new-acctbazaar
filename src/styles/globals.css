@@ -24,7 +24,7 @@
     @apply appOutlineBtn px-3 py-1 rounded text-xs hover:bg-red text-red;
   }
   .roundedBtn {
-    @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-3 px-3 lg:px-6 rounded-full;
+    @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-2 px-3 lg:px-6 rounded-full;
   }
   .app-small.ant-spin .ant-spin-dot-item {
     @apply !bg-primary;

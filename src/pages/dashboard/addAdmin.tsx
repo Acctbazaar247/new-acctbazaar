@@ -1,22 +1,20 @@
-import AddAdminTableSingleRow from "@/components/AddAdminTableSingleRow/AddAdminTableSingleRow";
-import ErrorCompo from "@/components/ui/AppErrorComponent";
-import Loading from "@/components/ui/Loading";
-import ManageAllUserTable from "@/components/ManageAllUserTable/ManageAllUserTable";
 import useDebounce from "@/hooks/useDebounce";
-import AdminLayout from "@/layout/AdminLayout";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
-import { useGetUsersQuery } from "@/redux/features/user/userApi";
-import { IUser } from "@/types/common";
-import { Input, Pagination } from "antd";
+import { useEditUserMutation, useGetUsersQuery } from "@/redux/features/user/userApi";
+import { UserRole } from "@/types/common";
+import { Avatar } from "antd";
 import React, { useMemo, useState } from "react";
+import AppInput from "@/components/ui/AppInput";
+import AppTable from "@/components/ui/AppTable";
+import TableLoading from "@/components/shared/TableLoading";
+import AppModal from "@/components/ui/AppModal";
+import { toast } from "react-toastify";
 
-type Props = {};
-
-const AddAdmin = (props: Props) => {
-  const defaultValue = { value: "", label: "" };
+const AddAdmin = () => {
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const debouncedSearch = useDebounce(search, 500); // 500ms debounce d
+  const debouncedSearch = useDebounce(search, 500);
+
   const queryString = useMemo(() => {
     const info = {
       page,
@@ -31,74 +29,124 @@ const AddAdmin = (props: Props) => {
     }, "");
     return queryString;
   }, [debouncedSearch, page]);
-  const { data, isError, isLoading, isFetching, isSuccess, error } =
-    useGetUsersQuery(queryString);
 
-  let content = null;
+  const queryInfo = useGetUsersQuery(queryString);
+  const [editUser] = useEditUserMutation();
 
-  if (isLoading || isFetching) {
-    content = <Loading></Loading>;
-  } else if (isError) {
-    content = <ErrorCompo></ErrorCompo>;
-  } else if (isSuccess && data.data.length) {
-    const info = data.data as IUser[];
-    content = (
-      <div>
-        <ManageAllUserTable>
-          {info.map((single) => (
-            <AddAdminTableSingleRow
-              {...single}
-              key={single.id}
-            ></AddAdminTableSingleRow>
-          ))}
-        </ManageAllUserTable>
-        <div className="flex justify-center mt-4">
-          <Pagination
-            pageSize={data.meta.limit}
-            total={data.meta.total}
-            current={data.meta.page}
-            onChange={(value) => {
-              setPage(value);
-            }}
-          ></Pagination>
-        </div>
-      </div>
-    );
-  } else {
-    content = <ErrorCompo error="Data not found!"></ErrorCompo>;
-  }
+  const handleMakeAdmin = (id: string) => {
+    editUser({ id, role: UserRole.Admin })
+      .unwrap()
+      .then((res: any) => {
+        toast.success("Make Admin successful.");
+      })
+      .catch(() => {
+        toast.error("Make Admin unsuccessful!");
+      });
+  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      className: "min-w-[150px]",
+      render: (name: any, record: any) => {
+        return (
+          <div className='flex items-center gap-1'>
+            <Avatar src={record?.profileImg}></Avatar>
+            <p className="line-clamp-1 text-base capitalize">{name}</p>
+          </div>
+        )
+      }
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      className: "min-w-[105px]",
+      render: (email: any) => {
+        return (
+          <p className="line-clamp-1 max-w-[30dvw] text-base">{email}</p>
+        )
+      }
+    },
+    {
+      title: 'Role',
+      dataIndex: 'role',
+      className: "min-w-[105px]",
+      render: (role: any) => {
+        return (
+          <p className="line-clamp-1 text-base">{role}</p>
+        )
+      }
+    },
+    {
+      title: 'Action',
+      dataIndex: 'status',
+      className: "min-w-[85px]",
+      render: (action: any, record: any) => {
+        return (
+          <div className="flex items-center justify-center">
+            <AppModal
+              key={action}
+              button={
+                <button className="appOutlineBtnSm">Make Admin</button>
+              }
+              cancelButtonTitle="No, Don’t"
+              primaryButtonTitle="Yes. Make Admin"
+              primaryButtonAction={() => handleMakeAdmin(record?.id)}
+            >
+              <div className="max-w-80">
+                <p className="text-center text-[#828282] pt-4 text-lg">
+                  Are you sure make admin
+                  <span className="text-textDark font-medium">
+                    {record?.name}
+                  </span>{" "}
+                  to from this Users list?
+                </p>
+              </div>
+            </AppModal>
+          </div>
+        );
+      },
+    },
+  ];
+
   return (
     <SuperAdminLayout>
-      <h1 className="text-center font-bold text-xl mb-5">Add new Admin</h1>
-      <div className="mt-5 mb-10">
-        <div className="flex flex-col md:flex-row items-center gap-4 mb-5 justify-between">
-          <div className="flex gap-4 w-full">
-            <Input
-              className="max-w-[500px] py-3 w-full inline-block"
-              type="search"
-              name="search"
-              onChange={handleSearchChange}
-              placeholder="Search by name or email"
-              value={search}
-            />
-          </div>
-          <div>
-            <button
-              className="px-4 py-2 bg-blue-500 text-white leading-0 rounded"
-              onClick={() => {
-                setSearch("");
-              }}
-            >
-              Reset
-            </button>
-          </div>
-        </div>
+      <h2 className="title text-center mb-5">Make New Admin</h2>
+
+      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
+        <AppInput
+          type="text"
+          onChange={handleSearchChange}
+          placeholder="Search by name or email"
+          value={search}
+          className="min-w-60 2xl:!py-2 max-w-[30%]"
+        />
+
+        <button
+          className="appBtn"
+          onClick={() => {
+            setSearch("");
+          }}
+        >
+          Reset
+        </button>
       </div>
-      {content}
+
+      <div className='max-h-[70dvh] overflow-auto'>
+        <AppTable
+          infoQuery={queryInfo}
+          columns={columns}
+          setPage={setPage}
+          loadingComponent={
+            <TableLoading columnNumber={columns.length} />
+          }
+        />
+      </div>
     </SuperAdminLayout>
   );
 };

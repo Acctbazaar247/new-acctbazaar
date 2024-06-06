@@ -15,6 +15,7 @@ import AppModal from "@/components/ui/AppModal";
 import { MdBlock } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { GoUnverified, GoVerified } from "react-icons/go";
+import DashboardLayout from "@/layout/DashboardLayout";
 
 const ManageAllUser = () => {
   const defaultValue = { value: "", label: "" };
@@ -181,7 +182,7 @@ const ManageAllUser = () => {
     <SuperAdminLayout>
       <h2 className="title text-center mb-5">Manage users</h2>
 
-      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
+      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-6 2xl:my-10 justify-between">
         <div className='flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5'>
           <Form submitHandler={() => { }}>
             <FormSelectField
@@ -212,7 +213,7 @@ const ManageAllUser = () => {
         </button>
       </div>
 
-      <div className='max-h-[70dvh] overflow-auto'>
+      <div className='h-[65dvh] overflow-auto'>
         <AppTable
           infoQuery={queryInfo}
           columns={columns}

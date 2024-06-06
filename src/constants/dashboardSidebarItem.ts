@@ -2,11 +2,7 @@ import { TNavItems, TNavItemsList } from "@/types/common";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import { FaCartShopping, FaTicket } from "react-icons/fa6";
-import {
-  IoHomeOutline,
-  IoPersonAddSharp,
-  IoSettingsSharp,
-} from "react-icons/io5";
+import { IoHome, IoPersonAddSharp, IoSettingsSharp } from "react-icons/io5";
 import {
   MdAddToPhotos,
   MdAdminPanelSettings,
@@ -16,7 +12,7 @@ import {
 import { RiRefund2Fill } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 
-const common: TNavItems[] = [
+const common: any[] = [
   {
     label: "Overview",
     path: "/dashboard",
@@ -35,7 +31,7 @@ const common: TNavItems[] = [
   {
     label: "Home",
     path: "/",
-    Icon: IoHomeOutline,
+    Icon: IoHome,
   },
 ];
 

@@ -208,7 +208,7 @@ const ManageKYC = () => {
   return (
     <SuperAdminLayout>
       <h2 className="title text-center mb-5">Manage KYC</h2>
-      <div className="flex flex-col md:flex-row items-center gap-4 my-10 justify-between">
+      <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
         <div className="flex gap-4">
           <div className="min-w-[180px] ">
             <Form submitHandler={() => { }}>
@@ -241,7 +241,7 @@ const ManageKYC = () => {
         </button>
       </div>
 
-      <div className='max-h-[70dvh] overflow-auto'>
+      <div className='h-[65dvh] overflow-auto'>
         <AppTable
           infoQuery={queryInfo}
           columns={columns}

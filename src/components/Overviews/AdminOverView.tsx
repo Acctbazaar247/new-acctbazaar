@@ -286,9 +286,9 @@ const AdminOverView = () => {
           </div>
         ))}
       </div>
-      <h2 className="text-xl font-bold mb-10 ">Manage Accounts</h2>
+      <h2 className="text-xl font-bold mb-6 ">Manage Accounts</h2>
 
-      <div className='max-h-[50dvh] overflow-auto'>
+      <div className='max-h-[45dvh] overflow-auto'>
         <AppTable
           infoQuery={queryInfo}
           columns={columns}

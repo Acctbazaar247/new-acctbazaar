@@ -237,7 +237,7 @@ const ManageAllUser = () => {
         </button>
       </div>
 
-      <div className='max-h-[70dvh] overflow-auto'>
+      <div className='h-[65dvh] overflow-auto'>
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
