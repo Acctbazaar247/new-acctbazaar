@@ -25,15 +25,17 @@ type TAddSellAccount = {
 };
 
 export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
-  const { data } = useGetAccountsQuery("");
   const [modalOpen, setModalOpen] = useState(false);
   const [userGuide, setUserGuide] = useState(1);
   const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetAccountsQuery(`ownById=${user?.id}`);
   const { accountCard } = useAppSelector((state) => state.account);
 
   useEffect(() => {
     if (data?.meta?.total > 0) {
       setModalOpen(false);
+    } else if (data?.meta?.total === 0) {
+      setModalOpen(true)
     }
     if (!user?.isPaidForSeller) {
       setModalOpen(true);
@@ -315,7 +317,6 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
 
       <div className="bg-white rounded-2xl w-full min-h-[80vh] pt-4 md:p-6 2xl:p-8">
         <h2
-          onClick={() => setModalOpen(true)}
           className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center"
         >
           Add Account

@@ -2,28 +2,24 @@ import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import Loading from "@/components/ui/Loading";
 import AddMoneyModal from "@/components/wallet/AddMoneyModal";
 import AddWithdrawModal from "@/components/wallet/AddWithdrawModal";
-import useDebounce from "@/hooks/useDebounce";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import {
   useGetCurrencyOfLoggedInUserQuery,
-  useGetCurrencyQuery,
 } from "@/redux/features/currency/currencyApi";
 import { useGetWithdrawFundsQuery } from "@/redux/features/withdrawFund/withdrawFundApi";
 import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
 import appDateFormate from "@/utils/appDateFormate";
-import { convertDateToString } from "@/utils/convertDateToString";
 import { Table } from "antd";
 import { useMemo, useState } from "react";
 import { GoDotFill } from "react-icons/go";
-import { IoEyeOutline } from "react-icons/io5";
 import dateFormat from "dateformat";
 import { useGetCurrencyRequestsQuery } from "@/redux/features/currencyRequest/currencyRequestApi";
+
 const Wallet = () => {
   const [page, setPage] = useState<number>(1);
   const [page2, setPage2] = useState<number>(1);
-  // const debouncedSearch = useDebounce(search, 500);
   const user = useAppSelector((state) => state.user.user);
   const [showWithdraw, setShowWithdraw] = useState(
     user?.role !== UserRole.User ? false : true
@@ -45,6 +41,7 @@ const Wallet = () => {
     }, "");
     return queryString;
   }, [page, user]);
+
   const queryStringCurrencyRequest = useMemo(() => {
     const info = {
       page: page2,
@@ -60,6 +57,7 @@ const Wallet = () => {
     }, "");
     return queryString;
   }, [page2, user]);
+
   const currencyQuery = useGetCurrencyRequestsQuery(queryStringCurrencyRequest);
   const queryData = useGetWithdrawFundsQuery(queryString);
 
@@ -111,11 +109,10 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
-                (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
                 (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
                 (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
-              }`}
+                }`}
             >
               <GoDotFill />
               {text}
@@ -175,11 +172,10 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
-                (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
                 (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
                 (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
-              }`}
+                }`}
             >
               <GoDotFill />
               {text}
@@ -224,11 +220,10 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
-                (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
                 (text === "denied" && "text-[#B42318] bg-[#FEF3F2]") ||
                 (text === "approved" && "text-[#027A48] bg-[#ECFDF3]")
-              }`}
+                }`}
             >
               <GoDotFill />
               {text}
@@ -242,7 +237,7 @@ const Wallet = () => {
   return (
     <HomeLayout>
       <PrivateLayout>
-        <div className="container py-5 md:py-10 2xl:py-12">
+        <div className="layout">
           <h2 className="title">Wallet</h2>
 
           {/* this is main div  */}

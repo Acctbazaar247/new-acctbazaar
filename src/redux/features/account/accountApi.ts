@@ -6,7 +6,7 @@ export const accountApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAccounts: builder.query({
       query: (query) => {
-        addCacheKey(query); // Track the query string
+        addCacheKey(query);
         return {
           url: `/accounts?${query}`,
         };

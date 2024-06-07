@@ -51,7 +51,7 @@ const MyAds = () => {
     return (
         <HomeLayout>
             <PrivateLayout>
-                <div className='container py-10 2xl:py-12'>
+                <div className='layout'>
                     {/* this is top section div  */}
                     <div className=''>
                         <h2 className="title">My Ads</h2>

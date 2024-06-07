@@ -5,9 +5,10 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 type TAvatar = {
     user: IUser | null;
     withName?: boolean;
+    onlyBatch?: boolean;
     size?: "large"
 }
-const AvatarComponent = ({ user, withName, size }: TAvatar) => {
+const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
 
     return (
         withName ?
@@ -24,11 +25,14 @@ const AvatarComponent = ({ user, withName, size }: TAvatar) => {
                 {user?.isVerifiedByAdmin && (
                     <div className='flex items-center gap-1'>
                         <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
-                        <p
-                            className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
-                        >
-                            verified merchant
-                        </p>
+                        {
+                            !onlyBatch &&
+                            <p
+                                className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                            >
+                                verified merchant
+                            </p>
+                        }
                     </div>
                 )}
             </div>

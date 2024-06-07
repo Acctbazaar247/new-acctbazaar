@@ -17,7 +17,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useGetSingleUserKycQuery, useMakeKycRequestMutation, useUpdateKycRequestMutation } from "@/redux/features/kyc/kycApi";
 import AttentionAlert from "@/components/shared/AttentionAlert";
 import SellerLayout from "@/layout/SellerLayout";
-
+import AppPhoneInput from "@/components/ui/AppPhoneInput";
 
 const VerifyAccount = () => {
     const [kycPending, setKycPending] = useState(false);
@@ -46,21 +46,15 @@ const VerifyAccount = () => {
         }
 
         const submittedData = {
-            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending" }),
+            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending" }), telegramNumber: `@${data?.telegramNumber}`
         }
 
         if (!kycDenied) {
             await addKycRequest(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
-
-                if (!res.data?.success) {
-                    toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
-                }
                 toast.success("KYC request send successfully!", { toastId: 1 });
                 setModalOpen(true);
             }).catch((res: ResponseErrorType | ResponseSuccessType) => {
-                if (!res.data?.success) {
-                    toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
-                }
+                toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
             });
         } else if (kycDenied) {
             await updateKyc(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
@@ -157,9 +151,10 @@ const VerifyAccount = () => {
     };
 
     const meansOfIdentificationOptions = [
-        { value: "Passport", label: "Passport" },
-        { value: "TIN", label: "TIN" },
-    ]
+        { value: "PASSPORT", label: "PASSPORT" },
+        { value: "DRIVER_LICENSE", label: "Driver LICENSE" },
+        { value: "NATIONAL_ID", label: "NATIONAL ID (NIN)" },
+    ];
 
     useEffect(() => {
         if (data) {
@@ -173,6 +168,10 @@ const VerifyAccount = () => {
                 router?.push("/marketplace");
             }
 
+            setValue("name", data?.data?.name || user?.name)
+            setValue("phoneNumber", data?.data?.phoneNumber || user?.phoneNumber)
+            setValue("whatsAppNumber", data?.data?.whatsAppNumber)
+            setValue("telegramNumber", data?.data?.telegramNumber)
             setValue("address", data?.data?.address)
             setValue("birthDate", data?.data?.birthDate)
             setValue("country", data?.data?.country)
@@ -181,9 +180,11 @@ const VerifyAccount = () => {
             setValue("userName", data?.data?.userName)
             setValue("identificationNumber", data?.data?.identificationNumber)
             setValue("meansOfIdentification", data?.data?.meansOfIdentification)
+            setValue("passportNumber", data?.data?.passportNumber)
+            setValue("identificationExpiredDate", data?.data?.identificationExpiredDate)
             setIdentityImage(data?.data?.identityImage);
         }
-    }, [data, kycPending, router, setValue])
+    }, [data, kycPending, router, setValue, user])
 
     return (
         <HomeLayout>
@@ -212,12 +213,12 @@ const VerifyAccount = () => {
                                     <div className='w-full md:w-[40%] space-y-3'>
 
                                         <AppFormInput
-                                            label="Name"
+                                            label="Full Name"
                                             name="name"
                                             type="text"
+                                            required
                                             register={register}
                                             defaultValue={user?.name}
-                                            readOnly={true}
                                         />
 
                                         <AppFormInput
@@ -233,17 +234,32 @@ const VerifyAccount = () => {
                                             label="Username"
                                             name="userName"
                                             type="text"
+                                            required
                                             register={register}
                                             error={errors?.userName}
                                         />
 
-                                        <AppFormInput
-                                            label="Phone Number"
+                                        <AppPhoneInput
                                             name="phoneNumber"
-                                            type="number"
+                                            control={control}
+                                            label="Phone Number"
+                                            placeholder="Phone Number"
+                                        />
+
+                                        <AppPhoneInput
+                                            name="whatsAppNumber"
+                                            control={control}
+                                            label="WhatsApp Number"
+                                            placeholder="WhatsApp Number"
+                                        />
+
+                                        <AppFormInput
+                                            label="Telegram Username"
+                                            name="telegramNumber"
+                                            type="text"
                                             register={register}
-                                            defaultValue={user?.phoneNumber}
-                                            readOnly={true}
+                                            error={errors?.telegramNumber}
+                                            required
                                         />
 
                                     </div>
@@ -269,26 +285,28 @@ const VerifyAccount = () => {
                                                     ? { value: user?.state, label: user?.state }
                                                     : undefined
                                             }
+                                            required
                                         />
 
                                         <AppFormSelect
                                             control={control}
                                             placeholder="Select State"
                                             name="state"
-                                            required={false}
+                                            required
                                             defaultValue={
                                                 user?.state
                                                     ? { value: user?.state, label: user?.state }
                                                     : undefined
                                             }
                                             options={stateOptions}
+
                                         />
 
                                         <AppFormSelect
                                             control={control}
                                             placeholder="Select City"
                                             name="city"
-                                            // required={true}
+                                            required
                                             options={cityOption ? cityOption : []}
                                         />
 
@@ -317,6 +335,7 @@ const VerifyAccount = () => {
                                         <AppFormDatePicker
                                             control={control}
                                             name="birthDate"
+                                            label="Date Of Birth"
                                             placeholder="Date of birth (DD/MM/YY)"
                                         />
                                         <AppFormSelect
@@ -326,6 +345,26 @@ const VerifyAccount = () => {
                                             required={true}
                                             options={meansOfIdentificationOptions}
                                         />
+
+                                        {
+                                            (watch("meansOfIdentification") === "PASSPORT") &&
+                                            <>
+                                                <AppFormInput
+                                                    label="Enter Passport Number"
+                                                    name="passportNumber"
+                                                    type="number"
+                                                    placeholder="Type your Passport Number"
+                                                    register={register}
+                                                    error={errors?.passportNumber}
+                                                />
+                                                <AppFormDatePicker
+                                                    control={control}
+                                                    name="identificationExpiredDate"
+                                                    label="Passport Expire date"
+                                                    placeholder="identification Expired Date"
+                                                />
+                                            </>
+                                        }
                                         <AppFormInput
                                             label="Enter Identification Number"
                                             name="identificationNumber"
