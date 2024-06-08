@@ -1,5 +1,5 @@
 import { authKey } from "@/constants/storageKey";
-import { IUser } from "@/types/common";
+import { IUser, UserRole } from "@/types/common";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import state from "sweetalert/typings/modules/state";
@@ -73,6 +73,7 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
 export const loginUserWithToken = createAsyncThunk(
   "user/loginUserWithToken",
   async () => {
@@ -91,6 +92,7 @@ export const loginUserWithToken = createAsyncThunk(
     }
   }
 );
+
 export const verifyUserWithToken = createAsyncThunk(
   "user/verifyUserWithToken",
   async (token: string) => {
@@ -113,6 +115,7 @@ export const verifyUserWithToken = createAsyncThunk(
     }
   }
 );
+
 export const resendEmail = createAsyncThunk(
   "user/resendEmail",
   async (email: string) => {
@@ -141,6 +144,13 @@ const authSlice = createSlice({
   reducers: {
     setLoading: (state, action) => {
       state.isLoading = action.payload;
+    },
+    setMakeSeller: (state) => {
+      if (state?.user?.role) {
+        state.user.role = UserRole.Seller;
+        state.user.isApprovedForSeller = true;
+        state.user.isPaidForSeller = true;
+      }
     },
     setError: (state, action) => {
       state.isError = action.payload.isError;
@@ -252,5 +262,7 @@ export const {
   setLoading,
   setError,
   addWithdrawalPin,
+  setMakeSeller,
 } = authSlice.actions;
+
 export default authSlice.reducer;

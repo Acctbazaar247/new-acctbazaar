@@ -23,7 +23,7 @@ const SignUpSeller = () => {
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+
   };
   return (
     <div className="flex lg:h-[100vh]">

@@ -22,6 +22,7 @@ import AppPhoneInput from "@/components/ui/AppPhoneInput";
 const VerifyAccount = () => {
     const [kycPending, setKycPending] = useState(false);
     const [kycDenied, setKycDenied] = useState(false);
+    const [denyMessage, setDenyMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const [identityImage, setIdentityImage] = useState("");
     const router = useRouter();
@@ -46,7 +47,7 @@ const VerifyAccount = () => {
         }
 
         const submittedData = {
-            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending" }), telegramNumber: `@${data?.telegramNumber}`
+            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending", messageByAdmin: "" }), telegramNumber: `@${data?.telegramNumber}`
         }
 
         if (!kycDenied) {
@@ -58,11 +59,10 @@ const VerifyAccount = () => {
             });
         } else if (kycDenied) {
             await updateKyc(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
-                console.log(res);
                 toast.success("KYC request updated successfully!", { toastId: 1 });
                 setModalOpen(true);
+                setKycDenied(false);
             }).catch((res: ResponseErrorType | ResponseSuccessType) => {
-                console.log(res);
                 toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
             });
         }
@@ -167,7 +167,7 @@ const VerifyAccount = () => {
             if (data?.data?.status === "approved") {
                 router?.push("/marketplace");
             }
-
+            setDenyMessage(data?.data?.messageByAdmin)
             setValue("name", data?.data?.name || user?.name)
             setValue("phoneNumber", data?.data?.phoneNumber || user?.phoneNumber)
             setValue("whatsAppNumber", data?.data?.whatsAppNumber)
@@ -432,6 +432,9 @@ const VerifyAccount = () => {
                                 }
                                 {
                                     kycPending && <AttentionAlert />
+                                }
+                                {
+                                    kycDenied && <AttentionAlert kycDenied={kycDenied} variant="danger" title="Your Kyc Request are denied for some reason, Resubmit with valid information." description={denyMessage} />
                                 }
                             </form>
                         </div>

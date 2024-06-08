@@ -9,6 +9,7 @@ import RootLayout from "@/layout/RootLayout";
 import { ToastContainer } from "react-toastify";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import config from "@/utils/config";
+import NextTopLoader from 'nextjs-toploader';
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import OnDeployment from "@/components/OnDeployment/OnDeployment";
 
@@ -19,6 +20,7 @@ const plus = Plus_Jakarta_Sans({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+
       <Head>
         <title>Acctbazaar</title>
         <meta name="description" content="Buy and sell social media accounts" />
@@ -33,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="author" content="acctbazaar" />
       </Head>
+      <NextTopLoader color="#FF5A35" showSpinner={false} crawl={false} shadow={"0 0 0 0"} />
       <Provider store={store}>
         <RootLayout>
           {config.onDevelopment ? (
@@ -41,6 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <main className={plus.className}>
               {/* <GoogleReCaptchaProvider reCaptchaKey={config.captcha as string}> */}
               <Component {...pageProps} />
+
               {/* </GoogleReCaptchaProvider> */}
             </main>
           )}

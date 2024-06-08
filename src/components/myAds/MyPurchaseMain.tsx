@@ -1,26 +1,21 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import AppTabs from "../ui/AppTabs";
-import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
-import OrderDetailsAccountInfo from "../orders/OrderDetailsAccountInfo";
-import MyAdsAccountCard from "./MyAdsAccountCard";
-import { IAccount, IOrder } from "@/types/common";
-import OrdersCard from "../OrdersCard/OrdersCard";
+import { IOrder } from "@/types/common";
 import MyPurchaseAccountCard from "./MyPurchaseAccountCard";
 
 type TMyPurchaseMain = {
-  accounts: IOrder[];
+  orders: IOrder[];
 };
 
-const MyPurchaseMain = ({ accounts }: TMyPurchaseMain) => {
+const MyPurchaseMain = ({ orders }: TMyPurchaseMain) => {
   return (
-    <div className="flex gap-4 max-h-[60vh] overflow-auto 2xl:gap-6">
+    <div className="flex gap-4 md:max-h-[60vh] overflow-auto 2xl:gap-6">
       <div className="w-full h-full bg-white">
-        {accounts.map((account) => (
+        {orders.map((order) => (
           // <OrdersCard key={account.id} {...account}></OrdersCard>
           <MyPurchaseAccountCard
-            account={account?.account}
-            key={account.id}
-            orderId={account.id}
+            account={order?.account}
+            order={order}
+            key={order.id}
+            orderId={order.id}
           />
         ))}
       </div>

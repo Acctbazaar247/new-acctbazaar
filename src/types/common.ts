@@ -233,9 +233,9 @@ export enum EApprovedForSale {
 }
 
 export enum EPlans {
-  basic = "basic",
-  pro = "pro",
-  proPlus = "proPlus",
+  BASIC_PLAN = "basic",
+  BUSINESS_PLAN = "pro",
+  PRO_PLAN = "proPlus",
 }
 
 export enum AccountType {

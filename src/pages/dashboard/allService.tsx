@@ -5,6 +5,7 @@ import { Avatar, Button, Popconfirm } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import {
   EApprovedForSale,
+  EPlans,
   IAccount,
   IUser
 } from "@/types/common";
@@ -38,6 +39,8 @@ function AllService() {
   const [category, setCategory] = useState<SelectOptions>(defaultValue);
   const [approvedForSale, setApprovedForSale] =
     useState<SelectOptions>(defaultValue);
+  const [planStatus, setPlanStatus] =
+    useState<SelectOptions>(defaultValue);
 
   const debouncedSearch = useDebounce(search, 500);
   const [editService] = useEditAccountMutation();
@@ -50,6 +53,9 @@ function AllService() {
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
       approvedForSale: approvedForSale.value.length
         ? approvedForSale.value
+        : undefined,
+      planType: planStatus.value.length
+        ? planStatus.value
         : undefined
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -60,7 +66,7 @@ function AllService() {
       return pre;
     }, "");
     return queryString;
-  }, [category, debouncedSearch, page, approvedForSale]);
+  }, [category.value, page, debouncedSearch, approvedForSale.value, planStatus.value]);
 
   const queryInfo = useGetAccountsQuery(queryString);
 
@@ -148,6 +154,18 @@ function AllService() {
 
   const handleApprovedChange = (el: string) => {
     setApprovedForSale({ value: el, label: el });
+  };
+
+  const planOptions =
+    Object.keys(EPlans).map((e) => {
+      return {
+        label: e.split("_").join(" ").toLowerCase(),
+        value: EPlans[e as keyof typeof EPlans]
+      }
+    });
+
+  const handlePlanChange = (el: string) => {
+    setPlanStatus({ value: el, label: el });
   };
 
   const columns: ColumnsType<DataType> = [
@@ -307,6 +325,17 @@ function AllService() {
             ></FormSelectField>
           </Form>
 
+          <Form submitHandler={() => { }}>
+            <FormSelectField
+              className="min-w-40"
+              name="planStatus"
+              handleChange={handlePlanChange}
+              placeholder="Filter By Plan Types"
+              options={planOptions}
+              value={planStatus.value}
+            ></FormSelectField>
+          </Form>
+
           <AppInput
             onChange={handleSearchChange}
             type="text"
@@ -323,6 +352,7 @@ function AllService() {
             setSearch("");
             setDenyMessage("");
             setApprovedForSale(defaultValue);
+            setPlanStatus(defaultValue)
           }}
         >
           Reset

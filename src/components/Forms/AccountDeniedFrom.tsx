@@ -6,13 +6,14 @@ import AppModal from "../ui/AppModal";
 
 type Props = {
   handleEdit: (data: { message?: string }) => void;
+  isButton?: boolean
 };
 
-const AccountDeniedFrom = (props: Props) => {
+const AccountDeniedFrom = ({ handleEdit, isButton = true }: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleSubmit = (data: { message: string }) => {
     setModalOpen(false);
-    props.handleEdit(data);
+    handleEdit(data);
   };
 
   return (
@@ -24,7 +25,7 @@ const AccountDeniedFrom = (props: Props) => {
         modalOpen={modalOpen}
         button={
           <button
-            className="app-status-button bg-yellow-500  text-xs lg:text-sm"
+            className={isButton ? "app-status-button bg-yellow-500  text-xs lg:text-sm" : ""}
           //  onClick={() => {
           //    editService({ id, approvedForSale: EApprovedForSale.denied });
           //  }}
