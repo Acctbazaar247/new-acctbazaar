@@ -11,7 +11,7 @@ import React, { useState } from "react";
 
 type Props = {};
 
-function ManageAdmin({ }: Props) {
+function ManageAdmin({}: Props) {
   const [page, setPage] = useState<number>(1);
   const { data, isError, isFetching, isLoading, isSuccess, isUninitialized } =
     useGetUsersQuery(`role=admin&page=${page}`);

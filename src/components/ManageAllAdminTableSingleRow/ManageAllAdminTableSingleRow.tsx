@@ -12,7 +12,7 @@ const ManageAllAdminTableSingleRow = ({
   password,
   profileImg,
   role,
-  isBlocked,
+  isBlocked
 }: Props) => {
   const [editUser, { isLoading, isError, isSuccess, error }] =
     useEditUserMutation();
@@ -55,13 +55,13 @@ const ManageAllAdminTableSingleRow = ({
             placement="leftTop"
             description="you will lost all review, booking, feedback of this user"
             okButtonProps={{
-              className: "!border !border-blue-300 text-blue-500",
+              className: "!border !border-blue-300 text-blue-500"
             }}
           >
             <button
               disabled={isLoading}
               // onClick={}
-              className="border border-red-300 px-3 leading-0 rounded-md  bg-red-500 transition-all text-white py-2 ml-2"
+              className="border bg-red border-red-300 px-3 leading-0 rounded-md  bg-red-500 transition-all text-white py-2 ml-2"
             >
               Remove
             </button>

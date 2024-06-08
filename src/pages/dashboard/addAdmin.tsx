@@ -1,6 +1,9 @@
 import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
-import { useEditUserMutation, useGetUsersQuery } from "@/redux/features/user/userApi";
+import {
+  useEditUserMutation,
+  useGetUsersQuery
+} from "@/redux/features/user/userApi";
 import { UserRole } from "@/types/common";
 import { Avatar } from "antd";
 import React, { useMemo, useState } from "react";
@@ -19,6 +22,7 @@ const AddAdmin = () => {
     const info = {
       page,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
+      role: "user"
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -50,50 +54,44 @@ const AddAdmin = () => {
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: "Name",
+      dataIndex: "name",
       className: "min-w-[150px]",
       render: (name: any, record: any) => {
         return (
-          <div className='flex items-center gap-1'>
+          <div className="flex items-center gap-1">
             <Avatar src={record?.profileImg}></Avatar>
             <p className="line-clamp-1 text-base capitalize">{name}</p>
           </div>
-        )
+        );
       }
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
+      title: "Email",
+      dataIndex: "email",
       className: "min-w-[105px]",
       render: (email: any) => {
-        return (
-          <p className="line-clamp-1 max-w-[30dvw] text-base">{email}</p>
-        )
+        return <p className="line-clamp-1 max-w-[30dvw] text-base">{email}</p>;
       }
     },
     {
-      title: 'Role',
-      dataIndex: 'role',
+      title: "Role",
+      dataIndex: "role",
       className: "min-w-[105px]",
       render: (role: any) => {
-        return (
-          <p className="line-clamp-1 text-base">{role}</p>
-        )
+        return <p className="line-clamp-1 text-base">{role}</p>;
       }
     },
     {
-      title: 'Action',
-      dataIndex: 'status',
+      title: "Action",
+      dataIndex: "status",
       className: "min-w-[85px]",
       render: (action: any, record: any) => {
         return (
           <div className="flex items-center justify-center">
             <AppModal
               key={action}
-              button={
-                <button className="appOutlineBtnSm">Make Admin</button>
-              }
+              button={<button className="appOutlineBtnSm">Make Admin</button>}
               cancelButtonTitle="No, Don’t"
               primaryButtonTitle="Yes. Make Admin"
               primaryButtonAction={() => handleMakeAdmin(record?.id)}
@@ -110,8 +108,8 @@ const AddAdmin = () => {
             </AppModal>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
 
   return (
@@ -137,14 +135,12 @@ const AddAdmin = () => {
         </button>
       </div>
 
-      <div className='max-h-[70dvh] overflow-auto'>
+      <div className="max-h-[70dvh] overflow-auto">
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
           setPage={setPage}
-          loadingComponent={
-            <TableLoading columnNumber={columns.length} />
-          }
+          loadingComponent={<TableLoading columnNumber={columns.length} />}
         />
       </div>
     </SuperAdminLayout>
