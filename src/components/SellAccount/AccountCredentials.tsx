@@ -81,7 +81,7 @@ export default function AccountCredentials({
         <div className=''>
           <Link href={"/seller/plans"} className="appOutlineBtnSm  inline">Choose Your Plan Here</Link>
         </div>
-        <div className='flex flex-wrap gap-1 items-center'>
+        <div className='flex flex-wrap gap-1 items-center md:pl-6'>
           Time remaining on your plan
           <CountDownPlanDays targetDate={currentPlan?.data?.createdAt} additionalDays={currentPlan?.data?.days} />
         </div>
