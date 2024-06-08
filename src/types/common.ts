@@ -232,6 +232,12 @@ export enum EApprovedForSale {
   denied = "denied",
 }
 
+export enum EPlans {
+  basic = "basic",
+  pro = "pro",
+  proPlus = "proPlus",
+}
+
 export enum AccountType {
   SocialMedia = "SocialMedia",
   Game = "Game",

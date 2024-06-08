@@ -4,7 +4,10 @@ import { toast } from "react-toastify";
 import config from "@/utils/config";
 import { useRouter } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useBecomeSellerMutation, useBecomeSellerWithWalletMutation } from "@/redux/features/auth/authSellerApi";
+import {
+  useBecomeSellerMutation,
+  useBecomeSellerWithWalletMutation
+} from "@/redux/features/auth/authSellerApi";
 import { ResponseSuccessType } from "@/types/common";
 import { IoWalletOutline } from "react-icons/io5";
 type TMakePayment = {
@@ -16,7 +19,8 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
   const router = useRouter();
 
   const [becomeASeller, { isLoading }] = useBecomeSellerMutation();
-  const [becomeASellerWithWallet, { isLoading: walletPaymentLoading }] = useBecomeSellerWithWalletMutation();
+  const [becomeASellerWithWallet, { isLoading: walletPaymentLoading }] =
+    useBecomeSellerWithWalletMutation();
 
   const handlePayment = () => {
     if (selectedOption === "bank") {
@@ -24,39 +28,51 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         .unwrap()
         .then((res: ResponseSuccessType) => {
           if (!res?.data) {
-            toast.error(res?.data?.message || "something went wrong ", { toastId: 1 });
+            toast.error(res?.data?.message || "something went wrong ", {
+              toastId: 1
+            });
           } else {
             router.push(res.data.txId);
           }
         })
         .catch((err) => {
-          toast.error(err?.data?.message || "something went wrong", { toastId: 1 });
+          toast.error(err?.data?.message || "something went wrong", {
+            toastId: 1
+          });
         });
     } else if (selectedOption === "crypto") {
       becomeASeller({ payWith: "nowpay" })
         .unwrap()
         .then((res: ResponseSuccessType) => {
           if (!res?.data) {
-            toast.error(res?.data?.message || "something went wrong ", { toastId: 1 });
+            toast.error(res?.data?.message || "something went wrong ", {
+              toastId: 1
+            });
           } else {
             router.push(res.data.txId);
           }
         })
         .catch((err) => {
-          toast.error(err?.data?.message || "something went wrong", { toastId: 1 });
+          toast.error(err?.data?.message || "something went wrong", {
+            toastId: 1
+          });
         });
     } else if (selectedOption === "wallet") {
       becomeASellerWithWallet("")
         .unwrap()
         .then((res: ResponseSuccessType) => {
-          if (!res?.data) {
-            toast.error(res?.data?.message || "something went wrong", { toastId: 1 });
+          if (!res?.success) {
+            toast.error(res?.data?.message || "something went wrong", {
+              toastId: 1
+            });
           } else {
             router.push(res.data.txId);
           }
         })
         .catch((err) => {
-          toast.error(err?.data?.message || "something went wrong", { toastId: 1 });
+          toast.error(err?.data?.message || "something went wrong", {
+            toastId: 1
+          });
         });
     } else {
       toast.warn("Select any one Payment option", { toastId: 1 });
@@ -69,8 +85,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
       <div className="py-6 space-y-6 md:w-[45%] mx-auto">
         <div
           onClick={() => setSelectedOption("bank")}
-          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${selectedOption === "bank" ? "border-primary" : "border-[#C5C5C5]"
-            }`}
+          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
+            selectedOption === "bank" ? "border-primary" : "border-[#C5C5C5]"
+          }`}
         >
           <Image
             width={32}
@@ -89,8 +106,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
 
         <div
           onClick={() => setSelectedOption("crypto")}
-          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${selectedOption === "crypto" ? "border-primary" : "border-[#C5C5C5]"
-            }`}
+          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
+            selectedOption === "crypto" ? "border-primary" : "border-[#C5C5C5]"
+          }`}
         >
           <Image
             width={32}
@@ -110,8 +128,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
 
         <div
           onClick={() => setSelectedOption("wallet")}
-          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${selectedOption === "wallet" ? "border-primary" : "border-[#C5C5C5]"
-            }`}
+          className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
+            selectedOption === "wallet" ? "border-primary" : "border-[#C5C5C5]"
+          }`}
         >
           <IoWalletOutline className="text-2xl" />
           <div className="space-y-1">
