@@ -158,34 +158,36 @@ const ManageAllOrder = () => {
               <AppPopover
                 arrow={false}
                 button={
-                  <div className={`flex items-center gap-1 text-textDark text-sm  rounded-full px-4 py-0.5 cursor-pointer ${record?.status === EOrderStatus.COMPLETED && "bg-green-500 text-white"} ${record?.status === EOrderStatus.CANCELLED && "bg-red text-white"} ${record?.status === EOrderStatus.PENDING && "bg-[#FCF0C9] "}`}>
-                    <h3>{record?.status}</h3> <IoIosArrowDown />
+                  <div className={`flex items-center gap-1 text-textDark text-sm  rounded-full px-4 py-0.5 ${record?.status === EOrderStatus.COMPLETED && "bg-green-500  cursor-pointer text-white"} ${record?.status === EOrderStatus.CANCELLED && "bg-red text-white"} ${record?.status === EOrderStatus.PENDING && "bg-[#FCF0C9]  cursor-pointer"}`}>
+                    <h3>{record?.status}</h3> {record?.status !== "cancelled" && <IoIosArrowDown />}
                   </div>
                 }
               >
-                <div className='flex flex-col items-end text-end'>
-                  {statusOptions.map(stat => (
-                    <AppModal
-                      key={stat.status}
-                      button={
-                        <button className="hover:bg-blue-50 w-full">{stat.status}</button>
-                      }
-                      cancelButtonTitle="No, Don’t"
-                      primaryButtonTitle="Yes. Update"
-                      primaryButtonAction={() => handleStatusUpdate(stat.status, record?.id)}
-                    >
-                      <div className="max-w-80">
-                        <p className="text-center text-[#828282] pt-4 text-lg">
-                          Are you sure Update status {record?.status} to
-                          <span className="text-textDark font-medium">
-                            {" "}{stat.status}
-                          </span>{" "}
-                          from this orders list?
-                        </p>
-                      </div>
-                    </AppModal>
-                  ))}
-                </div>
+                {record?.status !== "cancelled" &&
+                  <div className='flex flex-col items-end text-end'>
+                    {statusOptions.map(stat => (
+                      <AppModal
+                        key={stat.status}
+                        button={
+                          <button className="hover:bg-blue-50 w-full">{stat.status}</button>
+                        }
+                        cancelButtonTitle="No, Don’t"
+                        primaryButtonTitle="Yes. Update"
+                        primaryButtonAction={() => handleStatusUpdate(stat.status, record?.id)}
+                      >
+                        <div className="max-w-80">
+                          <p className="text-center text-[#828282] pt-4 text-lg">
+                            Are you sure Update status {record?.status} to
+                            <span className="text-textDark font-medium">
+                              {" "}{stat.status}
+                            </span>{" "}
+                            from this orders list?
+                          </p>
+                        </div>
+                      </AppModal>
+                    ))}
+                  </div>
+                }
               </AppPopover>
             </div>
           </div>

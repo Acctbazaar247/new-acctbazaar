@@ -124,7 +124,6 @@ const AccountSettingProfile = () => {
     await uploadImage(formData)
       .unwrap()
       .then((res: ResponseErrorType) => {
-        console.log(res);
         if (!res.data.success) {
           toast.error(res?.data?.message || "Something went wrong");
           setLoading(false);
@@ -190,7 +189,7 @@ const AccountSettingProfile = () => {
       }))
       : [];
   }, [selectedCountry, selectedState]);
-  console.log(url);
+
   return (
     <form
       className="w-full md:py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"

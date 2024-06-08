@@ -4,7 +4,7 @@ import FormSelectField, {
 } from "@/components/Forms/FormSelectField";
 import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
-import { KycStatus, ResponseSuccessType } from "@/types/common";
+import { EApprovedForSale, KycStatus, ResponseSuccessType } from "@/types/common";
 import { optionCreator } from "@/utils";
 import { Input } from "antd";
 import React, { useState, useMemo } from "react";
@@ -19,6 +19,8 @@ import { toast } from "react-toastify";
 import { IoIosArrowDown } from "react-icons/io";
 import ViewUser from "@/components/dashboard/ViewUser";
 import TableLoading from "@/components/shared/TableLoading";
+import AppInput from "@/components/ui/AppInput";
+import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
 
 const ManageKYC = () => {
   const defaultValue = { value: "", label: "" };
@@ -29,9 +31,9 @@ const ManageKYC = () => {
 
   const [updateKyc] = useUpdateStatusBySuperAdminKycRequestMutation();
 
-  const handleStatusUpdate = async (status: string, id: string) => {
+  const handleStatusUpdate = async (status: string, id: string, denyMessage?: string) => {
     const updateData = {
-      id, status
+      id, status, messageByAdmin: denyMessage
     }
     await updateKyc(updateData).unwrap().then((res: ResponseSuccessType) => {
       if (!res.success) {
@@ -131,25 +133,39 @@ const ManageKYC = () => {
               >
                 {record?.status === "pending" && <div className='flex flex-col items-end text-end'>
                   {statusOptions.map(stat => (
-                    <AppModal
-                      key={stat.status}
-                      button={
-                        <button className="hover:bg-blue-50 w-full">{stat.status}</button>
-                      }
-                      cancelButtonTitle="No, Don’t"
-                      primaryButtonTitle="Yes. Update"
-                      primaryButtonAction={() => handleStatusUpdate(stat.status, record?.id)}
-                    >
-                      <div className="max-w-80">
-                        <p className="text-center text-[#828282] pt-4 text-lg">
-                          Are you sure Update status {record?.status} to
-                          <span className="text-textDark font-medium">
-                            {" "}{stat.status}
-                          </span>{" "}
-                          from this KYC request list?
-                        </p>
-                      </div>
-                    </AppModal>
+                    stat?.status === "denied" ?
+                      <AccountDeniedFrom
+                        key={stat?.status}
+                        isButton={false}
+                        handleEdit={(info) => {
+                          // editService({
+                          //   id,
+                          //   approvedForSale: EApprovedForSale.denied,
+                          //   messageFromAdmin: info.message
+                          // });
+                          handleStatusUpdate(stat?.status, record?.id, info?.message)
+                          console.log(info);
+                        }}
+                      ></AccountDeniedFrom>
+                      : <AppModal
+                        key={stat.status}
+                        button={
+                          <button className="hover:bg-blue-50 w-full">{stat.status}</button>
+                        }
+                        cancelButtonTitle="No, Don’t"
+                        primaryButtonTitle="Yes. Update"
+                        primaryButtonAction={() => handleStatusUpdate(stat.status, record?.id)}
+                      >
+                        <div className="max-w-80">
+                          <p className="text-center text-[#828282] pt-4 text-lg">
+                            Are you sure Update status {record?.status} to
+                            <span className="text-textDark font-medium">
+                              {" "}{stat.status}
+                            </span>{" "}
+                            from this KYC request list?
+                          </p>
+                        </div>
+                      </AppModal>
                   ))}
                 </div>}
               </AppPopover>
@@ -181,7 +197,7 @@ const ManageKYC = () => {
       status: status.value.length ? status.value : undefined,
       page,
       limit: 50,
-      searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
+      email: debouncedSearch.length ? debouncedSearch : undefined,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -221,14 +237,15 @@ const ManageKYC = () => {
               ></FormSelectField>
             </Form>
           </div>
-          {/* <Input
-            className="max-w-[300px] w-full inline-block"
-            type="search"
-            name="search"
-            onChange={handleSearchChange}
-            placeholder="Search by name or email"
+
+          <AppInput
+            type="text"
             value={search}
-          /> */}
+            onChange={handleSearchChange}
+            placeholder="Search by exact email"
+            className="min-w-64 2xl:min-w-72 2xl:!py-2 !rounded"
+          />
+
         </div>
         <button
           className="appBtn"

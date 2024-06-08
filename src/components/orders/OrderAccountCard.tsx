@@ -49,7 +49,7 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo, notShowDetails }) => {
       <div className="flex flex-col md:flex-row md:items-center gap-1 justify-between">
         <p className="text-xs md:text-sm line-clamp-1 text-textBlack flex items-center gap-1 md:gap-2">
           <p className="w-24 md:w-fit text-textBlack">Order number</p>{" "}
-          <span className="text-textGrey line-clamp-1"># {orderInfo.id}</span>
+          <span className="text-textGrey"># {orderInfo.id}</span>
         </p>
         <p className="text-xs text-textGrey">
           <span className="md:hidden  text-textBlack">Order time: </span>

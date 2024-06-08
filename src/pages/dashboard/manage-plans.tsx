@@ -30,7 +30,7 @@ const ManagePlans = () => {
       page,
       limit: 50,
       ownById: debouncedSellerEmail.length ? debouncedSellerEmail : undefined,
-      planStatus: planStatus.value.length
+      planType: planStatus.value.length
         ? planStatus.value
         : undefined
     };
@@ -53,7 +53,12 @@ const ManagePlans = () => {
 
 
   const planOptions =
-    Object.values(EPlans).map(optionCreator);
+    Object.keys(EPlans).map((e) => {
+      return {
+        label: e.split("_").join(" ").toLowerCase(),
+        value: EPlans[e as keyof typeof EPlans]
+      }
+    });
 
   const handlePlanChange = (el: string) => {
     setPlanStatus({ value: el, label: el });
@@ -148,6 +153,17 @@ const ManagePlans = () => {
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
         <div className='flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5'>
 
+          <Form submitHandler={() => { }}>
+            <FormSelectField
+              name="planStatus"
+              className="min-w-40"
+              handleChange={handlePlanChange}
+              placeholder="Filter By Plan Types"
+              options={planOptions}
+              value={planStatus.value}
+            ></FormSelectField>
+          </Form>
+
           <AppInput
             onChange={handleSellerEmailChange}
             type="text"
@@ -155,15 +171,6 @@ const ManagePlans = () => {
             placeholder="Search by Seller ID"
             className="min-w-60 2xl:!py-2"
           />
-          <Form submitHandler={() => { }}>
-            <FormSelectField
-              name="planStatus"
-              handleChange={handlePlanChange}
-              placeholder="Filter By Approved status"
-              options={planOptions}
-              value={planStatus.value}
-            ></FormSelectField>
-          </Form>
         </div>
 
         <button
