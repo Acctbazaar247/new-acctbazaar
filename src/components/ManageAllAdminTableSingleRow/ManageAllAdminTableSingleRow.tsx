@@ -42,6 +42,7 @@ const ManageAllAdminTableSingleRow = ({
       </td>
       <td>{name}</td>
       <td>{email}</td>
+      <td>{email}</td>
       <td>
         <span className="uppercase">{role}</span>
       </td>

@@ -21,7 +21,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
   const [selectedOption, setSelectedOption] = useState<string>("bank");
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state?.user)
+  const { user } = useAppSelector((state) => state?.user);
 
   const [becomeASeller, { isLoading }] = useBecomeSellerMutation();
   const [becomeASellerWithWallet, { isLoading: walletPaymentLoading }] =
@@ -66,28 +66,12 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
       becomeASellerWithWallet("")
         .unwrap()
         .then((res: ResponseSuccessType) => {
-<<<<<<< HEAD
-          if (!res?.success) {
-            toast.error(res?.data?.message || "something went wrong", {
-              toastId: 1
-            });
-          } else {
-            router.push(res.data.txId);
-          }
-        })
-        .catch((err) => {
-          toast.error(err?.data?.message || "something went wrong", {
-            toastId: 1
-          });
-=======
           toast.success(res?.message, { toastId: 1 });
 
           dispatch(setMakeSeller());
-
         })
         .catch((err) => {
           toast.error(err?.message || "something went wrong", { toastId: 1 });
->>>>>>> rakibul
         });
     } else {
       toast.warn("Select any one Payment option", { toastId: 1 });
