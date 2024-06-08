@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { GoAlert } from "react-icons/go";
 import { useGetCurrentPlanQuery } from "@/redux/features/plan/planApi";
 import Link from "next/link";
+import CountDownPlanDays from "@/utils/countDownPlanDays";
 
 type TAccountCredentials = {
   updateProgress: Dispatch<SetStateAction<number>>;
@@ -70,6 +71,7 @@ export default function AccountCredentials({
     updateProgress(4);
   };
 
+
   return (
     <div className="bg-white rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
       <div className="border-yellow-500 bg-yellow-50 flex flex-wrap gap-2 w-full rounded-lg border-l-4 2xl:border-l-[6px] p-3 md:p-4">
@@ -78,6 +80,10 @@ export default function AccountCredentials({
         </div>
         <div className=''>
           <Link href={"/seller/plans"} className="appOutlineBtnSm  inline">Choose Your Plan Here</Link>
+        </div>
+        <div className='flex flex-wrap gap-1 items-center'>
+          Time remaining on your plan
+          <CountDownPlanDays targetDate={currentPlan?.data?.createdAt} additionalDays={currentPlan?.data?.days} />
         </div>
       </div>
 

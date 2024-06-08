@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import TableLoading from "@/components/shared/TableLoading";
 import AppInput from "@/components/ui/AppInput";
 
-const ManageAllUser = () => {
+const ManageAllOrder = () => {
   const [orderId, setOrderId] = useState<string>("");
   const [buyerEmail, setBuyerEmail] = useState<string>("");
   const [sellerEmail, setSellerEmail] = useState<string>("");
@@ -251,4 +251,4 @@ const ManageAllUser = () => {
   );
 };
 
-export default ManageAllUser;
+export default ManageAllOrder;

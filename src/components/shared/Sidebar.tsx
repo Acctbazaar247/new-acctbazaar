@@ -67,7 +67,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         {items?.map((singleItem) => (
           <div key={singleItem?.item} className="">
             <p className={`text-textBlack pb-2 ${singleItem?.item === "" && "hidden"}`}>{singleItem?.item}</p>
-            <div className="space-y-0.5 2xl:space-y-1">
+            <div className="space-y-0.5 2xl:space-y-0.5">
               {singleItem?.navItems.map((nav) => (
                 <div key={nav.label}>
                   <Link

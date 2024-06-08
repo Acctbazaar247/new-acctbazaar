@@ -8,6 +8,7 @@ import {
   MdAdminPanelSettings,
   MdSwitchAccount,
   MdVerified,
+  MdWorkspacePremium,
 } from "react-icons/md";
 import { RiRefund2Fill } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
@@ -131,6 +132,11 @@ export const supperItems: TNavItemsList[] = [
         label: "Manage Order",
         path: "/dashboard/manage-order",
         Icon: FaCartShopping,
+      },
+      {
+        label: "Manage Plans",
+        path: "/dashboard/manage-plans",
+        Icon: MdWorkspacePremium,
       },
       common[1],
     ],

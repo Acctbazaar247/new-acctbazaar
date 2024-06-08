@@ -1,10 +1,7 @@
-import ErrorCompo from "@/components/ui/AppErrorComponent";
-import Loading from "@/components/ui/Loading";
 import AdminLayout from "@/layout/AdminLayout";
 import Link from "next/link";
 import React, { ChangeEvent, useMemo, useState } from "react";
-import { Avatar, Button, Input, Pagination, Popconfirm } from "antd";
-import { Table } from "antd";
+import { Avatar, Button, Popconfirm } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import {
   EApprovedForSale,
@@ -22,7 +19,6 @@ import FormSelectField, {
 import useDebounce from "@/hooks/useDebounce";
 import Form from "@/components/Forms/Form";
 import { optionCreator } from "@/utils";
-import useIsMobile from "@/hooks/useIsMobile";
 import { ACCOUNT_CATEGORIES } from "@/shared";
 import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
 import AppInput from "@/components/ui/AppInput";
@@ -44,7 +40,7 @@ function AllService() {
     useState<SelectOptions>(defaultValue);
 
   const debouncedSearch = useDebounce(search, 500);
-  const [editService, { isLoading: isEditLoading }] = useEditAccountMutation();
+  const [editService] = useEditAccountMutation();
 
   const queryString = useMemo(() => {
     const info = {
