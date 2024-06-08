@@ -1,3 +1,5 @@
+import { TKyc } from "@/types/common";
+import { getCacheKeys } from "../account/account.cacheKey.manager";
 import { apiSlice } from "../apiSlice/apiSlice";
 import { tagTypes } from "../apiSlice/tagTypesList";
 
@@ -31,25 +33,28 @@ export const kycApi = apiSlice.injectEndpoints({
           body: info,
         };
       },
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        const patch = dispatch(
-          kycApi.util.updateQueryData(
-            "getAllKycRequest",
-            undefined,
-            (draft) => {
-              const kycData = draft?.data?.find(
-                (single: any) => single.id === arg?.id
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        // Optimistic update: update the cache before the request completes
+        const cacheKeys = getCacheKeys();
+        console.log(cacheKeys);
+        const patchResults = cacheKeys.map((key) =>
+          dispatch(
+            kycApi.util.updateQueryData("getAllKycRequest", key, (draft) => {
+              console.log(key, JSON.parse(JSON.stringify(draft)));
+              const index = draft.data.findIndex(
+                (kycReq: any) => kycReq?.id === arg.id
               );
-              if (kycData) {
-                kycData.status = arg?.status;
+              if (index !== -1) {
+                draft.data[index] = { ...draft.data[index], ...arg }; // Update the account with new data
               }
-            }
+            })
           )
         );
+
         try {
           await queryFulfilled;
         } catch (err) {
-          patch.undo();
+          patchResults.forEach((patchResult) => patchResult.undo()); // Revert optimistic update if the request fails
         }
       },
     }),

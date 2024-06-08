@@ -1,6 +1,4 @@
-"use client";
 import AppCaptcha from "@/components/AppCaptcha/AppCaptcha";
-import FormInputNumber from "@/components/Forms/FormInputNumber";
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
 import AppFormInput from "@/components/ui/AppFormInput";
 import AppSmallLoading from "@/components/ui/AppSmallLoading";
@@ -9,7 +7,6 @@ import { createUser, setError } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";

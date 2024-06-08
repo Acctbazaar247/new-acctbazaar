@@ -69,13 +69,13 @@ const AccountDetailsModal = ({
       <div className="flex flex-col gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">
         <Image
           src={findImageUrlByCategory(category)}
-          className="rounded-xl w-[30%]"
+          className="rounded-xl w-[30%] mx-auto"
           width={200}
           height={200}
           alt="account-img"
         />
-        <div className=" ">
-          <h4 className="text-2xl font-bold">{name}</h4>
+        <div className=" w-full">
+          <h4 className="text-2xl font-bold text-center">{name}</h4>
           <div>
             <p className="text-xl my-3">{description}</p>
           </div>

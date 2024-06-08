@@ -13,24 +13,28 @@ const Plans = () => {
     const { data: currentPlan } = useGetCurrentPlanQuery("");
     const [takeAPlan, { isLoading }] = useTakeAPlanMutation();
 
-    const [active, setActive] = useState("pro")
+    const [active, setActive] = useState("BUSINESS PLAN")
 
     const plans = [
         {
             id: 1,
-            name: "basic",
-            price: 0,
+            name: "BASIC PLAN",
+            price: config.basicPlanPrice,
             offers: [
                 {
-                    label: '10 Upload daily',
+                    label: `${config.basicPlanLimit} Upload daily`,
                     isHave: true
                 },
                 {
-                    label: 'Limited categories',
+                    label: 'Limited Categories',
                     isHave: true
                 },
                 {
-                    label: 'Bulk Uploads',
+                    label: 'Basic Support',
+                    isHave: true
+                },
+                {
+                    label: 'Bulk upload',
                     isHave: true
                 },
                 {
@@ -39,21 +43,33 @@ const Plans = () => {
                 },
                 {
                     label: 'First upload Approval',
+                    isHave: false
+                },
+                {
+                    label: 'Advanced Security',
+                    isHave: false
+                },
+                {
+                    label: 'Advance page analytics',
                     isHave: false
                 },
             ]
         },
         {
             id: 2,
-            name: "pro",
+            name: "BUSINESS PLAN",
             price: config.proPlanPrice,
             offers: [
                 {
-                    label: '100 Upload daily',
+                    label: `${config.proPlanLimit} Upload daily`,
                     isHave: true
                 },
                 {
-                    label: 'Limited categories',
+                    label: 'Unlimited categories',
+                    isHave: true
+                },
+                {
+                    label: 'Priority Support',
                     isHave: true
                 },
                 {
@@ -62,25 +78,37 @@ const Plans = () => {
                 },
                 {
                     label: 'Marketplace Featured Ads',
-                    isHave: false
+                    isHave: true
                 },
                 {
                     label: 'First upload Approval',
+                    isHave: false
+                },
+                {
+                    label: 'Advanced Security',
+                    isHave: false
+                },
+                {
+                    label: 'Advance page analytics',
                     isHave: false
                 },
             ]
         },
         {
             id: 3,
-            name: "proPlus",
+            name: "PRO PLAN",
             price: config.proPlusPlanPrice,
             offers: [
                 {
-                    label: '200 Upload daily',
+                    label: `${config.proPlusPlanLimit} Upload daily`,
                     isHave: true
                 },
                 {
-                    label: 'Limited categories',
+                    label: 'Unlimited categories',
+                    isHave: true
+                },
+                {
+                    label: 'Premium Support',
                     isHave: true
                 },
                 {
@@ -93,15 +121,31 @@ const Plans = () => {
                 },
                 {
                     label: 'First upload Approval',
-                    isHave: true
+                    isHave: false
+                },
+                {
+                    label: 'Advanced Security',
+                    isHave: false
+                },
+                {
+                    label: 'Weekends Upload and approval',
+                    isHave: false
                 },
             ]
         },
     ];
 
     const handleTakeAPlan = async (value: string) => {
+        if (value === "BASIC PLAN") {
+            value = "basic"
+        } else if (value === "BUSINESS PLAN") {
+            value = "pro"
+        } else if (value === "PRO PLAN") {
+            value = "proPlus"
+        }
+
         if (currentPlan?.data?.days > 0) {
-            return toast.error(`Now active ${currentPlan?.data?.planType} plan and after ${currentPlan?.data?.days} days you can change your plan!`, { toastId: 1 });
+            return toast.error(`Now active ${currentPlan?.data?.planType === "basic" && "BASIC PLAN" || currentPlan?.data?.planType === "pro" && "BUSINESS PLAN" || currentPlan?.data?.planType === "proPlus" && "PRO PLAN"} and after ${currentPlan?.data?.days} days you can change your plan!`, { toastId: 1 });
         };
 
         await takeAPlan({ planType: value }).unwrap().then((res: ResponseSuccessType) => {
@@ -114,14 +158,14 @@ const Plans = () => {
     return (
         <HomeLayout>
             <PrivateLayout>
-                <section className='min-h-[91dvh] container py-5 md:py-10 2xl:py-12'>
+                <section className='min-h-[90dvh] layout'>
                     <h2 className="text-center text-2xl lg:text-4xl font-bold">Upload Packages and pricing</h2>
                     <div className="flex flex-col items-center justify-center my-8 lg:my-24 space-y-16 md:items-end md:-mx-5 md:space-y-0 md:flex-row">
                         {
                             plans.map(plan => (
                                 <div onClick={() => setActive(plan?.name)} key={plan?.id} className={`w-full relative cursor-pointer px-6 py-6 transition-colors duration-300 transform rounded-2xl md:mx-5 md:w-96 border border-primary ${plan.name === active ? "bg-primary" : "bg-white"}`}>
                                     <div className="text-center">
-                                        <h2 className={`text-3xl font-bold uppercase ${plan.name === active ? "text-white" : "text-textBlack"}`}>{plan.name === "proPlus" ? "pro Plus" : plan.name}</h2>
+                                        <h2 className={`text-3xl font-bold uppercase ${plan.name === active ? "text-white" : "text-textBlack"}`}>{plan.name}</h2>
                                         <p className="my-4 border-borderColor border"></p>
                                         <h4 className={`font-bold text-4xl ${plan.name === active ? "text-white" : "text-primary"}`}>${plan.price}</h4>
                                         <p className={`mt-4 text-sm font-medium ${plan.name === active ? "text-zinc-300" : "text-textBlack"}`}>Per Merchant / Billed weekly </p>
@@ -147,14 +191,14 @@ const Plans = () => {
                                         </button>
                                     ) : (
                                         <button onClick={() => handleTakeAPlan(plan.name)} disabled={plan.name === currentPlan?.data?.planType} className={`appBtn lg:py-3 rounded-xl mt-6 w-full disabled:cursor-not-allowed  ${plan.name === active ? "bg-white disabled:bg-white hover:disabled:bg-white/90 hover:bg-white/90 disabled:text-primary text-primary disabled:border-primary" : "disabled:text-white disabled:bg-primary disabled:border-primary"}`}>
-                                            {plan.name === currentPlan?.data?.planType ? "Currently Active" : "Choose Plan"}
+                                            {(plan.name === "BASIC PLAN" && "basic" || plan.name === "BUSINESS PLAN" && "pro" || plan.name === "PRO PLAN" && "proPlus") === currentPlan?.data?.planType ? "Currently Active" : "Choose Plan"}
                                         </button>
                                     )}
 
 
 
                                     {
-                                        plan.name === "pro" && (
+                                        plan.name === "BUSINESS PLAN" && (
                                             <div className='absolute flex items-center left-0 justify-center w-full -top-10'>
                                                 <div className='flex items-center gap-1 px-6 py-2 rounded-t-2xl bg-black text-zinc-200'>
                                                     Most Popular <BsStars className="text-orange-300 " />

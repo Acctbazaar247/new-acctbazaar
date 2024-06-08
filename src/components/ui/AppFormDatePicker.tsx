@@ -1,9 +1,6 @@
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { Control, Controller } from "react-hook-form";
-// import DatePicker from "react-date-picker";
-// import "react-date-picker/dist/DatePicker.css";
-// import "react-calendar/dist/Calendar.css";
 
 interface TAppDatePicker {
   control: Control<any>;
@@ -32,18 +29,8 @@ const AppFormDatePicker = ({
       render={({ field, fieldState }) => {
         return (
           <div className="text-textDark">
-            <label htmlFor={name}>{label}</label>
-            {/* <DatePicker
-              className="!w-full border !border-[#D0D2D5]  h-11"
-              inputRef={field.ref}
-              name={field.name}
-              onBlur={field.onBlur}
-              clearIcon={null}
-              value={field.value ? field.value : null}
-              onChange={(date) => {
-                field.onChange(date);
-              }}
-            /> */}
+            <label className="md:pb-1 block text-black/80 text-sm lg:text-base" htmlFor={name}>{label}</label>
+
             <DatePicker
               size="large"
               className="w-full h-11"
@@ -60,7 +47,6 @@ const AppFormDatePicker = ({
                   : null
               }
               onChange={(date, dateString) => {
-                console.log(date);
                 field.onChange(date);
               }}
             />

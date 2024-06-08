@@ -68,6 +68,11 @@ export interface IUser {
 }
 
 export interface TKyc {
+  // id: string;
+  name: string;
+  phoneNumber: string;
+  whatsAppNumber: string;
+  telegramNumber: string;
   userName: string;
   country: string;
   state: string;
@@ -75,6 +80,8 @@ export interface TKyc {
   city: string;
   birthDate: string;
   meansOfIdentification: string;
+  identificationExpiredDate: string;
+  passportNumber: string;
   identificationNumber: string;
   identityImage: string;
 }

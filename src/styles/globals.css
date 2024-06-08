@@ -59,6 +59,9 @@
   .messageMine {
     @apply rounded-3xl py-2 text-sm px-4 my-1 w-fit bg-[#F9866C] text-white;
   }
+  .layout {
+    @apply container py-5 md:py-6 lg:py-8 xl:py-10 2xl:py-12;
+  }
   .bgGradient {
     background: linear-gradient(
       96.97deg,
@@ -106,7 +109,8 @@ html {
 }
 
 .float-label-input:focus-within label,
-.float-label-input input:not(:placeholder-shown) + label {
+.float-label-input input:not(:placeholder-shown) + label,
+.float-label-input textarea:not(:placeholder-shown) + label {
   transform: translateY(-1.5rem) scale(0.75) translateX(-0.7rem);
   background-color: white;
   color: #ff5a35;

@@ -45,7 +45,7 @@ const Orders = () => {
   return (
     <HomeLayout>
       <SellerLayout>
-        <div className="container py-5 md:py-10 2xl:py-10">
+        <div className="layout">
           {/* this is top section div  */}
           <div className="flex justify-between">
             <div className="">

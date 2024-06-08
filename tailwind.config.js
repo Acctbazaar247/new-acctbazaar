@@ -11,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        'custom-dvh': 'calc(100dvh - 74px)',
-        'custom-dvh-md': 'calc(100dvh - 62px)',
+        'custom-dvh': 'calc(100dvh - 80px)',
+        'custom-dvh-md': 'calc(100dvh - 64px)',
         'custom-dvh-sm': 'calc(100dvh - 56px)',
       },
       colors: {

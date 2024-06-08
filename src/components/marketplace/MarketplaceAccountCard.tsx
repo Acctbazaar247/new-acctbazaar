@@ -102,7 +102,7 @@ const MarketplaceAccountCard = ({
             {account?.description}
           </p>
           {/* this is profile div  */}
-          <AvatarComponent withName user={account?.ownBy as IUser} />
+          <AvatarComponent onlyBatch withName user={account?.ownBy as IUser} />
         </div>
       </div>
 
