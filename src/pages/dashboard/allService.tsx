@@ -54,10 +54,12 @@ function AllService() {
       approvedForSale: approvedForSale.value.length
         ? approvedForSale.value
         : undefined,
+
       planType: planStatus.value.length
         ? planStatus.value
         : undefined
     };
+
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
       if (value) {
@@ -66,14 +68,14 @@ function AllService() {
       return pre;
     }, "");
     return queryString;
-  }, [category.value, page, debouncedSearch, approvedForSale.value, planStatus.value]);
+  }, [category, page, debouncedSearch, approvedForSale, planStatus]);
 
   const queryInfo = useGetAccountsQuery(queryString);
 
   const approveButton = (id: string) => {
     return (
       <button
-        className="app-status-button text-xs lg:text-sm bg-green-600"
+        className="app-status-button text-xs lg:text-sm bg-green-500"
         onClick={() => {
           editService({
             id,
@@ -241,7 +243,7 @@ function AllService() {
               ) : (
                 <div>
                   <div className='flex items-center justify-center'>
-                    <span className="border text-xs rounded-full py-0.5 px-2">
+                    <span className={`border text-base text-white rounded-full py-0.5 px-2 ${current === "pending" && "bg-blue-600" || current === "denied" && "bg-red" || current === "approved" && "bg-green-500"}`}>
                       {current}
                     </span>
                   </div>
@@ -308,6 +310,7 @@ function AllService() {
           <Form submitHandler={() => { }}>
             <FormSelectField
               name="category"
+              className="min-w-40"
               handleChange={handleCategoryChange}
               placeholder="Filter By category"
               options={categoryOption}
@@ -318,6 +321,7 @@ function AllService() {
           <Form submitHandler={() => { }}>
             <FormSelectField
               name="approvedForSale"
+              className="min-w-32"
               handleChange={handleApprovedChange}
               placeholder="Filter By Approved status"
               options={approvedStatusOption}

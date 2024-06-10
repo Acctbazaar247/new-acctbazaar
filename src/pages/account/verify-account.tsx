@@ -47,10 +47,11 @@ const VerifyAccount = () => {
         }
 
         const submittedData = {
-            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending", messageByAdmin: "" }), telegramNumber: `@${data?.telegramNumber}`
+            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending", messageByAdmin: "" }), telegramNumber: `${data?.telegramNumber}`
         }
 
         if (!kycDenied) {
+            console.log(submittedData);
             await addKycRequest(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
                 toast.success("KYC request send successfully!", { toastId: 1 });
                 setModalOpen(true);
@@ -58,6 +59,7 @@ const VerifyAccount = () => {
                 toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
             });
         } else if (kycDenied) {
+
             await updateKyc(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
                 toast.success("KYC request updated successfully!", { toastId: 1 });
                 setModalOpen(true);
@@ -319,7 +321,6 @@ const VerifyAccount = () => {
                                             register={register}
                                             error={errors?.address}
                                         />
-
 
                                     </div>
                                 </div>

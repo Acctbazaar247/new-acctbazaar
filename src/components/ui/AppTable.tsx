@@ -78,7 +78,7 @@ const AppTable = ({
             }
             queryData={infoQuery}
             showData={(data) => {
-              console.warn(data);
+              // console.log(data);
               return (
                 <Table
                   showHeader={header}
