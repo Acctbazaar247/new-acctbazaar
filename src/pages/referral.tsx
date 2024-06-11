@@ -110,7 +110,7 @@ export default function Referral() {
                                         {copied ?
                                             <FiCheck className="text-2xl" />
                                             :
-                                            <BiSolidCopy onClick={copyText} className="cursor-pointer text-xl" />
+                                            <BiSolidCopy onClick={copyText} className="cursor-pointer text-xl 2xl:text-2xl" />
                                         }
                                     </p>
                                 </div>
