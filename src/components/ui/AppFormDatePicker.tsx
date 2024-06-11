@@ -14,22 +14,29 @@ const AppFormDatePicker = ({
   control,
   name,
   label,
-  placeholder,
+  placeholder
 }: TAppDatePicker) => {
   return (
     <Controller
+      name={name}
       control={control}
       //   defaultValue={}
-      name={name}
       rules={
         {
-          // required: `${label} field is required`,
+          // required:tru
+          required: `${label} field is required`,
         }
       }
       render={({ field, fieldState }) => {
+        // console.log(field.value, dayjs(field.value).isValid(), "hi");
         return (
           <div className="text-textDark">
-            <label className="md:pb-1 block text-black/80 text-sm lg:text-base" htmlFor={name}>{label}</label>
+            <label
+              className="md:pb-1 block text-black/80 text-sm lg:text-base"
+              htmlFor={name}
+            >
+              {label}
+            </label>
 
             <DatePicker
               size="large"
@@ -42,11 +49,13 @@ const AppFormDatePicker = ({
               name={field.name}
               onBlur={field.onBlur}
               value={
-                dayjs(field.value).isValid()
-                  ? dayjs(field.value)
+                field.value
+                  ? dayjs(field.value).isValid()
+                    ? dayjs(field.value)
+                    : null
                   : null
               }
-              onChange={(date, dateString) => {
+              onChange={(date) => {
                 field.onChange(date);
               }}
             />

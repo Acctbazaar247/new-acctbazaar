@@ -76,15 +76,17 @@ export default function AccountCredentials({
     <div className="bg-white rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
       <div className="border-yellow-500 bg-yellow-50 flex flex-wrap gap-2 w-full rounded-lg border-l-4 2xl:border-l-[6px] p-3 md:p-4">
         <div className=''>
-          <GoAlert className="text-yellow-500 text-xl inline" /> You are in <span className="font-bold inline">{currentPlan?.data?.planType} plan,</span> your account upload limit number for today is <span className="font-bold inline">{UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length},</span> if you want to upload more account, upgrade your plan.
+          <GoAlert className="text-yellow-500 text-xl inline" /> You are in <span className="font-bold inline">{currentPlan?.data?.planType === "default" && "DEFAULT PLAN" || currentPlan?.data?.planType === "basic" && "BASIC PLAN" || currentPlan?.data?.planType === "pro" && "BUSINESS PLAN" || currentPlan?.data?.planType === "proPlus" && "PRO PLAN"},</span> your account upload limit number for today is <span className="font-bold inline">{UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length},</span> if you want to upload more account, upgrade your plan.
         </div>
         <div className=''>
           <Link href={"/seller/plans"} className="appOutlineBtnSm  inline">Choose Your Plan Here</Link>
         </div>
-        <div className='flex flex-wrap gap-1 items-center md:pl-6'>
-          Time remaining on your plan
-          <CountDownPlanDays targetDate={currentPlan?.data?.createdAt} additionalDays={currentPlan?.data?.days} />
-        </div>
+        {currentPlan?.data?.planType !== "default" &&
+          <div className='flex flex-wrap gap-1 items-center md:pl-6'>
+            Time remaining on your plan
+            <CountDownPlanDays targetDate={currentPlan?.data?.createdAt} additionalDays={currentPlan?.data?.days} />
+          </div>
+        }
       </div>
 
       <h2 className="subTitle pt-4 md:pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">

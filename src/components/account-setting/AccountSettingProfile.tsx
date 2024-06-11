@@ -192,7 +192,7 @@ const AccountSettingProfile = () => {
 
   return (
     <form
-      className="w-full md:py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
+      className="w-full  md:py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col md:flex-row justify-between gap-3">

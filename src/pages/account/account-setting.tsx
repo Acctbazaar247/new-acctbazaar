@@ -21,35 +21,37 @@ const AccountSetting = () => {
   return (
     <HomeLayout>
       <PrivateLayout>
-        <div className="container py-5 md:py-10 2xl:py-12">
+        <div className="container py-5 md:py-10 2xl:py-12 ">
           <h2 className="title">Account settings</h2>
 
           {/* this is main div  */}
           <div className="bg-white rounded min-h-[80dvh] py-3 md:py-6 md:px-10 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
-            <AppTabs
-              tabs={tabs}
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
+            <div className='md:w-[95%] mx-auto'>
+              <AppTabs
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                className="w-full md:w-[80%] py-2 md:py-4"
-                key={activeTab ? activeTab : "empty"}
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: 10, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                {activeTab === "Profile" && <AccountSettingProfile />}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  className="w-full py-2 md:py-4"
+                  key={activeTab ? activeTab : "empty"}
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: 10, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {activeTab === "Profile" && <AccountSettingProfile />}
 
-                {activeTab === "Security" && <AccountSettingSecurity />}
+                  {activeTab === "Security" && <AccountSettingSecurity />}
 
-                {activeTab === "Notifications" && (
-                  <AccountSettingNotifications />
-                )}
-              </motion.div>
-            </AnimatePresence>
+                  {activeTab === "Notifications" && (
+                    <AccountSettingNotifications />
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </PrivateLayout>

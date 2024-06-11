@@ -5,7 +5,12 @@ import AppModal from "@/components/ui/AppModal";
 import HomeLayout from "@/layout/HomeLayout";
 import { useUploadImageMutation } from "@/redux/features/user/userApi";
 import { useAppSelector } from "@/redux/hook";
-import { IGenericErrorMessage, ResponseErrorType, ResponseSuccessType, TKyc } from "@/types/common";
+import {
+    IGenericErrorMessage,
+    ResponseErrorType,
+    ResponseSuccessType,
+    TKyc
+} from "@/types/common";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -14,7 +19,11 @@ import { CgFileAdd } from "react-icons/cg";
 import { toast } from "react-toastify";
 import { City, Country, State } from "country-state-city";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useGetSingleUserKycQuery, useMakeKycRequestMutation, useUpdateKycRequestMutation } from "@/redux/features/kyc/kycApi";
+import {
+    useGetSingleUserKycQuery,
+    useMakeKycRequestMutation,
+    useUpdateKycRequestMutation
+} from "@/redux/features/kyc/kycApi";
 import AttentionAlert from "@/components/shared/AttentionAlert";
 import SellerLayout from "@/layout/SellerLayout";
 import AppPhoneInput from "@/components/ui/AppPhoneInput";
@@ -29,7 +38,8 @@ const VerifyAccount = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const user = useAppSelector((state) => state.user.user);
     const [addKycRequest, { isLoading }] = useMakeKycRequestMutation();
-    const [updateKyc, { isLoading: updateLoading }] = useUpdateKycRequestMutation();
+    const [updateKyc, { isLoading: updateLoading }] =
+        useUpdateKycRequestMutation();
     const [uploadImage, { isLoading: imageLoading }] = useUploadImageMutation();
     const { data, refetch } = useGetSingleUserKycQuery("");
 
@@ -38,33 +48,52 @@ const VerifyAccount = () => {
         control,
         handleSubmit,
         formState: { errors },
-        watch, setValue
+        watch,
+        setValue
     } = useForm<TKyc>();
 
     const onSubmit: SubmitHandler<TKyc> = async (data) => {
-        if (identityImage === "") {
-            return toast.error("Please upload your identity image and try again", { toastId: 1 });
+        if (!identityImage) {
+            return toast.error("Please upload your identity image and try again", {
+                toastId: 1
+            });
         }
 
         const submittedData = {
-            id: user?.id, ...data, identityImage, ...(kycDenied && { status: "pending", messageByAdmin: "" }), telegramNumber: `@${data?.telegramNumber}`
-        }
+            id: user?.id,
+            ...data,
+            identityImage,
+            identificationNumber: data.identificationNumber.toString(),
+            ...(kycDenied && { status: "pending", messageByAdmin: "" }),
+            telegramNumber: `${data?.telegramNumber}`
+        };
 
         if (!kycDenied) {
-            await addKycRequest(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
-                toast.success("KYC request send successfully!", { toastId: 1 });
-                setModalOpen(true);
-            }).catch((res: ResponseErrorType | ResponseSuccessType) => {
-                toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
-            });
+            console.log(submittedData);
+            await addKycRequest(submittedData)
+                .unwrap()
+                .then((res: ResponseErrorType | ResponseSuccessType) => {
+                    toast.success("KYC request send successfully!", { toastId: 1 });
+                    setModalOpen(true);
+                })
+                .catch((res: ResponseErrorType | ResponseSuccessType) => {
+                    toast.error(res?.data?.message || "Something went wrong", {
+                        toastId: 1
+                    });
+                });
         } else if (kycDenied) {
-            await updateKyc(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
-                toast.success("KYC request updated successfully!", { toastId: 1 });
-                setModalOpen(true);
-                setKycDenied(false);
-            }).catch((res: ResponseErrorType | ResponseSuccessType) => {
-                toast.error(res?.data?.message || "Something went wrong", { toastId: 1 });
-            });
+            await updateKyc(submittedData)
+                .unwrap()
+                .then((res: ResponseErrorType | ResponseSuccessType) => {
+                    toast.success("KYC request updated successfully!", { toastId: 1 });
+                    setModalOpen(true);
+                    setKycDenied(false);
+                })
+                .catch((res: ResponseErrorType | ResponseSuccessType) => {
+                    toast.error(res?.data?.message || "Something went wrong", {
+                        toastId: 1
+                    });
+                });
         }
     };
 
@@ -72,7 +101,7 @@ const VerifyAccount = () => {
         () =>
             Country.getAllCountries().map((country) => ({
                 value: country.isoCode,
-                label: country.name,
+                label: country.name
             })),
         []
     );
@@ -90,7 +119,7 @@ const VerifyAccount = () => {
             ? State.getStatesOfCountry(selectedCountryDetails.isoCode).map(
                 (state) => ({
                     value: state.isoCode,
-                    label: state.name,
+                    label: state.name
                 })
             )
             : [];
@@ -111,7 +140,7 @@ const VerifyAccount = () => {
                 stateDetails?.isoCode
             ).map((city) => ({
                 value: city.name,
-                label: city.name,
+                label: city.name
             }))
             : [];
     }, [selectedCountry, selectedState]);
@@ -120,7 +149,7 @@ const VerifyAccount = () => {
         setModalOpen(false);
         router.push("/marketplace");
         refetch();
-    }
+    };
 
     const handleFileUpload = async (value: any) => {
         setLoading(true);
@@ -153,65 +182,71 @@ const VerifyAccount = () => {
     const meansOfIdentificationOptions = [
         { value: "PASSPORT", label: "PASSPORT" },
         { value: "DRIVER_LICENSE", label: "Driver LICENSE" },
-        { value: "NATIONAL_ID", label: "NATIONAL ID (NIN)" },
+        { value: "NATIONAL_ID", label: "NATIONAL ID (NIN)" }
     ];
 
     useEffect(() => {
         if (data) {
             if (data?.data?.status === "pending") {
-                setKycPending(true)
+                setKycPending(true);
             }
             if (data?.data?.status === "denied") {
-                setKycDenied(true)
+                setKycDenied(true);
             }
             if (data?.data?.status === "approved") {
                 router?.push("/marketplace");
             }
-            setDenyMessage(data?.data?.messageByAdmin)
-            setValue("name", data?.data?.name || user?.name)
-            setValue("phoneNumber", data?.data?.phoneNumber || user?.phoneNumber)
-            setValue("whatsAppNumber", data?.data?.whatsAppNumber)
-            setValue("telegramNumber", data?.data?.telegramNumber)
-            setValue("address", data?.data?.address)
-            setValue("birthDate", data?.data?.birthDate)
-            setValue("country", data?.data?.country)
-            setValue("state", data?.data?.state)
-            setValue("city", data?.data?.city)
-            setValue("userName", data?.data?.userName)
-            setValue("identificationNumber", data?.data?.identificationNumber)
-            setValue("meansOfIdentification", data?.data?.meansOfIdentification)
-            setValue("passportNumber", data?.data?.passportNumber)
-            setValue("identificationExpiredDate", data?.data?.identificationExpiredDate)
+            setDenyMessage(data?.data?.messageByAdmin);
+            setValue("name", data?.data?.name || user?.name);
+            setValue("phoneNumber", data?.data?.phoneNumber || user?.phoneNumber);
+            setValue("whatsAppNumber", data?.data?.whatsAppNumber);
+            setValue("telegramNumber", data?.data?.telegramNumber);
+            setValue("address", data?.data?.address);
+            setValue("birthDate", data?.data?.birthDate);
+            setValue("country", data?.data?.country);
+            setValue("state", data?.data?.state);
+            setValue("city", data?.data?.city);
+            setValue("userName", data?.data?.userName);
+            setValue("identificationNumber", data?.data?.identificationNumber);
+            setValue("meansOfIdentification", data?.data?.meansOfIdentification);
+            setValue(
+                "identificationExpiredDate",
+                data?.data?.identificationExpiredDate
+            );
             setIdentityImage(data?.data?.identityImage);
         }
-    }, [data, kycPending, router, setValue, user])
+    }, [data, kycPending, router, setValue, user]);
 
     return (
         <HomeLayout>
             <SellerLayout>
-                <div className='container py-5 md:py-10 2xl:py-12'>
+                <div className="container py-5 md:py-10 2xl:py-12">
                     {/* this is top section div  */}
-                    <div className='space-y-1'>
+                    <div className="space-y-1">
                         <h2 className="title">Verify your account</h2>
-                        <p className="text-textGrey text-xs md:text-sm">This helps us ensure you comply with regulations</p>
+                        <p className="text-textGrey text-xs md:text-sm">
+                            This helps us ensure you comply with regulations
+                        </p>
                     </div>
 
                     {/* this is main div  */}
-                    <div className='bg-white rounded min-h-[80dvh] mt-2 md:mt-4 lg:mt-5 2xl:mt-6'>
-                        <div className='md:w-[95%] mx-auto md:py-6  md:px-10'>
+                    <div className="bg-white rounded min-h-[80dvh] mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
+                        <div className="md:w-[95%] mx-auto md:py-6  md:px-10">
                             <form
                                 className="w-full py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
                                 onSubmit={handleSubmit(onSubmit)}
                             >
-                                <div className='flex flex-col md:flex-row justify-between'>
+                                <div className="flex flex-col md:flex-row justify-between">
                                     {/* this is left side text  */}
-                                    <div className='text-textBlueBlack space-y-1'>
+                                    <div className="text-textBlueBlack space-y-1">
                                         <h3 className="font-semibold">Personal Information</h3>
-                                        <p className="text-textGrey text-sm">Make adjustments to your personal <br /> information and save them.</p>
+                                        <p className="text-textGrey text-sm">
+                                            Make adjustments to your personal <br /> information and
+                                            save them.
+                                        </p>
                                     </div>
                                     {/* this is right side text  */}
-                                    <div className='w-full md:w-[40%] space-y-3'>
-
+                                    <div className="w-full md:w-[40%] space-y-3">
                                         <AppFormInput
                                             label="Full Name"
                                             name="name"
@@ -244,6 +279,7 @@ const VerifyAccount = () => {
                                             control={control}
                                             label="Phone Number"
                                             placeholder="Phone Number"
+                                            error={errors?.phoneNumber}
                                         />
 
                                         <AppPhoneInput
@@ -251,6 +287,7 @@ const VerifyAccount = () => {
                                             control={control}
                                             label="WhatsApp Number"
                                             placeholder="WhatsApp Number"
+                                            error={errors?.whatsAppNumber}
                                         />
 
                                         <AppFormInput
@@ -261,19 +298,19 @@ const VerifyAccount = () => {
                                             error={errors?.telegramNumber}
                                             required
                                         />
-
                                     </div>
                                 </div>
-                                <div className='border border-[#F2F4F7]'></div>
-                                <div className='flex flex-col md:flex-row justify-between'>
+                                <div className="border border-[#F2F4F7]"></div>
+                                <div className="flex flex-col md:flex-row justify-between">
                                     {/* this is left side text  */}
-                                    <div className='text-textBlueBlack space-y-1'>
+                                    <div className="text-textBlueBlack space-y-1">
                                         <h3 className="font-semibold">Residential Details</h3>
-                                        <p className="text-textGrey text-sm">Add your current home address.</p>
+                                        <p className="text-textGrey text-sm">
+                                            Add your current home address.
+                                        </p>
                                     </div>
                                     {/* this is right side text  */}
-                                    <div className='w-full md:w-[40%] space-y-3'>
-
+                                    <div className="w-full md:w-[40%] space-y-3">
                                         <AppFormSelect
                                             control={control}
                                             placeholder="Country of residence"
@@ -299,7 +336,6 @@ const VerifyAccount = () => {
                                                     : undefined
                                             }
                                             options={stateOptions}
-
                                         />
 
                                         <AppFormSelect
@@ -319,24 +355,25 @@ const VerifyAccount = () => {
                                             register={register}
                                             error={errors?.address}
                                         />
-
-
                                     </div>
                                 </div>
-                                <div className='border border-[#F2F4F7]'></div>
-                                <div className='flex flex-col md:flex-row justify-between'>
+                                <div className="border border-[#F2F4F7]"></div>
+                                <div className="flex flex-col md:flex-row justify-between">
                                     {/* this is left side text  */}
-                                    <div className='text-textBlueBlack space-y-1'>
+                                    <div className="text-textBlueBlack space-y-1">
                                         <h3 className="font-semibold">Means of Identification</h3>
-                                        <p className="text-textGrey text-sm">Kindly provide your correct means of ID.</p>
+                                        <p className="text-textGrey text-sm">
+                                            Kindly provide your correct means of ID.
+                                        </p>
                                     </div>
                                     {/* this is right side text  */}
-                                    <div className='w-full md:w-[40%] space-y-3'>
+                                    <div className="w-full md:w-[40%] space-y-3">
                                         <AppFormDatePicker
                                             control={control}
                                             name="birthDate"
                                             label="Date Of Birth"
                                             placeholder="Date of birth (DD/MM/YY)"
+
                                         />
                                         <AppFormSelect
                                             control={control}
@@ -345,35 +382,31 @@ const VerifyAccount = () => {
                                             required={true}
                                             options={meansOfIdentificationOptions}
                                         />
-
-                                        {
-                                            (watch("meansOfIdentification") === "PASSPORT") &&
-                                            <>
-                                                <AppFormInput
-                                                    label="Enter Passport Number"
-                                                    name="passportNumber"
-                                                    type="number"
-                                                    placeholder="Type your Passport Number"
-                                                    register={register}
-                                                    error={errors?.passportNumber}
-                                                />
-                                                <AppFormDatePicker
-                                                    control={control}
-                                                    name="identificationExpiredDate"
-                                                    label="Passport Expire date"
-                                                    placeholder="identification Expired Date"
-                                                />
-                                            </>
-                                        }
                                         <AppFormInput
                                             label="Enter Identification Number"
                                             name="identificationNumber"
-                                            type="text"
+                                            type={
+                                                watch("meansOfIdentification") === "PASSPORT"
+                                                    ? "number"
+                                                    : "text"
+                                            }
                                             placeholder="Type your Identification Number here"
                                             register={register}
+                                            required
                                             error={errors?.identificationNumber}
                                         />
-                                        <div className=''>
+                                        {watch("meansOfIdentification") === "PASSPORT" && (
+                                            <>
+                                                <AppFormDatePicker
+                                                    control={control}
+                                                    name="identificationExpiredDate"
+                                                    label="Passport Expire Date"
+                                                    placeholder="Enter Expired Date"
+                                                />
+                                            </>
+                                        )}
+
+                                        <div className="">
                                             <input
                                                 onChange={(e) =>
                                                     handleFileUpload(e.target.files && e.target.files[0])
@@ -383,37 +416,59 @@ const VerifyAccount = () => {
                                                 className="hidden"
                                                 accept="image/*"
                                             />
-                                            <label htmlFor="file" className='cursor-pointer border border-borderColor rounded hover:bg-gray-100 border-dashed flex items-center gap-1 justify-between'>
-                                                {(loading || imageLoading) ?
+                                            <label
+                                                htmlFor="file"
+                                                className="cursor-pointer border border-borderColor rounded hover:bg-gray-100 border-dashed flex items-center gap-1 justify-between"
+                                            >
+                                                {loading || imageLoading ? (
                                                     <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
-                                                    :
+                                                ) : (
                                                     <>
-                                                        {identityImage === ("" || undefined) ?
+                                                        {identityImage === ("" || undefined) ? (
                                                             <div className="flex items-center justify-between p-3 w-full">
-                                                                <h2 className="text-[#7D7878] flex items-center gap-1 text-sm"><CgFileAdd />Upload Valid Identity Document</h2>
-                                                                <p className="text-primary text-xs font-medium">Select File</p>
+                                                                <h2 className="text-[#7D7878] flex items-center gap-1 text-sm">
+                                                                    <CgFileAdd />
+                                                                    Upload Valid Identity Document
+                                                                </h2>
+                                                                <p className="text-primary text-xs font-medium">
+                                                                    Select File
+                                                                </p>
                                                             </div>
-                                                            :
-                                                            <img src={identityImage} alt="identity image" className="w-full rounded min-h-40 max-h-44 object-cover" />
-                                                        }
+                                                        ) : (
+                                                            <img
+                                                                src={identityImage}
+                                                                alt="identity image"
+                                                                className="w-full rounded min-h-40 max-h-44 object-cover"
+                                                            />
+                                                        )}
                                                     </>
-                                                }
+                                                )}
                                             </label>
-                                            <h2 className="text-[#7D7878] pt-1 text-xs">JPEG, PNG, PDF. Max file size: 2mb</h2>
+                                            <h2 className="text-[#7D7878] pt-1 text-xs">
+                                                JPEG, PNG, PDF. Max file size: 2mb
+                                            </h2>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='border border-[#F2F4F7]'></div>
-                                {
-                                    !kycPending &&
-                                    <div className='flex items-center justify-end'>
-                                        {isLoading || loading || updateLoading ? (
-                                            <button type="button" className="appBtn px-14 flex items-center justify-center">
+                                <div className="border border-[#F2F4F7]"></div>
+                                {!kycPending && (
+                                    <div className="flex items-center justify-end">
+                                        {/* {isLoading || loading || updateLoading ? (
+                                            <button
+                                                type="button"
+                                                className="appBtn px-14 flex items-center justify-center"
+                                            >
                                                 <AiOutlineLoading3Quarters className="animate-spin text-white text-2xl" />
                                             </button>
                                         ) : (
-                                            <button type="submit" className="appBtn">Save & Proceed</button>
-                                        )}
+                                            <button type="submit" className="appBtn">
+                                                Save & Proceed
+                                            </button>
+                                        )} */}
+
+                                        <button disabled={isLoading || loading || updateLoading} type="submit" className="appBtn">
+                                            Save & Proceed
+                                        </button>
 
                                         <AppModal
                                             modalOpen={modalOpen}
@@ -422,20 +477,32 @@ const VerifyAccount = () => {
                                             primaryButtonTitle="Done"
                                             primaryButtonAction={handleModal}
                                         >
-                                            <div className='md:w-[450px] text-center py-6 lg:py-8'>
-                                                <Image width={200} height={160} src="/assets/icons/verification-success.png" alt="" className="mx-auto size-28 mb-4" />
+                                            <div className="md:w-[450px] text-center py-6 lg:py-8">
+                                                <Image
+                                                    width={200}
+                                                    height={160}
+                                                    src="/assets/icons/verification-success.png"
+                                                    alt=""
+                                                    className="mx-auto size-28 mb-4"
+                                                />
                                                 <h2 className="subTitle">Verification Submitted</h2>
-                                                <p className="textG px-10">Verification has been completed, your account will be reviewed</p>
+                                                <p className="textG px-10">
+                                                    Verification has been completed, your account will be
+                                                    reviewed
+                                                </p>
                                             </div>
                                         </AppModal>
                                     </div>
-                                }
-                                {
-                                    kycPending && <AttentionAlert />
-                                }
-                                {
-                                    kycDenied && <AttentionAlert kycDenied={kycDenied} variant="danger" title="Your Kyc Request are denied for some reason, Resubmit with valid information." description={denyMessage} />
-                                }
+                                )}
+                                {kycPending && <AttentionAlert />}
+                                {kycDenied && (
+                                    <AttentionAlert
+                                        kycDenied={kycDenied}
+                                        variant="danger"
+                                        title="Your Kyc Request are denied for some reason, Resubmit with valid information."
+                                        description={denyMessage}
+                                    />
+                                )}
                             </form>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetCurrentPlanQuery, useTakeAPlanMutation } from "@/redux/features/plan/planApi";
 import { ResponseSuccessType } from "@/types/common";
 import CountDownPlanDays from "@/utils/countDownPlanDays";
+import getDaysRemaining from "@/utils/getDaysRemaining";
 import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
@@ -147,7 +148,7 @@ const Plans = () => {
         }
 
         if (currentPlan?.data?.days > 0) {
-            return toast.error(`Now active ${currentPlan?.data?.planType === "basic" && "BASIC PLAN" || currentPlan?.data?.planType === "pro" && "BUSINESS PLAN" || currentPlan?.data?.planType === "proPlus" && "PRO PLAN"} and after ${currentPlan?.data?.days} days you can change your plan!`, { toastId: 1 });
+            return toast.error(`Now active ${currentPlan?.data?.planType === "basic" && "BASIC PLAN" || currentPlan?.data?.planType === "pro" && "BUSINESS PLAN" || currentPlan?.data?.planType === "proPlus" && "PRO PLAN"} and after ${getDaysRemaining(currentPlan?.data?.createdAt)} days you can change your plan!`, { toastId: 1 });
         };
 
         await takeAPlan({ planType: value }).unwrap().then((res: ResponseSuccessType) => {
@@ -163,12 +164,14 @@ const Plans = () => {
                 <section className='min-h-[90dvh] layout'>
                     <div className="border-primary/50 bg-primary/10 flex flex-wrap gap-2 mx-auto w-fit rounded-lg border-l-4 2xl:border-l-[6px] p-3 md:p-4">
                         <div className=''>
-                            <GoAlert className="text-primary/50 text-xl inline" /> You are in <span className="font-bold inline">{currentPlan?.data?.planType} plan.</span>
+                            <GoAlert className="text-primary/50 text-xl inline" /> You are in <span className="font-bold inline">{currentPlan?.data?.planType === "default" && "DEFAULT PLAN" || currentPlan?.data?.planType === "basic" && "BASIC PLAN" || currentPlan?.data?.planType === "pro" && "BUSINESS PLAN" || currentPlan?.data?.planType === "proPlus" && "PRO PLAN"}.</span>
                         </div>
-                        <div className='flex flex-wrap gap-1 items-center'>
-                            Time remaining on your plan
-                            <CountDownPlanDays targetDate={currentPlan?.data?.createdAt} additionalDays={currentPlan?.data?.days} />
-                        </div>
+                        {currentPlan?.data?.planType !== "default" &&
+                            <div className='flex flex-wrap gap-1 items-center'>
+                                Time remaining on your plan
+                                <CountDownPlanDays targetDate={currentPlan?.data?.createdAt} additionalDays={currentPlan?.data?.days} />
+                            </div>
+                        }
                     </div>
                     <h2 className="text-center text-2xl lg:text-4xl font-bold mt-7">Upload Packages and pricing</h2>
                     <div className="flex flex-col items-center justify-center my-8 lg:my-24 space-y-16 md:items-end md:-mx-5 md:space-y-0 md:flex-row">

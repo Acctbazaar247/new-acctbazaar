@@ -26,6 +26,14 @@ const ViewUser = ({ record }: TEditUserProps) => {
             value: record?.ownBy?.phoneNumber
         },
         {
+            label: "WhatsApp Number",
+            value: record?.whatsAppNumber
+        },
+        {
+            label: "Telegram username",
+            value: record?.telegramNumber
+        },
+        {
             label: "Email",
             value: record?.ownBy?.email
         },
