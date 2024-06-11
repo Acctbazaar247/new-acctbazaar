@@ -18,17 +18,17 @@ const AppFormDatePicker = ({
 }: TAppDatePicker) => {
   return (
     <Controller
+      name={name}
       control={control}
       //   defaultValue={}
-      name={name}
       rules={
         {
           // required:tru
-          // required: `${label} field is required`,
+          required: `${label} field is required`,
         }
       }
       render={({ field, fieldState }) => {
-        console.log(field.value, dayjs(field.value).isValid(), "hi");
+        // console.log(field.value, dayjs(field.value).isValid(), "hi");
         return (
           <div className="text-textDark">
             <label

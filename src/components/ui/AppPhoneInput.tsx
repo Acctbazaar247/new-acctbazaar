@@ -7,7 +7,7 @@ type TPhoneInput = {
     name: string;
     placeholder: string;
     label?: string;
-    error?: string;
+    error?: any;
 }
 
 const AppPhoneInput = ({ control, placeholder, name, label, error }: TPhoneInput) => {
