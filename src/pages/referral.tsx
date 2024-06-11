@@ -7,7 +7,7 @@ import { useAppSelector } from "@/redux/hook";
 import { EReferral, TReferral } from "@/types/common";
 import { formatDate, formatDateWithTime } from "@/utils/formateDate";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BiSolidCopy } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi";
@@ -16,10 +16,21 @@ import { PiCurrencyDollarBold, PiUsersThreeLight } from "react-icons/pi";
 import { toast } from "react-toastify";
 
 export default function Referral() {
+    const [domain, setDomain] = useState('');
     const [copied, setCopied] = useState(false);
     const user = useAppSelector((state) => state?.user);
-    const clientUrlLink = process.env.NEXT_PUBLIC_FRONTEND_URL
-    const referralLink = `${clientUrlLink}/auth/sign-up?referralId=${user?.user?.id}`
+    // const clientUrlLink = process.env.NEXT_PUBLIC_FRONTEND_URL
+    const referralLink = `${domain}/auth/sign-up?referralId=${user?.user?.id}`
+
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setDomain(window.location.hostname);
+        }
+        if (domain === "localhost") {
+            setDomain("localhost:3000")
+        }
+    }, []);
 
     const copyText = async () => {
         try {
@@ -51,7 +62,7 @@ export default function Referral() {
             return acc;
         }
     }, 0);
-    console.log(totalAmount);
+
     const sortedData = data?.data?.filter((refer: TReferral) => refer?.status === activeTab);
 
 
