@@ -6,14 +6,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
 
     // Or if using src directory:
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
     extend: {
       height: {
-        'custom-dvh': 'calc(100dvh - 80px)',
-        'custom-dvh-md': 'calc(100dvh - 64px)',
-        'custom-dvh-sm': 'calc(100dvh - 56px)',
+        "custom-dvh": "calc(100dvh - 80px)",
+        "custom-dvh-md": "calc(100dvh - 64px)",
+        "custom-dvh-sm": "calc(100dvh - 56px)"
       },
       colors: {
         primary: "#FF5A35",
@@ -24,19 +24,19 @@ module.exports = {
         textGrey: "#645D5D",
         borderColor: "#D5D8DB",
         success: "#2AAE09",
-        red: "#E11C1B",
+        red: "#E11C1B"
       },
       container: {
         center: true,
         padding: {
           //   DEFAULT: "1rem",
-          //   sm: "2rem",
-          //   lg: "4rem",
-          xl: "0rem",
-          "2xl": "2rem",
-        },
-      },
-    },
+          // sm: "2rem",
+          // lg: "2rem",
+          xl: "2rem",
+          "2xl": "2rem"
+        }
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };

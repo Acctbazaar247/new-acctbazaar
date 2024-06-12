@@ -17,13 +17,13 @@ import { FiDollarSign, FiMenu } from "react-icons/fi";
 import { IoMdSettings } from "react-icons/io";
 import {
   MdOutlineDashboard,
-  MdOutlinePlaylistAddCheckCircle,
+  MdOutlinePlaylistAddCheckCircle
 } from "react-icons/md";
 import { FaBuysellads } from "react-icons/fa6";
 import {
   loggedSellerNavLinks,
   loggedUserNavLinks,
-  nonUserNavLinks,
+  nonUserNavLinks
 } from "./NavbarData";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -147,7 +147,7 @@ const Navbar = () => {
         )}
 
         {/* this is for tab to large screen  */}
-        <div className="hidden md:flex items-center gap-2 lg:gap-6">
+        <div className="hidden md:flex items-center gap-2 xl:gap-6">
           {(user?.id
             ? user?.role === UserRole.User
               ? loggedUserNavLinks
@@ -169,7 +169,7 @@ const Navbar = () => {
           )}
 
           {/* this is login or logout section  */}
-          <div className="pl-4 lg:pl-12">
+          <div className="pl-4 xl:pl-12">
             {!user?.id ? (
               <Link href="/auth/sign-in" className="appBtn text-base">
                 Login
