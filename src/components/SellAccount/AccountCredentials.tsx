@@ -36,7 +36,6 @@ export default function AccountCredentials({
   const { accountCard, accountCredentials } = useAppSelector(
     (state) => state.account
   );
-  console.log(UploadLeftOnCurrentPlan);
 
   const dispatch = useAppDispatch();
 
