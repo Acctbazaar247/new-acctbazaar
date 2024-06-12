@@ -2,6 +2,7 @@ import DashboardCard from "@/components/dashboard/DashboardCard";
 import DashboardPayments from "@/components/dashboard/DashboardPayments";
 import DashboardSalesDynamics from "@/components/dashboard/DashboardSalesDynamics";
 import AppDatePicker from "@/components/ui/AppDatePicker";
+import AdminLayout from "@/layout/AdminLayout";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import SellerLayout from "@/layout/SellerLayout";
