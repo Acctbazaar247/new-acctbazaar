@@ -1,6 +1,10 @@
 import { UserRole } from "@/types/common";
 import Link from "next/link";
-import { loggedUserPopupNavbarLinks, popupNavbarLinks } from "./NavbarData";
+import {
+  loggedUserPopupNavbarLinks,
+  popupNavbarLinks,
+  popupNavbarLinksForUser
+} from "./NavbarData";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import Image from "next/image";
@@ -40,7 +44,6 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
   // console.log(user);
   return (
     <>
-
       {modalOpen && (
         <AppModal
           modalOpen={modalOpen}
@@ -86,7 +89,7 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
             <h4 className="text-sm md:text-base flex items-center gap-1">
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
-                <div className='flex items-center gap-1'>
+                <div className="flex items-center gap-1">
                   <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
                   <p
                     className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
@@ -113,16 +116,17 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
               <div className="w-full flex items-center justify-between">
                 <h4 className="text-sm md:text-base flex items-center gap-1">
                   {user?.name}
-                  {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
-                    <div className='flex items-center gap-1'>
-                      <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
-                      <p
-                        className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] leading-4 md:leading-3 md:text-xs text-primary bg-primary/5 border border-primary h-fit py-0`}
-                      >
-                        verified merchant
-                      </p>
-                    </div>
-                  )}
+                  {user?.role === UserRole.Seller &&
+                    user?.isVerifiedByAdmin && (
+                      <div className="flex items-center gap-1">
+                        <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+                        <p
+                          className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] leading-4 md:leading-3 md:text-xs text-primary bg-primary/5 border border-primary h-fit py-0`}
+                        >
+                          verified merchant
+                        </p>
+                      </div>
+                    )}
                 </h4>
                 {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
                   <button
@@ -142,6 +146,8 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
         <div className="space-y-2 pt-2 p-2">
           {(user?.role === (UserRole.SuperAdmin || UserRole.Admin)
             ? loggedUserPopupNavbarLinks
+            : user?.role === UserRole.User
+            ? popupNavbarLinksForUser
             : popupNavbarLinks
           ).map((nav) =>
             nav.label === "Log out" ? (
@@ -157,8 +163,9 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
               <Link
                 href={nav?.path}
                 key={nav?.label}
-                className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg ${nav.label === "My Purchase" && "md:hidden"
-                  }`}
+                className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg ${
+                  nav.label === "My Purchase" && "md:hidden"
+                }`}
               >
                 <nav.icon /> {nav?.label}
               </Link>

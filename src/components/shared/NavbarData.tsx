@@ -8,37 +8,37 @@ import {
   TbClipboardList,
   TbLogout2,
   TbMessage2,
-  TbSpeakerphone,
+  TbSpeakerphone
 } from "react-icons/tb";
 
 export const nonUserNavLinks = [
   {
     path: "/",
-    label: "Home",
+    label: "Home"
   },
   {
     path: "/#about",
-    label: "About",
+    label: "About"
   },
   {
     path: "/#features",
-    label: "Features",
+    label: "Features"
   },
   {
     path: "/#how-it-works",
-    label: "How it Works",
+    label: "How it Works"
   },
   {
     path: "/become-a-merchant",
-    label: "Become a Merchant",
-  },
+    label: "Become a Merchant"
+  }
 ];
 
 export const loggedUserNavLinks = [
   {
     label: "Marketplace",
     path: "/marketplace",
-    icon: FiHome,
+    icon: FiHome
   },
   // {
   //     label: "Orders",
@@ -53,109 +53,136 @@ export const loggedUserNavLinks = [
   {
     label: "My Purchase",
     path: "/my-purchase",
-    icon: BsClipboardCheck,
+    icon: BsClipboardCheck
   },
   {
     label: "Messages",
     path: "/messages",
-    icon: TbMessage2,
+    icon: TbMessage2
   },
   {
     label: "Wallet",
     path: "/account/wallet",
-    icon: IoWalletOutline,
-  },
+    icon: IoWalletOutline
+  }
 ];
 export const loggedSellerNavLinks = [
   {
     label: "Marketplace",
     path: "/marketplace",
-    icon: FiHome,
+    icon: FiHome
   },
   {
     label: "Orders",
     path: "/orders",
-    icon: TbClipboardList,
+    icon: TbClipboardList
   },
   {
     label: "My Ads",
     path: "/my-ads",
-    icon: TbSpeakerphone,
+    icon: TbSpeakerphone
   },
   {
     label: "My Purchase",
     path: "/my-purchase",
-    icon: BsClipboardCheck,
+    icon: BsClipboardCheck
   },
   {
     label: "Messages",
     path: "/messages",
-    icon: TbMessage2,
+    icon: TbMessage2
   },
   {
     label: "Wallet",
     path: "/account/wallet",
-    icon: IoWalletOutline,
-  },
+    icon: IoWalletOutline
+  }
 ];
 
 export const popupNavbarLinks = [
   {
     label: "My Account Dashboard",
     path: "/seller/dashboard",
-    icon: LuLayoutDashboard,
+    icon: LuLayoutDashboard
   },
   {
     label: "Referral",
     path: "/referral",
-    icon: PiUsersThreeLight,
+    icon: PiUsersThreeLight
   },
   {
     label: "Plans",
     path: "/seller/plans",
-    icon: MdWorkspacePremium,
+    icon: MdWorkspacePremium
   },
   {
     label: "My Purchase",
     path: "/my-purchase",
-    icon: BsClipboardCheck,
+    icon: BsClipboardCheck
   },
   {
     label: "Account settings",
     path: "/account/account-setting",
-    icon: IoSettingsOutline,
+    icon: IoSettingsOutline
   },
   {
     label: "Log out",
     path: "/",
-    icon: TbLogout2,
+    icon: TbLogout2
+  }
+];
+export const popupNavbarLinksForUser = [
+  {
+    label: "My Account Dashboard",
+    path: "/seller/dashboard",
+    icon: LuLayoutDashboard
   },
+  {
+    label: "Referral",
+    path: "/referral",
+    icon: PiUsersThreeLight
+  },
+  {
+    label: "My Purchase",
+    path: "/my-purchase",
+    icon: BsClipboardCheck
+  },
+  {
+    label: "Account settings",
+    path: "/account/account-setting",
+    icon: IoSettingsOutline
+  },
+  {
+    label: "Log out",
+    path: "/",
+    icon: TbLogout2
+  }
 ];
 
 export const loggedUserPopupNavbarLinks = [
   {
     label: "My Account Dashboard",
     path: "/dashboard",
-    icon: LuLayoutDashboard,
+    icon: LuLayoutDashboard
   },
   {
     label: "Referral",
     path: "/referral",
-    icon: PiUsersThreeLight,
+    icon: PiUsersThreeLight
   },
   {
     label: "My Purchase",
     path: "/my-purchase",
-    icon: BsClipboardCheck,
+    icon: BsClipboardCheck
   },
   {
     label: "Account settings",
     path: "/account/account-setting",
-    icon: IoSettingsOutline,
+    icon: IoSettingsOutline
   },
   {
     label: "Log out",
     path: "/",
-    icon: TbLogout2,
-  },
+    icon: TbLogout2
+  }
 ];
