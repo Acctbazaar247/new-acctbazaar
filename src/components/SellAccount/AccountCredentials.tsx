@@ -14,7 +14,7 @@ import CountDownPlanDays from "@/utils/countDownPlanDays";
 
 type TAccountCredentials = {
   updateProgress: Dispatch<SetStateAction<number>>;
-  UploadLeftOnCurrentPlan: any
+  UploadLeftOnCurrentPlan: any;
 };
 
 interface FormData {
@@ -27,14 +27,16 @@ interface FormData {
 }
 
 export default function AccountCredentials({
-  updateProgress, UploadLeftOnCurrentPlan
+  updateProgress,
+  UploadLeftOnCurrentPlan
 }: TAccountCredentials) {
-  const { data: currentPlan } = useGetCurrentPlanQuery("");
+  const { data: currentPlan, isLoading } = useGetCurrentPlanQuery("");
 
   const { user } = useAppSelector((state) => state.user);
   const { accountCard, accountCredentials } = useAppSelector(
     (state) => state.account
   );
+  console.log(UploadLeftOnCurrentPlan);
 
   const dispatch = useAppDispatch();
 
@@ -44,17 +46,20 @@ export default function AccountCredentials({
     watch,
     reset,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     const randomId = Math.random().toString(36).substr(2, 8);
 
-    if ((UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length) === 0) {
-      return toast.error("Your upload limit has finished for today, want to more upload account? Please upgrade your plan", {
-        toastId: 1,
-      });
-    };
+    if (UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length === 0) {
+      return toast.error(
+        "Your upload limit has finished for today, want to more upload account? Please upgrade your plan",
+        {
+          toastId: 1
+        }
+      );
+    }
 
     dispatch(
       setAccountCredentials({ ...data, username: user?.name, id: randomId })
@@ -65,28 +70,46 @@ export default function AccountCredentials({
   const handleCredentials = () => {
     if (accountCredentials.length < 1) {
       return toast.error("Please set minimum one account Credentials", {
-        toastId: 1,
+        toastId: 1
       });
     }
     updateProgress(4);
   };
 
-
   return (
     <div className="bg-white rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
       <div className="border-yellow-500 bg-yellow-50 flex flex-wrap gap-2 w-full rounded-lg border-l-4 2xl:border-l-[6px] p-3 md:p-4">
-        <div className=''>
-          <GoAlert className="text-yellow-500 text-xl inline" /> You are in <span className="font-bold inline">{currentPlan?.data?.planType === "default" && "DEFAULT PLAN" || currentPlan?.data?.planType === "basic" && "BASIC PLAN" || currentPlan?.data?.planType === "pro" && "BUSINESS PLAN" || currentPlan?.data?.planType === "proPlus" && "PRO PLAN"},</span> your account upload limit number for today is <span className="font-bold inline">{UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length},</span> if you want to upload more account, upgrade your plan.
+        <div className="">
+          <GoAlert className="text-yellow-500 text-xl inline" /> You are in{" "}
+          <span className="font-bold inline">
+            {(currentPlan?.data?.planType === "default" && "DEFAULT PLAN") ||
+              (currentPlan?.data?.planType === "basic" && "BASIC PLAN") ||
+              (currentPlan?.data?.planType === "pro" && "BUSINESS PLAN") ||
+              (currentPlan?.data?.planType === "proPlus" && "PRO PLAN")}
+            ,
+          </span>{" "}
+          your account upload limit number for today is{" "}
+          <span className="font-bold inline">
+            {UploadLeftOnCurrentPlan?.data?.left - accountCredentials.length},
+          </span>{" "}
+          if you want to upload more account, upgrade your plan.
         </div>
-        <div className=''>
-          <Link href={"/seller/plans"} className="appOutlineBtnSm  inline">Choose Your Plan Here</Link>
+        <div className="">
+          <Link href={"/seller/plans"} className="appOutlineBtnSm  inline">
+            Choose Your Plan Here
+          </Link>
         </div>
-        {currentPlan?.data?.planType !== "default" &&
-          <div className='flex flex-wrap gap-1 items-center md:pl-6'>
-            Time remaining on your plan
-            <CountDownPlanDays targetDate={currentPlan?.data?.createdAt} additionalDays={currentPlan?.data?.days} />
-          </div>
-        }
+        {isLoading
+          ? null
+          : currentPlan?.data?.planType !== "default" && (
+              <div className="flex flex-wrap gap-1 items-center md:pl-6">
+                Time remaining on your plan
+                <CountDownPlanDays
+                  targetDate={currentPlan?.data?.createdAt}
+                  additionalDays={currentPlan?.data?.days}
+                />
+              </div>
+            )}
       </div>
 
       <h2 className="subTitle pt-4 md:pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
