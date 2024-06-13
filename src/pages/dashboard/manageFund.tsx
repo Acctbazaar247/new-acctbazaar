@@ -7,13 +7,13 @@ import AdminLayout from "@/layout/AdminLayout";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
 import {
   useEditWithdrawFundMutation,
-  useGetWithdrawFundsQuery,
+  useGetWithdrawFundsQuery
 } from "@/redux/features/withdrawFund/withdrawFundApi";
 import {
   EApprovedForSale,
   EStatusOfWithdrawalRequest,
   IUser,
-  IWithdrawalRequest,
+  IWithdrawalRequest
 } from "@/types/common";
 import { optionCreator } from "@/utils";
 import { Avatar, Pagination, Popconfirm, TableColumnsType, Table } from "antd";
@@ -35,7 +35,7 @@ const ManageFund = (props: Props) => {
       limit: 50,
       approvedForSale: approvedForSale.value.length
         ? approvedForSale.value
-        : undefined,
+        : undefined
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -53,13 +53,13 @@ const ManageFund = (props: Props) => {
   const columns: TableColumnsType<IWithdrawalRequest> = [
     {
       title: "Amount",
-      dataIndex: "amount",
+      dataIndex: "amount"
       //   key: "amount",
     },
     {
       title: "Status",
       dataIndex: "status",
-      className: "capitalize",
+      className: "capitalize"
       //   key: "age",
     },
     {
@@ -72,7 +72,7 @@ const ManageFund = (props: Props) => {
             <ManageFundDetailsModal {...fullData}></ManageFundDetailsModal>
           </div>
         );
-      },
+      }
       //   key: "age",
     },
     {
@@ -91,7 +91,7 @@ const ManageFund = (props: Props) => {
             </div>
           </div>
         );
-      },
+      }
     },
     {
       title: "Requested Date",
@@ -99,7 +99,7 @@ const ManageFund = (props: Props) => {
       //   key: "date",
       render: (current) => {
         return <span>{new Date(current).toDateString()}</span>;
-      },
+      }
     },
 
     {
@@ -118,7 +118,7 @@ const ManageFund = (props: Props) => {
                     onConfirm={() => {
                       editWithdrawFund({
                         id: record.id,
-                        status: EStatusOfWithdrawalRequest.approved,
+                        status: EStatusOfWithdrawalRequest.approved
                       })
                         .unwrap()
                         .then((res: any) => {
@@ -134,7 +134,7 @@ const ManageFund = (props: Props) => {
                     }}
                     okButtonProps={{
                       className:
-                        "border-orange-500 text-orange-500 hover:text-white hover:!bg-orange-500",
+                        "border-orange-500 text-orange-500 hover:text-white hover:!bg-orange-500"
                     }}
                     title="Are you sure to change the status to approve!"
                   >
@@ -145,12 +145,12 @@ const ManageFund = (props: Props) => {
                   <Popconfirm
                     okButtonProps={{
                       className:
-                        "border-orange-500 text-orange-500 hover:text-white hover:!bg-orange-500",
+                        "border-orange-500 text-orange-500 hover:text-white hover:!bg-orange-500"
                     }}
                     onConfirm={() => {
                       editWithdrawFund({
                         id: record.id,
-                        status: EStatusOfWithdrawalRequest.denied,
+                        status: EStatusOfWithdrawalRequest.denied
                       })
                         .unwrap()
                         .then((res: any) => {
@@ -177,8 +177,8 @@ const ManageFund = (props: Props) => {
             </div>
           </div>
         );
-      },
-    },
+      }
+    }
     // {
     //   title: "Action",
     //   className: "text-[12px] lg:text-md",
@@ -215,14 +215,16 @@ const ManageFund = (props: Props) => {
     content = <ErrorCompo></ErrorCompo>;
   } else if (data?.data.length) {
     content = (
-      <div className="overflow-x-auto overflow-y-clip">
-        <div className=" ">
-          <Table
-            key={"id"}
-            pagination={false}
-            columns={columns}
-            dataSource={data.data}
-          />
+      <div>
+        <div className="overflow-x-auto overflow-y-scroll h-[70vh] 2xl:h-[75vh]">
+          <div className=" ">
+            <Table
+              key={"id"}
+              pagination={false}
+              columns={columns}
+              dataSource={data.data}
+            />
+          </div>
         </div>
         <div className="flex justify-center mt-5">
           <Pagination
