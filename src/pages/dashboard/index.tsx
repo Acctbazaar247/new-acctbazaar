@@ -22,7 +22,7 @@ const Dashboard = () => {
   } else {
     content = <AdminOverView></AdminOverView>;
   }
-  return <DashboardLayout>{content}</DashboardLayout>;
+  return <>{content}</>;
 };
 
 export default Dashboard;
