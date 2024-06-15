@@ -36,11 +36,11 @@ export const kycApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         // Optimistic update: update the cache before the request completes
         const cacheKeys = getCacheKeys();
-        console.log(cacheKeys);
+        // console.log(cacheKeys);
         const patchResults = cacheKeys.map((key) =>
           dispatch(
             kycApi.util.updateQueryData("getAllKycRequest", key, (draft) => {
-              console.log(key, JSON.parse(JSON.stringify(draft)));
+              // console.log(key, JSON.parse(JSON.stringify(draft)));
               const index = draft.data.findIndex(
                 (kycReq: any) => kycReq?.id === arg.id
               );

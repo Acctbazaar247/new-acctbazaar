@@ -1,10 +1,5 @@
-import ErrorCompo from "@/components/ui/AppErrorComponent";
 import { SelectOptions } from "@/components/Forms/FormSelectField";
-import Loading from "@/components/ui/Loading";
 import ManageFundDetailsModal from "@/components/ManageFundDetailsModal/ManageFundDetailsModal";
-import useIsMobile from "@/hooks/useIsMobile";
-import AdminLayout from "@/layout/AdminLayout";
-import SuperAdminLayout from "@/layout/SuperAdminLayout";
 import {
   useEditWithdrawFundMutation,
   useGetWithdrawFundsQuery
@@ -13,22 +8,25 @@ import {
   EApprovedForSale,
   EStatusOfWithdrawalRequest,
   IUser,
-  IWithdrawalRequest
+  IWithdrawalRequest,
+  UserRole
 } from "@/types/common";
 import { optionCreator } from "@/utils";
-import { Avatar, Pagination, Popconfirm, TableColumnsType, Table } from "antd";
+import { Avatar, Popconfirm, TableColumnsType } from "antd";
 import React, { useMemo, useState } from "react";
 import { toast } from "react-toastify";
-type Props = {};
+import AdminsLayout from "@/layout/AdminsLayout";
+import AppTable from "@/components/ui/AppTable";
+import TableLoading from "@/components/shared/TableLoading";
 
-const ManageFund = (props: Props) => {
+const ManageFund = () => {
   const [page, setPage] = useState<number>(1);
-  const [editWithdrawFund, { isLoading: isEditLoading }] =
-    useEditWithdrawFundMutation();
-  const defaultValue = { value: "", label: "" }; // 500ms debounce delay
-  const isMobile = useIsMobile();
+  const [editWithdrawFund] = useEditWithdrawFundMutation();
+  const defaultValue = { value: "", label: "" };
+
   const [approvedForSale, setApprovedForSale] =
     useState<SelectOptions>(defaultValue);
+
   const queryString = useMemo(() => {
     const info = {
       page,
@@ -46,9 +44,8 @@ const ManageFund = (props: Props) => {
     }, "");
     return queryString;
   }, [page, approvedForSale]);
-  const { data, isFetching, isLoading, isError } =
-    useGetWithdrawFundsQuery(queryString);
-  let content = null;
+
+  const queryInfo = useGetWithdrawFundsQuery(queryString);
 
   const columns: TableColumnsType<IWithdrawalRequest> = [
     {
@@ -79,7 +76,7 @@ const ManageFund = (props: Props) => {
       title: "Owner",
       dataIndex: "ownBy",
       key: "ownBy",
-      className: "text-[12px] lg:text-md",
+      className: "text-sm",
 
       render: (ownBy: IUser) => {
         return (
@@ -106,7 +103,7 @@ const ManageFund = (props: Props) => {
       title: "Status",
       dataIndex: "approvedForSale",
       key: "approvedForSale",
-      className: "text-[12px] lg:text-md",
+      className: "text-sm",
       render: (_, record) => {
         return (
           <div className="flex gap-2 items-center">
@@ -206,57 +203,30 @@ const ManageFund = (props: Props) => {
     //   ),
     // },
   ];
-  if (isMobile) {
-    columns?.splice(3, 1);
-  }
-  if (isFetching || isLoading) {
-    content = <Loading></Loading>;
-  } else if (isError) {
-    content = <ErrorCompo></ErrorCompo>;
-  } else if (data?.data.length) {
-    content = (
-      <div>
-        <div className="overflow-x-auto overflow-y-scroll h-[70vh] 2xl:h-[75vh]">
-          <div className=" ">
-            <Table
-              key={"id"}
-              pagination={false}
-              columns={columns}
-              dataSource={data.data}
-            />
-          </div>
-        </div>
-        <div className="flex justify-center mt-5">
-          <Pagination
-            showSizeChanger={false}
-            pageSize={data.meta.limit}
-            total={data.meta.total}
-            current={data.meta.page}
-            onChange={(value) => {
-              setPage(value);
-            }}
-          ></Pagination>
-        </div>
-      </div>
-    );
-  } else {
-    content = (
-      <div>
-        <h2 className="text-center capitalize">No request found!</h2>
-      </div>
-    );
-  }
+
   const approvedStatusOption =
     Object.values(EApprovedForSale).map(optionCreator);
 
   const handleApprovedChange = (el: string) => {
     setApprovedForSale({ value: el, label: el });
   };
+
   return (
-    <AdminLayout>
-      <h2 className="text-center text-xl font-bold mb-5">Manage Fund</h2>
-      <div className="">{content}</div>
-    </AdminLayout>
+    <AdminsLayout roles={[UserRole.FinanceAdmin]}>
+
+      <h2 className="title text-center mb-10">Manage Fund</h2>
+
+      <div className='h-[70dvh] overflow-auto'>
+        <AppTable
+          infoQuery={queryInfo}
+          columns={columns}
+          setPage={setPage}
+          loadingComponent={
+            <TableLoading columnNumber={columns.length} />
+          }
+        />
+      </div>
+    </AdminsLayout>
   );
 };
 

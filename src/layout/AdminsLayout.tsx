@@ -5,31 +5,36 @@ import Loading from "@/components/ui/Loading";
 import { UserRole } from "@/types/common";
 import DashboardLayout from "./DashboardLayout";
 
-interface AdminLayoutProps {
+interface AdminsLayoutLayoutProps {
   children: ReactNode;
+  roles: UserRole[]
 }
 
-const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
+const AdminsLayout: React.FC<AdminsLayoutLayoutProps> = ({ children, roles }) => {
+
   const { isLoading, user } = useAppSelector((state) => state.user);
   const router = useRouter();
+
   if (isLoading) {
     return (
       <div className="flex justify-center">
         <Loading></Loading>
       </div>
     );
-  }
+  };
 
-  const notAdmin = user?.role !== UserRole.Admin;
+  const userHasRole = user && roles.includes(user?.role);
 
-  if (user?.role === UserRole.SuperAdmin) {
+  if (user?.role === UserRole.SuperAdmin || userHasRole) {
     return <DashboardLayout>{children}</DashboardLayout>;
   }
-  if (notAdmin) {
+  // console.log(userHasRole, user?.role);
+  if (!userHasRole) {
     router.push({
-      pathname: "/dashboard",
+      pathname: "/",
       //   query: { from: router.pathname },
     });
+
     return (
       <div className="flex justify-center">
         <Loading></Loading>
@@ -37,7 +42,6 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     );
   }
 
-  return <DashboardLayout>{children}</DashboardLayout>;
 };
 
-export default AdminLayout;
+export default AdminsLayout;

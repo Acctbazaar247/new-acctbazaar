@@ -4,7 +4,7 @@ import {
   useEditUserMutation,
   useGetUsersQuery
 } from "@/redux/features/user/userApi";
-import { UserRole } from "@/types/common";
+import { IUser, UserRole } from "@/types/common";
 import { Avatar } from "antd";
 import React, { useMemo, useState } from "react";
 import AppInput from "@/components/ui/AppInput";
@@ -12,6 +12,7 @@ import AppTable from "@/components/ui/AppTable";
 import TableLoading from "@/components/shared/TableLoading";
 import AppModal from "@/components/ui/AppModal";
 import { toast } from "react-toastify";
+import { GoUnverified } from "react-icons/go";
 
 const AddAdmin = () => {
   const [search, setSearch] = useState<string>("");
@@ -37,14 +38,14 @@ const AddAdmin = () => {
   const queryInfo = useGetUsersQuery(queryString);
   const [editUser] = useEditUserMutation();
 
-  const handleMakeAdmin = (id: string) => {
-    editUser({ id, role: UserRole.Admin })
+  const handleMakeAdmin = (id: string, role: string) => {
+    editUser({ id, role })
       .unwrap()
       .then((res: any) => {
-        toast.success("Make Admin successful.");
+        toast.success(`Make ${role === UserRole.PRAdmin && "Product Reviewer Admin" || role === UserRole.CCAdmin && "Customer Care Admin" || role === UserRole.FinanceAdmin && "Finance Admin"} successful.`);
       })
       .catch(() => {
-        toast.error("Make Admin unsuccessful!");
+        toast.error(`Make ${role === UserRole.PRAdmin && "Product Reviewer Admin" || role === UserRole.CCAdmin && "Customer Care Admin" || role === UserRole.FinanceAdmin && "Finance Admin"}  unsuccessful!`);
       });
   };
 
@@ -56,7 +57,7 @@ const AddAdmin = () => {
     {
       title: "Name",
       dataIndex: "name",
-      className: "min-w-[150px]",
+      className: "min-w-[120px] md:min-w-[250px]",
       render: (name: any, record: any) => {
         return (
           <div className="flex items-center gap-1">
@@ -69,7 +70,7 @@ const AddAdmin = () => {
     {
       title: "Email",
       dataIndex: "email",
-      className: "min-w-[105px]",
+      className: "min-w-[120px] md:min-w-[255px]",
       render: (email: any) => {
         return <p className="line-clamp-1 max-w-[30dvw] text-base">{email}</p>;
       }
@@ -77,7 +78,7 @@ const AddAdmin = () => {
     {
       title: "Role",
       dataIndex: "role",
-      className: "min-w-[105px]",
+      className: "min-w-[120px] md:min-w-[200px]",
       render: (role: any) => {
         return <p className="line-clamp-1 text-base">{role}</p>;
       }
@@ -85,27 +86,71 @@ const AddAdmin = () => {
     {
       title: "Action",
       dataIndex: "status",
-      className: "min-w-[85px]",
-      render: (action: any, record: any) => {
+      className: "min-w-[120px] ",
+      render: (action: any, record: IUser) => {
         return (
-          <div className="flex items-center justify-center">
-            <AppModal
-              key={action}
-              button={<button className="appOutlineBtnSm">Make Admin</button>}
-              cancelButtonTitle="No, Don’t"
-              primaryButtonTitle="Yes. Make Admin"
-              primaryButtonAction={() => handleMakeAdmin(record?.id)}
-            >
-              <div className="max-w-80">
-                <p className="text-center text-[#828282] pt-4 text-lg">
-                  Are you sure make admin
-                  <span className="text-textDark font-medium">
-                    {record?.name}
-                  </span>{" "}
-                  to from this Users list?
-                </p>
+          <div className="flex items-center justify-center gap-2 w-fit">
+            {record?.isVerified ?
+              <>
+                <AppModal
+                  key={action}
+                  button={<button className="appOutlineBtnSm">Make Product Reviewer Admin</button>}
+                  cancelButtonTitle="No, Don’t"
+                  primaryButtonTitle="Yes. Make Product Reviewer Admin"
+                  primaryButtonAction={() => handleMakeAdmin(record?.id, UserRole.PRAdmin)}
+                >
+                  <div className="max-w-80">
+                    <p className="text-center text-[#828282] pt-4 lg:text-lg">
+                      Are you sure make Product Reviewer Admin{" "}
+                      <span className="text-textDark font-medium">
+                        {record?.name}{" "}
+                      </span>
+                      from this Users list?
+                    </p>
+                  </div>
+                </AppModal>
+
+                <AppModal
+                  key={action}
+                  button={<button className="appOutlineBtnSm">Make Customer Care Admin</button>}
+                  cancelButtonTitle="No, Don’t"
+                  primaryButtonTitle="Yes. Make Customer Care Admin"
+                  primaryButtonAction={() => handleMakeAdmin(record?.id, UserRole.CCAdmin)}
+                >
+                  <div className="max-w-80">
+                    <p className="text-center text-[#828282] pt-4 lg:text-lg">
+                      Are you sure Make Customer Care Admin
+                      <span className="text-textDark font-medium">
+                        {" "} {record?.name}
+                      </span>{" "}
+                      from this Users list?
+                    </p>
+                  </div>
+                </AppModal>
+
+                <AppModal
+                  key={action}
+                  button={<button className="appOutlineBtnSm">Make Finance Admin</button>}
+                  cancelButtonTitle="No, Don’t"
+                  primaryButtonTitle="Yes. Make Finance Admin"
+                  primaryButtonAction={() => handleMakeAdmin(record?.id, UserRole.FinanceAdmin)}
+                >
+                  <div className="max-w-80">
+                    <p className="text-center text-[#828282] pt-4 lg:text-lg">
+                      Are you sure Make Finance Admin
+                      <span className="text-textDark font-medium">
+                        {" "}{record?.name}
+                      </span>{" "}
+                      from this Users list?
+                    </p>
+                  </div>
+                </AppModal>
+              </>
+              :
+              <div className='flex items-center gap-1 justify-center'>
+                <GoUnverified /> The user is not verified yet.
               </div>
-            </AppModal>
+            }
           </div>
         );
       }

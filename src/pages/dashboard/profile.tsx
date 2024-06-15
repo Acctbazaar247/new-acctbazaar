@@ -1,5 +1,4 @@
 import Loading from "@/components/ui/Loading";
-import AdminLayout from "@/layout/AdminLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import { useAppSelector } from "@/redux/hook";
 import { Avatar } from "antd";

@@ -51,7 +51,7 @@ export const accountApi = apiSlice.injectEndpoints({
         const patchResults = cacheKeys.map((key) =>
           dispatch(
             accountApi.util.updateQueryData("getAccounts", key, (draft) => {
-              console.log(key, JSON.parse(JSON.stringify(draft)));
+              // console.log(key, JSON.parse(JSON.stringify(draft)));
               const index = draft.data.findIndex(
                 (account: IAccount) => account.id === arg.id
               );

@@ -1,5 +1,4 @@
 import useDebounce from "@/hooks/useDebounce";
-import AdminLayout from "@/layout/AdminLayout";
 import { useGetUsersQuery } from "@/redux/features/user/userApi";
 import { IUser, UserRole } from "@/types/common";
 import {
@@ -15,6 +14,7 @@ import AppInput from "@/components/ui/AppInput";
 import { LuCircleDollarSign } from "react-icons/lu";
 import AppTable from "@/components/ui/AppTable";
 import TableLoading from "@/components/shared/TableLoading";
+import SuperAdminLayout from "@/layout/SuperAdminLayout";
 
 const TopUpToUser = () => {
   const [search, setSearch] = useState<string>("");
@@ -120,7 +120,7 @@ const TopUpToUser = () => {
   };
 
   return (
-    <AdminLayout>
+    <SuperAdminLayout>
       <h2 className="title text-center mb-5">Topup users</h2>
 
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
@@ -173,7 +173,7 @@ const TopUpToUser = () => {
           }
         />
       </div>
-    </AdminLayout>
+    </SuperAdminLayout>
   );
 };
 

@@ -23,6 +23,7 @@ import { useGetAdminOverviewQuery } from "@/redux/features/user/userApi";
 import AppTable from "../ui/AppTable";
 import TableLoading from "../shared/TableLoading";
 import AccountDeniedFrom from "../Forms/AccountDeniedFrom";
+import SuperAdminLayout from "@/layout/SuperAdminLayout";
 
 type DataType = {} & IAccount;
 
@@ -267,7 +268,7 @@ const AdminOverView = () => {
   ];
 
   return (
-    <div>
+    <SuperAdminLayout>
       <div className="grid lg:grid-cols-3 grid-cols-2 gap-2 md:gap-8 pb-10">
         {info.map((single) => (
           <div
@@ -298,7 +299,7 @@ const AdminOverView = () => {
           }
         />
       </div>
-    </div>
+    </SuperAdminLayout>
   );
 };
 

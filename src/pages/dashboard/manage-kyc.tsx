@@ -144,7 +144,7 @@ const ManageKYC = () => {
                           //   messageFromAdmin: info.message
                           // });
                           handleStatusUpdate(stat?.status, record?.id, info?.message)
-                          console.log(info);
+                          // console.log(info);
                         }}
                       ></AccountDeniedFrom>
                       : <AppModal

@@ -63,7 +63,7 @@ const AddFunds = (props: Props) => {
       toast.error(`Minimum amount is ${config.fundMinMoney}$`);
       return;
     }
-    console.log("paystack");
+    // console.log("paystack");
     addRequestWithPayStack({ amount })
       .unwrap()
       .then((res: any) => {
@@ -87,7 +87,7 @@ const AddFunds = (props: Props) => {
       handllePayWithPayStack();
     } else {
       handlePay();
-      console.log("his");
+      // console.log("his");
     }
   };
   if (isLoading || isPayStackLoading) {
@@ -152,8 +152,8 @@ const AddFunds = (props: Props) => {
                   <PaySelection
                     onChange={setSelectedOption}
                     isDisabled={isLoading}
-                    // handleCryptoClick={handlePay}
-                    // handleBankClick={handllePayWithPayStack}
+                  // handleCryptoClick={handlePay}
+                  // handleBankClick={handllePayWithPayStack}
                   ></PaySelection>
                 </div>
                 <button

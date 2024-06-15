@@ -1,8 +1,6 @@
 import SellerLayout from "@/layout/SellerLayout";
 import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
-import AdminLayout from "@/layout/AdminLayout";
-import DashboardLayout from "@/layout/DashboardLayout";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { Avatar, Button, Input, Pagination, Popconfirm } from "antd";
