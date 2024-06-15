@@ -36,34 +36,6 @@ const common: any[] = [
   },
 ];
 
-const adminItems: TNavItemsList[] = [
-  {
-    item: "",
-    navItems: [common[3]],
-  },
-  {
-    item: "Account",
-    navItems: [
-      {
-        label: "All Account",
-        path: "/dashboard/allService",
-        Icon: MdSwitchAccount,
-      },
-    ],
-  },
-  {
-    item: "Fund",
-    navItems: [
-      {
-        label: "Manage Fund",
-        path: "/dashboard/manageFund",
-        Icon: RiRefund2Fill,
-      },
-      common[2],
-    ],
-  },
-];
-
 export const supperItems: TNavItemsList[] = [
   {
     item: "",
@@ -143,7 +115,129 @@ export const supperItems: TNavItemsList[] = [
   },
 ];
 
+const adminItems: TNavItemsList[] = [
+  {
+    item: "",
+    navItems: [common[3]],
+  },
+  {
+    item: "Account",
+    navItems: [
+      {
+        label: "All Account",
+        path: "/dashboard/allService",
+        Icon: MdSwitchAccount,
+      },
+    ],
+  },
+  {
+    item: "Fund",
+    navItems: [
+      {
+        label: "Manage Fund",
+        path: "/dashboard/manageFund",
+        Icon: RiRefund2Fill,
+      },
+      common[2],
+    ],
+  },
+];
+
+const prAdminItems: TNavItemsList[] = [
+  {
+    item: "",
+    navItems: [common[3]],
+  },
+  {
+    item: "Account",
+    navItems: [
+      {
+        label: "Manage Account",
+        path: "/dashboard/allService",
+        Icon: MdSwitchAccount,
+      },
+    ],
+  },
+];
+
+const ccAdminItems: TNavItemsList[] = [
+  {
+    item: "",
+    navItems: [common[3]],
+  },
+  {
+    item: "Account",
+    navItems: [
+      {
+        label: "Manage Account",
+        path: "/dashboard/allService",
+        Icon: MdSwitchAccount,
+      },
+    ],
+  },
+  {
+    item: "Manage User",
+    navItems: [
+      {
+        label: "Manage Users",
+        path: "/dashboard/manageAllUser",
+        Icon: FaUsers,
+      },
+    ],
+  },
+  {
+    item: "Order",
+    navItems: [
+      {
+        label: "Manage Order",
+        path: "/dashboard/manage-order",
+        Icon: FaCartShopping,
+      },
+    ],
+  },
+];
+
+const financeAdminItems: TNavItemsList[] = [
+  {
+    item: "",
+    navItems: [common[3]],
+  },
+  {
+    item: "Manage User",
+    navItems: [
+      {
+        label: "Manage Users",
+        path: "/dashboard/manageAllUser",
+        Icon: FaUsers,
+      },
+    ],
+  },
+  {
+    item: "Fund",
+    navItems: [
+      {
+        label: "Manage Fund",
+        path: "/dashboard/manageFund",
+        Icon: RiRefund2Fill,
+      },
+    ],
+  },
+  {
+    item: "Order",
+    navItems: [
+      {
+        label: "Manage Order",
+        path: "/dashboard/manage-order",
+        Icon: FaCartShopping,
+      },
+    ],
+  },
+];
+
 export const dashboardSidebarItem = {
   adminItems: [common[0], ...adminItems, common[1]],
   supperItems,
+  prAdminItems,
+  ccAdminItems,
+  financeAdminItems,
 };

@@ -4,10 +4,12 @@ import React, { ChangeEvent, useMemo, useState } from "react";
 import { Avatar, Button, Popconfirm } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import {
+  AdminRole,
   EApprovedForSale,
   EPlans,
   IAccount,
-  IUser
+  IUser,
+  UserRole
 } from "@/types/common";
 import {
   useDeleteAccountMutation,
@@ -25,6 +27,8 @@ import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
 import AppInput from "@/components/ui/AppInput";
 import AppTable from "@/components/ui/AppTable";
 import TableLoading from "@/components/shared/TableLoading";
+import PRAdminLayout from "@/layout/PRAdminLayout";
+import AdminsLayout from "@/layout/AdminsLayout";
 
 type DataType = {} & IAccount;
 
@@ -302,7 +306,7 @@ function AllService() {
   ];
 
   return (
-    <AdminLayout>
+    <AdminsLayout roles={[UserRole.PRAdmin, UserRole.CCAdmin]}>
       <h2 className="title text-center mb-5">Manage Accounts</h2>
 
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-6 2xl:my-8 justify-between">
@@ -382,7 +386,7 @@ function AllService() {
           }
         />
       </div>
-    </AdminLayout>
+    </AdminsLayout>
   );
 }
 

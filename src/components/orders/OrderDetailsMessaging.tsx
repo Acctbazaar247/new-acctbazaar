@@ -12,7 +12,7 @@ type props = {
 };
 const OrderDetailsMessaging: React.FC<props> = ({ order }) => {
   const user = useAppSelector((state) => state.user.user);
-  console.log(order);
+  // console.log(order);
   const imageUrl =
     order.orderById === user?.id
       ? order.account?.ownBy?.profileImg

@@ -22,14 +22,26 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   switch (user?.role) {
 
-    case UserRole.Admin:
-      items = dashboardSidebarItem.adminItems;
-
-      break;
     case UserRole.SuperAdmin:
       items = dashboardSidebarItem.supperItems;
-
       break;
+
+    case UserRole.Admin:
+      items = dashboardSidebarItem.adminItems;
+      break;
+
+    case UserRole.PRAdmin:
+      items = dashboardSidebarItem.prAdminItems;
+      break;
+
+    case UserRole.CCAdmin:
+      items = dashboardSidebarItem.ccAdminItems;
+      break;
+
+    case UserRole.FinanceAdmin:
+      items = dashboardSidebarItem.financeAdminItems;
+      break;
+
     default:
       items = [];
       break;

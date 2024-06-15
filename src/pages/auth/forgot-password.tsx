@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     forgotPassword(data.email)
       .unwrap()
       .then((res: ResponseSuccessType) => {
-        console.log(res);
+        // console.log(res);
         if (!res?.success) {
           toast.error(res?.message || "something went wrong");
         } else {

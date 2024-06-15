@@ -69,7 +69,7 @@ const VerifyAccount = () => {
         };
 
         if (!kycDenied) {
-            console.log(submittedData);
+            // console.log(submittedData);
             await addKycRequest(submittedData)
                 .unwrap()
                 .then((res: ResponseErrorType | ResponseSuccessType) => {

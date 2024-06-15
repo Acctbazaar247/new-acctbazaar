@@ -1,6 +1,6 @@
 import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
-import { EOrderStatus, ResponseSuccessType } from "@/types/common";
+import { EOrderStatus, ResponseSuccessType, UserRole } from "@/types/common";
 import React, { useState, useMemo } from "react";
 import AppTable from "@/components/ui/AppTable";
 import AppModal from "@/components/ui/AppModal";
@@ -11,6 +11,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
 import TableLoading from "@/components/shared/TableLoading";
 import AppInput from "@/components/ui/AppInput";
+import AdminsLayout from "@/layout/AdminsLayout";
 
 const ManageAllOrder = () => {
   const [orderId, setOrderId] = useState<string>("");
@@ -197,7 +198,7 @@ const ManageAllOrder = () => {
   ];
 
   return (
-    <SuperAdminLayout>
+    <AdminsLayout roles={[UserRole.CCAdmin, UserRole.FinanceAdmin]}>
       <h2 className="title text-center mb-5">Manage orders</h2>
 
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
@@ -249,7 +250,7 @@ const ManageAllOrder = () => {
           }
         />
       </div>
-    </SuperAdminLayout>
+    </AdminsLayout>
   );
 };
 

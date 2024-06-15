@@ -1,25 +1,20 @@
 import { UserRole } from "@/types/common";
 import Link from "next/link";
-import {
-  loggedUserPopupNavbarLinks,
-  popupNavbarLinks,
-  popupNavbarLinksForUser
-} from "./NavbarData";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import Image from "next/image";
 import AppModal from "../ui/AppModal";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
-import { GoDotFill } from "react-icons/go";
 import AvatarComponent from "./AvatarComponent";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { PopupLinksSuperAdmin, ccAdminPopUpLinks, financeAdminPopUpLinks, popupLinksForUser, popupNavbarLinks, prAdminPopUpLinks } from "./NavbarData";
 
 type ProfileDetailsBody = {
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
+const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
   const [modalOpen, setModalOpen] = useState(false);
@@ -41,7 +36,26 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
     setModalOpen(true);
     setOpen(false);
   };
-  // console.log(user);
+
+
+  const getNavItems = () => {
+    if (user?.role === UserRole.SuperAdmin || user?.role === UserRole.Admin) {
+      return PopupLinksSuperAdmin;
+    } else if (user?.role === UserRole.PRAdmin) {
+      return prAdminPopUpLinks;
+    } else if (user?.role === UserRole.CCAdmin) {
+      return ccAdminPopUpLinks;
+    } else if (user?.role === UserRole.FinanceAdmin) {
+      return financeAdminPopUpLinks;
+    } else if (user?.role === UserRole.User) {
+      return popupLinksForUser;
+    } else {
+      return popupNavbarLinks;
+    }
+  };
+
+  const navItems = getNavItems();
+
   return (
     <>
       {modalOpen && (
@@ -144,33 +158,26 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
         </div>
 
         <div className="space-y-2 pt-2 p-2">
-          {(user?.role === (UserRole.SuperAdmin || UserRole.Admin)
-            ? loggedUserPopupNavbarLinks
-            : user?.role === UserRole.User
-            ? popupNavbarLinksForUser
-            : popupNavbarLinks
-          ).map((nav) =>
-            nav.label === "Log out" ? (
-              <div
-                key={nav?.label}
-                onClick={() => dispatch(userLoggedOut())}
-                className="flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg cursor-pointer"
-              >
-                <nav.icon /> {nav?.label}
-              </div>
-            ) : user?.role === UserRole.User &&
-              nav.label === "My Account Dashboard" ? null : (
-              <Link
-                href={nav?.path}
-                key={nav?.label}
-                className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg ${
-                  nav.label === "My Purchase" && "md:hidden"
-                }`}
-              >
-                <nav.icon /> {nav?.label}
-              </Link>
-            )
-          )}
+          {
+            navItems.map((nav: any) =>
+              nav?.label === "Log out" ? (
+                <div
+                  key={nav?.label}
+                  onClick={() => dispatch(userLoggedOut())}
+                  className="flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg cursor-pointer"
+                >
+                  <nav.Icon /> {nav?.label}
+                </div>
+              ) : (
+                <Link
+                  href={nav?.path}
+                  key={nav?.label}
+                  className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg`}
+                >
+                  <nav.Icon /> {nav?.label}
+                </Link>
+              )
+            )}
         </div>
 
         {/* this is for mobile  */}
@@ -186,3 +193,5 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
     </>
   );
 }
+
+export default ProfileDetailsBody;
