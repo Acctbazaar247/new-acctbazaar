@@ -2,7 +2,6 @@ import ErrorCompo from "@/components/ui/AppErrorComponent";
 import AddServiceForm from "@/components/Forms/AddServiceForm";
 import EditServiceForm from "@/components/Forms/EditServiceForm";
 import Loading from "@/components/ui/Loading";
-import AdminLayout from "@/layout/AdminLayout";
 import SellerLayout from "@/layout/SellerLayout";
 import { useGetAccountByIdQuery } from "@/redux/features/account/accountApi";
 import { IAccount } from "@/types/common";

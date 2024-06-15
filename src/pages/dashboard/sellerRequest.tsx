@@ -1,28 +1,16 @@
 import ErrorCompo from "@/components/ui/AppErrorComponent";
-import Form from "@/components/Forms/Form";
-import FormInput from "@/components/Forms/FormInput";
-import FormSelectField, {
-  SelectOptions,
-} from "@/components/Forms/FormSelectField";
 import Loading from "@/components/ui/Loading";
-import ManageAllAdminTableSingleRow from "@/components/ManageAllAdminTableSingleRow/ManageAllAdminTableSingleRow";
-import ManageAllUserTable from "@/components/ManageAllUserTable/ManageAllUserTable";
-import ManageAllUserTableSingleRow from "@/components/ManageAllUserTable/ManageAllUserTableSingleRow";
 import ManageSellerSingleRow from "@/components/ManageAllUserTable/ManageSellerSingleRow";
 import ManageSellerTable from "@/components/ManageAllUserTable/ManageSellerTable";
 import useDebounce from "@/hooks/useDebounce";
-import AdminLayout from "@/layout/AdminLayout";
 import { useGetUsersQuery } from "@/redux/features/user/userApi";
 import { IUser, UserRole } from "@/types/common";
-import { optionCreator } from "@/utils";
 import { Input, Pagination } from "antd";
-import Search from "antd/es/input/Search";
 import React, { useState, useMemo } from "react";
-import { useStore } from "react-redux";
+import AdminsLayout from "@/layout/AdminsLayout";
 
-type Props = {};
 
-const SellerRequest = (props: Props) => {
+const SellerRequest = () => {
   const defaultValue = { value: "", label: "" };
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -86,7 +74,7 @@ const SellerRequest = (props: Props) => {
     setSearch(e.target.value);
   };
   return (
-    <AdminLayout>
+    <AdminsLayout roles={[UserRole.Admin]}>
       <div>
         <h2 className="text-xl text-center font-bold mb-5">
           Manage Seller Requested
@@ -117,7 +105,7 @@ const SellerRequest = (props: Props) => {
         </div>
         {content}
       </div>
-    </AdminLayout>
+    </AdminsLayout>
   );
 };
 
