@@ -47,7 +47,7 @@ const Marketplace = () => {
       approvedForSale: "approved",
       limit: 150,
       page,
-      searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
+      searchTerm: debouncedSearch.length ? debouncedSearch : undefined
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -83,7 +83,7 @@ const Marketplace = () => {
                 onChange={handleSearchChange}
                 type="text"
                 placeholder="Search by name or description"
-                value={""}
+                value={search}
               />
               <AppDrawer
                 title="Filter"
