@@ -26,13 +26,12 @@ import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
 import AppInput from "@/components/ui/AppInput";
 import AppTable from "@/components/ui/AppTable";
 import TableLoading from "@/components/shared/TableLoading";
-import PRAdminLayout from "@/layout/PRAdminLayout";
+// import PRAdminLayout from "@/layout/PRAdminLayout";
 import AdminsLayout from "@/layout/AdminsLayout";
 
 type DataType = {} & IAccount;
 
 function AllService() {
-
   const [page, setPage] = useState<number>(1);
   const [deleteService] = useDeleteAccountMutation();
   const [search, setSearch] = useState<string>("");
@@ -42,8 +41,7 @@ function AllService() {
   const [category, setCategory] = useState<SelectOptions>(defaultValue);
   const [approvedForSale, setApprovedForSale] =
     useState<SelectOptions>(defaultValue);
-  const [planStatus, setPlanStatus] =
-    useState<SelectOptions>(defaultValue);
+  const [planStatus, setPlanStatus] = useState<SelectOptions>(defaultValue);
 
   const debouncedSearch = useDebounce(search, 500);
   const [editService] = useEditAccountMutation();
@@ -58,9 +56,7 @@ function AllService() {
         ? approvedForSale.value
         : undefined,
 
-      planType: planStatus.value.length
-        ? planStatus.value
-        : undefined
+      planType: planStatus.value.length ? planStatus.value : undefined
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -106,29 +102,29 @@ function AllService() {
   };
 
   const deniedButton = (id: string) => {
-    return (
-      denyMessage.length > 0 ?
-        <button className="app-status-button bg-yellow-500  text-xs lg:text-sm"
-          onClick={() => {
-            editService({
-              id,
-              approvedForSale: EApprovedForSale.denied,
-              messageFromAdmin: denyMessage
-            });
-          }}
-        >
-          Denied
-        </button>
-        :
-        <AccountDeniedFrom
-          handleEdit={(info) => {
-            editService({
-              id,
-              approvedForSale: EApprovedForSale.denied,
-              messageFromAdmin: info.message
-            });
-          }}
-        ></AccountDeniedFrom>
+    return denyMessage.length > 0 ? (
+      <button
+        className="app-status-button bg-yellow-500  text-xs lg:text-sm"
+        onClick={() => {
+          editService({
+            id,
+            approvedForSale: EApprovedForSale.denied,
+            messageFromAdmin: denyMessage
+          });
+        }}
+      >
+        Denied
+      </button>
+    ) : (
+      <AccountDeniedFrom
+        handleEdit={(info) => {
+          editService({
+            id,
+            approvedForSale: EApprovedForSale.denied,
+            messageFromAdmin: info.message
+          });
+        }}
+      ></AccountDeniedFrom>
     );
   };
 
@@ -161,13 +157,12 @@ function AllService() {
     setApprovedForSale({ value: el, label: el });
   };
 
-  const planOptions =
-    Object.keys(EPlans).map((e) => {
-      return {
-        label: e.split("_").join(" ").toLowerCase(),
-        value: EPlans[e as keyof typeof EPlans]
-      }
-    });
+  const planOptions = Object.keys(EPlans).map((e) => {
+    return {
+      label: e.split("_").join(" ").toLowerCase(),
+      value: EPlans[e as keyof typeof EPlans]
+    };
+  });
 
   const handlePlanChange = (el: string) => {
     setPlanStatus({ value: el, label: el });
@@ -224,7 +219,9 @@ function AllService() {
           <div className="flex gap-2 items-center">
             <Avatar src={ownBy?.profileImg}></Avatar>
             <div>
-              <span className=" text-xs lg:text-sm capitalize">{ownBy.name}</span>
+              <span className=" text-xs lg:text-sm capitalize">
+                {ownBy.name}
+              </span>
               <p className="text-xs">{ownBy.email}</p>
             </div>
           </div>
@@ -245,8 +242,14 @@ function AllService() {
                 <p className="font-bold text-center">Sold</p>
               ) : (
                 <div>
-                  <div className='flex items-center justify-center'>
-                    <span className={`border text-base text-white rounded-full py-0.5 px-2 ${current === "pending" && "bg-blue-600" || current === "denied" && "bg-red" || current === "approved" && "bg-green-500"}`}>
+                  <div className="flex items-center justify-center">
+                    <span
+                      className={`border text-base text-white rounded-full py-0.5 px-2 ${
+                        (current === "pending" && "bg-blue-600") ||
+                        (current === "denied" && "bg-red") ||
+                        (current === "approved" && "bg-green-500")
+                      }`}
+                    >
                       {current}
                     </span>
                   </div>
@@ -310,7 +313,7 @@ function AllService() {
 
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-6 2xl:my-8 justify-between">
         <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5">
-          <Form submitHandler={() => { }}>
+          <Form submitHandler={() => {}}>
             <FormSelectField
               name="category"
               className="min-w-40"
@@ -321,7 +324,7 @@ function AllService() {
             ></FormSelectField>
           </Form>
 
-          <Form submitHandler={() => { }}>
+          <Form submitHandler={() => {}}>
             <FormSelectField
               name="approvedForSale"
               className="min-w-32"
@@ -332,7 +335,7 @@ function AllService() {
             ></FormSelectField>
           </Form>
 
-          <Form submitHandler={() => { }}>
+          <Form submitHandler={() => {}}>
             <FormSelectField
               className="min-w-40"
               name="planStatus"
@@ -359,7 +362,7 @@ function AllService() {
             setSearch("");
             setDenyMessage("");
             setApprovedForSale(defaultValue);
-            setPlanStatus(defaultValue)
+            setPlanStatus(defaultValue);
           }}
         >
           Reset
@@ -375,14 +378,12 @@ function AllService() {
         />
       </div>
 
-      <div className='h-[55dvh] overflow-auto'>
+      <div className="h-[55dvh] overflow-auto">
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
           setPage={setPage}
-          loadingComponent={
-            <TableLoading columnNumber={columns.length} />
-          }
+          loadingComponent={<TableLoading columnNumber={columns.length} />}
         />
       </div>
     </AdminsLayout>
