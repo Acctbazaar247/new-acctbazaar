@@ -1,11 +1,7 @@
 import useDebounce from "@/hooks/useDebounce";
 import { useGetUsersQuery } from "@/redux/features/user/userApi";
 import { IUser, UserRole } from "@/types/common";
-import {
-  Avatar,
-  Button,
-  TableProps,
-} from "antd";
+import { Avatar, Button, TableProps } from "antd";
 import React, { useState, useMemo } from "react";
 import { toast } from "react-toastify";
 import config from "@/utils/config";
@@ -15,6 +11,7 @@ import { LuCircleDollarSign } from "react-icons/lu";
 import AppTable from "@/components/ui/AppTable";
 import TableLoading from "@/components/shared/TableLoading";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
+import AdminsLayout from "@/layout/AdminsLayout";
 
 const TopUpToUser = () => {
   const [search, setSearch] = useState<string>("");
@@ -29,7 +26,7 @@ const TopUpToUser = () => {
       role: UserRole.User,
       page,
       limit: 50,
-      searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
+      searchTerm: debouncedSearch.length ? debouncedSearch : undefined
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -64,7 +61,6 @@ const TopUpToUser = () => {
       });
   };
 
-
   const columns: TableProps<IUser>["columns"] = [
     {
       title: "Name",
@@ -78,13 +74,13 @@ const TopUpToUser = () => {
             <p className="capitalize">{data?.name}</p>
           </div>
         );
-      },
+      }
     },
     {
       title: "Email",
       dataIndex: "email",
       className: "text-sm lg:text-base",
-      key: "id",
+      key: "id"
     },
     {
       title: "Currency",
@@ -93,7 +89,7 @@ const TopUpToUser = () => {
       className: "text-sm lg:text-base",
       render: (currency) => {
         return <span>{currency?.amount}</span>;
-      },
+      }
     },
 
     {
@@ -111,8 +107,8 @@ const TopUpToUser = () => {
             Top up {amount ? "$" + amount : ""}
           </Button>
         </div>
-      ),
-    },
+      )
+    }
   ];
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,11 +116,11 @@ const TopUpToUser = () => {
   };
 
   return (
-    <SuperAdminLayout>
+    <AdminsLayout roles={[UserRole.SuperAdmin, UserRole.FinanceAdmin]}>
       <h2 className="title text-center mb-5">Topup users</h2>
 
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
-        <div className='flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5'>
+        <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5">
           <AppInput
             type="text"
             onChange={handleSearchChange}
@@ -163,17 +159,15 @@ const TopUpToUser = () => {
         </button>
       </div>
 
-      <div className='max-h-[70dvh] overflow-auto'>
+      <div className="max-h-[70dvh] overflow-auto">
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
           setPage={setPage}
-          loadingComponent={
-            <TableLoading columnNumber={columns.length} />
-          }
+          loadingComponent={<TableLoading columnNumber={columns.length} />}
         />
       </div>
-    </SuperAdminLayout>
+    </AdminsLayout>
   );
 };
 
