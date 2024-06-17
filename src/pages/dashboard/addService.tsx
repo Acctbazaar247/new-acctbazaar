@@ -7,8 +7,7 @@ import { isValidURL } from "@/utils";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
 
 const AddService = () => {
-  const [addService, { isLoading }] =
-    useAddAccountMutation();
+  const [addService, { isLoading }] = useAddAccountMutation();
 
   const onSubmit = async (data: any) => {
     if (data?.preview?.length) {
@@ -28,7 +27,7 @@ const AddService = () => {
             icon: "success",
             title: "Success!",
             text: "Account has been successfully added.",
-            confirmButtonText: "Ok",
+            confirmButtonText: "Ok"
           });
         }
       })
@@ -39,10 +38,8 @@ const AddService = () => {
 
   return (
     <SuperAdminLayout>
-      <div className='overflow-y-auto h-full'>
-        <h2 className="title text-center pb-5">
-          Add an Account
-        </h2>
+      <div className="overflow-y-auto h-full">
+        <h2 className="title text-center pb-5">Add an Account</h2>
         <div className="mt-5">
           <AddServiceForm
             isLoading={isLoading}
@@ -55,10 +52,10 @@ const AddService = () => {
             <li className="pb-4">
               When you add social media accounts like Facebook, Instagram,
               Twitter, or Snapchat, try putting the link of the account in the
-              preview link option. For example:
-              (https://website.com/username). This helps AcctBazaar.com show a
-              preview of your accounts so buyers can check them before buying,
-              which can help you sell more. Remember, this is optional.
+              preview link option. For example: (https://website.com/username).
+              This helps AcctBazaar.com show a preview of your accounts so
+              buyers can check them before buying, which can help you sell more.
+              Remember, this is optional.
             </li>
             <li className="pb-4">
               If you&apos;re uploading WhatsApp or Google Voice accounts, make
@@ -74,9 +71,9 @@ const AddService = () => {
             <li className="pb-4">
               When you name your account, especially if it&apos;s been around
               for 1 to 5 years or more, make sure to put how long you&apos;ve
-              had it in the Name section. Keep it short and simple, like 4
-              Years Facebook Account. You can give more details about the
-              account in the description part.
+              had it in the Name section. Keep it short and simple, like 4 Years
+              Facebook Account. You can give more details about the account in
+              the description part.
             </li>
             <li className="pb-4">
               If you want to sell accounts that don&apos;t fit into any
@@ -88,16 +85,14 @@ const AddService = () => {
               information section.
             </li>
             <li className="pb-4">
-              All accounts you upload have to be checked before they can be
-              sold on AcctBazaar. So, make sure all the information you give
-              is right.
+              All accounts you upload have to be checked before they can be sold
+              on AcctBazaar. So, make sure all the information you give is
+              right.
             </li>
             <p>
               If you need help uploading accounts or want to upload a lot of
               them at once, send a message to{" "}
-              <a href="mailto:support@acctbazaar.com">
-                support@acctbazaar.com.
-              </a>
+              <a href="mailto:help@acctbazaar.com">help@acctbazaar.com.</a>
             </p>
           </div>
         </div>

@@ -29,16 +29,16 @@ const Contactus = (props: Props) => {
     }
     const payload = {
       ...data,
-      queryType, // Add this line to include the query type in your submission
+      queryType // Add this line to include the query type in your submission
     };
     setLoading(true);
     fetch(`${baseUrl}/users/send-query`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: getFromLocalStorage(authKey) || "",
+        authorization: getFromLocalStorage(authKey) || ""
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload)
     })
       .then((result) => {
         return result.json();
@@ -127,8 +127,8 @@ const Contactus = (props: Props) => {
               <div className="max-w-[700px] mb-10 text-left">
                 If you encounter any issues with the ticket system or
                 haven&apos;t received a response, please reach out to us via
-                email at support@acctbazaar.com. Our technical support is
-                available in English.
+                email at help@acctbazaar.com. Our technical support is available
+                in English.
               </div>
             </div>
           </div>
