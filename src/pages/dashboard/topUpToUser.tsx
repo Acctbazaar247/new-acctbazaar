@@ -132,15 +132,16 @@ const TopUpToUser = () => {
           <AppInput
             type="number"
             onChange={(e) => {
-              if (parseFloat(e.target.value) >= 0) {
-                setAmount((pre) => {
-                  if (parseFloat(e.target.value) < config.topupMax) {
-                    return parseFloat(e.target.value);
-                  } else {
-                    return pre;
-                  }
-                });
-              }
+              setAmount(parseFloat(e.target.value));
+              // if (parseFloat(e.target.value) >= 0) {
+              //   setAmount((pre) => {
+              //     if (parseFloat(e.target.value) < config.topupMax) {
+              //       return parseFloat(e.target.value);
+              //     } else {
+              //       return pre;
+              //     }
+              //   });
+              // }
             }}
             value={amount}
             placeholder="Enter Topup amount"
