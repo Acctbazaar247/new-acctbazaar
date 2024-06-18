@@ -4,17 +4,20 @@ import EditServiceForm from "@/components/Forms/EditServiceForm";
 import Loading from "@/components/ui/Loading";
 import SellerLayout from "@/layout/SellerLayout";
 import { useGetAccountByIdQuery } from "@/redux/features/account/accountApi";
-import { IAccount } from "@/types/common";
+import { IAccount, UserRole } from "@/types/common";
 import { useRouter } from "next/router";
 import React from "react";
 import HomeLayout from "@/layout/HomeLayout";
+import AdminsLayout from "@/layout/AdminsLayout";
+import { useAppSelector } from "@/redux/hook";
 
 type Props = {};
 
 const EditSingleService = (props: Props) => {
   const {
-    query: { serviceId },
+    query: { serviceId }
   } = useRouter();
+  const user = useAppSelector((state) => state.user.user);
   const { data, isLoading, isError, isFetching } =
     useGetAccountByIdQuery(serviceId);
   let content = null;
@@ -39,10 +42,19 @@ const EditSingleService = (props: Props) => {
       </div>
     );
   }
+  if (UserRole.Seller === user?.role) {
+    return (
+      <SellerLayout>
+        <HomeLayout>{content}</HomeLayout>
+      </SellerLayout>
+    );
+  }
   return (
-    <SellerLayout>
-      <HomeLayout>{content}</HomeLayout>
-    </SellerLayout>
+    <AdminsLayout
+      roles={[UserRole.PRAdmin, UserRole.SuperAdmin, UserRole.Seller]}
+    >
+      <>{content}</>
+    </AdminsLayout>
   );
 };
 

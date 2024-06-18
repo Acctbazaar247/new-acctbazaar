@@ -3,7 +3,7 @@ import {
   AccountCategory,
   EApprovedForSale,
   IAccount,
-  UserRole,
+  UserRole
 } from "@/types/common";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -46,7 +46,7 @@ const EditServiceForm = ({ data }: Props) => {
         id: data.id,
         username,
         password,
-        approvedForSale: EApprovedForSale.pending,
+        approvedForSale: EApprovedForSale.pending
       })
         .unwrap()
         .then((res: any) => {
@@ -64,8 +64,9 @@ const EditServiceForm = ({ data }: Props) => {
 
   const categoryOption = Object.values(AccountCategory).map(optionCreator);
   const notAdmin = user?.role !== UserRole.Admin;
+  const notPrAdmin = user?.role !== UserRole.PRAdmin;
   const notSuperAdmin = user?.role !== UserRole.SuperAdmin;
-  if (notAdmin && notSuperAdmin) {
+  if (notAdmin && notSuperAdmin && notPrAdmin) {
     if (user?.id !== data.ownById) {
       return <ErrorCompo error="You do not own this account"></ErrorCompo>;
     }
@@ -91,7 +92,7 @@ const EditServiceForm = ({ data }: Props) => {
         submitHandler={handleSubmit}
         defaultValues={{
           ...data,
-          price: hasScientificNotation(data.price) ? 0 : data.price,
+          price: hasScientificNotation(data.price) ? 0 : data.price
         }}
       >
         <div className="grid gap-3  grid-cols-1 xl:grid-cols-2 ">

@@ -1,5 +1,6 @@
 export enum tagTypes {
   account = "account",
+  singleAccount = "singleAccount",
   booking = "booking",
   cart = "cart",
   user = "user",
@@ -7,6 +8,6 @@ export enum tagTypes {
   withdraw = "withdraw",
   kyc = "kyc",
   referral = "referral",
-  plan = "plan",
+  plan = "plan"
 }
 export const tagTypesList = Object.values(tagTypes);
