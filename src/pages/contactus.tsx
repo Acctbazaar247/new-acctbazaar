@@ -1,22 +1,20 @@
-"use client";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormTextArea from "@/components/Forms/FormTextArea";
-import Loading from "@/components/ui/Loading";
+import AppButton from "@/components/ui/AppButton";
+import { config } from "@/config";
 import { authKey } from "@/constants/storageKey";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useAppSelector } from "@/redux/hook";
-import config from "@/utils/config";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { Button } from "antd";
-import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-type Props = {};
-const Contactus = (props: Props) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
+const Contactus = () => {
+
   const user = useAppSelector((state) => state.user.user);
   const [loading, setLoading] = useState(false);
   //new state for handling the selected option
@@ -27,12 +25,13 @@ const Contactus = (props: Props) => {
       toast.error("Please select a subject");
       return;
     }
+
     const payload = {
       ...data,
-      queryType // Add this line to include the query type in your submission
+      queryType
     };
     setLoading(true);
-    fetch(`${baseUrl}/users/send-query`, {
+    fetch(`${config?.baseUrl}/users/send-query`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,17 +54,19 @@ const Contactus = (props: Props) => {
         setLoading(false);
       });
   };
+
   return (
     <HomeLayout>
       <PrivateLayout>
-        <div className="container max-w-[1200px]">
-          <h1 className="text-center pt-2 pb-2 text-2xl">New Ticket</h1>
-          <div className="mt-10">
+        <div className="layout max-w-7xl custom-hight">
+          <h1 className="title">New Ticket</h1>
+
+          <div className="mt-4 md:mt-10">
             <Form
               submitHandler={handleSubmit}
               defaultValues={{ name: user?.name, email: user?.email }}
             >
-              <div className="grid gap-3  grid-cols-1 md:grid-cols-2 ">
+              <div className="grid gap-3  grid-cols-1 md:grid-cols-2 mb-4">
                 {/* Add the select dropdown here */}
 
                 <div>
@@ -115,21 +116,17 @@ const Contactus = (props: Props) => {
                 </div>
               </div>
 
-              <Button
-                disabled={loading}
-                htmlType="submit"
-                className="mt-3 contact-us-btn"
-              >
-                Send Message
-              </Button>
+              <AppButton
+                isLoading={loading}
+                label="Send Message"
+              />
+
             </Form>
-            <div className="flex my-10">
-              <div className="max-w-[700px] mb-10 text-left">
-                If you encounter any issues with the ticket system or
-                haven&apos;t received a response, please reach out to us via
-                email at help@acctbazaar.com. Our technical support is available
-                in English.
-              </div>
+            <div className="mt-5 md:mt-10 text-left">
+              If you encounter any issues with the ticket system or
+              haven&apos;t received a response, please reach out to us via
+              email at help@acctbazaar.com. Our technical support is available
+              in English.
             </div>
           </div>
         </div>

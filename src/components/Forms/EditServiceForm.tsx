@@ -5,7 +5,7 @@ import {
   IAccount,
   UserRole
 } from "@/types/common";
-import React, { useEffect } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import Form from "./Form";
 import FormInput from "./FormInput";
@@ -76,6 +76,7 @@ const EditServiceForm = ({ data }: Props) => {
     return <Loading></Loading>;
   }
   const isStatusSuccess = data.approvedForSale === EApprovedForSale.approved;
+
   return (
     <div className="pb-10">
       <div>

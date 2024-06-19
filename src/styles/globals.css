@@ -14,15 +14,35 @@
   .appOutlineBtn {
     @apply hover:bg-primary text-primary select-none text-sm 2xl:text-base hover:text-white rounded lg:rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-6 2xl:px-10 py-2 2xl:py-2 border border-primary;
   }
+
+  .appBtnMd {
+    @apply appBtn px-3 2xl:px-6 py-1 2xl:py-2 text-xs 2xl:text-sm;
+  }
+  .appOutlineBtnMd {
+    @apply appOutlineBtn px-3 2xl:px-6 py-1 2xl:py-2 text-xs 2xl:text-sm;
+  }
+
   .appBtnSm {
     @apply appBtn px-3 py-1 rounded text-xs;
   }
   .appOutlineBtnSm {
     @apply appOutlineBtn px-3 py-1 rounded text-xs;
   }
-  .appOutlineBtnSmDelete {
-    @apply appOutlineBtn px-3 py-1 rounded text-xs hover:bg-red text-red;
+
+  .appBtnDelete {
+    @apply appBtn bg-red text-white hover:bg-red/95;
   }
+  .appOutlineBtnDelete {
+    @apply appOutlineBtn hover:bg-red text-red;
+  }
+
+  .appBtnSmDelete {
+    @apply appBtnSm bg-red text-white hover:bg-red/95;
+  }
+  .appOutlineBtnSmDelete {
+    @apply appOutlineBtnSm hover:bg-red text-red;
+  }
+
   .roundedBtn {
     @apply bg-primary/80 hover:bg-primary text-sm md:text-base text-white py-1 md:py-2 2xl:py-2 px-3 lg:px-6 rounded-full;
   }
@@ -61,6 +81,9 @@
   }
   .layout {
     @apply container py-5 md:py-6 lg:py-8 xl:py-10 2xl:py-12;
+  }
+  .custom-hight {
+    @apply h-custom-dvh-sm md:h-custom-dvh-md 2xl:h-custom-dvh overflow-hidden;
   }
   .bgGradient {
     background: linear-gradient(

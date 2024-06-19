@@ -16,6 +16,7 @@ import { useMemo, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import dateFormat from "dateformat";
 import { useGetCurrencyRequestsQuery } from "@/redux/features/currencyRequest/currencyRequestApi";
+import AppButton from "@/components/ui/AppButton";
 
 const Wallet = () => {
   const [page, setPage] = useState<number>(1);
@@ -316,7 +317,8 @@ const Wallet = () => {
                   </button>
                 )}
               </h2>
-              <div className="border border-[#F3F3F3] rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
+
+              <div className="border mb-4 md:mb-5 border-[#F3F3F3] rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
                 {showWithdraw ? (
                   <>
                     <div className="hidden md:block">
@@ -411,6 +413,10 @@ const Wallet = () => {
                   </>
                 )}
               </div>
+              <AppButton
+                label="Report transaction"
+                href="/contactus"
+              />
             </div>
           </div>
         </div>

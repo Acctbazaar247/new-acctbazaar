@@ -17,6 +17,7 @@ import AppErrorComponent from "@/components/ui/AppErrorComponent";
 import { Tooltip } from "antd";
 import AppDrawer from "@/components/ui/AppDrawer";
 import { findImageUrlByCategory } from "@/shared";
+import AttentionAlert from "@/components/shared/AttentionAlert";
 
 const OrderDetails = () => {
   const isCancelled = false;
@@ -55,6 +56,7 @@ const OrderDetails = () => {
     additionalPassword: mainData.account.additionalPassword || "",
     additionalDescription: mainData.account.additionalDescription || "",
   };
+
   return (
     <HomeLayout>
       <div className="container py-5 md:py-10 2xl:py-12">
@@ -65,29 +67,27 @@ const OrderDetails = () => {
           <div className="md:space-x-2 space-y-1 md:space-y-0">
             <p className="text-textBlack w-full flex items-center gap-1 md:gap-2 font-medium text-sm line-clamp-1 md:text-[28px]">
               <p className="w-24 md:w-fit">Order No:</p>
-              <span className="text-textGrey line-clamp-1 text-sm md:text-base font-normal">
+              <span className="text-textGrey text-sm md:text-base font-normal">
                 #{location.id}
               </span>
             </p>
             <p
-              className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${
-                (mainData.status === "pending" &&
-                  "text-[#B54708] bg-[#FFFAEB]") ||
+              className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${(mainData.status === "pending" &&
+                "text-[#B54708] bg-[#FFFAEB]") ||
                 (mainData.status === "cancelled" &&
                   "text-[#B42318] bg-[#FEF3F2]") ||
                 (mainData.status === "completed" &&
                   "text-[#027A48] bg-[#ECFDF3]")
-              }`}
+                }`}
             >
               <GoDotFill
-                className={`${
-                  (mainData.status === "pending" &&
-                    "text-[#B54708] bg-[#FFFAEB]") ||
+                className={`${(mainData.status === "pending" &&
+                  "text-[#B54708] bg-[#FFFAEB]") ||
                   (mainData.status === "cancelled" &&
                     "text-[#B42318] bg-[#FEF3F2]") ||
                   (mainData.status === "completed" &&
                     "text-[#027A48] bg-[#ECFDF3]")
-                }`}
+                  }`}
               />
               {mainData.status}
             </p>
@@ -101,7 +101,7 @@ const OrderDetails = () => {
         </div>
 
         {/* this is main div  */}
-        <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[90vh] bg-white md:p-4 lg:p-5 2xl:p-6">
+        <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl 2xl:max-h-[75vh] overflow-auto bg-white md:p-4 lg:p-5 2xl:p-6">
           <div className="w-full md:w-[55%] h-full space-y-3 2xl:space-y-4">
             <div
               className={`w-full flex flex-col md:flex-row items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-[#FBFAFA] p-2 md:p-4 2xl:p-5`}
@@ -189,12 +189,17 @@ const OrderDetails = () => {
                 </div> */}
               </>
             )}
+            <p className="bg-yellow-100 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">“When logging into your social media account, it is highly recommended to use a VPN or proxy. These tools provide an extra layer of security by encrypting your internet connection and masking your IP address. GET VPN”</p>
           </div>
           <div className="hidden md:block border border-[#EFECEC]"></div>
           <div className="hidden md:block w-[43%] h-full">
             <OrderDetailsMessaging order={mainData} />
           </div>
         </div>
+
+        {/* <div className='absolute md:hidden bottom-20 left-0 w-full'>
+          <p className="bg-yellow-100 mx-4 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">“When logging into your social media account, it is highly recommended to use a VPN or proxy. These tools provide an extra layer of security by encrypting your internet connection and masking your IP address. GET VPN”</p>
+        </div> */}
       </div>
     </HomeLayout>
   );

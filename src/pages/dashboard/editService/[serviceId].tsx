@@ -11,9 +11,8 @@ import HomeLayout from "@/layout/HomeLayout";
 import AdminsLayout from "@/layout/AdminsLayout";
 import { useAppSelector } from "@/redux/hook";
 
-type Props = {};
 
-const EditSingleService = (props: Props) => {
+const EditSingleService = () => {
   const {
     query: { serviceId }
   } = useRouter();

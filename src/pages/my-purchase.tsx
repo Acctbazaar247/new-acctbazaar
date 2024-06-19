@@ -1,6 +1,7 @@
 import MyAdsMain from "@/components/myAds/MyAdsMain";
 import MyPurchaseMain from "@/components/myAds/MyPurchaseMain";
 import AccountLoading from "@/components/shared/AccountLoading";
+import AppButton from "@/components/ui/AppButton";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
@@ -50,11 +51,19 @@ export default function MyPurchase() {
       <PrivateLayout>
         <div className="container py-10 2xl:py-12">
           {/* this is top section div  */}
-          <div className="">
-            <h2 className="title">My Purchase</h2>
-            <p className="text-textGrey text-xs md:text-sm">
-              All of your product Purchase shows here
-            </p>
+          <div className='flex items-center justify-between'>
+            <div className="">
+              <h2 className="title">My Purchase</h2>
+              <p className="text-textGrey text-xs md:text-sm">
+                All of your product Purchase shows here
+              </p>
+            </div>
+            <AppButton
+              label="Report Product"
+              href="/contactus"
+              // variant="outline"
+              size="medium"
+            />
           </div>
 
           {/* this is main div  */}

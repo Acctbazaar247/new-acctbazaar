@@ -1,4 +1,5 @@
 export const config = {
+  baseUrl: process.env.NEXT_PUBLIC_SERVER_URL,
   defaultPlanLimit: parseInt(
     process.env.NEXT_PUBLIC_NEXT_PUBLIC_DEFAULT_PLAN_LIMIT as string
   ),

@@ -2,9 +2,7 @@ import React, { ReactNode, useEffect } from "react";
 import { useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/router";
 import Loading from "@/components/ui/Loading";
-import NotVerified from "@/components/NotVerified/NotVerified";
-import { toast } from "react-toastify";
-import Link from "next/link";
+import AppButton from "@/components/ui/AppButton";
 
 interface PrivateLayoutProps {
   children: ReactNode;
@@ -48,9 +46,20 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
   }
   if (user.isBlocked) {
     return (
-      <div className="flex justify-center flex-col items-center h-screen">
-        <h2 className="text-2xl">You are Block by Admin</h2>
-        {/* <Link href={"/contactus"}>Contact Us</Link> */}
+      <div className="flex justify-center flex-col  custom-hight max-w-4xl mx-auto space-y-5">
+        <h2 className="md:text-xl flex flex-col gap-2">
+          <span className="font-semibold">Dear {user?.name}, </span>
+          <span>
+            Your account with Acctbazaar.com is currently inactive. This may be due to a violation of our policies or an issue with your trades/transactions.
+
+            Please contact our support team for further assistance and to resolve this matter promptly.
+          </span>
+        </h2>
+        <AppButton
+          label="Contact support"
+          href="/contactus"
+        />
+
       </div>
     );
   }
