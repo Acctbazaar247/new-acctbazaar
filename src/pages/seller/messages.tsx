@@ -1,8 +1,6 @@
 import MessageMain from "@/components/message/MessageMain";
 import SingleMessageUser from "@/components/message/SingleMessageUser";
-import SingleMessage from "@/components/message/SingleMessageUser";
 import AppErrorComponent from "@/components/ui/AppErrorComponent";
-import AppInput from "@/components/ui/AppInput";
 import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
 import { useGetOrdersQuery } from "@/redux/features/order/orderApi";
@@ -14,29 +12,10 @@ import { useEffect, useState } from "react";
 const Messages = () => {
   const { user } = useAppSelector((state) => state.user);
   const [activeChatId, setActiveChatId] = useState<null | string>(null);
-  const message = true;
-  const { isLoading, isFetching, error, isError, data } = useGetOrdersQuery(
+
+  const { isLoading, isFetching, isError, data } = useGetOrdersQuery(
     `sellerId=${user?.id}`
   );
-
-  const messageList = [
-    {
-      name: "Sheldon Cooper",
-      imageUrl: "/assets/windscribe.png",
-      message: "Will I be able to get the things??",
-      time: "01:30pm",
-      notificationNumber: "5+",
-      isActive: true,
-    },
-    {
-      name: "Sheldon Cooper",
-      imageUrl: "/assets/windscribe.png",
-      message: "Will I be able to get the things??",
-      time: "01:30pm",
-      notificationNumber: "5+",
-      isActive: false,
-    },
-  ];
 
   useEffect(() => {
     if (data?.data) {
@@ -63,6 +42,7 @@ const Messages = () => {
   const activeMessageBoxInfo = mainData.find(
     (single) => single.id === activeChatId
   );
+
   return (
     <HomeLayout>
       <div className="container py-10 2xl:py-12">
