@@ -87,12 +87,14 @@ const SellerDetailsPage = () => {
                                             // console.log(data);
                                             return (
                                                 <>
-                                                    {data.data.map((single: IAccount) => (
-                                                        <ReviewCard
-                                                            // account={single}
-                                                            key={single.id}
-                                                        />
-                                                    ))}
+                                                    <div className='pr-2'>
+                                                        {data.data.map((single: IAccount) => (
+                                                            <ReviewCard
+                                                                // account={single}
+                                                                key={single.id}
+                                                            />
+                                                        ))}
+                                                    </div>
                                                     <div className="flex justify-center items-center mt-5">
                                                         <Pagination
                                                             showSizeChanger={false}
