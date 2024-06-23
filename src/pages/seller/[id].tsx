@@ -57,11 +57,11 @@ const SellerDetailsPage = () => {
           return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${value}`;
         }
       }
-
       return pre;
     }, "");
     return queryString;
   }, [pageQuery, reviewPage, activeReviewTab]);
+
   const reviewQuery = useGetReviewsQuery(reviewQueryString);
 
   const queryString = useMemo(() => {
