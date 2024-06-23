@@ -1,17 +1,26 @@
 import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
-import { EOrderStatus, ResponseSuccessType, UserRole } from "@/types/common";
+import {
+  EOrderStatus,
+  IUser,
+  ResponseSuccessType,
+  UserRole
+} from "@/types/common";
 import React, { useState, useMemo } from "react";
 import AppTable from "@/components/ui/AppTable";
 import AppModal from "@/components/ui/AppModal";
 import { formatDate } from "@/utils/formateDate";
-import { useGetOrdersQuery, useUpdateOrderMutation } from "@/redux/features/order/orderApi";
+import {
+  useGetOrdersQuery,
+  useUpdateOrderMutation
+} from "@/redux/features/order/orderApi";
 import AppPopover from "@/components/ui/AppPopover";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
 import TableLoading from "@/components/shared/TableLoading";
 import AppInput from "@/components/ui/AppInput";
 import AdminsLayout from "@/layout/AdminsLayout";
+import { Avatar } from "antd";
 
 const ManageAllOrder = () => {
   const [orderId, setOrderId] = useState<string>("");
@@ -33,23 +42,31 @@ const ManageAllOrder = () => {
     },
     {
       status: EOrderStatus.CANCELLED
-    },
+    }
   ];
 
   const handleStatusUpdate = async (status: string, id: string) => {
     const updateData = {
-      id, status
-    }
-    await updateOrder(updateData).unwrap().then((res: ResponseSuccessType) => {
-      if (!res.success) {
-        return toast.error(res?.data.message || "Order updated unsuccessful!", { toastId: 1 });
-      }
-      toast.success("Order updated successful!", { toastId: 1 });
-
-    }).catch((res: any) => {
-      return toast.error(res?.data.message || "Something went wrong!", { toastId: 1 });
-    });
-  }
+      id,
+      status
+    };
+    await updateOrder(updateData)
+      .unwrap()
+      .then((res: ResponseSuccessType) => {
+        if (!res.success) {
+          return toast.error(
+            res?.data.message || "Order updated unsuccessful!",
+            { toastId: 1 }
+          );
+        }
+        toast.success("Order updated successful!", { toastId: 1 });
+      })
+      .catch((res: any) => {
+        return toast.error(res?.data.message || "Something went wrong!", {
+          toastId: 1
+        });
+      });
+  };
 
   const queryString = useMemo(() => {
     const info = {
@@ -57,7 +74,9 @@ const ManageAllOrder = () => {
       limit: 50,
       id: debouncedOrderId.length ? debouncedOrderId : undefined,
       buyerEmail: debouncedBuyerEmail.length ? debouncedBuyerEmail : undefined,
-      sellerEmail: debouncedSellerEmail.length ? debouncedSellerEmail : undefined,
+      sellerEmail: debouncedSellerEmail.length
+        ? debouncedSellerEmail
+        : undefined
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -86,71 +105,101 @@ const ManageAllOrder = () => {
 
   const columns = [
     {
-      title: 'Account Name',
-      dataIndex: 'account',
+      title: "Account Name",
+      dataIndex: "account",
       className: "min-w-[150px]",
       render: (account: any, record: any) => {
-        return (
-          <p className="line-clamp-1  text-base">{account?.name}</p>
-        )
+        return <p className="line-clamp-1  text-base">{account?.name}</p>;
       }
     },
     {
-      title: 'Price',
-      dataIndex: 'account',
+      title: "Price",
+      dataIndex: "account",
       className: "min-w-[105px]",
       render: (account: any) => {
         return (
-          <p className="line-clamp-1 max-w-[30dvw] text-base">{account?.price}</p>
-        )
+          <p className="line-clamp-1 max-w-[30dvw] text-base">
+            {account?.price}
+          </p>
+        );
       }
     },
     {
-      title: 'Account Category',
-      dataIndex: 'account',
+      title: "Account Category",
+      dataIndex: "account",
       className: "min-w-[105px]",
       render: (account: any) => {
-        return (
-          <p className="line-clamp-1 text-base">{account?.category}</p>
-        )
+        return <p className="line-clamp-1 text-base">{account?.category}</p>;
       }
     },
     {
-      title: 'Account Type',
-      dataIndex: 'account',
+      title: "Account Type",
+      dataIndex: "account",
       className: "min-w-[105px]",
       render: (account: any) => {
         return (
           <p className="line-clamp-1  text-base">{account?.accountType}</p>
-        )
+        );
       }
     },
     {
-      title: 'Order By',
-      dataIndex: 'orderBy',
+      title: "Order By",
+      dataIndex: "orderBy",
       className: "min-w-[105px]",
-      render: (orderBy: any) => {
+      render: (orderBy: IUser) => {
         return (
-          <div className='flex items-center gap-1 text-base'>
-            <img src={orderBy?.profileImg} alt="profile Image" className="rounded-full object-cover size-9" />
-            <p className="line-clamp-1">{orderBy?.name}</p>
+          <div>
+            <div className="flex items-center gap-2 text-base">
+              <Avatar
+                src={orderBy?.profileImg}
+                alt="profile Image"
+                className="rounded-full object-cover size-9"
+              />
+              <div>
+                <p className="line-clamp-1">{orderBy?.name}</p>
+                <p>{orderBy.email}</p>
+                <p className="text-xs">#{orderBy.id}</p>
+              </div>
+            </div>
           </div>
-        )
+        );
       }
     },
     {
-      title: 'Date',
-      dataIndex: 'createdAt',
+      title: "Seller ",
+      dataIndex: "account",
+      className: "min-w-[105px]",
+      render: ({ ownBy }: { ownBy: IUser }) => {
+        console.log(ownBy);
+        return (
+          <div>
+            <div className="flex items-center gap-2 text-base">
+              <Avatar
+                src={ownBy?.profileImg}
+                alt="profile Image"
+                className="rounded-full object-cover size-9"
+              />
+              <div>
+                <p className="line-clamp-1">{ownBy?.name}</p>
+                <p>{ownBy?.email}</p>
+                <p className="text-xs">#{ownBy?.id}</p>
+              </div>
+            </div>
+          </div>
+        );
+      }
+    },
+    {
+      title: "Date",
+      dataIndex: "createdAt",
       className: "min-w-[115px]",
       render: (date: string) => {
-        return (
-          <p className="line-clamp-1">{formatDate(date)}</p>
-        )
+        return <p className="line-clamp-1">{formatDate(date)}</p>;
       }
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
+      title: "Status",
+      dataIndex: "status",
       className: "min-w-[85px]",
       render: (action: any, record: any) => {
         return (
@@ -159,28 +208,45 @@ const ManageAllOrder = () => {
               <AppPopover
                 arrow={false}
                 button={
-                  <div className={`flex items-center gap-1 text-textDark text-sm  rounded-full px-4 py-0.5 ${record?.status === EOrderStatus.COMPLETED && "bg-green-500  cursor-pointer text-white"} ${record?.status === EOrderStatus.CANCELLED && "bg-red text-white"} ${record?.status === EOrderStatus.PENDING && "bg-[#FCF0C9]  cursor-pointer"}`}>
-                    <h3>{record?.status}</h3> {record?.status !== "cancelled" && <IoIosArrowDown />}
+                  <div
+                    className={`flex items-center gap-1 text-textDark text-sm  rounded-full px-4 py-0.5 ${
+                      record?.status === EOrderStatus.COMPLETED &&
+                      "bg-green-500  cursor-pointer text-white"
+                    } ${
+                      record?.status === EOrderStatus.CANCELLED &&
+                      "bg-red text-white"
+                    } ${
+                      record?.status === EOrderStatus.PENDING &&
+                      "bg-[#FCF0C9]  cursor-pointer"
+                    }`}
+                  >
+                    <h3>{record?.status}</h3>{" "}
+                    {record?.status !== "cancelled" && <IoIosArrowDown />}
                   </div>
                 }
               >
-                {record?.status !== "cancelled" &&
-                  <div className='flex flex-col items-end text-end'>
-                    {statusOptions.map(stat => (
+                {record?.status !== "cancelled" && (
+                  <div className="flex flex-col items-end text-end">
+                    {statusOptions.map((stat) => (
                       <AppModal
                         key={stat.status}
                         button={
-                          <button className="hover:bg-blue-50 w-full">{stat.status}</button>
+                          <button className="hover:bg-blue-50 w-full">
+                            {stat.status}
+                          </button>
                         }
                         cancelButtonTitle="No, Don’t"
                         primaryButtonTitle="Yes. Update"
-                        primaryButtonAction={() => handleStatusUpdate(stat.status, record?.id)}
+                        primaryButtonAction={() =>
+                          handleStatusUpdate(stat.status, record?.id)
+                        }
                       >
                         <div className="max-w-80">
                           <p className="text-center text-[#828282] pt-4 text-lg">
                             Are you sure Update status {record?.status} to
                             <span className="text-textDark font-medium">
-                              {" "}{stat.status}
+                              {" "}
+                              {stat.status}
                             </span>{" "}
                             from this orders list?
                           </p>
@@ -188,13 +254,13 @@ const ManageAllOrder = () => {
                       </AppModal>
                     ))}
                   </div>
-                }
+                )}
               </AppPopover>
             </div>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
 
   return (
@@ -202,7 +268,7 @@ const ManageAllOrder = () => {
       <h2 className="title text-center mb-5">Manage orders</h2>
 
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
-        <div className='flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5'>
+        <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5">
           <AppInput
             onChange={handleBuyerEmailChange}
             type="text"
@@ -240,14 +306,12 @@ const ManageAllOrder = () => {
         </button>
       </div>
 
-      <div className='h-[65dvh] overflow-auto'>
+      <div className="h-[65dvh] overflow-auto">
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
           setPage={setPage}
-          loadingComponent={
-            <TableLoading columnNumber={columns.length} />
-          }
+          loadingComponent={<TableLoading columnNumber={columns.length} />}
         />
       </div>
     </AdminsLayout>

@@ -25,11 +25,6 @@ import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 const SellerDetailsPage = () => {
-  const [page, setPage] = useState<number>(1);
-  const pageQuery = useParams();
-  const { isLoading, isFetching, isError, error, data } =
-    useGetSellerProfileByIdQuery(pageQuery?.id);
-  const reviewQuery = useGetReviewsQuery(`sellerId=${pageQuery?.id}`);
   const tabs = [
     { value: "Ads", label: "Ads" },
     { value: "Reviews", label: "Reviews" }
@@ -39,9 +34,36 @@ const SellerDetailsPage = () => {
     { value: "Ads", label: "Ads" },
     { value: "Reviews", label: "Reviews" }
   ];
-
   const [activeTab, setActiveTab] = useState(tabs[0].value);
   const [activeReviewTab, setActiveReviewTab] = useState("All");
+  const [page, setPage] = useState<number>(1);
+  const [reviewPage, setReviewPage] = useState<number>(1);
+  const pageQuery = useParams();
+  const { isLoading, isFetching, isError, error, data } =
+    useGetSellerProfileByIdQuery(pageQuery?.id);
+  const reviewQueryString = useMemo(() => {
+    const info = {
+      page: reviewPage,
+      sellerId: pageQuery?.id,
+      reviewStatus: activeReviewTab.toLowerCase()
+    };
+
+    const queryString = Object.keys(info).reduce((pre, key: string) => {
+      const value = info[key as keyof typeof info];
+      if (key === "reviewStatus" && value === "all") {
+        return pre;
+      } else {
+        if (value) {
+          return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${value}`;
+        }
+      }
+
+      return pre;
+    }, "");
+    return queryString;
+  }, [pageQuery, reviewPage, activeReviewTab]);
+  const reviewQuery = useGetReviewsQuery(reviewQueryString);
+
   const queryString = useMemo(() => {
     const info = {
       page,
@@ -159,7 +181,7 @@ const SellerDetailsPage = () => {
                           activeReviewTab === "All" && "border"
                         } px-2 py-1 rounded hover:bg-gray-100`}
                       >
-                        All(150)
+                        All( {data?.data?.totalReviews} )
                       </button>
                       <button
                         onClick={() => setActiveReviewTab("Positive")}
@@ -167,7 +189,7 @@ const SellerDetailsPage = () => {
                           activeReviewTab === "Positive" && "border"
                         } px-2 py-1 rounded hover:bg-gray-100`}
                       >
-                        Positive(50)
+                        Positive({data?.data?.totalPositiveReviews})
                       </button>
                       <button
                         onClick={() => setActiveReviewTab("Negative")}
@@ -175,23 +197,18 @@ const SellerDetailsPage = () => {
                           activeReviewTab === "Negative" && "border"
                         } px-2 py-1 rounded hover:bg-gray-100`}
                       >
-                        Negative(50)
+                        Negative({data?.data?.totalNegativeReviews})
                       </button>
                     </div>
                     <AppRenderReduxData
                       queryData={reviewQuery}
                       loadingComponent={<AccountLoading />}
                       showData={(data) => {
-                        // console.log(data);
                         return (
                           <>
                             <div className="pr-2">
                               {data.data.map((single: IReview) => (
-                                <ReviewCard
-                                  //   account={single}
-                                  data={data}
-                                  key={single.id}
-                                />
+                                <ReviewCard data={single} key={single.id} />
                               ))}
                             </div>
                             <div className="flex justify-center items-center mt-5">
@@ -201,7 +218,7 @@ const SellerDetailsPage = () => {
                                 total={data.meta.total}
                                 current={data.meta.page}
                                 onChange={(value) => {
-                                  setPage(value);
+                                  setReviewPage(value);
                                 }}
                               ></Pagination>
                             </div>
