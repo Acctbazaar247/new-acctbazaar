@@ -233,17 +233,23 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
         </h3>
       </div>
 
-      <div className="rounded bg-primary/5 flex flex-col md:flex-row items-center justify-between w-full py-2 2xl:py-2.5 px-4">
+      <div className="rounded bg-primary/5 flex flex-col  items-center justify-between w-full py-2 2xl:py-2.5 px-4">
         <span className="textG min-w-fit">Merchant link:</span>
-        <p className="flex textB items-center justify-center gap-1">
-          <span className="textB md:ml-auto mr-2  max-w-[50%] 2xl:max-w-[70%] line-clamp-1">
+        <p onClick={copyText} className="flex textB items-center   gap-1">
+          <span className="whitespace-pre-wrap text-wrap inline-block  ">
+            {/* https://new-acctbazaar-development.onrender.com/seller/a0a5cc97-21f9-4f4f-b9aa-42ddd03c5546 */}
             {referralLink}
           </span>
-          {copied ? (
-            <FiCheck className="text-green-500" />
-          ) : (
-            <FiCopy onClick={copyText} className="cursor-pointer text-red" />
-          )}
+          <div>
+            {copied ? (
+              <FiCheck className="text-green-500" />
+            ) : (
+              <FiCopy
+                onClick={copyText}
+                className="cursor-pointer text-red  size-5"
+              />
+            )}
+          </div>
         </p>
       </div>
     </div>
