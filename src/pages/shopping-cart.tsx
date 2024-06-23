@@ -14,7 +14,7 @@ import config from "@/utils/config";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AiOutlineDislike, AiOutlineLike, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CiWallet } from "react-icons/ci";
@@ -28,6 +28,7 @@ interface FormData {
 
 export default function ShoppingCart() {
   const router = useRouter()
+  const [cartsData, setCartsData] = useState<ICart[]>([]);
   const { user } = useAppSelector((state) => state.user);
   const {
     register,
@@ -44,7 +45,7 @@ export default function ShoppingCart() {
     totalItems: 0,
     isDone: false,
   });
-  const [modalOpen, setModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
   const [
     makeOrder,
     { isError: isOrderError, isLoading: isOrderLoading, isSuccess },
@@ -58,6 +59,12 @@ export default function ShoppingCart() {
   const [makeReview] = useAddReviewMutation()
 
   const mainData = cartsInfo?.data as ICart[];
+  useEffect(() => {
+    setCartsData(cartsInfo?.data);
+    if (successStatus.isDone && !modalOpen) {
+      router.push('/marketplace');
+    }
+  }, [modalOpen, router, successStatus.isDone])
 
   const totalPrice = mainData?.reduce((pre, current) => {
     if (current.account?.price) {
@@ -108,18 +115,21 @@ export default function ShoppingCart() {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
 
-    const submittedData = [{
-      sellerId: user?.id,
+    const submittedData = cartsData.map(cartD => ({
+      sellerId: cartD?.account?.ownBy?.id,
+      accountId: cartD?.account?.id,
       reviewText: data?.reviewText,
       reviewStatus: feedback,
       isAnonymous: data?.isAnonymous
-    }]
-    console.log(submittedData);
+    }))
+
+
     await makeReview(submittedData)
       .unwrap()
       .then((res: any) => {
         toast.success("Add review successful!", { toastId: 1 });
         setModalOpen(true);
+        router.push('/marketplace');
       })
       .catch((res: any) => {
         toast.error(res?.data?.message || "Something went wrong", {
@@ -239,7 +249,7 @@ export default function ShoppingCart() {
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
         >
-          <div className="md:w-[500px]">
+          <div className="w-[80dvw] md:w-[500px]">
             <div className='max-w-lg mx-auto py-4'>
               <Image width={200} height={160} src="/assets/auth/congratulations.png" alt="" className="mx-auto" />
 
@@ -268,14 +278,14 @@ export default function ShoppingCart() {
                 <div className=" contact-input-label   flex items-center">
                   <input
                     {...register("isAnonymous")}
-
                     type="checkbox"
+                    id="checkbox"
                     className="mr-[8px] w-[20px] h-[20px] cursor-pointer"
                   />
 
-                  <p className="text-sm lg:text-base text-textGrey">
+                  <label htmlFor="checkbox" className="text-sm lg:text-base cursor-pointer text-textGrey">
                     I want to stay anonymous
-                  </p>
+                  </label>
                 </div>
 
                 <div className='flex justify-end'>
