@@ -107,7 +107,7 @@ const MyPurchaseAccountCard = ({
             </h2>
             {/* this is icons div view cart message  */}
             <div className="flex items-center justify-between gap-4 text-[#4F4F4F]">
-              {!account?.Review?.id &&
+              {(!account?.Review?.id && order?.status !== EOrderStatus.CANCELLED) &&
                 <div className='w-fit h-fit' onClick={() => setModalOpen(true)}>
                   <Tooltip title="Give a Review">
                     <MdOutlineReviews className="cursor-pointer" />
