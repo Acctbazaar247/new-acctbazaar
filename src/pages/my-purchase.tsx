@@ -1,15 +1,12 @@
-import MyAdsMain from "@/components/myAds/MyAdsMain";
 import MyPurchaseMain from "@/components/myAds/MyPurchaseMain";
 import AccountLoading from "@/components/shared/AccountLoading";
 import AppButton from "@/components/ui/AppButton";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
-import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetMyOrdersQuery } from "@/redux/features/order/orderApi";
 import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
-import Link from "next/link";
 import { useMemo, useState } from "react";
 
 export default function MyPurchase() {
@@ -22,7 +19,7 @@ export default function MyPurchase() {
 
   const [activeTab, setActiveTab] = useState(tabs[0].value);
 
-  const user = useAppSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state?.user?.user);
 
   const queryString = useMemo(() => {
     const info = {
@@ -74,6 +71,7 @@ export default function MyPurchase() {
               loadingComponent={<AccountLoading />}
               isEmptyComponentHave
               showData={(data) => {
+                // console.log(data);
                 return (
                   <>
                     {data?.data.length > 0 ? (

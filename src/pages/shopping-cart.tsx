@@ -8,7 +8,6 @@ import { useGetMyCartsQuery } from "@/redux/features/cart/cartApi";
 import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
 import { useAddOrderMutation } from "@/redux/features/order/orderApi";
 import { useAddReviewMutation } from "@/redux/features/review/reviewApi";
-import { useAppSelector } from "@/redux/hook";
 import { ICart } from "@/types/common";
 import config from "@/utils/config";
 import Image from "next/image";
@@ -29,15 +28,13 @@ interface FormData {
 export default function ShoppingCart() {
   const router = useRouter()
   const [cartsData, setCartsData] = useState<ICart[]>([]);
-  const { user } = useAppSelector((state) => state.user);
+
   const {
     register,
-    control,
-    watch,
-    reset,
     handleSubmit,
     formState: { errors }
   } = useForm<FormData>();
+
   const { data: cartsInfo, isLoading: isCartLoading } = useGetMyCartsQuery("");
   const myCarts = (cartsInfo?.data as ICart[]) || ([] as ICart[]);
   const [feedback, setFeedback] = useState("")
