@@ -19,7 +19,7 @@ export const orderApi = apiSlice.injectEndpoints({
           url: `/order/my-orders`,
         };
       },
-      providesTags: [tagTypes.order],
+      providesTags: [tagTypes.order, tagTypes.Review],
     }),
     addOrder: builder.mutation({
       query: (info) => {
