@@ -40,14 +40,11 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
       negativePercentage
     };
   }, [positiveReviews, negativeReviews]);
-  const referralLink = `${domain}/seller/${data?.sellerInfo?.id}`;
-  console.log(data);
+  const referralLink = `${domain === "localhost" ? "localhost:3000" : domain}/seller/${data?.sellerInfo?.id}`;
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setDomain(window.location.hostname);
-    }
-    if (domain === "localhost") {
-      setDomain("localhost:3000");
     }
   }, []);
 
