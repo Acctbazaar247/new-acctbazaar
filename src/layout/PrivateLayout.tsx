@@ -15,7 +15,7 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
     if (!user?.email && !isLoading) {
       router.push({
         pathname: "/auth/sign-in",
-        query: { from: router?.pathname },
+        query: { from: router?.asPath }
       });
     }
   }, [user, router, isLoading]);
@@ -30,7 +30,7 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
   if (!user?.email) {
     router.push({
       pathname: "/auth/sign-in",
-      query: { from: router?.pathname },
+      query: { from: router?.asPath }
     });
 
     return (
@@ -50,16 +50,13 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
         <h2 className="md:text-xl flex flex-col gap-2">
           <span className="font-semibold">Dear {user?.name}, </span>
           <span>
-            Your account with Acctbazaar.com is currently inactive. This may be due to a violation of our policies or an issue with your trades/transactions.
-
-            Please contact our support team for further assistance and to resolve this matter promptly.
+            Your account with Acctbazaar.com is currently inactive. This may be
+            due to a violation of our policies or an issue with your
+            trades/transactions. Please contact our support team for further
+            assistance and to resolve this matter promptly.
           </span>
         </h2>
-        <AppButton
-          label="Contact support"
-          href="/contactus"
-        />
-
+        <AppButton label="Contact support" href="/contactus" />
       </div>
     );
   }

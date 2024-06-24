@@ -88,7 +88,16 @@ const SignUp = () => {
             <p className="text-[#645D5D] text-xs lg:text-sm">
               Already have an account?{" "}
               <span className="text-primary font-medium">
-                <Link href="/auth/sign-in">Login</Link>
+                <Link
+                  href={{
+                    pathname: "/auth/sign-in",
+                    query: router.query?.from && {
+                      from: router.query?.from || ""
+                    }
+                  }}
+                >
+                  Login
+                </Link>
               </span>
             </p>
 
