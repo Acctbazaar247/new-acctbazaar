@@ -100,7 +100,7 @@ export interface IAllCategoryOfPcService {
 export enum KycStatus {
   PENDING = "pending",
   APPROVED = "approved",
-  DENIED = "denied",
+  DENIED = "denied"
 }
 
 export enum UserRole {
@@ -110,13 +110,13 @@ export enum UserRole {
   PRAdmin = "prAdmin",
   CCAdmin = "ccAdmin",
   FinanceAdmin = "financeAdmin",
-  SuperAdmin = "superAdmin",
+  SuperAdmin = "superAdmin"
 }
 
 export enum AdminRole {
   PRAdmin = "prAdmin",
   CCAdmin = "ccAdmin",
-  FinanceAdmin = "financeAdmin",
+  FinanceAdmin = "financeAdmin"
 }
 
 export enum AccountCategory {
@@ -203,8 +203,13 @@ export enum AccountCategory {
   SephoraGiftCard = "SephoraGiftCard",
   SteamGiftCard = "SteamGiftCard",
 
+  // websites
+  Website = "Website",
+  CryptoWebsite = "CryptoWebsite",
+  OnlyFans = "OnlyFans",
+
   // Other types of accounts
-  Other = "Other",
+  Other = "Other"
 }
 
 export enum BookingStatus {
@@ -212,7 +217,7 @@ export enum BookingStatus {
   ACCEPT = "ACCEPT",
   REJECT = "REJECT",
   COMPLETE = "COMPLETE",
-  CANCELED = "CANCELED",
+  CANCELED = "CANCELED"
   // Add more status options as needed
 }
 
@@ -232,19 +237,19 @@ export interface IOrder {
 export enum EOrderStatus {
   PENDING = "pending",
   COMPLETED = "completed",
-  CANCELLED = "cancelled",
+  CANCELLED = "cancelled"
 }
 
 export enum EApprovedForSale {
   pending = "pending",
   approved = "approved",
-  denied = "denied",
+  denied = "denied"
 }
 
 export enum EPlans {
   BASIC_PLAN = "basic",
   BUSINESS_PLAN = "pro",
-  PRO_PLAN = "proPlus",
+  PRO_PLAN = "proPlus"
 }
 
 export enum AccountType {
@@ -253,7 +258,8 @@ export enum AccountType {
   Email = "Email",
   Vpn = "Vpn",
   GiftCard = "GiftCard",
-  Other = "Other",
+  Websites = "Websites",
+  Other = "Other"
 }
 
 export interface IAccount {
@@ -299,7 +305,7 @@ export interface Booking {
 export enum EStatusOfWithdrawalRequest {
   pending = "pending",
   approved = "approved",
-  denied = "denied",
+  denied = "denied"
 }
 
 export interface IWithdrawalRequest {
@@ -346,7 +352,7 @@ export type TReferral = {
 export enum EReferral {
   pending = "pending",
   completed = "completed",
-  cancel = "cancel",
+  cancel = "cancel"
 }
 
 export interface IBlog {
@@ -495,5 +501,5 @@ export interface IReview {
 }
 export enum EReviewStatus {
   POSITIVE = "positive",
-  NEGATIVE = "negative",
+  NEGATIVE = "negative"
 }

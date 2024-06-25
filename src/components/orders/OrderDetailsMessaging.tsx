@@ -42,7 +42,13 @@ const OrderDetailsMessaging: React.FC<props> = ({ order }) => {
           />
           <h3 className="text-[#1D2939] font-semibold flex items-center gap-2">
             {name}
-            <RiVerifiedBadgeFill className="text-success" />
+            {order.orderById === user?.id ? (
+              order.account?.ownBy?.isVerifiedByAdmin ? (
+                <RiVerifiedBadgeFill className="text-success" />
+              ) : null
+            ) : order.orderBy?.isVerifiedByAdmin ? (
+              <RiVerifiedBadgeFill className="text-success" />
+            ) : null}
           </h3>
         </div>
         <Link href={"/contactus"} className="text-red text-sm">
