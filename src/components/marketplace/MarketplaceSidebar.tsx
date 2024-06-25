@@ -9,7 +9,9 @@ import {
   GamingAccountCategories,
   GiftCardCategories,
   SocialMediaCategories,
+  ToolsAndResources,
   VpnCategories,
+  WebsitesCategories
 } from "@/shared";
 
 const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
@@ -17,37 +19,47 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
     {
       imageUrl: "/assets/icons/like.png",
       label: "Social Media",
-      children: SocialMediaCategories,
+      children: SocialMediaCategories
     },
     {
       imageUrl: "/assets/icons/email.png",
       label: "Emails & Messaging Service ",
-      children: EmailMessagingCategories,
+      children: EmailMessagingCategories
     },
     {
       imageUrl: "/assets/icons/gift.png",
       label: "Giftcards",
-      children: GiftCardCategories,
+      children: GiftCardCategories
     },
     {
-      imageUrl: "/assets/icons/internet.png",
+      imageUrl: "/assets/icons/vpn.png",
       label: "VPN & PROXYs",
-      children: VpnCategories,
+      children: VpnCategories
+    },
+    {
+      imageUrl: "/assets/product/internet-websites.png",
+      label: "Websites",
+      children: WebsitesCategories
     },
     {
       imageUrl: "/assets/icons/ecart.png",
       label: "E-commerce Platforms",
-      children: EcommerceCategories,
+      children: EcommerceCategories
     },
     {
       imageUrl: "/assets/icons/game.png",
       label: "Gaming",
-      children: GamingAccountCategories,
+      children: GamingAccountCategories
     },
     {
       imageUrl: "/assets/icons/tag-user.png",
       label: "Accounts & Subscriptions",
-      children: AccountsSubscriptionsCategories,
+      children: AccountsSubscriptionsCategories
+    },
+    {
+      imageUrl: "/assets/icons/toolsandre.png",
+      label: "Tools & Resources",
+      children: ToolsAndResources
     },
     {
       imageUrl: "/assets/icons/others.png",
@@ -56,10 +68,10 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
         {
           label: "Other",
           value: AccountCategory.Other,
-          imageUrl: "/assets/other.png",
-        },
-      ],
-    },
+          imageUrl: "/assets/other.png"
+        }
+      ]
+    }
   ];
 
   return (

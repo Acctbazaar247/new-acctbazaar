@@ -135,6 +135,18 @@ export enum AccountCategory {
   Discord = "Discord",
   Pof = "Pof",
   Hinge = "Hinge",
+  // new social
+  Grindr = "Grindr",
+  Viber = "Viber",
+  GMX = "GMX",
+  Quora = "Quora",
+  Match = "Match",
+  Ourtime = "Ourtime",
+  Hellotalk = "Hellotalk",
+  Zoosk = "Zoosk",
+  Okcupid = "Okcupid",
+  SMSmode = "SMSmode",
+
   // Gaming accounts
   Playstation = "Playstation",
   CallOfDuty = "CallOfDuty",
@@ -168,6 +180,7 @@ export enum AccountCategory {
   CyberGhost = "CyberGhost",
   Private = "Private",
   Total = "Total",
+  Surfshark = "Surfshark",
 
   // E-commerce
   Aliexpress = "Aliexpress",
@@ -207,6 +220,17 @@ export enum AccountCategory {
   Website = "Website",
   CryptoWebsite = "CryptoWebsite",
   OnlyFans = "OnlyFans",
+
+  // Tools and research
+  Tickets = "Tickets",
+  Tutorials = "Tutorials",
+  Formats = "Formats",
+  Accounts = "Accounts",
+  CreditCards = "CreditCards",
+  Software = "Software",
+  Logs = "Logs",
+  Tools = "Tools",
+  Delivery = "Delivery",
 
   // Other types of accounts
   Other = "Other"
@@ -259,6 +283,7 @@ export enum AccountType {
   Vpn = "Vpn",
   GiftCard = "GiftCard",
   Websites = "Websites",
+  ToolsAndResources = "ToolsAndResources",
   Other = "Other"
 }
 

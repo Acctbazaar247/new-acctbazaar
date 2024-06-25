@@ -10,6 +10,63 @@ export const WebsitesCategories: IProduct_Category[] = [
     label: "Website",
     value: AccountCategory.Website,
     imageUrl: "/assets/product/website.png"
+  },
+  {
+    label: "Onlyfans",
+    value: AccountCategory.OnlyFans,
+    imageUrl: "/assets/product/onlyfans.png"
+  },
+  {
+    label: "Crypto websites",
+    value: AccountCategory.CryptoWebsite,
+    imageUrl: "/assets/product/crypto-website.png"
+  }
+];
+export const ToolsAndResources: IProduct_Category[] = [
+  {
+    label: "Tickets",
+    value: AccountCategory.Tickets,
+    imageUrl: "/assets/product/tickets.png"
+  },
+  {
+    label: "Tutorials",
+    value: AccountCategory.Tutorials,
+    imageUrl: "/assets/product/tutorials.png"
+  },
+  {
+    label: "Formats",
+    value: AccountCategory.Formats,
+    imageUrl: "/assets/product/formats.png"
+  },
+  {
+    label: "Accounts",
+    value: AccountCategory.Accounts,
+    imageUrl: "/assets/product/accounts.png"
+  },
+  {
+    label: "CreditCards",
+    value: AccountCategory.CreditCards,
+    imageUrl: "/assets/product/credit-cards.png"
+  },
+  {
+    label: "Software",
+    value: AccountCategory.Software,
+    imageUrl: "/assets/product/software.png"
+  },
+  {
+    label: "Logs",
+    value: AccountCategory.Logs,
+    imageUrl: "/assets/product/logs.png"
+  },
+  {
+    label: "Tools",
+    value: AccountCategory.Tools,
+    imageUrl: "/assets/product/tools.png"
+  },
+  {
+    label: "Delivery",
+    value: AccountCategory.Delivery,
+    imageUrl: "/assets/product/delivery.png"
   }
 ];
 export const GiftCardCategories: IProduct_Category[] = [
@@ -129,6 +186,56 @@ export const SocialMediaCategories: IProduct_Category[] = [
     label: "Hinge",
     value: AccountCategory.Hinge,
     imageUrl: "/assets/product/hinge.png"
+  },
+  {
+    label: "Grindr",
+    value: AccountCategory.Grindr,
+    imageUrl: "/assets/product/grindr.png"
+  },
+  {
+    label: "Viber",
+    value: AccountCategory.Viber,
+    imageUrl: "/assets/product/viber.png"
+  },
+  {
+    label: "GMX",
+    value: AccountCategory.GMX,
+    imageUrl: "/assets/product/gMX.png"
+  },
+  {
+    label: "Quora",
+    value: AccountCategory.Quora,
+    imageUrl: "/assets/product/quora.png"
+  },
+  {
+    label: "Match",
+    value: AccountCategory.Match,
+    imageUrl: "/assets/product/match.png"
+  },
+  {
+    label: "Ourtime",
+    value: AccountCategory.Ourtime,
+    imageUrl: "/assets/product/ourtime.jpg"
+  },
+  {
+    label: "Hellotalk",
+    value: AccountCategory.Hellotalk,
+    imageUrl: "/assets/product/hellotalk.png"
+  },
+  {
+    label: "Zoosk",
+    value: AccountCategory.Zoosk,
+    imageUrl: "/assets/product/zoosk.png"
+  },
+  {
+    label: "Okcupid",
+    value: AccountCategory.Okcupid,
+    imageUrl: "/assets/product/okcupid.png"
+  },
+  {
+    label: "SMSmode",
+    value: AccountCategory.SMSmode,
+    imageUrl: "/assets/product/smsmode.png"
   }
 ];
 
@@ -277,6 +384,11 @@ export const VpnCategories: IProduct_Category[] = [
     label: "Total",
     value: AccountCategory.Total,
     imageUrl: "/assets/product/total.png"
+  },
+  {
+    label: "Surfshark",
+    value: AccountCategory.Surfshark,
+    imageUrl: "/assets/product/surfshark.png"
   }
 ];
 
@@ -382,7 +494,8 @@ export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
   ...VpnCategories,
   ...EcommerceCategories,
   ...AccountsSubscriptionsCategories,
-
+  ...WebsitesCategories,
+  ...ToolsAndResources,
   {
     label: "Other",
     value: AccountCategory.Other,
