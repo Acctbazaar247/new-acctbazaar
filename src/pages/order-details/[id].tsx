@@ -238,10 +238,10 @@ const OrderDetails = () => {
             )}
             {!mainData?.account?.Review?.id &&
               mainData?.status !== EOrderStatus.CANCELLED && (
-                <div className="w-fit h-fit" onClick={() => setModalOpen(true)}>
-                  <Tooltip title="Give a Review">
-                    <MdOutlineReviews className="cursor-pointer text-[18px] md:text-[20px] text-[#69645ad9]" />
-                  </Tooltip>
+                <div className="  flex justify-center w-full">
+                  <button onClick={() => setModalOpen(true)} className="appBtn">
+                    Leave a review
+                  </button>
                 </div>
               )}
             <p className="bg-yellow-100 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">
