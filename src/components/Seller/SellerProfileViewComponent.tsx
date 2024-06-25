@@ -17,6 +17,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 import Image from "next/image";
+import { IoIosCloseCircle } from "react-icons/io";
 
 const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
   const [domain, setDomain] = useState("");
@@ -113,9 +114,15 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           </h2>
 
           <div className="flex items-center flex-wrap gap-x-4 text-xs 2xl:text-sm py-3">
-            <h2 className="flex items-center gap-1">
-              <IoCheckmarkCircle className="text-green-500" /> ID verified
-            </h2>
+            {data.sellerInfo.isVerifiedByAdmin ? (
+              <h2 className="flex items-center gap-1">
+                <IoCheckmarkCircle className="text-green-500" /> ID verified
+              </h2>
+            ) : (
+              <h2 className="flex items-center gap-1">
+                <IoIosCloseCircle className="text-orange-500" /> ID verified
+              </h2>
+            )}
             <h2 className="flex items-center gap-1">
               <IoCheckmarkCircle className="text-green-500" /> Mobile
             </h2>
