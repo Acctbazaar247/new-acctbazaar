@@ -27,6 +27,7 @@ import { useAddReviewMutation } from "@/redux/features/review/reviewApi";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import AvatarComponent from "../shared/AvatarComponent";
+import { VscFeedback } from "react-icons/vsc";
 
 interface FormData {
   reviewText: string;
@@ -128,7 +129,7 @@ const MyPurchaseAccountCard = ({
                     onClick={() => setModalOpen(true)}
                   >
                     <Tooltip title="Give a Review">
-                      <MdOutlineReviews className="cursor-pointer text-[18px] md:text-[20px] text-[#69645ad9]" />
+                      <VscFeedback className="cursor-pointer text-[18px] md:text-[20px] text-[#69645ad9]" />
                     </Tooltip>
                   </div>
                 )}
