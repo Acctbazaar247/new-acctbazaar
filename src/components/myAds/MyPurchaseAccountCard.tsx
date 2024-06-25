@@ -1,10 +1,20 @@
 import { useDeleteAccountMutation } from "@/redux/features/account/accountApi";
-import { AccountCategory, EOrderStatus, IAccount, IOrder } from "@/types/common";
+import {
+  AccountCategory,
+  EOrderStatus,
+  IAccount,
+  IOrder,
+  IUser
+} from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import { Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineDelete, AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
+import {
+  AiOutlineDelete,
+  AiOutlineDislike,
+  AiOutlineLike
+} from "react-icons/ai";
 import { MdOutlinePauseCircle, MdOutlineReviews } from "react-icons/md";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import AppModal from "../ui/AppModal";
@@ -16,10 +26,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddReviewMutation } from "@/redux/features/review/reviewApi";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import AvatarComponent from "../shared/AvatarComponent";
 
 interface FormData {
   reviewText: string;
-  isAnonymous: boolean
+  isAnonymous: boolean;
 }
 
 const MyPurchaseAccountCard = ({
@@ -32,7 +43,7 @@ const MyPurchaseAccountCard = ({
   orderId: string;
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [feedback, setFeedback] = useState("")
+  const [feedback, setFeedback] = useState("");
 
   const {
     register,
@@ -43,14 +54,15 @@ const MyPurchaseAccountCard = ({
   const [makeReview] = useAddReviewMutation();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-
-    const submittedData = [{
-      sellerId: account?.ownBy?.id,
-      accountId: account?.id,
-      reviewText: data?.reviewText,
-      reviewStatus: feedback,
-      isAnonymous: data?.isAnonymous
-    }]
+    const submittedData = [
+      {
+        sellerId: account?.ownBy?.id,
+        accountId: account?.id,
+        reviewText: data?.reviewText,
+        reviewStatus: feedback,
+        isAnonymous: data?.isAnonymous
+      }
+    ];
     console.log(submittedData);
     await makeReview(submittedData)
       .unwrap()
@@ -89,11 +101,12 @@ const MyPurchaseAccountCard = ({
               </p>
             </div>
             <p
-              className={`text-sm   py-1 px-2 rounded-full ${(order?.status === EOrderStatus.CANCELLED &&
-                "text-[#B42318] bg-[#FEF3F2]") ||
+              className={`text-sm   py-1 px-2 rounded-full ${
+                (order?.status === EOrderStatus.CANCELLED &&
+                  "text-[#B42318] bg-[#FEF3F2]") ||
                 (order?.status === EOrderStatus.COMPLETED &&
                   "text-[#175CD3] bg-[#EFF8FF]")
-                }`}
+              }`}
             >
               {order?.status}
             </p>
@@ -105,18 +118,22 @@ const MyPurchaseAccountCard = ({
               <PiCurrencyDollarBold />
               {account?.price}
             </h2>
+
             {/* this is icons div view cart message  */}
             <div className="flex items-center justify-between gap-4 text-[#4F4F4F]">
-              {(!account?.Review?.id && order?.status !== EOrderStatus.CANCELLED) &&
-                <div className='w-fit h-fit' onClick={() => setModalOpen(true)}>
-                  <Tooltip title="Give a Review">
-                    <MdOutlineReviews className="cursor-pointer" />
-                  </Tooltip>
-                </div>
+              {!account?.Review?.id &&
+                order?.status !== EOrderStatus.CANCELLED && (
+                  <div
+                    className="w-fit h-fit"
+                    onClick={() => setModalOpen(true)}
+                  >
+                    <Tooltip title="Give a Review">
+                      <MdOutlineReviews className="cursor-pointer text-[18px] md:text-[20px] text-[#69645ad9]" />
+                    </Tooltip>
+                  </div>
+                )}
 
-              }
-
-              {(order?.status !== EOrderStatus.CANCELLED) &&
+              {order?.status !== EOrderStatus.CANCELLED && (
                 <AppModal
                   title="Account Information"
                   button={
@@ -133,7 +150,7 @@ const MyPurchaseAccountCard = ({
                 >
                   <OrderSecretViewPop account={account}></OrderSecretViewPop>
                 </AppModal>
-              }
+              )}
 
               <Link href={`/order-details/${orderId}`}>
                 <Tooltip title="Message vendor">
@@ -154,6 +171,13 @@ const MyPurchaseAccountCard = ({
                         </button> */}
             </div>
           </div>
+          <div>
+            <AvatarComponent
+              onlyBatch
+              withName
+              user={account?.ownBy as IUser}
+            />
+          </div>
         </div>
       </div>
 
@@ -163,44 +187,63 @@ const MyPurchaseAccountCard = ({
         setModalOpen={setModalOpen}
       >
         <div className="w-[80dvw] md:w-[500px]">
-          <div className='max-w-lg mx-auto py-4'>
-
-            <h3 className="text-sm lg:text-lg  font-medium text-textBlack">Leave a review</h3>
-            <div className='flex items-center gap-4 pt-2'>
-              <button onClick={() => setFeedback("positive")} className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-green-500 text-green-500 ${feedback === "positive" && "bg-green-500 text-white"}`}><AiOutlineLike /> Positive</button>
-              <button onClick={() => setFeedback("negative")} className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-red text-red  ${feedback === "negative" && "bg-red text-white"}`}><AiOutlineDislike /> Negative</button>
+          <div className="max-w-lg mx-auto py-4">
+            <h3 className="text-sm lg:text-lg  font-medium text-textBlack">
+              Leave a review
+            </h3>
+            <div className="flex items-center gap-4 pt-2">
+              <button
+                onClick={() => setFeedback("positive")}
+                className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-green-500 text-green-500 ${
+                  feedback === "positive" && "bg-green-500 text-white"
+                }`}
+              >
+                <AiOutlineLike /> Positive
+              </button>
+              <button
+                onClick={() => setFeedback("negative")}
+                className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-red text-red  ${
+                  feedback === "negative" && "bg-red text-white"
+                }`}
+              >
+                <AiOutlineDislike /> Negative
+              </button>
             </div>
 
-            {(feedback === "positive" || feedback === "negative") && <form className="space-y-2 pt-4" onSubmit={handleSubmit(onSubmit)}>
-
-              <AppFormTextarea
-                label="Leave feedback"
-                name="reviewText"
-                register={register}
-                required
-                error={errors?.reviewText}
-              />
-
-              <div className=" contact-input-label   flex items-center">
-                <input
-                  {...register("isAnonymous")}
-                  type="checkbox"
-                  id="checkbox"
-                  className="mr-[8px] w-[20px] h-[20px] cursor-pointer"
+            {(feedback === "positive" || feedback === "negative") && (
+              <form
+                className="space-y-2 pt-4"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <AppFormTextarea
+                  label="Leave feedback"
+                  name="reviewText"
+                  register={register}
+                  required
+                  error={errors?.reviewText}
                 />
 
-                <label htmlFor="checkbox" className="text-sm lg:text-base cursor-pointer text-textGrey">
-                  I want to stay anonymous
-                </label>
-              </div>
+                <div className=" contact-input-label   flex items-center">
+                  <input
+                    {...register("isAnonymous")}
+                    type="checkbox"
+                    id="checkbox"
+                    className="mr-[8px] w-[20px] h-[20px] cursor-pointer"
+                  />
 
-              <div className='flex justify-end'>
-                <AppButton
-                  label="Send"
-                  size="medium"
-                />
-              </div>
-            </form>}
+                  <label
+                    htmlFor="checkbox"
+                    className="text-sm lg:text-base cursor-pointer text-textGrey"
+                  >
+                    I want to stay anonymous
+                  </label>
+                </div>
+
+                <div className="flex justify-end">
+                  <AppButton label="Send" size="medium" />
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </AppModal>

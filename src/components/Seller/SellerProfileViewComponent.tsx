@@ -7,6 +7,7 @@ import { FiCheck, FiCopy } from "react-icons/fi";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { toast } from "react-toastify";
+import greenCheck from "./assets/greenCheck.png";
 import {
   Radar,
   RadarChart,
@@ -15,6 +16,7 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer
 } from "recharts";
+import Image from "next/image";
 
 const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
   const [domain, setDomain] = useState("");
@@ -93,28 +95,22 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
     <div className="w-full md:w-[30%]d max-h-[75dvh] overflow-auto space-y-3 lg:space-y-4 2xl:space-y-5 bg-white  rounded-lg p-2 md:p-4">
       {/* this is image and details div  */}
       <div className="flex items-center gap-4 2xl:gap-5">
-        <div className="">
+        <div className="relative">
           <Avatar
             src={data.sellerInfo.profileImg}
             alt={data.sellerInfo.name}
             className="size-20 2xl:size-28 rounded-full object-cover"
           />
+          {data.sellerInfo.isVerifiedByAdmin ? (
+            <div className="absolute bottom-[5px] right-[5px]">
+              <Image src={greenCheck} alt="" />
+            </div>
+          ) : null}
         </div>
         <div className="">
           <h2 className="text-xl font-bold capitalize">
             {data?.sellerInfo?.name}
           </h2>
-          {data.sellerInfo.isVerifiedByAdmin ? (
-            <div className="flex items-center gap-1 mt-2">
-              <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
-
-              <p
-                className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
-              >
-                verified merchant
-              </p>
-            </div>
-          ) : null}
 
           <div className="flex items-center flex-wrap gap-x-4 text-xs 2xl:text-sm py-3">
             <h2 className="flex items-center gap-1">
@@ -139,7 +135,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
         </div>
       </div>
 
-      <div className="  h-[240px] flex justify-center items-center">
+      <div className="  h-[200px] flex justify-center items-center">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart cx="50%" cy="50%" outerRadius="80%" data={graphData}>
             <PolarGrid />

@@ -46,7 +46,10 @@ const EditServiceForm = ({ data }: Props) => {
         id: data.id,
         username,
         password,
-        approvedForSale: EApprovedForSale.pending
+        approvedForSale:
+          user?.role === UserRole.Seller
+            ? EApprovedForSale.pending
+            : approvedForSale
       })
         .unwrap()
         .then((res: any) => {
@@ -180,6 +183,17 @@ const EditServiceForm = ({ data }: Props) => {
               disabled={isStatusSuccess}
             />
           </div>
+          {user.role === UserRole.Seller ? null : (
+            <div>
+              <FormSelectField
+                name="approvedForSale"
+                label={"Status"}
+                className="min-w-32"
+                placeholder="Filter By Approved status"
+                options={Object.values(EApprovedForSale).map(optionCreator)}
+              ></FormSelectField>
+            </div>
+          )}
         </div>
 
         <Button danger disabled={isLoading} htmlType="submit" className="mt-3">

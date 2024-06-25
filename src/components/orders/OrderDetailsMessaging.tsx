@@ -7,10 +7,12 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 import React from "react";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hook";
+import { useRouter } from "next/router";
 type props = {
   order: IOrder;
 };
 const OrderDetailsMessaging: React.FC<props> = ({ order }) => {
+  const router = useRouter();
   const user = useAppSelector((state) => state.user.user);
   // console.log(order);
   const imageUrl =
@@ -21,11 +23,16 @@ const OrderDetailsMessaging: React.FC<props> = ({ order }) => {
     order.orderById === user?.id
       ? order.account.ownBy?.name
       : order.orderBy?.name;
+  const handleClick = () => {
+    if (order.orderById === user?.id) {
+      router.push(`/seller/${order.account?.ownBy?.id}`);
+    }
+  };
   return (
     <div className="border border-[#EFECEC] rounded-lg">
       {/* this is top message div  */}
-      <div className="border-b border-b-[#EFECEC] p-5 flex items-center justify-between gap-5">
-        <div className="flex items-center gap-3">
+      <div className="border-b border-b-[#EFECEC] cursor-pointer p-5 flex items-center justify-between gap-5">
+        <div onClick={handleClick} className="flex items-center gap-3">
           <Image
             src={imageUrl || ""}
             className="size-10 rounded-full"

@@ -12,9 +12,7 @@ import { Button } from "antd";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-
 const Contactus = () => {
-
   const user = useAppSelector((state) => state.user.user);
   const [loading, setLoading] = useState(false);
   //new state for handling the selected option
@@ -25,10 +23,18 @@ const Contactus = () => {
       toast.error("Please select a subject");
       return;
     }
-
+    console.log(data);
     const payload = {
       ...data,
-      queryType
+      queryType,
+      description: data.orderNumber
+        ? `
+      ${data.description}
+
+
+      Order Number: ${data.orderNumber}
+      `
+        : data.description
     };
     setLoading(true);
     fetch(`${config?.baseUrl}/users/send-query`, {
@@ -40,6 +46,12 @@ const Contactus = () => {
       body: JSON.stringify(payload)
     })
       .then((result) => {
+        if (!result.ok) {
+          // Convert non-2xx HTTP responses into errors
+          return result.json().then((err) => {
+            throw new Error(err.message || "Please try again after some time");
+          });
+        }
         return result.json();
       })
       .then((res) => {
@@ -48,6 +60,7 @@ const Contactus = () => {
         }
       })
       .catch((err) => {
+        console.log("hi");
         toast.error("Please try again after some time");
       })
       .finally(() => {
@@ -106,6 +119,14 @@ const Contactus = () => {
                     </option>
                   </select>
                 </div>
+                {queryType === "product" && (
+                  <div className="col-span-2">
+                    <FormInput
+                      placeholder="Enter you order number"
+                      name="orderNumber"
+                    />
+                  </div>
+                )}
                 <div className="md:col-span-2">
                   <FormTextArea
                     placeholder="Enter your message here"
@@ -116,17 +137,13 @@ const Contactus = () => {
                 </div>
               </div>
 
-              <AppButton
-                isLoading={loading}
-                label="Send Message"
-              />
-
+              <AppButton isLoading={loading} label="Send Message" />
             </Form>
             <div className="mt-5 md:mt-10 text-left">
-              If you encounter any issues with the ticket system or
-              haven&apos;t received a response, please reach out to us via
-              email at help@acctbazaar.com. Our technical support is available
-              in English.
+              If you encounter any issues with the ticket system or haven&apos;t
+              received a response, please reach out to us via email at
+              help@acctbazaar.com. Our technical support is available in
+              English.
             </div>
           </div>
         </div>

@@ -11,7 +11,6 @@ import HomeLayout from "@/layout/HomeLayout";
 import AdminsLayout from "@/layout/AdminsLayout";
 import { useAppSelector } from "@/redux/hook";
 
-
 const EditSingleService = () => {
   const {
     query: { serviceId }
@@ -28,7 +27,7 @@ const EditSingleService = () => {
   } else if (data.data) {
     const info = data.data as IAccount;
     content = (
-      <div className="container">
+      <div className="container h-screen overflow-y-scroll pb-10">
         <h2 className="text-center text-xl font-bold mb-5">Edit Account</h2>
         {/* <EditSingleServiceForm {...info}></EditSingleServiceForm> */}
         <EditServiceForm data={info}></EditServiceForm>

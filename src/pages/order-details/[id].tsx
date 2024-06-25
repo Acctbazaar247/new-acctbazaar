@@ -2,7 +2,7 @@ import OrderDetailsAccountInfo from "@/components/orders/OrderDetailsAccountInfo
 import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
 import { useGetOrderByIdQuery } from "@/redux/features/order/orderApi";
-import { AccountCategory, IOrder } from "@/types/common";
+import { AccountCategory, EOrderStatus, IOrder } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import Image from "next/image";
 import dateFormat from "dateformat";
@@ -18,9 +18,31 @@ import { Tooltip } from "antd";
 import AppDrawer from "@/components/ui/AppDrawer";
 import { findImageUrlByCategory } from "@/shared";
 import AttentionAlert from "@/components/shared/AttentionAlert";
+import { MdOutlineReviews } from "react-icons/md";
+import { useState } from "react";
+import AppModal from "@/components/ui/AppModal";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
+import AppFormTextarea from "@/components/ui/AppFormTextarea";
+import { useAddReviewMutation } from "@/redux/features/review/reviewApi";
+import { toast } from "react-toastify";
+import AppButton from "@/components/ui/AppButton";
 
+interface FormData {
+  reviewText: string;
+  isAnonymous: boolean;
+}
 const OrderDetails = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const isCancelled = false;
+  const [feedback, setFeedback] = useState("");
+  const [makeReview] = useAddReviewMutation();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormData>();
   const location = useParams();
   const { data, isLoading, isError, error } = useGetOrderByIdQuery(
     location?.id,
@@ -54,9 +76,32 @@ const OrderDetails = () => {
     preview: mainData.account.preview || "",
     additionalEmail: mainData.account.additionalEmail || "",
     additionalPassword: mainData.account.additionalPassword || "",
-    additionalDescription: mainData.account.additionalDescription || "",
+    additionalDescription: mainData.account.additionalDescription || ""
   };
-
+  console.log(mainData);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const submittedData = [
+      {
+        sellerId: mainData?.account?.ownBy?.id,
+        accountId: mainData?.account?.id,
+        reviewText: data?.reviewText,
+        reviewStatus: feedback,
+        isAnonymous: data?.isAnonymous
+      }
+    ];
+    console.log(submittedData);
+    await makeReview(submittedData)
+      .unwrap()
+      .then((res: any) => {
+        toast.success("Add review successful!", { toastId: 1 });
+        setModalOpen(false);
+      })
+      .catch((res: any) => {
+        toast.error(res?.data?.message || "Something went wrong", {
+          toastId: 1
+        });
+      });
+  };
   return (
     <HomeLayout>
       <div className="container py-5 md:py-10 2xl:py-12">
@@ -72,22 +117,24 @@ const OrderDetails = () => {
               </span>
             </p>
             <p
-              className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${(mainData.status === "pending" &&
-                "text-[#B54708] bg-[#FFFAEB]") ||
+              className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${
+                (mainData.status === "pending" &&
+                  "text-[#B54708] bg-[#FFFAEB]") ||
                 (mainData.status === "cancelled" &&
                   "text-[#B42318] bg-[#FEF3F2]") ||
                 (mainData.status === "completed" &&
                   "text-[#027A48] bg-[#ECFDF3]")
-                }`}
+              }`}
             >
               <GoDotFill
-                className={`${(mainData.status === "pending" &&
-                  "text-[#B54708] bg-[#FFFAEB]") ||
+                className={`${
+                  (mainData.status === "pending" &&
+                    "text-[#B54708] bg-[#FFFAEB]") ||
                   (mainData.status === "cancelled" &&
                     "text-[#B42318] bg-[#FEF3F2]") ||
                   (mainData.status === "completed" &&
                     "text-[#027A48] bg-[#ECFDF3]")
-                  }`}
+                }`}
               />
               {mainData.status}
             </p>
@@ -189,7 +236,20 @@ const OrderDetails = () => {
                 </div> */}
               </>
             )}
-            <p className="bg-yellow-100 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">“When logging into your social media account, it is highly recommended to use a VPN or proxy. These tools provide an extra layer of security by encrypting your internet connection and masking your IP address. GET VPN”</p>
+            {!mainData?.account?.Review?.id &&
+              mainData?.status !== EOrderStatus.CANCELLED && (
+                <div className="w-fit h-fit" onClick={() => setModalOpen(true)}>
+                  <Tooltip title="Give a Review">
+                    <MdOutlineReviews className="cursor-pointer text-[18px] md:text-[20px] text-[#69645ad9]" />
+                  </Tooltip>
+                </div>
+              )}
+            <p className="bg-yellow-100 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">
+              “When logging into your social media account, it is highly
+              recommended to use a VPN or proxy. These tools provide an extra
+              layer of security by encrypting your internet connection and
+              masking your IP address. GET VPN”
+            </p>
           </div>
           <div className="hidden md:block border border-[#EFECEC]"></div>
           <div className="hidden md:block w-[43%] h-full">
@@ -201,6 +261,72 @@ const OrderDetails = () => {
           <p className="bg-yellow-100 mx-4 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">“When logging into your social media account, it is highly recommended to use a VPN or proxy. These tools provide an extra layer of security by encrypting your internet connection and masking your IP address. GET VPN”</p>
         </div> */}
       </div>
+      <AppModal
+        // closeable={false}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      >
+        <div className="w-[80dvw] md:w-[500px]">
+          <div className="max-w-lg mx-auto py-4">
+            <h3 className="text-sm lg:text-lg  font-medium text-textBlack">
+              Leave a review
+            </h3>
+            <div className="flex items-center gap-4 pt-2">
+              <button
+                onClick={() => setFeedback("positive")}
+                className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-green-500 text-green-500 ${
+                  feedback === "positive" && "bg-green-500 text-white"
+                }`}
+              >
+                <AiOutlineLike /> Positive
+              </button>
+              <button
+                onClick={() => setFeedback("negative")}
+                className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-red text-red  ${
+                  feedback === "negative" && "bg-red text-white"
+                }`}
+              >
+                <AiOutlineDislike /> Negative
+              </button>
+            </div>
+
+            {(feedback === "positive" || feedback === "negative") && (
+              <form
+                className="space-y-2 pt-4"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <AppFormTextarea
+                  label="Leave feedback"
+                  name="reviewText"
+                  register={register}
+                  required
+                  error={errors?.reviewText}
+                />
+
+                <div className=" contact-input-label   flex items-center">
+                  <input
+                    {...register("isAnonymous")}
+                    type="checkbox"
+                    id="checkbox"
+                    className="mr-[8px] w-[20px] h-[20px] cursor-pointer"
+                  />
+
+                  <label
+                    htmlFor="checkbox"
+                    className="text-sm lg:text-base cursor-pointer text-textGrey"
+                  >
+                    I want to stay anonymous
+                  </label>
+                </div>
+
+                <div className="flex justify-end">
+                  <AppButton label="Send" size="medium" />
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </AppModal>
     </HomeLayout>
   );
 };
