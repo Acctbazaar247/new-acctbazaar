@@ -1,4 +1,5 @@
 import { IUser, UserRole } from "@/types/common";
+import { Avatar } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
@@ -23,9 +24,7 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
     >
       {withName ? (
         <div className="flex items-center gap-1 pt-1 md:pt-2">
-          <Image
-            width={40}
-            height={40}
+          <Avatar
             src={user?.profileImg as string}
             className={`rounded-full ${size === "large" ? "size-8" : "size-5"}`}
             alt="avatar image"
