@@ -102,11 +102,23 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
             alt={data.sellerInfo.name}
             className="size-20 2xl:size-28 rounded-full object-cover"
           />
-          {data.sellerInfo.isVerifiedByAdmin ? (
+
+          {!data.sellerInfo.isVerifiedByAdmin ? (
             <div className="absolute bottom-[5px] right-[5px]">
-              <Image src={greenCheck} alt="" />
+              <img
+                className="w-[20px]"
+                src={"/assets/greenCheck.png"}
+                alt="asdfdf"
+              />
             </div>
           ) : null}
+          <div className="flex absolute w-[200px] items-center gap-1">
+            <p
+              className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary rounded mt-2`}
+            >
+              verified merchant
+            </p>
+          </div>
         </div>
         <div className="">
           <h2 className="text-xl font-bold capitalize">
@@ -136,7 +148,10 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
               <p className="border-l border-l-gray-400 h-4"></p>
             ) : null}
             <p>
-              Joined: {new Date(data.sellerInfo.createdAt).toLocaleDateString()}
+              Joined:{" "}
+              {new Date(data.sellerInfo.createdAt)
+                .toLocaleDateString()
+                .replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$1-$2-$3")}
             </p>
           </div>
         </div>

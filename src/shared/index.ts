@@ -499,7 +499,7 @@ export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
   {
     label: "Other",
     value: AccountCategory.Other,
-    imageUrl: "/assets/other.png"
+    imageUrl: "/assets/icons/other.png"
   },
   // new added git card
   ...GiftCardCategories
