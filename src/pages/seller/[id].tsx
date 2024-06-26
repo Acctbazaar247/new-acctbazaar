@@ -98,7 +98,6 @@ const SellerDetailsPage = () => {
       </HomeLayout>
     );
   } else if (isError) {
-    console.log(error);
     const err = error as any;
     return (
       <HomeLayout>

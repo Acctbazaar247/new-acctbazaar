@@ -235,7 +235,7 @@ export const SocialMediaCategories: IProduct_Category[] = [
   {
     label: "SMSmode",
     value: AccountCategory.SMSmode,
-    imageUrl: "/assets/product/smsmode.png"
+    imageUrl: "/assets/product/sMSmode.png"
   }
 ];
 

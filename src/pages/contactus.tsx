@@ -23,7 +23,6 @@ const Contactus = () => {
       toast.error("Please select a subject");
       return;
     }
-    console.log(data);
     const payload = {
       ...data,
       queryType,
@@ -60,7 +59,6 @@ const Contactus = () => {
         }
       })
       .catch((err) => {
-        console.log("hi");
         toast.error("Please try again after some time");
       })
       .finally(() => {

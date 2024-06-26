@@ -241,7 +241,7 @@ const Plans = () => {
                       plan.name === active ? "text-zinc-300" : "text-textBlack"
                     }`}
                   >
-                    Per Merchant / Billed weekly{" "}
+                    Per Merchant / Billed monthly
                   </p>
                 </div>
 

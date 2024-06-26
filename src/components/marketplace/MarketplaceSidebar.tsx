@@ -68,7 +68,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
         {
           label: "Other",
           value: AccountCategory.Other,
-          imageUrl: "/assets/other.png"
+          imageUrl: "/assets/icons/other.png"
         }
       ]
     }
