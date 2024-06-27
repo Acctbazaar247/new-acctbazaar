@@ -103,7 +103,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
             className="size-20 2xl:size-28 rounded-full object-cover"
           />
 
-          {!data.sellerInfo.isVerifiedByAdmin ? (
+          {data.sellerInfo.isVerifiedByAdmin ? (
             <div className="absolute bottom-[5px] right-[5px]">
               <img
                 className="w-[20px]"
@@ -112,13 +112,15 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
               />
             </div>
           ) : null}
-          <div className="flex absolute w-[200px] items-center gap-1">
-            <p
-              className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary rounded mt-2`}
-            >
-              verified merchant
-            </p>
-          </div>
+          {data.sellerInfo.isVerifiedByAdmin ? (
+            <div className="flex absolute w-[200px] items-center gap-1">
+              <p
+                className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary rounded mt-2`}
+              >
+                verified merchant
+              </p>
+            </div>
+          ) : null}
         </div>
         <div className="">
           <h2 className="text-xl font-bold capitalize">
