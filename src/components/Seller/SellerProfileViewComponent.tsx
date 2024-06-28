@@ -39,8 +39,8 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
     const negativePercentage = (negativeReviews / totalReviews) * 100;
 
     return {
-      positivePercentage,
-      negativePercentage
+      positivePercentage: Math.round(positivePercentage),
+      negativePercentage: Math.round(negativePercentage)
     };
   }, [positiveReviews, negativeReviews]);
   const referralLink = `${domain}/seller/${data?.sellerInfo?.id}`;
