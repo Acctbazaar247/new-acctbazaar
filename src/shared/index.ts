@@ -489,7 +489,7 @@ export const AccountsSubscriptionsCategories: IProduct_Category[] = [
   {
     label: "Paypal",
     value: AccountCategory.Paypal,
-    imageUrl: "/assets/product/paypal.jpg"
+    imageUrl: "/assets/product/paypal.png"
   }
 ];
 export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
