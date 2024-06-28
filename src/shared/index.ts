@@ -485,6 +485,11 @@ export const AccountsSubscriptionsCategories: IProduct_Category[] = [
     label: "Office365",
     value: AccountCategory.Office365,
     imageUrl: "/assets/product/office365.png"
+  },
+  {
+    label: "Paypal",
+    value: AccountCategory.Paypal,
+    imageUrl: "/assets/product/paypal.jpg"
   }
 ];
 export const ACCOUNT_CATEGORIES: IProduct_Category[] = [

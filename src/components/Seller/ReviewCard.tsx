@@ -9,7 +9,11 @@ const ReviewCard = ({ data }: { data: IReview }) => {
       {/* This is details div  */}
       <div className="flex gap-2">
         <Avatar
-          src={data.isAnonymous ? "A" : data?.ownBy?.profileImg || ""}
+          src={
+            data.isAnonymous
+              ? "/assets/home/anonymous.png"
+              : data?.ownBy?.profileImg || ""
+          }
           alt=""
           className="size-9 rounded-full"
         />

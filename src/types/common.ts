@@ -204,6 +204,7 @@ export enum AccountCategory {
   Canva = "Canva",
   ChatGPT = "ChatGPT",
   Office365 = "Office365",
+  Paypal = "Paypal",
 
   // Gift card accounts
   AmazonGiftCard = "AmazonGiftCard",

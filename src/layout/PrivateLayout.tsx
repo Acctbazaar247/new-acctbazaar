@@ -19,6 +19,13 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
       });
     }
   }, [user, router, isLoading]);
+  useEffect(() => {
+    if (user?.isBlocked) {
+      setTimeout(() => {
+        router.push("/contactus");
+      }, 2000);
+    }
+  }, [user]);
   if (isLoading) {
     return (
       <div className="flex justify-center">

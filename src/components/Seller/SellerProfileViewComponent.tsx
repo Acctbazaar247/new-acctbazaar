@@ -119,6 +119,11 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
               >
                 verified merchant
               </p>
+              <img
+                className="w-[18px] mt-2"
+                src={"/assets/greenCheck.png"}
+                alt="asdfdf"
+              />
             </div>
           ) : null}
         </div>

@@ -7,7 +7,7 @@ import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import Image from "next/image";
 import dateFormat from "dateformat";
 import { useParams } from "next/navigation";
-import { BiDislike, BiLike } from "react-icons/bi";
+import { BiDislike, BiLike, BiSolidCopy } from "react-icons/bi";
 import { GoDotFill } from "react-icons/go";
 import { IoWalletOutline } from "react-icons/io5";
 import { PiCurrencyDollarBold } from "react-icons/pi";
@@ -28,6 +28,7 @@ import { useAddReviewMutation } from "@/redux/features/review/reviewApi";
 import { toast } from "react-toastify";
 import AppButton from "@/components/ui/AppButton";
 import PrivateLayout from "@/layout/PrivateLayout";
+import { FiCheck } from "react-icons/fi";
 
 interface FormData {
   reviewText: string;
@@ -45,6 +46,7 @@ const OrderDetails = () => {
     formState: { errors }
   } = useForm<FormData>();
   const location = useParams();
+  const [copied, setCopied] = useState(false);
   const { data, isLoading, isError, error } = useGetOrderByIdQuery(
     location?.id,
     { skip: !location?.id }
@@ -103,6 +105,19 @@ const OrderDetails = () => {
         });
       });
   };
+
+  const copyText = async (id: string | undefined | string[]) => {
+    try {
+      await navigator.clipboard.writeText(id as string);
+      setCopied(true);
+      toast.success("copied!");
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (error) {
+      console.error("Failed to copy:", error);
+    }
+  };
   return (
     <HomeLayout>
       <PrivateLayout>
@@ -114,9 +129,23 @@ const OrderDetails = () => {
             <div className="md:space-x-2 space-y-1 md:space-y-0">
               <p className="text-textBlack w-full flex items-center gap-1 md:gap-2 font-medium text-sm line-clamp-1 md:text-[28px]">
                 <p className="w-24 md:w-fit">Order No:</p>
-                <span className="text-textGrey text-sm md:text-base font-normal">
+                <span
+                  onClick={() => copyText(location.id)}
+                  className="text-textGrey text-sm md:text-base font-normal"
+                >
                   #{location.id}
                 </span>
+                {copied ? (
+                  <FiCheck
+                    onClick={() => copyText(location.id)}
+                    className="text-2xl text-primary"
+                  />
+                ) : (
+                  <BiSolidCopy
+                    onClick={() => copyText(location.id)}
+                    className="cursor-pointer text-primary text-xl 2xl:text-2xl"
+                  />
+                )}
               </p>
               <p
                 className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${
