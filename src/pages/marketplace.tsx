@@ -145,12 +145,12 @@ const Marketplace = () => {
                   }}
                 />
               </div>
-              <div className=" md:max-w-[440px] lg:max-w-[660px] xl:max-w-[916px]  2xl:max-w-[1076px] w-full mt-5">
+              {/* <div className=" md:max-w-[440px] lg:max-w-[660px] xl:max-w-[916px]  2xl:max-w-[1076px] w-full mt-5">
                 <AccountReel
                   title="Gift Cards"
                   accountType={AccountType.GiftCard}
                 ></AccountReel>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
