@@ -44,7 +44,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
     };
   }, [positiveReviews, negativeReviews]);
   const referralLink = `${domain}/seller/${data?.sellerInfo?.id}`;
-  console.log(data);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setDomain(window.location.hostname);
@@ -92,6 +92,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
       value: data.totalOrder
     }
   ];
+
   return (
     <div className="w-full md:w-[30%]d max-h-[75dvh] overflow-auto space-y-3 lg:space-y-4 2xl:space-y-5 bg-white  rounded-lg p-2 md:p-4">
       {/* this is image and details div  */}
@@ -119,11 +120,6 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
               >
                 verified merchant
               </p>
-              <img
-                className="w-[18px] mt-2"
-                src={"/assets/greenCheck.png"}
-                alt="asdfdf"
-              />
             </div>
           ) : null}
         </div>
