@@ -2,6 +2,7 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import AppButton from "@/components/ui/AppButton";
+import Loading from "@/components/ui/Loading";
 import { config } from "@/config";
 import { authKey } from "@/constants/storageKey";
 import HomeLayout from "@/layout/HomeLayout";
@@ -13,7 +14,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 const Contactus = () => {
-  const user = useAppSelector((state) => state.user.user);
+  const { user, isLoading } = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   //new state for handling the selected option
   const [queryType, setQueryType] = useState("");
@@ -65,10 +66,22 @@ const Contactus = () => {
         setLoading(false);
       });
   };
-
+  if (isLoading) {
+    return (
+      <HomeLayout>
+        <Loading></Loading>
+      </HomeLayout>
+    );
+  } else if (!user?.id) {
+    return (
+      <HomeLayout>
+        <Loading></Loading>
+      </HomeLayout>
+    );
+  }
   return (
     <HomeLayout>
-      <PrivateLayout>
+      <>
         <div className="layout max-w-7xl custom-hight">
           <h1 className="title">New Ticket</h1>
 
@@ -145,7 +158,7 @@ const Contactus = () => {
             </div>
           </div>
         </div>
-      </PrivateLayout>
+      </>
     </HomeLayout>
   );
 };
