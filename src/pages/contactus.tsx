@@ -32,7 +32,9 @@ const Contactus = () => {
       ${data.description}
 
 
-      Order Number: ${data.orderNumber}
+      ${queryType === "payment" ? "Transaction ID" : "Order Number"}: ${
+            data.orderNumber
+          }
       `
         : data.description
     };
@@ -130,14 +132,19 @@ const Contactus = () => {
                     </option>
                   </select>
                 </div>
-                {queryType === "product" && (
-                  <div className="col-span-2">
-                    <FormInput
-                      placeholder="Enter you order number"
-                      name="orderNumber"
-                    />
-                  </div>
-                )}
+                {queryType === "product" ||
+                  (queryType === "payment" && (
+                    <div className="col-span-2">
+                      <FormInput
+                        placeholder={
+                          queryType === "payment"
+                            ? "Enter your Transaction ID"
+                            : "Enter you order number"
+                        }
+                        name="orderNumber"
+                      />
+                    </div>
+                  ))}
                 <div className="md:col-span-2">
                   <FormTextArea
                     placeholder="Enter your message here"
