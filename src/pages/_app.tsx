@@ -29,13 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Acctbazaar</title>
-        {/* <script
+        <script
           src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
           async
-        ></script> */}
-        <script
-          src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
-          defer
         ></script>
 
         <meta name="description" content="Buy and sell social media accounts" />
