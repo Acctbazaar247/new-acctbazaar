@@ -24,15 +24,15 @@ export default function App({ Component, pageProps }: AppProps) {
       window.OneSignalInitialized = true;
       initOneSignal();
     }
-  }, []);
+  });
   return (
     <>
       <Head>
         <title>Acctbazaar</title>
-        <script
+        {/* <script
           src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
           async
-        ></script>
+        ></script> */}
 
         <meta name="description" content="Buy and sell social media accounts" />
         <meta
