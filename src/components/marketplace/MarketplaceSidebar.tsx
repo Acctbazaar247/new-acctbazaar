@@ -9,7 +9,7 @@ import {
   GamingAccountCategories,
   GiftCardCategories,
   SocialMediaCategories,
-  ToolsAndResources,
+  // ToolsAndResources,
   VpnCategories,
   WebsitesCategories
 } from "@/shared";
@@ -56,11 +56,11 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
       label: "Accounts & Subscriptions",
       children: AccountsSubscriptionsCategories
     },
-    {
-      imageUrl: "/assets/icons/toolsandre.png",
-      label: "Tools & Resources",
-      children: ToolsAndResources
-    },
+    // {
+    //   imageUrl: "/assets/icons/toolsandre.png",
+    //   label: "Tools & Resources",
+    //   children: ToolsAndResources
+    // },
     {
       imageUrl: "/assets/icons/others.png",
       label: "Others",
