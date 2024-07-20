@@ -16,59 +16,59 @@ export const WebsitesCategories: IProduct_Category[] = [
     value: AccountCategory.OnlyFans,
     imageUrl: "/assets/product/onlyfans.png"
   },
-  {
-    label: "Crypto websites",
-    value: AccountCategory.CryptoWebsite,
-    imageUrl: "/assets/product/crypto-website.png"
-  }
+  // {
+  //   label: "Crypto websites",
+  //   value: AccountCategory.CryptoWebsite,
+  //   imageUrl: "/assets/product/crypto-website.png"
+  // }
 ];
-export const ToolsAndResources: IProduct_Category[] = [
-  {
-    label: "Tickets",
-    value: AccountCategory.Tickets,
-    imageUrl: "/assets/product/tickets.png"
-  },
-  {
-    label: "Tutorials",
-    value: AccountCategory.Tutorials,
-    imageUrl: "/assets/product/tutorials.png"
-  },
-  {
-    label: "Formats",
-    value: AccountCategory.Formats,
-    imageUrl: "/assets/product/formats.png"
-  },
-  {
-    label: "Accounts",
-    value: AccountCategory.Accounts,
-    imageUrl: "/assets/product/accounts.png"
-  },
-  {
-    label: "CreditCards",
-    value: AccountCategory.CreditCards,
-    imageUrl: "/assets/product/credit-cards.png"
-  },
-  {
-    label: "Software",
-    value: AccountCategory.Software,
-    imageUrl: "/assets/product/software.png"
-  },
-  {
-    label: "Logs",
-    value: AccountCategory.Logs,
-    imageUrl: "/assets/product/logs.png"
-  },
-  {
-    label: "Tools",
-    value: AccountCategory.Tools,
-    imageUrl: "/assets/product/tools.png"
-  },
-  {
-    label: "Delivery",
-    value: AccountCategory.Delivery,
-    imageUrl: "/assets/product/delivery.png"
-  }
-];
+// export const ToolsAndResources: IProduct_Category[] = [
+//   {
+//     label: "Tickets",
+//     value: AccountCategory.Tickets,
+//     imageUrl: "/assets/product/tickets.png"
+//   },
+//   {
+//     label: "Tutorials",
+//     value: AccountCategory.Tutorials,
+//     imageUrl: "/assets/product/tutorials.png"
+//   },
+//   {
+//     label: "Formats",
+//     value: AccountCategory.Formats,
+//     imageUrl: "/assets/product/formats.png"
+//   },
+//   {
+//     label: "Accounts",
+//     value: AccountCategory.Accounts,
+//     imageUrl: "/assets/product/accounts.png"
+//   },
+//   {
+//     label: "CreditCards",
+//     value: AccountCategory.CreditCards,
+//     imageUrl: "/assets/product/credit-cards.png"
+//   },
+//   {
+//     label: "Software",
+//     value: AccountCategory.Software,
+//     imageUrl: "/assets/product/software.png"
+//   },
+//   {
+//     label: "Logs",
+//     value: AccountCategory.Logs,
+//     imageUrl: "/assets/product/logs.png"
+//   },
+//   {
+//     label: "Tools",
+//     value: AccountCategory.Tools,
+//     imageUrl: "/assets/product/tools.png"
+//   },
+//   {
+//     label: "Delivery",
+//     value: AccountCategory.Delivery,
+//     imageUrl: "/assets/product/delivery.png"
+//   }
+// ];
 export const GiftCardCategories: IProduct_Category[] = [
   {
     label: "Amazon ",
@@ -500,7 +500,7 @@ export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
   ...EcommerceCategories,
   ...AccountsSubscriptionsCategories,
   ...WebsitesCategories,
-  ...ToolsAndResources,
+  // ...ToolsAndResources,
   {
     label: "Other",
     value: AccountCategory.Other,
