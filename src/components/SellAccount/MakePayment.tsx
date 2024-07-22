@@ -133,9 +133,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         >
           <IoWalletOutline className="text-2xl" />
           <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Wallet</h3>
+            <h3 className="text-textBlack font-bold">Acctbazaar Wallet</h3>
             <p className="text-sm text-textGrey">
-              Make payment using your own wallet
+              Make payment using your Acctbazaar account Balance
             </p>
           </div>
         </div>
