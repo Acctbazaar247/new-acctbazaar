@@ -57,7 +57,7 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
           <Image
             width={40}
             height={40}
-            className="size-7 md:size-9 rounded-full"
+            className="size-7 md:size-9 rounded-full aspect-square block object-cover"
             src={user?.profileImg as string}
             alt="country icon"
           />

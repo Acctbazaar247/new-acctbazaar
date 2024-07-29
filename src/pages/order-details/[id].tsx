@@ -29,6 +29,7 @@ import { toast } from "react-toastify";
 import AppButton from "@/components/ui/AppButton";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { FiCheck } from "react-icons/fi";
+import { useAppSelector } from "@/redux/hook";
 
 interface FormData {
   reviewText: string;
@@ -39,11 +40,11 @@ const OrderDetails = () => {
   const isCancelled = false;
   const [feedback, setFeedback] = useState("");
   const [makeReview] = useAddReviewMutation();
-
+  const { user } = useAppSelector((state) => state.user);
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
   const location = useParams();
   const [copied, setCopied] = useState(false);
@@ -79,9 +80,9 @@ const OrderDetails = () => {
     preview: mainData.account.preview || "",
     additionalEmail: mainData.account.additionalEmail || "",
     additionalPassword: mainData.account.additionalPassword || "",
-    additionalDescription: mainData.account.additionalDescription || ""
+    additionalDescription: mainData.account.additionalDescription || "",
   };
-  console.log(mainData);
+  // console.log(mainData);
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const submittedData = [
       {
@@ -89,8 +90,8 @@ const OrderDetails = () => {
         accountId: mainData?.account?.id,
         reviewText: data?.reviewText,
         reviewStatus: feedback,
-        isAnonymous: data?.isAnonymous
-      }
+        isAnonymous: data?.isAnonymous,
+      },
     ];
     console.log(submittedData);
     await makeReview(submittedData)
@@ -101,7 +102,7 @@ const OrderDetails = () => {
       })
       .catch((res: any) => {
         toast.error(res?.data?.message || "Something went wrong", {
-          toastId: 1
+          toastId: 1,
         });
       });
   };
@@ -268,7 +269,8 @@ const OrderDetails = () => {
                 </>
               )}
               {!mainData?.account?.Review?.id &&
-                mainData?.status !== EOrderStatus.CANCELLED && (
+                mainData?.status !== EOrderStatus.CANCELLED &&
+                mainData.account.ownById !== user?.id && (
                   <div className="  flex justify-center w-full">
                     <button
                       onClick={() => setModalOpen(true)}

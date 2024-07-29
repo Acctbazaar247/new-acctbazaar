@@ -62,7 +62,7 @@ export default function CartPopUpBody() {
             </div>
           </div>
 
-          <Link href={"shopping-cart"}>
+          <Link href={"/shopping-cart"}>
             <button className="appBtn w-full">
               Checkout {myCarts.length > 0 && `( ${myCarts.length} )`}
             </button>

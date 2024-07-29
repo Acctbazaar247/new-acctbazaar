@@ -2,6 +2,7 @@ import AccountReel from "@/components/AccountReel/AccountReel";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import MarketplaceSidebar from "@/components/marketplace/MarketplaceSidebar";
 import AccountLoading from "@/components/shared/AccountLoading";
+import AnimationWrapper from "@/components/ui/AnimationWrapper";
 import AppDrawer from "@/components/ui/AppDrawer";
 import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
@@ -47,7 +48,7 @@ const Marketplace = () => {
       approvedForSale: "approved",
       limit: 150,
       page,
-      searchTerm: debouncedSearch.length ? debouncedSearch : undefined
+      searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -123,11 +124,13 @@ const Marketplace = () => {
                     // console.log(data);
                     return (
                       <>
-                        {data.data.map((single: IAccount) => (
-                          <MarketplaceAccountCard
-                            account={single}
+                        {data.data.map((single: IAccount, i: number) => (
+                          <AnimationWrapper
                             key={single.id}
-                          />
+                            transition={{ delay: i * 0.08 }}
+                          >
+                            <MarketplaceAccountCard account={single} />
+                          </AnimationWrapper>
                         ))}
                         <div className="flex justify-center items-center mt-5">
                           <Pagination

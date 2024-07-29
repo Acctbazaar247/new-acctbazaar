@@ -1,5 +1,6 @@
 import OrderAccountCard from "@/components/orders/OrderAccountCard";
 import AccountLoading from "@/components/shared/AccountLoading";
+import AnimationWrapper from "@/components/ui/AnimationWrapper";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
@@ -84,12 +85,16 @@ const Orders = () => {
                       <div className="py-4 md:py-6 space-y-6">
                         {data?.data.length > 0 ? (
                           <div className="max-h-[70dvh] overflow-auto space-y-3 md:space-y-4">
-                            {data.data.map((single: IOrder) => (
-                              <OrderAccountCard
-                                orderInfo={single}
+                            {data.data.map((single: IOrder, i: number) => (
+                              <AnimationWrapper
                                 key={single.id}
-                                notShowDetails={true}
-                              />
+                                transition={{ delay: i * 0.08 }}
+                              >
+                                <OrderAccountCard
+                                  orderInfo={single}
+                                  notShowDetails={true}
+                                />
+                              </AnimationWrapper>
                             ))}
                           </div>
                         ) : (
