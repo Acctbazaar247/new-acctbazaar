@@ -163,11 +163,11 @@ const AccountSettingProfile = () => {
 
     return selectedCountryDetails?.isoCode
       ? State.getStatesOfCountry(selectedCountryDetails.isoCode).map(
-        (state) => ({
-          value: state.isoCode,
-          label: state.name,
-        })
-      )
+          (state) => ({
+            value: state.isoCode,
+            label: state.name,
+          })
+        )
       : [];
   }, [selectedCountry]);
 
@@ -181,12 +181,12 @@ const AccountSettingProfile = () => {
 
     return selectedCountryDetails?.isoCode && stateDetails?.isoCode
       ? City.getCitiesOfState(
-        selectedCountryDetails.isoCode,
-        stateDetails?.isoCode
-      ).map((city) => ({
-        value: city.name,
-        label: city.name,
-      }))
+          selectedCountryDetails.isoCode,
+          stateDetails?.isoCode
+        ).map((city) => ({
+          value: city.name,
+          label: city.name,
+        }))
       : [];
   }, [selectedCountry, selectedState]);
 
@@ -215,9 +215,9 @@ const AccountSettingProfile = () => {
               register={register}
               error={errors?.name}
               defaultValue={user?.name}
-              readOnly={readOnly}
+              readOnly={user?.isVerifiedByAdmin || readOnly}
             />
-            {readOnly && (
+            {!user?.isVerifiedByAdmin && readOnly && (
               <p className="text-xs text-zinc-400">
                 You can update your name after {daysLeft} days
               </p>
@@ -297,8 +297,9 @@ const AccountSettingProfile = () => {
               className="hidden"
             />
             <div
-              className={`border border-borderColor rounded border-dashed ${loading && "h-20 w-56"
-                }`}
+              className={`border border-borderColor rounded border-dashed ${
+                loading && "h-20 w-56"
+              }`}
             >
               {loading ? (
                 <AppSmallLoading />

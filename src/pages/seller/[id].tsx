@@ -46,6 +46,7 @@ const SellerDetailsPage = () => {
   const reviewQueryString = useMemo(() => {
     const info = {
       page: reviewPage,
+      limit: 100,
       sellerId: pageQuery?.id,
       reviewStatus: activeReviewTab.toLowerCase(),
     };
@@ -141,7 +142,7 @@ const SellerDetailsPage = () => {
                   <SellerProfileViewComponent data={data.data} />
                 )}
                 {activeTab === "Ads" && (
-                  <div className="max-h-[67.8dvh] overflow-auto">
+                  <div className="max-h-[calc(100dvh-205px)] md:max-h-[67.8dvh] overflow-auto">
                     <AppRenderReduxData
                       queryData={queryData}
                       loadingComponent={<AccountLoading />}
@@ -159,6 +160,9 @@ const SellerDetailsPage = () => {
                             ))}
                             <div className="flex justify-center items-center mt-5">
                               <Pagination
+                                size={
+                                  window.innerWidth > 668 ? "default" : "small"
+                                }
                                 showSizeChanger={false}
                                 pageSize={data.meta.limit}
                                 total={data.meta.total}

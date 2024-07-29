@@ -10,22 +10,11 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 
 export default function MyPurchase() {
-  const tabs = [
-    { value: "All", label: "All" },
-    { value: "approved", label: "Active" },
-    { value: "pending", label: "Pending" },
-    { value: "denied", label: "Denied" },
-  ];
-
-  const [activeTab, setActiveTab] = useState(tabs[0].value);
-
   const user = useAppSelector((state) => state?.user?.user);
-
+  const [page, setPage] = useState<number>(1);
   const queryString = useMemo(() => {
     const info = {
-      ownById: user?.id,
-      isSold: false,
-      approvedForSale: activeTab === "All" ? undefined : activeTab,
+      page,
       limit: 50,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -40,15 +29,15 @@ export default function MyPurchase() {
       return pre;
     }, "");
     return queryString;
-  }, [activeTab, user?.id]);
-  const queryData = useGetMyOrdersQuery("");
+  }, [page]);
+  const queryData = useGetMyOrdersQuery(queryString);
 
   return (
     <HomeLayout>
       <PrivateLayout>
         <div className="container py-10 2xl:py-12">
           {/* this is top section div  */}
-          <div className='flex items-center justify-between'>
+          <div className="flex items-center justify-between">
             <div className="">
               <h2 className="title">My Purchase</h2>
               <p className="text-textGrey text-xs md:text-sm">
@@ -75,7 +64,11 @@ export default function MyPurchase() {
                 return (
                   <>
                     {data?.data.length > 0 ? (
-                      <MyPurchaseMain orders={data?.data} />
+                      <MyPurchaseMain
+                        setPage={setPage}
+                        data={data}
+                        orders={data?.data}
+                      />
                     ) : (
                       <div className="bg-white rounded-2xl w-full min-h-[80dvh] flex items-center justify-center flex-col">
                         <Image
