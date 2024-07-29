@@ -12,27 +12,16 @@ import config from "@/utils/config";
 import NextTopLoader from "nextjs-toploader";
 import OnDeployment from "@/components/OnDeployment/OnDeployment";
 import { useEffect } from "react";
-import { initOneSignal } from "@/utils/oneSignal";
 
 const plus = Plus_Jakarta_Sans({
   subsets: ["latin"]
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    if (typeof window !== "undefined" && !window.OneSignalInitialized) {
-      window.OneSignalInitialized = true;
-      initOneSignal();
-    }
-  });
   return (
     <>
       <Head>
         <title>Acctbazaar</title>
-        {/* <script
-          src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
-          async
-        ></script> */}
 
         <meta name="description" content="Buy and sell social media accounts" />
         <meta
