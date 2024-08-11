@@ -28,12 +28,12 @@ import { useMemo, useState } from "react";
 const SellerDetailsPage = () => {
   const tabs = [
     { value: "Ads", label: "Ads" },
-    { value: "Reviews", label: "Reviews" },
+    // { value: "Reviews", label: "Reviews" },
   ];
   const mobileTabs = [
     { value: "Info", label: "Info" },
     { value: "Ads", label: "Ads" },
-    { value: "Reviews", label: "Reviews" },
+    // { value: "Reviews", label: "Reviews" },
   ];
   const [activeTab, setActiveTab] = useState(tabs[0].value);
   const [activeReviewTab, setActiveReviewTab] = useState("All");
@@ -179,7 +179,7 @@ const SellerDetailsPage = () => {
                   </div>
                 )}
 
-                {activeTab === "Reviews" && (
+                {/* {activeTab === "Reviews" && (
                   <div className="max-h-[67.8dvh] overflow-auto">
                     <div className="flex items-center gap-4 text-sm py-4">
                       <button
@@ -239,7 +239,7 @@ const SellerDetailsPage = () => {
                       }}
                     />
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>

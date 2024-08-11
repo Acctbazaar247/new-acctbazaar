@@ -74,8 +74,7 @@ const MarketplaceAccountCard = ({
   return (
     <div
       className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${
-        existOnCart ||
-        (account?.ownBy?.id === user?.id && "bg-[#FBFAFA] opacity-50")
+        existOnCart && "bg-[#FBFAFA] opacity-50"
       }`}
     >
       {/* this is image and description div  */}

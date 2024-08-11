@@ -268,7 +268,7 @@ const OrderDetails = () => {
                 </div> */}
                 </>
               )}
-              {!mainData?.account?.Review?.id &&
+              {/* {!mainData?.account?.Review?.id &&
                 mainData?.status !== EOrderStatus.CANCELLED &&
                 mainData.account.ownById !== user?.id && (
                   <div className="  flex justify-center w-full">
@@ -279,7 +279,7 @@ const OrderDetails = () => {
                       Leave a review
                     </button>
                   </div>
-                )}
+                )} */}
               <p className="bg-yellow-100 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">
                 “When logging into your social media account, it is highly
                 recommended to use a VPN or proxy. These tools provide an extra
