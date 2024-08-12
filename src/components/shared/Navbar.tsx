@@ -17,13 +17,13 @@ import { FiDollarSign, FiMenu } from "react-icons/fi";
 import { IoMdSettings } from "react-icons/io";
 import {
   MdOutlineDashboard,
-  MdOutlinePlaylistAddCheckCircle
+  MdOutlinePlaylistAddCheckCircle,
 } from "react-icons/md";
 import { FaBuysellads } from "react-icons/fa6";
 import {
   loggedSellerNavLinks,
   loggedUserNavLinks,
-  nonUserNavLinks
+  nonUserNavLinks,
 } from "./NavbarData";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -253,9 +253,12 @@ const Navbar = () => {
                 >
                   log in
                 </Link>
-                <div className="appBtn !text-white !hover:text-white w-full mt-3">
-                  <Link href="/auth/sign-up">Sign up</Link>
-                </div>
+                <Link
+                  className="appBtn !text-white !hover:text-white w-full mt-3 block"
+                  href="/auth/sign-up"
+                >
+                  Sign up
+                </Link>
               </div>
             </Drawer>
           </div>
