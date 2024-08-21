@@ -343,7 +343,7 @@ export default function AddWithdrawModal() {
                       transition={{ duration: 0.3 }}
                     >
                       <form onSubmit={handleSubmit(onSubmit)}>
-                        <h4>We only pay USDT</h4>
+                        <h4>USDT Only (minimum <b>$100</b>) </h4>
                         <div className="pt-3">
                           <p className="textG text-sm pb-1">Choose Network</p>
                           <div className="grid grid-cols-2 gap-3">
@@ -385,7 +385,8 @@ export default function AddWithdrawModal() {
                                   TRON network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match.
+                                doesn’t match. A network fee of $6 will be deducted from 
+                                your transaction
                               </p>
                             )}
                             {bnbSelect && (
@@ -398,7 +399,8 @@ export default function AddWithdrawModal() {
                                   BNB Smart Chain network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match.
+                                doesn’t match. A network fee of $6 will be deducted from 
+                                your transaction
                               </p>
                             )}
                             <div className="col-span-2">
