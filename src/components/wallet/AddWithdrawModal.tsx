@@ -405,7 +405,7 @@ export default function AddWithdrawModal() {
                             )}
                             <div className="col-span-2">
                               <AppFormInput
-                                label="User address"
+                                label="Wallet address"
                                 name="address"
                                 type="text"
                                 placeholder="Type your address here"
