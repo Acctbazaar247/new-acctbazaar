@@ -48,7 +48,7 @@ const Footer = (props: Props) => {
               </Link>
               <Link
                 className="text-nowrap text-sm sm:text-md font-normal"
-                href="/become-a-seller"
+                href="/become-a-merchant"
               >
                 Become a Merchant
               </Link>
