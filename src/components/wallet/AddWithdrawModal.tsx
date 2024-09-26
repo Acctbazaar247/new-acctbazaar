@@ -335,113 +335,114 @@ export default function AddWithdrawModal() {
               </div>
               
               {cryptoW && (
-                <h3 className="text-textBlack font-medium">
-                  Currently unavailable
-                </h3>
-                // <AnimatePresence>
-                //   {!withdrawData?.address ? (
-                //     <motion.div
-                //       initial={{ opacity: 0 }}
-                //       animate={{ opacity: 1 }}
-                //       exit={{ opacity: 0 }}
-                //       transition={{ duration: 0.3 }}
-                //     >
-                //       <form onSubmit={handleSubmit(onSubmit)}>
-                //         <h4>USDT Only (minimum <b>$100</b>) </h4>
-                //         <div className="pt-3">
-                //           <p className="textG text-sm pb-1">Choose Network</p>
-                //           <div className="grid grid-cols-2 gap-3">
-                //             <div
-                //               onClick={() => handleNetworkSelect("TRON")}
-                //               className={`border cursor-pointer rounded-md py-3 px-4 ${
-                //                 tronSelect
-                //                   ? "border-primary"
-                //                   : "border-[#D0D2D5]"
-                //               }`}
-                //             >
-                //               <h4 className="font-normal">Tron (TRC20)</h4>
-                //               <p className="textG text-xs">
-                //                 Est. arrival ~ 2 mins
-                //               </p>
-                //             </div>
-                //             <div
-                //               onClick={() => handleNetworkSelect("BNB")}
-                //               className={`border cursor-pointer rounded-md py-3 px-4 ${
-                //                 bnbSelect
-                //                   ? "border-primary"
-                //                   : "border-[#D0D2D5]"
-                //               }`}
-                //             >
-                //               <h4 className="font-normal">
-                //                 BNB Smart Chain (BEP20)
-                //               </h4>
-                //               <p className="textG text-xs">
-                //                 Est. arrival ~ 3 mins
-                //               </p>
-                //             </div>
-                //             {tronSelect && (
-                //               <p className="col-span-2 textG text-xs">
-                //                 The network you have selected is{" "}
-                //                 <span className="textB text-sm">TRON</span>.
-                //                 Please make sure the withdrawal address supports
-                //                 the{" "}
-                //                 <span className="textB text-sm">
-                //                   TRON network
-                //                 </span>
-                //                 . you will potentially lose your assets if it
-                //                 doesn’t match. A network fee of $6 will be deducted from 
-                //                 your transaction
-                //               </p>
-                //             )}
-                //             {bnbSelect && (
-                //               <p className="col-span-2 textG text-xs">
-                //                 The network you have selected is{" "}
-                //                 <span className="textB text-sm">BSC</span>.
-                //                 Please make sure the withdrawal address supports
-                //                 the{" "}
-                //                 <span className="textB text-sm">
-                //                   BNB Smart Chain network
-                //                 </span>
-                //                 . you will potentially lose your assets if it
-                //                 doesn’t match. A network fee of $6 will be deducted from 
-                //                 your transaction
-                //               </p>
-                //             )}
-                //             <div className="col-span-2">
-                //               <AppFormInput
-                //                 label="Wallet address"
-                //                 name="address"
-                //                 type="text"
-                //                 placeholder="Type your address here"
-                //                 register={register}
-                //                 error={errors?.address}
-                //               />
-                //             </div>
+                
+                <AnimatePresence>
+                  {/* {!withdrawData?.address ? (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <h4>USDT Only (minimum <b>$100</b>) </h4>
+                        <div className="pt-3">
+                          <p className="textG text-sm pb-1">Choose Network</p>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div
+                              onClick={() => handleNetworkSelect("TRON")}
+                              className={`border cursor-pointer rounded-md py-3 px-4 ${
+                                tronSelect
+                                  ? "border-primary"
+                                  : "border-[#D0D2D5]"
+                              }`}
+                            >
+                              <h4 className="font-normal">Tron (TRC20)</h4>
+                              <p className="textG text-xs">
+                                Est. arrival ~ 2 mins
+                              </p>
+                            </div>
+                            <div
+                              onClick={() => handleNetworkSelect("BNB")}
+                              className={`border cursor-pointer rounded-md py-3 px-4 ${
+                                bnbSelect
+                                  ? "border-primary"
+                                  : "border-[#D0D2D5]"
+                              }`}
+                            >
+                              <h4 className="font-normal">
+                                BNB Smart Chain (BEP20)
+                              </h4>
+                              <p className="textG text-xs">
+                                Est. arrival ~ 3 mins
+                              </p>
+                            </div>
+                            {tronSelect && (
+                              <p className="col-span-2 textG text-xs">
+                                The network you have selected is{" "}
+                                <span className="textB text-sm">TRON</span>.
+                                Please make sure the withdrawal address supports
+                                the{" "}
+                                <span className="textB text-sm">
+                                  TRON network
+                                </span>
+                                . you will potentially lose your assets if it
+                                doesn’t match. A network fee of $6 will be deducted from 
+                                your transaction
+                              </p>
+                            )}
+                            {bnbSelect && (
+                              <p className="col-span-2 textG text-xs">
+                                The network you have selected is{" "}
+                                <span className="textB text-sm">BSC</span>.
+                                Please make sure the withdrawal address supports
+                                the{" "}
+                                <span className="textB text-sm">
+                                  BNB Smart Chain network
+                                </span>
+                                . you will potentially lose your assets if it
+                                doesn’t match. A network fee of $6 will be deducted from 
+                                your transaction
+                              </p>
+                            )}
+                            <div className="col-span-2">
+                              <AppFormInput
+                                label="Wallet address"
+                                name="address"
+                                type="text"
+                                placeholder="Type your address here"
+                                register={register}
+                                error={errors?.address}
+                              />
+                            </div>
 
-                //             {watch("address") && (
-                //               <motion.div
-                //                 initial={{ height: 0, opacity: 0 }}
-                //                 animate={{ height: 50, opacity: 1 }}
-                //                 exit={{ height: 0, opacity: 0 }}
-                //                 transition={{ duration: 0.3 }}
-                //                 className="col-span-2 flex items-center justify-end"
-                //               >
-                //                 <button
-                //                   disabled={isCurrencyLoading}
-                //                   // onClick={handleWithdraw}
-                //                   type="submit"
-                //                   className="appBtn"
-                //                 >
-                //                   Withdraw
-                //                 </button>
-                //               </motion.div>
-                //             )}
-                //           </div>
-                //         </div>
-                //       </form>
-                //     </motion.div>
-                //   ) : null}
-                // </AnimatePresence>
+                            {watch("address") && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 50, opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="col-span-2 flex items-center justify-end"
+                              >
+                                <button
+                                  disabled={isCurrencyLoading}
+                                  // onClick={handleWithdraw}
+                                  type="submit"
+                                  className="appBtn"
+                                >
+                                  Withdraw
+                                </button>
+                              </motion.div>
+                            )}
+                          </div>
+                        </div>
+                      </form>
+                    </motion.div>
+                  ) : null} */}
+                  <h3 className="text-textBlack font-medium">
+                    Currently unavailable
+                  </h3>
+                </AnimatePresence>
               )}
             </div>
           </div>
