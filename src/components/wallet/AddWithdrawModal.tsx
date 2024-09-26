@@ -333,7 +333,10 @@ export default function AddWithdrawModal() {
                 </div>
                 <Radio checked={cryptoW} />
               </div>
-              {cryptoW && (
+              <h3 className="text-textBlack font-medium">
+                Currently unavailable
+              </h3>
+              {/* {cryptoW && (
                 <AnimatePresence>
                   {!withdrawData?.address ? (
                     <motion.div
@@ -438,7 +441,7 @@ export default function AddWithdrawModal() {
                     </motion.div>
                   ) : null}
                 </AnimatePresence>
-              )}
+              )} */}
             </div>
           </div>
         )}
