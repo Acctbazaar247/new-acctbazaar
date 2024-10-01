@@ -2,6 +2,7 @@ import AccountReel from "@/components/AccountReel/AccountReel";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import MarketplaceSidebar from "@/components/marketplace/MarketplaceSidebar";
 import AccountLoading from "@/components/shared/AccountLoading";
+import { AppAlert } from "@/components/shared/AppAlert";
 import AnimationWrapper from "@/components/ui/AnimationWrapper";
 import AppDrawer from "@/components/ui/AppDrawer";
 import AppInput from "@/components/ui/AppInput";
@@ -72,6 +73,7 @@ const Marketplace = () => {
       <PrivateLayout>
         <div className="layout h-[calc(100dvh-105px)] md:h-custom-dvh-md 2xl:h-custom-dvh overflow-hidden">
           {/* this is top section div  */}
+          <AppAlert />
           <div className="flex flex-col md:flex-row justify-between gap-1 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-white md:static z-40">
             <div className="md:pl-4">
               <h2 className="title">Marketplace</h2>

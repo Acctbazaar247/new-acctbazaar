@@ -1,11 +1,7 @@
 import Loading from "@/components/ui/Loading";
 import Logo from "@/components/ui/Logo";
 import HomeLayout from "@/layout/HomeLayout";
-import {
-  loginUser,
-  setError,
-  setLoading,
-} from "@/redux/features/auth/authSlice";
+import { loginUser, setError } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import config from "@/utils/config";
 import { Modal } from "antd";
@@ -81,7 +77,7 @@ const SignIn: React.FC = () => {
         }
       })
       .catch((res) => {
-        (res);
+        res;
         toast.error(res?.response?.data?.message || "something went wrong");
       })
       .finally(() => {
