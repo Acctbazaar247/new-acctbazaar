@@ -14,7 +14,7 @@ const AppAlert = () => {
           <FiBell className="text-2xl font-bold xl:text-[30px] w-[40px]" />{" "}
           <span
             style={{ wordSpacing: "7px" }}
-            className="uppercase text-center  font-bold"
+            className="uppercase text-center w-full font-bold"
           >
             {message}
           </span>
