@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiAlertTriangle } from "react-icons/fi";
+import { FiAlertTriangle, FiBell } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 
 const AppAlert = () => {
@@ -10,9 +10,12 @@ const AppAlert = () => {
   return (
     <>
       {isShow && message && (
-        <div className="bg-primary flex items-center gap-2 text-white rounded px-2 md:px-4 text-xs md:text-lg py-1.5 md:py-2">
-          <FiAlertTriangle className="text-xl 2xl:text-2xl w-fit" />{" "}
-          <span style={{ wordSpacing: "7px" }} className="uppercase">
+        <div className="bg-primary flex font-bold items-center gap-2 text-white rounded px-2 md:px-4 text-xs md:text-lg py-1.5 md:py-2">
+          <FiBell className="text-2xl font-bold xl:text-[30px] w-[40px]" />{" "}
+          <span
+            style={{ wordSpacing: "7px" }}
+            className="uppercase text-center md:text-left font-bold"
+          >
             {message}
           </span>
           <RxCross2
