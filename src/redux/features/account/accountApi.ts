@@ -2,47 +2,48 @@ import { IAccount } from "@/types/common";
 import { apiSlice } from "../apiSlice/apiSlice";
 import { tagTypes } from "../apiSlice/tagTypesList";
 import { addCacheKey, getCacheKeys } from "./account.cacheKey.manager";
+
 export const accountApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAccounts: builder.query({
       query: (query) => {
         addCacheKey(query);
         return {
-          url: `/accounts?${query}`
+          url: `/accounts?${query}`,
         };
       },
-      providesTags: [tagTypes.account]
+      providesTags: [tagTypes.account],
     }),
     getAccountById: builder.query({
       query: (id) => `/accounts/${id}`,
-      providesTags: [tagTypes.account, tagTypes.singleAccount]
+      providesTags: [tagTypes.account, tagTypes.singleAccount],
     }),
     addAccount: builder.mutation({
       query: (info) => {
         return {
           url: "/accounts",
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.account, tagTypes.plan]
+      invalidatesTags: [tagTypes.account, tagTypes.plan],
     }),
     addMultiAccount: builder.mutation({
       query: (info) => {
         return {
           url: "/accounts/multi-upload",
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.account, tagTypes.plan]
+      invalidatesTags: [tagTypes.account, tagTypes.plan],
     }),
     editAccount: builder.mutation({
       query: (info) => {
         return {
           url: `/accounts/${info.id}`,
           method: "PATCH",
-          body: info
+          body: info,
         };
       },
       invalidatesTags: [tagTypes.singleAccount],
@@ -68,24 +69,25 @@ export const accountApi = apiSlice.injectEndpoints({
         } catch (err) {
           patchResults.forEach((patchResult) => patchResult.undo()); // Revert optimistic update if the request fails
         }
-      }
+      },
     }),
     deleteAccount: builder.mutation({
       query: (id) => {
         return {
           url: `/accounts/${id}`,
-          method: "DELETE"
+          method: "DELETE",
         };
       },
-      invalidatesTags: [tagTypes.account]
-    })
-  })
+      invalidatesTags: [tagTypes.account],
+    }),
+  }),
 });
+
 export const {
   useGetAccountsQuery,
   useAddAccountMutation,
   useDeleteAccountMutation,
   useEditAccountMutation,
   useGetAccountByIdQuery,
-  useAddMultiAccountMutation
+  useAddMultiAccountMutation,
 } = accountApi;

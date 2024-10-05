@@ -81,7 +81,7 @@ const MyPurchaseAccountCard = ({
   return (
     <>
       <div
-        className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 hover:bg-[#FBFAFA]`}
+        className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-whiteGrey p-2 md:p-4 2xl:p-5 hover:bg-borderLight`}
       >
         <Image
           src={findImageUrlByCategory(account?.category)}
@@ -104,9 +104,9 @@ const MyPurchaseAccountCard = ({
             <p
               className={`text-sm   py-1 px-2 rounded-full ${
                 (order?.status === EOrderStatus.CANCELLED &&
-                  "text-[#B42318] bg-[#FEF3F2]") ||
+                  "text-red bg-red/10") ||
                 (order?.status === EOrderStatus.COMPLETED &&
-                  "text-[#175CD3] bg-[#EFF8FF]")
+                  "text-blue bg-blue/10")
               }`}
             >
               {order?.status}
@@ -121,7 +121,7 @@ const MyPurchaseAccountCard = ({
             </h2>
 
             {/* this is icons div view cart message  */}
-            <div className="flex items-center justify-between gap-4 text-[#4F4F4F]">
+            <div className="flex items-center justify-between gap-4 text-textGrey">
               {/* {!account?.Review?.id &&
                 order?.status !== EOrderStatus.CANCELLED && (
                   <div
@@ -129,7 +129,7 @@ const MyPurchaseAccountCard = ({
                     onClick={() => setModalOpen(true)}
                   >
                     <Tooltip title="Give a Review">
-                      <VscFeedback className="cursor-pointer text-[18px] md:text-[20px] text-[#69645ad9]" />
+                      <VscFeedback className="cursor-pointer text-[18px] md:text-[20px]" />
                     </Tooltip>
                   </div>
                 )} */}

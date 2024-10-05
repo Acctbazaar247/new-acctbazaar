@@ -77,13 +77,13 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed w-full top-0 z-[500] md:shadow md:border-b border-b-[#D0D2D5]">
+    <header className="fixed w-full top-0 z-[500] md:shadow md:border-b border-b-borderColor">
       <div
         className={`
       px-4 md:px-4 lg:px-10 2xl:px-16 py-2 2xl:py-2.5  flex justify-between items-center text-black transition-all
       ${
         !isHome
-          ? "bg-[#FAFAFC] md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
+          ? "bg-borderLight md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
           : progress >= 0.06
           ? "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
           : "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl lg:bg-transparent lg:backdrop-blur-0"

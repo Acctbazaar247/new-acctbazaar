@@ -28,7 +28,7 @@ interface FormData {
 
 export default function AccountCredentials({
   updateProgress,
-  UploadLeftOnCurrentPlan
+  UploadLeftOnCurrentPlan,
 }: TAccountCredentials) {
   const { data: currentPlan, isLoading } = useGetCurrentPlanQuery("");
 
@@ -45,7 +45,7 @@ export default function AccountCredentials({
     watch,
     reset,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -55,7 +55,7 @@ export default function AccountCredentials({
       return toast.error(
         "Your upload limit has finished for today, want to more upload account? Please upgrade your plan",
         {
-          toastId: 1
+          toastId: 1,
         }
       );
     }
@@ -69,7 +69,7 @@ export default function AccountCredentials({
   const handleCredentials = () => {
     if (accountCredentials.length < 1) {
       return toast.error("Please set minimum one account Credentials", {
-        toastId: 1
+        toastId: 1,
       });
     }
     updateProgress(4);
@@ -187,13 +187,13 @@ export default function AccountCredentials({
             {/* <div className=''>
                             <input type="file" id="file" className="hidden" />
                             <label htmlFor="file" className='cursor-pointer border border-borderColor rounded hover:bg-gray-100 border-dashed py-3 px-3 flex items-center gap-1 justify-between'>
-                                <h2 className="text-[#7D7878] flex items-center gap-1 text-sm"><CgFileAdd />Upload Valid Identity Document</h2>
+                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm"><CgFileAdd />Upload Valid Identity Document</h2>
                                 <p className="text-primary text-xs font-medium">Select File</p>
                             </label>
-                            <h2 className="text-[#7D7878] pt-1 text-xs">JPEG, PNG, PDF. Max file size: 2mb</h2>
+                            <h2 className="text-darkishGrey pt-1 text-xs">JPEG, PNG, PDF. Max file size: 2mb</h2>
                         </div> */}
           </div>
-          <div className="hidden md:block border border-[#EFECEC]"></div>
+          <div className="hidden md:block border border-whiteGrey"></div>
           {/* this is last div  */}
           <div className="md:w-[35%] space-y-2 min-h-full">
             {accountCredentials.length < 1 ? (

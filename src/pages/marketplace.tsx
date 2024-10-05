@@ -115,7 +115,7 @@ const Marketplace = () => {
                 <MarketplaceSidebar />
               </div>
             </div>
-            <div className="hidden md:block border border-[#E1DBDB]"></div>
+            <div className="hidden md:block border border-borderColor"></div>
             <div className="w-full mt-[120px] md:mt-0">
               <div className="w-full bg-white max-h-[calc(100dvh-248px)] md:max-h-[74dvh] lg:max-h-[68dvh] 2xl:max-h-[72dvh] overflow-auto p-2 md:p-4 2xl:p-6">
                 <h2 className="text-xl font-bold">Latest account</h2>

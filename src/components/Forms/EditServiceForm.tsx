@@ -3,7 +3,7 @@ import {
   AccountCategory,
   EApprovedForSale,
   IAccount,
-  UserRole
+  UserRole,
 } from "@/types/common";
 import React from "react";
 import { toast } from "react-toastify";
@@ -49,7 +49,7 @@ const EditServiceForm = ({ data }: Props) => {
         approvedForSale:
           user?.role === UserRole.Seller
             ? EApprovedForSale.pending
-            : approvedForSale
+            : approvedForSale,
       })
         .unwrap()
         .then((res: any) => {
@@ -84,8 +84,8 @@ const EditServiceForm = ({ data }: Props) => {
     <div className="pb-10">
       <div>
         {isStatusSuccess ? (
-          <div className="p-2 rounded w-full md:w-1/2 mb-2 bg-[#FFFAE6] mt-2 ">
-            <span className="flex gap-2 items-center    text-[#A77207] ">
+          <div className="p-2 rounded w-full md:w-1/2 mb-2 bg-yellowShadow mt-2 ">
+            <span className="flex gap-2 items-center    text-biskutColor ">
               <MdErrorOutline></MdErrorOutline> Sorry you can not update active
               account
             </span>{" "}
@@ -96,7 +96,7 @@ const EditServiceForm = ({ data }: Props) => {
         submitHandler={handleSubmit}
         defaultValues={{
           ...data,
-          price: hasScientificNotation(data.price) ? 0 : data.price
+          price: hasScientificNotation(data.price) ? 0 : data.price,
         }}
       >
         <div className="grid gap-3  grid-cols-1 xl:grid-cols-2 ">

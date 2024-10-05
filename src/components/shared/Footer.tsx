@@ -9,7 +9,7 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <div className="bg-[#581203] text-white">
+    <div className="bg-khoyri text-white">
       <div className="container px-4 py-16 lg:py-20 flex justify-between  gap-3 lg:flex-row flex-col w-full">
         <div className="max-w-[300px]">
           <Link href="/" className="flex items-center pb-3">
@@ -32,7 +32,7 @@ const Footer = (props: Props) => {
 
         <div className="flex justify-between lg:gap-32">
           <div className="">
-            <h2 className="font-bold text-[#F7AC9B] pb-5">Links</h2>
+            <h2 className="font-bold text-primary/50 pb-5">Links</h2>
             <div className="space-y-3 flex flex-col font-normal">
               <Link
                 className="text-nowrap text-sm sm:text-md font-normal"
@@ -65,7 +65,7 @@ const Footer = (props: Props) => {
 
           {/* this is contact section  */}
           <div className="">
-            <h2 className="font-bold text-[#F7AC9B]">Contact</h2>
+            <h2 className="font-bold text-primary/50">Contact</h2>
             <p className="text-sm font-normal pt-4">help@acctbazaar.com</p>
             <div className="flex my-4">
               <Link
@@ -124,7 +124,7 @@ const Footer = (props: Props) => {
         <div className="flex justify-between lg:justify-normal gap-6 pt-6 lg:pt-0">
           <div className="space-y-2">
             <h2 className="font-medium">Get the app</h2>
-            <p className="bg-[#CAFBBE] text-sm px-2 py-1 rounded-full text-textBlack">
+            <p className="bg-success/20 text-sm px-2 py-1 rounded-full text-textBlack">
               Coming Soon
             </p>
           </div>
@@ -151,7 +151,7 @@ const Footer = (props: Props) => {
       </div>
 
       <div className="hidden lg:block container px-4">
-        <hr className="bg-[#A4A1A1]" />
+        <hr className="bg-darkishGrey" />
       </div>
 
       <div className="container flex flex-col-reverse lg:flex-row justify-between items-center px-4 lg:pt-9 pb-12">
@@ -159,7 +159,7 @@ const Footer = (props: Props) => {
           Copyright &copy; 2024 Acctbazaar. All rights reserved !
         </p>
         <div className="lg:hidden container px-4 py-6">
-          <hr className="bg-[#A4A1A1]" />
+          <hr className="bg-darkishGrey" />
         </div>
         <div className="flex items-start w-full lg:w-fit pl-4 lg:pl-0 lg:items-center font-normal gap-6 text-sm">
           <Link href={"/terms-and-condition"}>

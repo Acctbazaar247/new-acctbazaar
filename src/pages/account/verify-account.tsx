@@ -301,7 +301,7 @@ const VerifyAccount = () => {
                     />
                   </div>
                 </div>
-                <div className="border border-[#F2F4F7]"></div>
+                <div className="border border-borderLight"></div>
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
@@ -358,7 +358,7 @@ const VerifyAccount = () => {
                     />
                   </div>
                 </div>
-                <div className="border border-[#F2F4F7]"></div>
+                <div className="border border-borderLight"></div>
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
@@ -426,7 +426,7 @@ const VerifyAccount = () => {
                           <>
                             {identityImage === ("" || undefined) ? (
                               <div className="flex items-center justify-between p-3 w-full">
-                                <h2 className="text-[#7D7878] flex items-center gap-1 text-sm">
+                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm">
                                   <CgFileAdd />
                                   Upload Valid Identity Document
                                 </h2>
@@ -444,13 +444,13 @@ const VerifyAccount = () => {
                           </>
                         )}
                       </label>
-                      <h2 className="text-[#7D7878] pt-1 text-xs">
+                      <h2 className="text-darkishGrey pt-1 text-xs">
                         JPEG, PNG, PDF. Max file size: 2mb
                       </h2>
                     </div>
                   </div>
                 </div>
-                <div className="border border-[#F2F4F7]"></div>
+                <div className="border border-borderLight"></div>
                 {!kycPending && (
                   <div className="flex items-center justify-end">
                     {/* {isLoading || loading || updateLoading ? (

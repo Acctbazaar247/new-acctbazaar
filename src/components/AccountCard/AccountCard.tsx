@@ -81,7 +81,7 @@ const AccountCard = (props: Props) => {
       }
     >
       <div className="flex flex-col gap-5  items-start">
-        <div className="w-full h-[145px] flex justify-center items-center rounded bg-[#FFF4F1]">
+        <div className="w-full h-[145px] flex justify-center items-center rounded bg-primary/5">
           <Image
             src={findImageUrlByCategory(category)}
             className="rounded "
@@ -113,7 +113,7 @@ const AccountCard = (props: Props) => {
               )} */}
               {ownBy?.isVerifiedByAdmin && (
                 <p
-                  className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
+                  className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-yellowShadow`}
                 >
                   <GoDotFill />
                   verified merchant

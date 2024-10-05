@@ -149,23 +149,21 @@ const OrderDetails = () => {
                 )}
               </p>
               <p
-                className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${
+                className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-success bg-success/10 ${
                   (mainData.status === "pending" &&
-                    "text-[#B54708] bg-[#FFFAEB]") ||
-                  (mainData.status === "cancelled" &&
-                    "text-[#B42318] bg-[#FEF3F2]") ||
+                    "text-brown bg-yellowShadow") ||
+                  (mainData.status === "cancelled" && "text-red bg-red/10") ||
                   (mainData.status === "completed" &&
-                    "text-[#027A48] bg-[#ECFDF3]")
+                    "text-success bg-success/10")
                 }`}
               >
                 <GoDotFill
                   className={`${
                     (mainData.status === "pending" &&
-                      "text-[#B54708] bg-[#FFFAEB]") ||
-                    (mainData.status === "cancelled" &&
-                      "text-[#B42318] bg-[#FEF3F2]") ||
+                      "text-brown bg-yellowShadow") ||
+                    (mainData.status === "cancelled" && "text-red bg-red/10") ||
                     (mainData.status === "completed" &&
-                      "text-[#027A48] bg-[#ECFDF3]")
+                      "text-success bg-success/10")
                   }`}
                 />
                 {mainData.status}
@@ -183,7 +181,7 @@ const OrderDetails = () => {
           <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl 2xl:max-h-[75vh] overflow-auto bg-white md:p-4 lg:p-5 2xl:p-6">
             <div className="w-full md:w-[55%] h-full space-y-3 2xl:space-y-4">
               <div
-                className={`w-full flex flex-col md:flex-row items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-[#FBFAFA] p-2 md:p-4 2xl:p-5`}
+                className={`w-full flex flex-col md:flex-row items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-borderLight p-2 md:p-4 2xl:p-5`}
               >
                 {/* this is image and description div  */}
                 <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -256,11 +254,11 @@ const OrderDetails = () => {
                   {/* <div className="">
                   <h4>Leave a Review</h4>
                   <div className="flex items-center gap-6 pt-2.5">
-                    <button className="bg-[#F4F5F5] text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
+                    <button className=" text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
                       <BiLike />
                       Positive
                     </button>
-                    <button className="bg-[#F4F5F5] text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
+                    <button className="bg- text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
                       <BiDislike />
                       Negative
                     </button>
@@ -287,7 +285,7 @@ const OrderDetails = () => {
                 masking your IP address. GET VPN”
               </p>
             </div>
-            <div className="hidden md:block border border-[#EFECEC]"></div>
+            <div className="hidden md:block border border-whiteGrey"></div>
             <div className="hidden md:block w-[43%] h-full">
               <OrderDetailsMessaging order={mainData} />
             </div>

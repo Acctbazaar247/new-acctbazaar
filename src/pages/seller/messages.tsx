@@ -74,7 +74,7 @@ const Messages = () => {
                   />
                 ))}
               </div>
-              <div className="border border-[#EFECEC]"></div>
+              <div className="border border-whiteGrey"></div>
               <div className="w-[63%] h-full">
                 {activeMessageBoxInfo && activeChatId ? (
                   <MessageMain

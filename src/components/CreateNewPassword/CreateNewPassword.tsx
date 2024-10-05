@@ -63,7 +63,7 @@ const CreateNewPassword: React.FC<Props> = ({ otp, email }) => {
           <h2 className="text-2xl lg:text-4xl font-bold text-textBlack pb-1 lg:pb-2">
             Create new password
           </h2>
-          <p className="text-[#645D5D] text-xs lg:text-sm">
+          <p className="text-textGrey text-xs lg:text-sm">
             Create your new password to get back into your account
           </p>
 

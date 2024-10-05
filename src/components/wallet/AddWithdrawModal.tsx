@@ -184,7 +184,7 @@ export default function AddWithdrawModal() {
               height={60}
               src="/assets/icons/send.png"
               alt=""
-              className="size-14 rounded-lg border border-[#E6E0E0] hover:bg-[#FFCAAD]/15 cursor-pointer"
+              className="size-14 rounded-lg border border-brown/10 hover:bg-primary/15 cursor-pointer"
             />
             <h4>Withdraw</h4>
           </div>
@@ -233,7 +233,7 @@ export default function AddWithdrawModal() {
               </div>
             </div>
 
-            <div className=" p-4 border border-[#C5C5C5] rounded-lg ">
+            <div className=" p-4 border border-borderColor rounded-lg ">
               <div
                 onClick={handleBankWithdraw}
                 className={`flex items-center justify-between gap-5 ${
@@ -312,7 +312,7 @@ export default function AddWithdrawModal() {
             </div>
 
             {/* this is crypto withdrawal code  */}
-            <div className="p-4 border border-[#C5C5C5] rounded-lg">
+            <div className="p-4 border border-borderColor rounded-lg">
               <div
                 onClick={handleCryptoWithdraw}
                 className={`flex items-center justify-between cursor-pointer gap-5 ${
@@ -333,9 +333,8 @@ export default function AddWithdrawModal() {
                 </div>
                 <Radio checked={cryptoW} />
               </div>
-              
+
               {cryptoW && (
-                
                 <AnimatePresence>
                   {/* {!withdrawData?.address ? (
                     <motion.div
@@ -354,7 +353,7 @@ export default function AddWithdrawModal() {
                               className={`border cursor-pointer rounded-md py-3 px-4 ${
                                 tronSelect
                                   ? "border-primary"
-                                  : "border-[#D0D2D5]"
+                                  : "border-borderColor"
                               }`}
                             >
                               <h4 className="font-normal">Tron (TRC20)</h4>
@@ -367,7 +366,7 @@ export default function AddWithdrawModal() {
                               className={`border cursor-pointer rounded-md py-3 px-4 ${
                                 bnbSelect
                                   ? "border-primary"
-                                  : "border-[#D0D2D5]"
+                                  : "border-borderColor"
                               }`}
                             >
                               <h4 className="font-normal">
@@ -387,7 +386,7 @@ export default function AddWithdrawModal() {
                                   TRON network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match. A network fee of $6 will be deducted from 
+                                doesn’t match. A network fee of $6 will be deducted from
                                 your transaction
                               </p>
                             )}
@@ -401,7 +400,7 @@ export default function AddWithdrawModal() {
                                   BNB Smart Chain network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match. A network fee of $6 will be deducted from 
+                                doesn’t match. A network fee of $6 will be deducted from
                                 your transaction
                               </p>
                             )}

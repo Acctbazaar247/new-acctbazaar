@@ -28,7 +28,7 @@ const SignUp = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
 
   const router = useRouter();
@@ -52,7 +52,7 @@ const SignUp = () => {
     let submittedData = {
       ...rest,
       role: UserRole.User,
-      ...(referralId && { referralId })
+      ...(referralId && { referralId }),
     };
 
     dispatch(createUser(submittedData as any));
@@ -85,15 +85,15 @@ const SignUp = () => {
             <h2 className="text-2xl lg:text-4xl font-bold text-textBlack pb-1 lg:pb-2">
               Welcome to Acctbazaar 👋🏾
             </h2>
-            <p className="text-[#645D5D] text-xs lg:text-sm">
+            <p className="text-textGrey text-xs lg:text-sm">
               Already have an account?{" "}
               <span className="text-primary font-medium">
                 <Link
                   href={{
                     pathname: "/auth/sign-in",
                     query: router.query?.from && {
-                      from: router.query?.from || ""
-                    }
+                      from: router.query?.from || "",
+                    },
                   }}
                 >
                   Login
@@ -128,7 +128,7 @@ const SignUp = () => {
               <Controller
                 name="phoneNumber"
                 rules={{
-                  required: true
+                  required: true,
                 }}
                 control={control}
                 render={({ field: { name, onBlur, onChange, ref, value } }) => (
@@ -136,14 +136,14 @@ const SignUp = () => {
                     value={value}
                     // enableAreaCodes={true}
                     specialLabel={""}
-                    inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-[#D0D2D5]"
+                    inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-borderColor"
                     country={"ng"}
                     placeholder="Phone Number"
                     inputProps={{
                       name,
                       onBlur,
                       ref,
-                      onChange
+                      onChange,
                     }}
                   />
                 )}
@@ -188,7 +188,7 @@ const SignUp = () => {
                 <div className=" contact-input-label   flex items-center">
                   <input
                     {...register("accept", {
-                      required: true
+                      required: true,
                     })}
                     required
                     type="checkbox"

@@ -18,56 +18,56 @@ const ViewUser = ({ record }: TEditUserProps) => {
   const kycData = [
     {
       label: "Name",
-      value: record?.ownBy?.name
+      value: record?.ownBy?.name,
     },
     {
       label: "Username",
-      value: record?.userName
+      value: record?.userName,
     },
     {
       label: "Phone Number",
-      value: record?.ownBy?.phoneNumber
+      value: record?.ownBy?.phoneNumber,
     },
     {
       label: "WhatsApp Number",
-      value: record?.whatsAppNumber
+      value: record?.whatsAppNumber,
     },
     {
       label: "Telegram username",
-      value: record?.telegramNumber
+      value: record?.telegramNumber,
     },
     {
       label: "Email",
-      value: record?.ownBy?.email
+      value: record?.ownBy?.email,
     },
     {
       label: "Country",
-      value: countryDetails?.name
+      value: countryDetails?.name,
     },
     {
       label: "State",
-      value: stateDetails?.name
+      value: stateDetails?.name,
     },
     {
       label: "City",
-      value: record?.city
+      value: record?.city,
     },
     {
       label: "Address",
-      value: record?.address
+      value: record?.address,
     },
     {
       label: "Date of Birth",
-      value: record?.birthDate
+      value: record?.birthDate,
     },
     {
       label: "Means Of Identification",
-      value: record?.meansOfIdentification
+      value: record?.meansOfIdentification,
     },
     {
       label: "Identification Number",
-      value: record?.identificationNumber
-    }
+      value: record?.identificationNumber,
+    },
   ];
 
   return (
@@ -83,7 +83,7 @@ const ViewUser = ({ record }: TEditUserProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
         {kycData?.map((data) => (
           <div key={data?.label}>
-            <p className="text-[#828282]">{data?.label}</p>
+            <p className="text-darkishGrey">{data?.label}</p>
             <p className="text-textDark font-medium">{data?.value}</p>
           </div>
         ))}

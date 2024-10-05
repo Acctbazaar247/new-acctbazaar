@@ -28,7 +28,7 @@ export default function AccountCredentialCard({
   // );
   return (
     <div
-      className={` flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg p-2 md:p-3 2xl:p-4 bg-[#FBFAFA]`}
+      className={` flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg p-2 md:p-3 2xl:p-4 bg-borderLight`}
     >
       <Image
         src={findImageUrlByCategory(account?.category as AccountCategory)}

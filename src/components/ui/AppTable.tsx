@@ -29,9 +29,8 @@ const AppTable = ({
   onInputChange,
   loadingComponent,
   setPage,
-  tabs
+  tabs,
 }: TTableProps) => {
-
   const [input, setInput] = useState("");
   const debounceInput = useDebounce(input, 500);
 
@@ -42,14 +41,22 @@ const AppTable = ({
   }, [debounceInput, onInputChange]);
 
   return (
-    <div className="w-full  border border-[#E6E6E7] ">
+    <div className="w-full  border border-borderLight ">
       {/* Table header here  */}
-      {!button && !headerText && !inputPlaceholder ? <></> :
-        <div className="bg-[#F8F8F8] w-full flex gap-2 lg:gap-0 flex-col md:flex-row justify-between p-2 lg:p-3 rounded-t-2xl">
-          <div className={`flex md:items-center justify-between ${inputPlaceholder ? "md:w-3/5" : "md:w-1/5"}`}>
+      {!button && !headerText && !inputPlaceholder ? (
+        <></>
+      ) : (
+        <div className="bg-borderLight w-full flex gap-2 lg:gap-0 flex-col md:flex-row justify-between p-2 lg:p-3 rounded-t-2xl">
+          <div
+            className={`flex md:items-center justify-between ${
+              inputPlaceholder ? "md:w-3/5" : "md:w-1/5"
+            }`}
+          >
             <h1 className="md:text-lg lg:text-xl font-medium">{headerText}</h1>
             {inputPlaceholder && (
-              <div className={`bg-white w-1/2 lg:w-3/5 rounded-md px-1 md:px-2.5 py-1 md:py-1.5 lg:p-2.5 flex items-center`}>
+              <div
+                className={`bg-white w-1/2 lg:w-3/5 rounded-md px-1 md:px-2.5 py-1 md:py-1.5 lg:p-2.5 flex items-center`}
+              >
                 <LuSearch className="text-textDark text-lg" />
                 <input
                   type="text"
@@ -62,20 +69,18 @@ const AppTable = ({
             )}
           </div>
           {tabs}
-          {button &&
+          {button && (
             <div className="lg:w-2/5 flex  items-center justify-end">
               {button}
             </div>
-          }
+          )}
         </div>
-      }
+      )}
 
-      <div className='overflow-x-auto'>
+      <div className="overflow-x-auto">
         {infoQuery && (
           <AppRenderReduxData
-            loadingComponent={
-              loadingComponent || <AppTableSkeleton />
-            }
+            loadingComponent={loadingComponent || <AppTableSkeleton />}
             queryData={infoQuery}
             showData={(data) => {
               // console.log(data);
@@ -83,22 +88,27 @@ const AppTable = ({
                 <Table
                   showHeader={header}
                   columns={columns}
-                  dataSource={Array.isArray(data?.data) ? data?.data : [data?.data]}
+                  dataSource={
+                    Array.isArray(data?.data) ? data?.data : [data?.data]
+                  }
                   rowKey="id"
-                  pagination={setPage ? {
-                    onChange: (value) => setPage(value),
-                    pageSize: data?.meta?.limit,
-                    total: data?.meta?.total,
-                    current: data?.meta?.page,
-                    showSizeChanger: false
-                  } : false}
+                  pagination={
+                    setPage
+                      ? {
+                          onChange: (value) => setPage(value),
+                          pageSize: data?.meta?.limit,
+                          total: data?.meta?.total,
+                          current: data?.meta?.page,
+                          showSizeChanger: false,
+                        }
+                      : false
+                  }
                 />
               );
             }}
           />
         )}
       </div>
-
     </div>
   );
 };

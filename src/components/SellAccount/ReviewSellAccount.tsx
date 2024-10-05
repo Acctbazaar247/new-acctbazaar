@@ -16,7 +16,10 @@ import {
   ResponseSuccessType,
 } from "@/types/common";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { emptyAccountCredentials, setAccountCard } from "@/redux/features/account/accountSlice";
+import {
+  emptyAccountCredentials,
+  setAccountCard,
+} from "@/redux/features/account/accountSlice";
 
 type TReviewSellAccount = {
   updateProgress: Dispatch<SetStateAction<number>>;
@@ -56,7 +59,6 @@ export default function ReviewSellAccount({
         }
       })
       .catch((err: IGenericErrorMessage) => {
-
         toast.error(err.message || "something went wrong");
       });
   };
@@ -84,9 +86,9 @@ export default function ReviewSellAccount({
           updateProgress={updateProgress}
           account={accountCard}
         />
-        <div className="border border-[#EFECEC]"></div>
+        <div className="border border-whiteGrey"></div>
 
-        <div className='w-full max-h-[50dvh] overflow-auto space-y-3'>
+        <div className="w-full max-h-[50dvh] overflow-auto space-y-3">
           {accountCredentials.map((account, index) => (
             <OrderDetailsAccountInfo
               key={index}

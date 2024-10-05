@@ -162,7 +162,7 @@ export default function ShoppingCart() {
                   ))}
                 </div>
               ) : (
-                <div className="px-4 py-12 text-[#828D99] flex items-center justify-center flex-col gap-2">
+                <div className="px-4 py-12 text-zinc flex items-center justify-center flex-col gap-2">
                   <Image
                     width={80}
                     height={80}
@@ -174,7 +174,7 @@ export default function ShoppingCart() {
                 </div>
               )}
             </div>
-            <div className="hidden md:block border border-[#E1DBDB] 2xl:mr-6"></div>
+            <div className="hidden md:block border border-borderColor 2xl:mr-6"></div>
             <div className="w-full md:w-[37%] min-h-full overflow-y-auto bg-white p-2 md:p-4 2xl:p-6">
               {myCarts.length > 0 && (
                 <>

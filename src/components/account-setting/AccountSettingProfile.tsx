@@ -246,7 +246,7 @@ const AccountSettingProfile = () => {
                 value={value}
                 // enableAreaCodes={true}
                 specialLabel={""}
-                inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-[#D0D2D5]"
+                inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-borderColor"
                 country={"ng"}
                 placeholder="Phone Number"
                 inputProps={{
@@ -267,7 +267,7 @@ const AccountSettingProfile = () => {
         </div>
       </div>
 
-      <div className="border border-[#F2F4F7]"></div>
+      <div className="border border-borderLight"></div>
 
       <div className="flex flex-col md:flex-row gap-3 justify-between">
         {/* this is left side text  */}
@@ -323,7 +323,7 @@ const AccountSettingProfile = () => {
                 //     src="/assets/icons/gallry.png"
                 //     alt=""
                 //   />
-                //   <h2 className="text-[#7D7878] text-xs font-light">
+                //   <h2 className="text-xs font-light">
                 //     <span className="font-medium text-gray-700">
                 //       Click to replace
                 //     </span>{" "}
@@ -337,7 +337,7 @@ const AccountSettingProfile = () => {
         </div>
       </div>
 
-      <div className="border border-[#F2F4F7]"></div>
+      <div className="border border-borderLight"></div>
 
       <div className="flex flex-col md:flex-row gap-3 justify-between">
         {/* this is left side text  */}
@@ -418,7 +418,7 @@ const AccountSettingProfile = () => {
           />
         </div>
       </div>
-      <div className="border border-[#F2F4F7]"></div>
+      <div className="border border-borderLight"></div>
 
       <div className="flex items-center justify-end">
         {isLoading ? (

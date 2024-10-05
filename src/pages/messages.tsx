@@ -116,7 +116,7 @@ const Messages = () => {
                     </>
                   ))}
                 </div>
-                <div className="hidden md:block border border-[#EFECEC]"></div>
+                <div className="hidden md:block border border-whiteGrey"></div>
                 <div className="hidden md:block md:w-[63%] h-full">
                   {activeMessageBoxInfo && activeChatId ? (
                     <MessageMain

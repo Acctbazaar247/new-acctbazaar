@@ -101,7 +101,7 @@ const MessageBody: React.FC<props> = ({ orderId }) => {
                       {single?.text}
                     </p>
                   </Popover>
-                  <p className="flex items-end bottom-1 text-[10px] text-[#667085]">
+                  <p className="flex items-end bottom-1 text-[10px] text-textBlueGrey">
                     {single.createdAt ? "Delivered" : "Sending"}
                   </p>
                 </div>
@@ -114,7 +114,7 @@ const MessageBody: React.FC<props> = ({ orderId }) => {
       </div>
       <div className="p-4 2xl:p-5 ">
         {/* this is send divs  */}
-        <div className="bg-[#F6F6F6]   rounded-xl py-2.5 px-4 pr-[33px] relative">
+        <div className="bg-whiteGrey   rounded-xl py-2.5 px-4 pr-[33px] relative">
           <input
             type="text"
             placeholder="Enter message"
@@ -129,15 +129,15 @@ const MessageBody: React.FC<props> = ({ orderId }) => {
           />
           <div className="flex  text-xl items-center justify-between py-1 absolute right-2 top-1/2 -translate-y-1/2">
             <div className="">
-              {/* <FiPaperclip className="text-[#98A2B3] cursor-pointer" />
-              <MdAddReaction className="text-[#98A2B3] cursor-pointer" /> */}
+              {/* <FiPaperclip className=" cursor-pointer" />
+              <MdAddReaction className=" cursor-pointer" /> */}
             </div>
             <button
               onClick={handleAddNewMessage}
               disabled={isLoading}
               className="disabled:opacity-45 opacity-100 transition-all"
             >
-              <LuSendHorizonal className="text-[#344054] cursor-pointer" />
+              <LuSendHorizonal className="text-textBlueBlack cursor-pointer" />
             </button>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Loading from "@/components/ui/Loading";
 import {
   resendEmail,
   userLoggedOut,
-  verifyUserWithToken
+  verifyUserWithToken,
 } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/router";
@@ -22,7 +22,7 @@ const EnterOtp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
 
   const { isLoading, user, error } = useAppSelector((state) => state.user);
@@ -115,7 +115,7 @@ const EnterOtp = () => {
             <h2 className="text-2xl lg:text-4xl font-bold text-textBlack pb-1 lg:pb-2">
               Enter OTP
             </h2>
-            <p className="text-[#645D5D] text-xs lg:text-sm">
+            <p className="text-textGrey text-xs lg:text-sm">
               A 6-digit OTP (one time password) has been sent to your e-mail for
               verification.
               <button
@@ -142,7 +142,7 @@ const EnterOtp = () => {
                       {...props}
                       placeholder="-"
                       type="number"
-                      className="size-11 lg:size-14 mr-2 md:mr-10 bg-[#F2F4F7] rounded text-center focus:border-2 !w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
+                      className="size-11 lg:size-14 mr-2 md:mr-10 bg-borderLight rounded text-center focus:border-2 !w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
                     />
                   )}
                 />

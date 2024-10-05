@@ -4,7 +4,7 @@ import {
   EOrderStatus,
   IUser,
   ResponseSuccessType,
-  UserRole
+  UserRole,
 } from "@/types/common";
 import React, { useState, useMemo } from "react";
 import AppTable from "@/components/ui/AppTable";
@@ -12,7 +12,7 @@ import AppModal from "@/components/ui/AppModal";
 import { formatDate } from "@/utils/formateDate";
 import {
   useGetOrdersQuery,
-  useUpdateOrderMutation
+  useUpdateOrderMutation,
 } from "@/redux/features/order/orderApi";
 import AppPopover from "@/components/ui/AppPopover";
 import { IoIosArrowDown } from "react-icons/io";
@@ -35,20 +35,20 @@ const ManageAllOrder = () => {
 
   const statusOptions = [
     {
-      status: EOrderStatus.PENDING
+      status: EOrderStatus.PENDING,
     },
     {
-      status: EOrderStatus.COMPLETED
+      status: EOrderStatus.COMPLETED,
     },
     {
-      status: EOrderStatus.CANCELLED
-    }
+      status: EOrderStatus.CANCELLED,
+    },
   ];
 
   const handleStatusUpdate = async (status: string, id: string) => {
     const updateData = {
       id,
-      status
+      status,
     };
     await updateOrder(updateData)
       .unwrap()
@@ -63,7 +63,7 @@ const ManageAllOrder = () => {
       })
       .catch((res: any) => {
         return toast.error(res?.data.message || "Something went wrong!", {
-          toastId: 1
+          toastId: 1,
         });
       });
   };
@@ -76,7 +76,7 @@ const ManageAllOrder = () => {
       buyerEmail: debouncedBuyerEmail.length ? debouncedBuyerEmail : undefined,
       sellerEmail: debouncedSellerEmail.length
         ? debouncedSellerEmail
-        : undefined
+        : undefined,
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -110,7 +110,7 @@ const ManageAllOrder = () => {
       className: "min-w-[150px]",
       render: (account: any, record: any) => {
         return <p className="line-clamp-1  text-base">{account?.name}</p>;
-      }
+      },
     },
     {
       title: "Price",
@@ -122,7 +122,7 @@ const ManageAllOrder = () => {
             {account?.price}
           </p>
         );
-      }
+      },
     },
     {
       title: "Account Category",
@@ -130,7 +130,7 @@ const ManageAllOrder = () => {
       className: "min-w-[105px]",
       render: (account: any) => {
         return <p className="line-clamp-1 text-base">{account?.category}</p>;
-      }
+      },
     },
     {
       title: "Account Type",
@@ -140,7 +140,7 @@ const ManageAllOrder = () => {
         return (
           <p className="line-clamp-1  text-base">{account?.accountType}</p>
         );
-      }
+      },
     },
     {
       title: "Order By",
@@ -163,7 +163,7 @@ const ManageAllOrder = () => {
             </div>
           </div>
         );
-      }
+      },
     },
     {
       title: "Seller ",
@@ -187,7 +187,7 @@ const ManageAllOrder = () => {
             </div>
           </div>
         );
-      }
+      },
     },
     {
       title: "Date",
@@ -195,7 +195,7 @@ const ManageAllOrder = () => {
       className: "min-w-[115px]",
       render: (date: string) => {
         return <p className="line-clamp-1">{formatDate(date)}</p>;
-      }
+      },
     },
     {
       title: "Status",
@@ -217,7 +217,7 @@ const ManageAllOrder = () => {
                       "bg-red text-white"
                     } ${
                       record?.status === EOrderStatus.PENDING &&
-                      "bg-[#FCF0C9]  cursor-pointer"
+                      "bg-yellowShadow  cursor-pointer"
                     }`}
                   >
                     <h3>{record?.status}</h3>{" "}
@@ -242,7 +242,7 @@ const ManageAllOrder = () => {
                         }
                       >
                         <div className="max-w-80">
-                          <p className="text-center text-[#828282] pt-4 text-lg">
+                          <p className="text-center text-darkishGrey pt-4 text-lg">
                             Are you sure Update status {record?.status} to
                             <span className="text-textDark font-medium">
                               {" "}
@@ -259,8 +259,8 @@ const ManageAllOrder = () => {
             </div>
           </div>
         );
-      }
-    }
+      },
+    },
   ];
 
   return (

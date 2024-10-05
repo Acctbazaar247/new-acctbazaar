@@ -25,7 +25,7 @@ const AppDrawer = ({
             : "hidden"
         } `}
       >
-        <div className="bg-[#FAFAFC] h-full p-4  mt-11">
+        <div className="bg-borderLight h-full p-4  mt-11">
           <div className="flex items-center text-center">
             <HiOutlineArrowLeft
               onClick={() => setOpen(false)}

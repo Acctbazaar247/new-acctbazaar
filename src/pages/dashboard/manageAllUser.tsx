@@ -4,7 +4,11 @@ import FormSelectField, {
 } from "@/components/Forms/FormSelectField";
 import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
-import { useDeleteUserMutation, useEditUserMutation, useGetUsersQuery } from "@/redux/features/user/userApi";
+import {
+  useDeleteUserMutation,
+  useEditUserMutation,
+  useGetUsersQuery,
+} from "@/redux/features/user/userApi";
 import { IUser, UserRole } from "@/types/common";
 import { optionCreator } from "@/utils";
 import React, { useState, useMemo } from "react";
@@ -58,51 +62,51 @@ const ManageAllUser = () => {
 
   const handleBlockUser = (id: string, isBlocked: boolean) => {
     editUser({ id, isBlocked });
-  }
+  };
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: "Name",
+      dataIndex: "name",
       className: "min-w-[150px]",
       render: (name: string, record: IUser) => {
         return (
-          <div className='flex items-center gap-1'>
-            <img src={record?.profileImg as string} alt="" className="rounded-full w-10 h-10" />
+          <div className="flex items-center gap-1">
+            <img
+              src={record?.profileImg as string}
+              alt=""
+              className="rounded-full w-10 h-10"
+            />
             <p className="cursor-pointer">{name}</p>
           </div>
-        )
-      }
+        );
+      },
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
+      title: "Email",
+      dataIndex: "email",
       className: "min-w-[150px]",
     },
     {
-      title: 'Money',
-      dataIndex: 'Currency',
+      title: "Money",
+      dataIndex: "Currency",
       className: "min-w-[150px]",
       render: (Currency: any) => {
-        return (
-          <p className="font-medium">${Currency?.amount.toFixed(2)}</p>
-        )
-      }
+        return <p className="font-medium">${Currency?.amount.toFixed(2)}</p>;
+      },
     },
     {
-      title: 'Phone Number',
-      dataIndex: 'phoneNumber',
+      title: "Phone Number",
+      dataIndex: "phoneNumber",
       className: "min-w-[145px]",
     },
     {
-      title: 'Role',
-      dataIndex: 'role',
+      title: "Role",
+      dataIndex: "role",
       className: "min-w-[145px]",
       render: (role: any) => {
-        return (
-          <p className="text-base font-medium uppercase">{role}</p>
-        )
-      }
+        return <p className="text-base font-medium uppercase">{role}</p>;
+      },
     },
     {
       title: "User Status",
@@ -110,37 +114,41 @@ const ManageAllUser = () => {
       className: "min-w-[115px]",
       render: (isBlocked: boolean) => {
         return (
-          <div className={`flex items-center gap-1 text-sm ${isBlocked ? "text-textDark" : "text-success"}`}>
-            {
-              isBlocked ? <MdBlock /> : <RiVerifiedBadgeFill />
-            }
+          <div
+            className={`flex items-center gap-1 text-sm ${
+              isBlocked ? "text-textDark" : "text-success"
+            }`}
+          >
+            {isBlocked ? <MdBlock /> : <RiVerifiedBadgeFill />}
             {isBlocked ? "Blocked" : "Active"}
           </div>
         );
       },
     },
     {
-      title: 'Verified Merchant',
-      dataIndex: 'isVerifiedByAdmin',
+      title: "Verified Merchant",
+      dataIndex: "isVerifiedByAdmin",
       className: "min-w-[150px]",
       render: (isVerifiedByAdmin: boolean) => {
         return (
-          <div className={`flex items-center gap-1 ${isVerifiedByAdmin === true ? 'text-success' : "text-bgSecondary"}`}>
-            {
-              isVerifiedByAdmin === true ? <GoVerified /> : <GoUnverified />
-            }
+          <div
+            className={`flex items-center gap-1 ${
+              isVerifiedByAdmin === true ? "text-success" : "text-bgSecondary"
+            }`}
+          >
+            {isVerifiedByAdmin === true ? <GoVerified /> : <GoUnverified />}
             {isVerifiedByAdmin === true ? "Verified" : "Unverified"}
           </div>
-        )
-      }
+        );
+      },
     },
     {
-      title: 'Action',
-      dataIndex: 'action',
+      title: "Action",
+      dataIndex: "action",
       className: "min-w-[145px]",
       render: (text: string, record: any) => {
         return (
-          <div className='flex items-center justify-evenly gap-1'>
+          <div className="flex items-center justify-evenly gap-1">
             <AppModal
               button={
                 <button className="appOutlineBtnSmDelete">
@@ -148,11 +156,15 @@ const ManageAllUser = () => {
                 </button>
               }
               cancelButtonTitle="No, Don’t"
-              primaryButtonTitle={`Yes. ${record?.isBlocked ? "UnBlock" : "Block"}`}
-              primaryButtonAction={() => handleBlockUser(record?.id, record?.isBlocked ? false : true)}
+              primaryButtonTitle={`Yes. ${
+                record?.isBlocked ? "UnBlock" : "Block"
+              }`}
+              primaryButtonAction={() =>
+                handleBlockUser(record?.id, record?.isBlocked ? false : true)
+              }
             >
               <div className="max-w-80">
-                <p className="text-center text-[#828282] pt-4 text-lg">
+                <p className="text-center text-darkishGrey pt-4 text-lg">
                   Are you sure {record?.isBlocked ? "UnBlock" : "Block"}{" "}
                   <span className="text-textDark font-medium">
                     {record?.name}
@@ -162,19 +174,25 @@ const ManageAllUser = () => {
               </div>
             </AppModal>
 
-            <AppModal button={
-              <button className="appBtnSm">Delete</button>}
+            <AppModal
+              button={<button className="appBtnSm">Delete</button>}
               cancelButtonTitle="No, Don’t"
               primaryButtonTitle="Yes. Remove"
               primaryButtonAction={() => deleteUser(record?.id)}
             >
-              <div className='max-w-80'>
-                <p className="text-center text-[#828282] pt-4 text-lg">Are you sure  Remove <span className="text-textDark font-medium">{record?.name}</span> from the user list?</p>
+              <div className="max-w-80">
+                <p className="text-center text-darkishGrey pt-4 text-lg">
+                  Are you sure Remove{" "}
+                  <span className="text-textDark font-medium">
+                    {record?.name}
+                  </span>{" "}
+                  from the user list?
+                </p>
               </div>
             </AppModal>
           </div>
-        )
-      }
+        );
+      },
     },
   ];
 
@@ -183,8 +201,8 @@ const ManageAllUser = () => {
       <h2 className="title text-center mb-5">Manage users</h2>
 
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-6 2xl:my-10 justify-between">
-        <div className='flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5'>
-          <Form submitHandler={() => { }}>
+        <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 md:gap-5">
+          <Form submitHandler={() => {}}>
             <FormSelectField
               name="role"
               className="min-w-44"
@@ -214,14 +232,12 @@ const ManageAllUser = () => {
         </button>
       </div>
 
-      <div className='h-[65dvh] overflow-auto'>
+      <div className="h-[65dvh] overflow-auto">
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
           setPage={setPage}
-          loadingComponent={
-            <TableLoading columnNumber={columns.length} />
-          }
+          loadingComponent={<TableLoading columnNumber={columns.length} />}
         />
       </div>
     </AdminsLayout>

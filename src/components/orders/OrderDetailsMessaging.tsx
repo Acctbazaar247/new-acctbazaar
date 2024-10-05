@@ -29,9 +29,9 @@ const OrderDetailsMessaging: React.FC<props> = ({ order }) => {
     }
   };
   return (
-    <div className="border border-[#EFECEC] rounded-lg">
+    <div className="border border-whiteGrey rounded-lg">
       {/* this is top message div  */}
-      <div className="border-b border-b-[#EFECEC] cursor-pointer p-5 flex items-center justify-between gap-5">
+      <div className="border-b border-b-whiteGrey cursor-pointer p-5 flex items-center justify-between gap-5">
         <div onClick={handleClick} className="flex items-center gap-3">
           <Image
             src={imageUrl || ""}
@@ -40,7 +40,7 @@ const OrderDetailsMessaging: React.FC<props> = ({ order }) => {
             height={40}
             alt="avatar"
           />
-          <h3 className="text-[#1D2939] font-semibold flex items-center gap-2">
+          <h3 className="text-textBlueBlack font-semibold flex items-center gap-2">
             {name}
             {order.orderById === user?.id ? (
               order.account?.ownBy?.isVerifiedByAdmin ? (

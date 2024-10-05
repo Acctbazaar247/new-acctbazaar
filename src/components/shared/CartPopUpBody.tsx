@@ -69,7 +69,7 @@ export default function CartPopUpBody() {
           </Link>
         </>
       ) : (
-        <div className="p-4 text-[#828D99] flex items-center justify-center flex-col gap-2">
+        <div className="p-4 text-zinc flex items-center justify-center flex-col gap-2">
           <Image
             width={80}
             height={80}

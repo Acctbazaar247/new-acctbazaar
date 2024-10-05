@@ -14,7 +14,7 @@ import {
   PolarGrid,
   PolarAngleAxis,
   PolarRadiusAxis,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 import Image from "next/image";
 import { IoIosCloseCircle } from "react-icons/io";
@@ -31,7 +31,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
     if (totalReviews === 0) {
       return {
         positivePercentage: 0,
-        negativePercentage: 0
+        negativePercentage: 0,
       };
     }
 
@@ -40,7 +40,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
 
     return {
       positivePercentage: Math.round(positivePercentage),
-      negativePercentage: Math.round(negativePercentage)
+      negativePercentage: Math.round(negativePercentage),
     };
   }, [positiveReviews, negativeReviews]);
   const referralLink = `${domain}/seller/${data?.sellerInfo?.id}`;
@@ -69,28 +69,28 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
   const graphData = [
     {
       subject: "Positive Review",
-      value: data.totalPositiveReviews
+      value: data.totalPositiveReviews,
     },
     {
       subject: "Negative Review",
-      value: data.totalPositiveReviews
+      value: data.totalPositiveReviews,
     },
     {
       subject: "Ads",
-      value: data.totalAccountApprove
+      value: data.totalAccountApprove,
     },
     {
       subject: "Sold",
-      value: data.totalSoldAccount
+      value: data.totalSoldAccount,
     },
     {
       subject: "Cancelled Order",
-      value: data.totalCancelOrder
+      value: data.totalCancelOrder,
     },
     {
       subject: "Total order",
-      value: data.totalOrder
-    }
+      value: data.totalOrder,
+    },
   ];
 
   return (
@@ -176,7 +176,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           </RadarChart>
         </ResponsiveContainer>
       </div>
-      <h4 className="border-b border-b-[#EFEFEF]"></h4>
+      <h4 className="border-b border-b-whiteGrey"></h4>
 
       {/* this is profile div  */}
       <div className="text-sm space-y-2.5">
@@ -203,7 +203,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           </p>
         </h3>
       </div>
-      {/* <h4 className="border-b border-b-[#EFEFEF]"></h4> */}
+      {/* <h4 className="border-b border-b-whiteGrey"></h4> */}
 
       {/* this is last 30 days div  */}
       {/* <div className="text-sm space-y-2.5">
@@ -230,7 +230,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           </p>
         </h3>
       </div> */}
-      <h4 className="border-b border-b-[#EFEFEF]"></h4>
+      <h4 className="border-b border-b-whiteGrey"></h4>
 
       {/* this is total average div  */}
       <div className="text-sm space-y-2.5">

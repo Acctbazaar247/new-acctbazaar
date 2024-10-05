@@ -14,10 +14,10 @@ type Props = {
 
 const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
   return (
-    <div className="border border-[#EFECEC] rounded-lg">
+    <div className="border border-whiteGrey rounded-lg">
       {/* this is top message div  */}
-      <div className="border-b border-b-[#EFECEC] flex flex-col md:flex-row">
-        <div className="w-full md:w-1/3 pt-2 md:p-5 border-r border-r-[#EFECEC] flex items-center justify-center">
+      <div className="border-b border-b-whiteGrey flex flex-col md:flex-row">
+        <div className="w-full md:w-1/3 pt-2 md:p-5 border-r border-r-whiteGrey flex items-center justify-center">
           <div className="flex items-center gap-3">
             <Image
               src={user.profileImg || ""}
@@ -26,7 +26,7 @@ const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
               height={40}
               alt="avatar"
             />
-            <h3 className="text-[#1D2939] font-semibold">{user.name}</h3>
+            <h3 className="text-textBlueBlack font-semibold">{user.name}</h3>
           </div>
         </div>
         <div className="w-full md:w-2/3 px-3 py-1.5">

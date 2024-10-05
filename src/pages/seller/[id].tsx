@@ -131,7 +131,7 @@ const SellerDetailsPage = () => {
               <div className="hidden md:block w-full xl:w-[30%]">
                 <SellerProfileViewComponent data={data.data} />
               </div>
-              <div className="hidden md:block border border-[#EFECEC]"></div>
+              <div className="hidden md:block border border-whiteGrey"></div>
               <div className=" md:w-[68%] min-h-full bg-white  rounded-lg  p-2 md:p-4">
                 <AppTabs
                   tabs={window.innerWidth > 1280 ? tabs : mobileTabs}

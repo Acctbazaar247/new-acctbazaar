@@ -34,7 +34,7 @@ const ReviewCard = ({ data }: { data: IReview }) => {
 
   // console.log(data);
   return (
-    <div className="py-4 border-b border-b-[#EFEFEF]">
+    <div className="py-4 border-b border-b-whiteGrey">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <Avatar
@@ -57,7 +57,7 @@ const ReviewCard = ({ data }: { data: IReview }) => {
         </div>
         <div className="">
           {data.reviewStatus === EReviewStatus.POSITIVE ? (
-            <h3 className="flex items-center gap-1 border rounded-full px-2 py-0.5 border-[#2AAE09] text-[#2AAE09] text-sm">
+            <h3 className="flex items-center gap-1 border rounded-full px-2 py-0.5 border-success text-success text-sm">
               <AiOutlineLike /> Positive
             </h3>
           ) : (

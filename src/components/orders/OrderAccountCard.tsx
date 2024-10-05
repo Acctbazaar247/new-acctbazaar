@@ -23,7 +23,7 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo, notShowDetails }) => {
 
   return (
     <div
-      className={`space-y-3 rounded-lg p-2 md:px-5 md:py-3 lg:px-6 lg:py-4 bg-[#FBFAFA]`}
+      className={`space-y-3 rounded-lg p-2 md:px-5 md:py-3 lg:px-6 lg:py-4 bg-borderLight`}
     >
       {/* this is sell or buy div  */}
       <div className="flex items-center justify-between gap-4">
@@ -39,7 +39,7 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo, notShowDetails }) => {
             {accountInfo.category}
           </p>
         </div>
-        <p className="py-0.5 md:py-1 px-1 md:px-2 rounded-full text-xs flex items-center gap-1 md:gap-2 text-[#027A48] bg-[#ECFDF3]">
+        <p className="py-0.5 md:py-1 px-1 md:px-2 rounded-full text-xs flex items-center gap-1 md:gap-2 text-success bg-success/10">
           <GoDotFill />
           Completed
         </p>
@@ -92,24 +92,24 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo, notShowDetails }) => {
             {notShowDetails
               ? null
               : orderInfo.status === "completed" && (
-                <AppModal
-                  button={
-                    <Tooltip title="Open account details">
-                      <Image
-                        src={"/assets/icons/eye.png"}
-                        width={40}
-                        height={40}
-                        className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
-                        alt="eye"
-                      />
-                    </Tooltip>
-                  }
-                >
-                  <OrderSecretViewPop
-                    account={accountInfo}
-                  ></OrderSecretViewPop>
-                </AppModal>
-              )}
+                  <AppModal
+                    button={
+                      <Tooltip title="Open account details">
+                        <Image
+                          src={"/assets/icons/eye.png"}
+                          width={40}
+                          height={40}
+                          className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                          alt="eye"
+                        />
+                      </Tooltip>
+                    }
+                  >
+                    <OrderSecretViewPop
+                      account={accountInfo}
+                    ></OrderSecretViewPop>
+                  </AppModal>
+                )}
             <Link href={`/order-details/${orderInfo.id}`}>
               <Tooltip title="Message vendor">
                 <Image

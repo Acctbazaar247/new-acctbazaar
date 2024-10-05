@@ -70,7 +70,7 @@ const FormUploadImage: React.FC<props> = ({
             src="/assets/icons/gallry.png"
             alt=""
           />
-          <h2 className="text-[#7D7878] text-xs font-light">
+          <h2 className="text-darkishGrey text-xs font-light">
             <span className="font-medium text-gray-700">Click to replace</span>{" "}
             or drag and drop <br />
             SVG, PNG, JPG or GIF (max 800 x 400px)
@@ -86,7 +86,7 @@ const FormUploadImage: React.FC<props> = ({
         action={`${process.env.NEXT_PUBLIC_SERVER_URL}/uploadImg`}
         beforeUpload={beforeUpload}
         onChange={handleChange}
-      
+
       >
         {loading ? (
           <LoadingOutlined />

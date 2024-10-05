@@ -80,7 +80,7 @@ export default function AddMoneyModal() {
             height={60}
             src="/assets/icons/add.png"
             alt=""
-            className="size-14 rounded-lg border border-[#E6E0E0] hover:bg-[#FFCAAD]/15 cursor-pointer"
+            className="size-14 rounded-lg border border-brown/10 hover:bg-primary/15 cursor-pointer"
           />
           <h4>Add Money</h4>
         </div>
@@ -98,7 +98,7 @@ export default function AddMoneyModal() {
         />
         <button
           onClick={() => setSelectedOption("bank")}
-          className={`flex gap-5 p-4 border border-[#C5C5C5] rounded-lg transition-all w-full text-left ${
+          className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "bank" ? "border-orange-400" : ""
           }`}
         >
@@ -119,7 +119,7 @@ export default function AddMoneyModal() {
 
         <button
           onClick={() => setSelectedOption("crypto")}
-          className={`flex gap-5 p-4 border border-[#C5C5C5] rounded-lg transition-all w-full text-left ${
+          className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "crypto" ? "border-orange-400" : ""
           }`}
         >

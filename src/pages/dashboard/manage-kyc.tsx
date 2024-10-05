@@ -147,7 +147,7 @@ const ManageKYC = () => {
                       record?.status === KycStatus.DENIED && "bg-red text-white"
                     } ${
                       record?.status === KycStatus.PENDING &&
-                      "bg-[#FCF0C9]  cursor-pointer"
+                      "bg-yellowShadow  cursor-pointer"
                     }`}
                   >
                     <h3>{record?.status}</h3>
@@ -191,7 +191,7 @@ const ManageKYC = () => {
                           }
                         >
                           <div className="max-w-80">
-                            <p className="text-center text-[#828282] pt-4 text-lg">
+                            <p className="text-center text-darkishGrey pt-4 text-lg">
                               Are you sure Update status {record?.status} to
                               <span className="text-textDark font-medium">
                                 {" "}

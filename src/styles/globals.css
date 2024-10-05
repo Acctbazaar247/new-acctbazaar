@@ -74,7 +74,7 @@
     @apply font-bold text-xl lg:text-2xl 2xl:text-3xl;
   }
   .message {
-    @apply rounded-3xl py-2 text-sm px-4 my-1 w-fit bg-[#E6E6E6];
+    @apply rounded-3xl py-2 text-sm px-4 my-1 w-fit bg-borderLight;
   }
   .messageMine {
     @apply rounded-3xl py-2 text-sm px-4 my-1 w-fit bg-[#F9866C] text-white;

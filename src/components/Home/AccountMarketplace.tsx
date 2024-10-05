@@ -11,7 +11,7 @@ export default function AccountMarketplace() {
   }, []);
 
   return (
-    <div className="bg-[#F8F6F6] text-textBlack" id="about">
+    <div className="bg-red/5 text-textBlack" id="about">
       <div className="container flex flex-col-reverse lg:grid grid-cols-2 gap-16 lg:gap-8 2xl:gap-20 px-4 py-20 lg:py-32">
         <div
           className="relative"

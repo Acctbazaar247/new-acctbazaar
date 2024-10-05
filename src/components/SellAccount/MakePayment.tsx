@@ -85,7 +85,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         <div
           onClick={() => setSelectedOption("bank")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
-            selectedOption === "bank" ? "border-primary" : "border-[#C5C5C5]"
+            selectedOption === "bank" ? "border-primary" : "border-borderColor"
           }`}
         >
           <Image
@@ -106,7 +106,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         <div
           onClick={() => setSelectedOption("crypto")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
-            selectedOption === "crypto" ? "border-primary" : "border-[#C5C5C5]"
+            selectedOption === "crypto"
+              ? "border-primary"
+              : "border-borderColor"
           }`}
         >
           <Image
@@ -128,7 +130,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         <div
           onClick={() => setSelectedOption("wallet")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
-            selectedOption === "wallet" ? "border-primary" : "border-[#C5C5C5]"
+            selectedOption === "wallet"
+              ? "border-primary"
+              : "border-borderColor"
           }`}
         >
           <IoWalletOutline className="text-2xl" />
