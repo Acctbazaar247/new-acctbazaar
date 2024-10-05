@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import { createThemes } from "tw-colors";
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -50,5 +52,54 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    createThemes({
+      light: {
+        primary: "#FF5A35",
+        textBlack: "#1B1818",
+        textBlueBlack: "#1D2939",
+        textBlueGrey: "#667085",
+        textDarkGrey: "#403C3C",
+        textGreyBlack: "#312F2F",
+        textGrey: "#645D5D",
+        darkishGrey: "#828282",
+        whiteGrey: "#EFECEC",
+        darkBg: "#252120",
+        brown: "#B54708",
+        khoyri: "#581203",
+        biskutColor: "#A77207",
+        zinc: "#98A2B3",
+        blue: "#175CD3",
+        yellowShadow: "#FFFAEB",
+        yellowMore: "#FFFAEB",
+        borderColor: "#D5D8DB",
+        borderLight: "#F2F4F7",
+        success: "#2AAE09",
+        red: "#E11C1B",
+      },
+      dark: {
+        primary: "#FF5A35",
+        textBlack: "#1B1818",
+        textBlueBlack: "#1D2939",
+        textBlueGrey: "#667085",
+        textDarkGrey: "#403C3C",
+        textGreyBlack: "#312F2F",
+        textGrey: "#645D5D",
+        darkishGrey: "#828282",
+        whiteGrey: "#EFECEC",
+        darkBg: "#252120",
+        brown: "#B54708",
+        khoyri: "#581203",
+        biskutColor: "#A77207",
+        zinc: "#98A2B3",
+        blue: "#175CD3",
+        yellowShadow: "#FFFAEB",
+        yellowMore: "#FFFAEB",
+        borderColor: "#D5D8DB",
+        borderLight: "#F2F4F7",
+        success: "#2AAE09",
+        red: "#E11C1B",
+      },
+    }),
+  ],
 };

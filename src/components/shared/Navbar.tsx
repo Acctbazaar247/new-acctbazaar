@@ -37,6 +37,7 @@ import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
 import NotificationBody from "./NotificationBody";
 import CartPopUpBody from "./CartPopUpBody";
 import ProfileDetailsBody from "./ProfileDetailsBody";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -167,6 +168,8 @@ const Navbar = () => {
               </Link>
             )
           )}
+
+          <ThemeSwitcher />
 
           {/* this is login or logout section  */}
           <div className="pl-4 xl:pl-12">
