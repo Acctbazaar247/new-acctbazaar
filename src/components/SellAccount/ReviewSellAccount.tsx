@@ -77,7 +77,7 @@ export default function ReviewSellAccount({
   }, [accountCredentials, updateProgress]);
 
   return (
-    <div className="bg-white rounded-2xl w-full min-h-[80vh] md:p-6 2xl:p-8">
+    <div className="bg-background rounded-2xl w-full min-h-[80vh] md:p-6 2xl:p-8">
       <h2 className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
         Review Account
       </h2>

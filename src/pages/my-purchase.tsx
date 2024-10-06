@@ -53,7 +53,7 @@ export default function MyPurchase() {
           </div>
 
           {/* this is main div  */}
-          <div className="mt-2 md:mt-4 lg:mt-5 2xl:mt-6 bg-white rounded-2xl w-full py-2 md:p-6 2xl:p-8">
+          <div className="mt-2 md:mt-4 lg:mt-5 2xl:mt-6 bg-background rounded-2xl w-full py-2 md:p-6 2xl:p-8">
             {/* <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} /> */}
             <AppRenderReduxData
               queryData={queryData}
@@ -70,7 +70,7 @@ export default function MyPurchase() {
                         orders={data?.data}
                       />
                     ) : (
-                      <div className="bg-white rounded-2xl w-full min-h-[80dvh] flex items-center justify-center flex-col">
+                      <div className="bg-background rounded-2xl w-full min-h-[80dvh] flex items-center justify-center flex-col">
                         <Image
                           width={120}
                           height={120}

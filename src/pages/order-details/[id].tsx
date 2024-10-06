@@ -178,7 +178,7 @@ const OrderDetails = () => {
           </div>
 
           {/* this is main div  */}
-          <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl 2xl:max-h-[75vh] overflow-auto bg-white md:p-4 lg:p-5 2xl:p-6">
+          <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl 2xl:max-h-[75vh] overflow-auto bg-background md:p-4 lg:p-5 2xl:p-6">
             <div className="w-full md:w-[55%] h-full space-y-3 2xl:space-y-4">
               <div
                 className={`w-full flex flex-col md:flex-row items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-borderLight p-2 md:p-4 2xl:p-5`}

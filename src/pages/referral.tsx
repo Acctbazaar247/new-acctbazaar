@@ -80,7 +80,7 @@ export default function Referral() {
 
           {/* this is main div  */}
           <div className="flex flex-col md:flex-row gap-4 min-h-[90dvh] 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
-            <div className="rounded md:w-1/2 min-h-full pb-8 bg-white">
+            <div className="rounded md:w-1/2 min-h-full pb-8 bg-background">
               <div className="flex items-center justify-center flex-col md:px-16 gap-1 text-center py-6 lg:py-8">
                 <Image
                   width={200}
@@ -175,7 +175,7 @@ export default function Referral() {
             <div className="hidden md:block border border-borderColor"></div>
             <div className="w-full md:w-1/2 space-y-4 border border-borderColor/50 rounded-lg min-h-full overflow-y-auto bg-transparent p-2 md:p-4 lg:p-6 2xl:p-6">
               <h4 className="text-xl font-medium">Referral Record</h4>
-              <div className="p-4 2xl:p-6 bg-white grid grid-cols-2 rounded-lg">
+              <div className="p-4 2xl:p-6 bg-background grid grid-cols-2 rounded-lg">
                 <div className="space-y-2">
                   <h3 className="flex items-center gap-2">
                     <IoWalletOutline />
@@ -197,13 +197,13 @@ export default function Referral() {
                 </div>
               </div>
 
-              <div className="p-2 md:p-4 2xl:py-5 2xl:px-6 min-h-[70%] bg-white rounded-lg">
+              <div className="p-2 md:p-4 2xl:py-5 2xl:px-6 min-h-[70%] bg-background rounded-lg">
                 <AppTabs
                   tabs={tabs}
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
                 />
-                <div className="bg-white  max-h-[55dvh] pr-1 md:pr-2 overflow-auto">
+                <div className="bg-background  max-h-[55dvh] pr-1 md:pr-2 overflow-auto">
                   {sortedData?.map((referral: TReferral) => (
                     <div
                       key={referral?.id}

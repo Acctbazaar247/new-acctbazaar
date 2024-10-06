@@ -110,7 +110,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
                 <div className="flex items-center gap-1">
-                  <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+                  <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
                   <p
                     className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                   >
@@ -139,7 +139,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   {user?.role === UserRole.Seller &&
                     user?.isVerifiedByAdmin && (
                       <div className="flex items-center gap-1">
-                        <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+                        <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
                         <p
                           className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] leading-4 md:leading-3 md:text-xs text-primary bg-primary/5 border border-primary h-fit py-0`}
                         >

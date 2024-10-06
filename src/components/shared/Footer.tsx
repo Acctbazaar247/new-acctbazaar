@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
-import { MdMailOutline } from "react-icons/md";
 import { FaXTwitter } from "react-icons/fa6";
 
 type Props = {};
@@ -32,7 +30,7 @@ const Footer = (props: Props) => {
 
         <div className="flex justify-between lg:gap-32">
           <div className="">
-            <h2 className="font-bold text-primary/50 pb-5">Links</h2>
+            <h2 className="font-bold text-primary pb-5">Links</h2>
             <div className="space-y-3 flex flex-col font-normal">
               <Link
                 className="text-nowrap text-sm sm:text-md font-normal"
@@ -65,7 +63,7 @@ const Footer = (props: Props) => {
 
           {/* this is contact section  */}
           <div className="">
-            <h2 className="font-bold text-primary/50">Contact</h2>
+            <h2 className="font-bold text-primary">Contact</h2>
             <p className="text-sm font-normal pt-4">help@acctbazaar.com</p>
             <div className="flex my-4">
               <Link
@@ -124,7 +122,7 @@ const Footer = (props: Props) => {
         <div className="flex justify-between lg:justify-normal gap-6 pt-6 lg:pt-0">
           <div className="space-y-2">
             <h2 className="font-medium">Get the app</h2>
-            <p className="bg-success/20 text-sm px-2 py-1 rounded-full text-textBlack">
+            <p className="bg-green-300 text-sm px-2 py-1 rounded-full text-textBlack">
               Coming Soon
             </p>
           </div>

@@ -1,9 +1,7 @@
-import AccountReel from "@/components/AccountReel/AccountReel";
 import AccountMarketplace from "@/components/Home/AccountMarketplace";
 import BannerHome from "@/components/Home/BannerHome";
 import BecomeSeller from "@/components/Home/BecomeSeller";
 import Features from "@/components/Home/Features";
-import FilterAndFindAccountSection from "@/components/Home/FilterAndFindAccountSection";
 import HowItWorks from "@/components/Home/HowItWorks";
 import ReadyToStart from "@/components/Home/ReadyToStart";
 import TestimonialHome from "@/components/Home/TestimonialHome";
@@ -11,11 +9,11 @@ import WhyChoose from "@/components/Home/WhyChoose";
 import HomeLayout from "@/layout/HomeLayout";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { AccountType, UserRole } from "@/types/common";
-import { useEffect } from "react";
+import { UserRole } from "@/types/common";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
   const user = useAppSelector((state) => state.user.user);

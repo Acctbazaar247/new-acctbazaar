@@ -94,7 +94,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
   ];
 
   return (
-    <div className="w-full md:w-[30%]d max-h-[75dvh] overflow-auto space-y-3 lg:space-y-4 2xl:space-y-5 bg-white  rounded-lg p-2 md:p-4">
+    <div className="w-full md:w-[30%]d max-h-[75dvh] overflow-auto space-y-3 lg:space-y-4 2xl:space-y-5 bg-background  rounded-lg p-2 md:p-4">
       {/* this is image and details div  */}
       <div className="flex items-center gap-4 2xl:gap-5">
         <div className="relative">

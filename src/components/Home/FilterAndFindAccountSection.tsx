@@ -122,12 +122,13 @@ const FilterAndFindAccountSection = (props: Props) => {
                   )
                 }
                 key={single.value}
-                className={`flex bg-white shadow-lg border w-full h-[40px] xl:h-[57px] border-gray-200 min-w-[100px] lg:min-w-[170px] transition-all   items-center p-2 rounded-xl   select-none gap-1 md:gap-2 ${activeAcc
-                  ? activeAcc === single.value
-                    ? "grayscale-0 "
-                    : "grayscale opacity-70"
-                  : "grayscale-0 "
-                  }`}
+                className={`flex bg-background shadow-lg border w-full h-[40px] xl:h-[57px] border-gray-200 min-w-[100px] lg:min-w-[170px] transition-all   items-center p-2 rounded-xl   select-none gap-1 md:gap-2 ${
+                  activeAcc
+                    ? activeAcc === single.value
+                      ? "grayscale-0 "
+                      : "grayscale opacity-70"
+                    : "grayscale-0 "
+                }`}
               >
                 <Image
                   //   className="w-full object-cover "
@@ -148,10 +149,10 @@ const FilterAndFindAccountSection = (props: Props) => {
           ))}
         </Swiper>
         <div className="flex  gap-2  pointer-events-none absolute w-full justify-between top-1/2 z-20 -translate-y-1/2">
-          <button className="swiper-button-prev  rounded-full  hover:text-orange-500 bg-white/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
+          <button className="swiper-button-prev  rounded-full  hover:text-orange-500 bg-background/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
             <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
           </button>
-          <button className="swiper-button-next  rounded-full  hover:text-orange-500 bg-white/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
+          <button className="swiper-button-next  rounded-full  hover:text-orange-500 bg-background/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
             <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </button>
         </div>

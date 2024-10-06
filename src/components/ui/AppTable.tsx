@@ -55,7 +55,7 @@ const AppTable = ({
             <h1 className="md:text-lg lg:text-xl font-medium">{headerText}</h1>
             {inputPlaceholder && (
               <div
-                className={`bg-white w-1/2 lg:w-3/5 rounded-md px-1 md:px-2.5 py-1 md:py-1.5 lg:p-2.5 flex items-center`}
+                className={`bg-background w-1/2 lg:w-3/5 rounded-md px-1 md:px-2.5 py-1 md:py-1.5 lg:p-2.5 flex items-center`}
               >
                 <LuSearch className="text-textDark text-lg" />
                 <input

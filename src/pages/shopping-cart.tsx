@@ -145,7 +145,7 @@ export default function ShoppingCart() {
 
           {/* this is main div  */}
           <div className="flex flex-col md:flex-row gap-4 lg:gap-0 min-h-[80dvh] pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
-            <div className="md:w-[60%] min-h-full bg-white max-h-[60dvh] overscroll-auto md:max-h-[80dvh]">
+            <div className="md:w-[60%] min-h-full bg-background max-h-[60dvh] overscroll-auto md:max-h-[80dvh]">
               <h3 className="font-medium px-4 pt-4">
                 All Items ({myCarts.length})
               </h3>
@@ -175,7 +175,7 @@ export default function ShoppingCart() {
               )}
             </div>
             <div className="hidden md:block border border-borderColor 2xl:mr-6"></div>
-            <div className="w-full md:w-[37%] min-h-full overflow-y-auto bg-white p-2 md:p-4 2xl:p-6">
+            <div className="w-full md:w-[37%] min-h-full overflow-y-auto bg-background p-2 md:p-4 2xl:p-6">
               {myCarts.length > 0 && (
                 <>
                   <h2 className="subTitle">Order Summary</h2>

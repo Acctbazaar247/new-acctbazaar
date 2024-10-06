@@ -74,7 +74,7 @@ const Marketplace = () => {
         <div className="layout h-[calc(100dvh-105px)] md:h-custom-dvh-md 2xl:h-custom-dvh overflow-hidden">
           {/* this is top section div  */}
           <AppAlert />
-          <div className="flex flex-col md:flex-row justify-between gap-1 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-white md:static z-40">
+          <div className="flex flex-col md:flex-row justify-between gap-1 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-background md:static z-40">
             <div className="md:pl-4">
               <h2 className="title">Marketplace</h2>
               <p className="text-textGrey text-xs md:text-sm">
@@ -103,7 +103,7 @@ const Marketplace = () => {
           </div>
 
           {/* this is main div  */}
-          <div className="flex gap-4 bg-white max-h-[calc(100dvh-240px)] 2xl:max-h-[72dvh] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
+          <div className="flex gap-4 bg-background max-h-[calc(100dvh-240px)] 2xl:max-h-[72dvh] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
             <div className="hidden md:block md:w-[30%] min-w-[330px] max-h-[72dvh] md:max-h-[68dvh] lg:max-h-[68dvh] 2xl:max-h-[72dvh] overflow-hidden xl:overflow-auto 2xl:overflow-hidden">
               {/* <Sticky
                 topOffset={-40}
@@ -111,13 +111,13 @@ const Marketplace = () => {
                 stickyClassName="mt-[90px]"
               >
               </Sticky> */}
-              <div className="bg-white">
+              <div className="bg-background">
                 <MarketplaceSidebar />
               </div>
             </div>
             <div className="hidden md:block border border-borderColor"></div>
             <div className="w-full mt-[120px] md:mt-0">
-              <div className="w-full bg-white max-h-[calc(100dvh-248px)] md:max-h-[74dvh] lg:max-h-[68dvh] 2xl:max-h-[72dvh] overflow-auto p-2 md:p-4 2xl:p-6">
+              <div className="w-full bg-background max-h-[calc(100dvh-248px)] md:max-h-[74dvh] lg:max-h-[68dvh] 2xl:max-h-[72dvh] overflow-auto p-2 md:p-4 2xl:p-6">
                 <h2 className="text-xl font-bold">Latest account</h2>
                 <AppRenderReduxData
                   queryData={queryData}

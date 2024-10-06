@@ -35,7 +35,7 @@ const AppFormTextarea = ({
               rows={5}
               {...register(name, { ...(required && { required: true }) })}
               // className="peer min-h-[140px] 2xl:min-h-[160px] resize-none overflow-auto w-full rounded border border-borderColor border-t-transparent bg-transparent px-3 2xl:px-4 py-2.5 font-sans text-base 2xl:text-lg font-normal text-textBlack outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-borderColor placeholder-shown:border-t-borderColor focus:border-2 focus:border-primary focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100 caret-primary"
-              className="block w-full bg-white focus:outline-none focus:shadow-outline border 2xl:border-[1.5px] border-borderColor rounded 2xl:rounded py-2 md:py-2.5 2xl:py-2.5 px-2 2xl:px-3 appearance-none leading-normal focus:border-primary"
+              className="block w-full bg-background focus:outline-none focus:shadow-outline border 2xl:border-[1.5px] border-borderColor rounded 2xl:rounded py-2 md:py-2.5 2xl:py-2.5 px-2 2xl:px-3 appearance-none leading-normal focus:border-primary"
               placeholder={""}
             />
             <label

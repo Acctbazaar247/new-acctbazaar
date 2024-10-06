@@ -24,6 +24,7 @@ const Orders = () => {
   const [activeTab, setActiveTab] = useState(tabs[0].label);
   const { user } = useAppSelector((state) => state.user);
   const [page, setPage] = useState<number>(1);
+
   const queryString = useMemo(() => {
     const info = {
       status: activeTab !== "All" ? activeTab.toLocaleLowerCase() : undefined,
@@ -40,8 +41,8 @@ const Orders = () => {
     }, "");
     return queryString;
   }, [page, user, activeTab]);
+
   const orderQuery = useGetOrdersQuery(queryString);
-  // console.log(queryString);
 
   return (
     <HomeLayout>
@@ -70,7 +71,7 @@ const Orders = () => {
           {/* this is main div  */}
           <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-2">
             <div>
-              <div className="bg-white rounded-2xl w-full min-h-[60vh] md:pt-6 md:px-6 2xl:pt-8">
+              <div className="bg-background rounded-2xl w-full min-h-[60vh] md:pt-6 md:px-6 2xl:pt-8">
                 <AppTabs
                   tabs={tabs}
                   activeTab={activeTab}
@@ -112,7 +113,7 @@ const Orders = () => {
                             </div>
                           </div>
                         ) : (
-                          <div className="bg-white rounded-2xl w-full min-h-[48vh] flex items-center justify-center flex-col">
+                          <div className="bg-background rounded-2xl w-full min-h-[48vh] flex items-center justify-center flex-col">
                             <Image
                               width={120}
                               height={120}

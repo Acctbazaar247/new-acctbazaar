@@ -67,13 +67,13 @@ export default function TestimonialHome() {
           </div>
 
           <div className="flex items-end justify-end lg:justify-center gap-6 lg:mb-10">
-            <button className="cursor-pointer swiper-testimonial-prev bg-white dropShadow rounded-full h-11 w-11">
+            <button className="cursor-pointer swiper-testimonial-prev bg-background dropShadow rounded-full h-11 w-11">
               <FontAwesomeIcon
                 icon={faArrowLeft}
                 className="text-textBlueGrey"
               />
             </button>
-            <button className="cursor-pointer swiper-testimonial-next bg-white dropShadow rounded-full h-11 w-11">
+            <button className="cursor-pointer swiper-testimonial-next bg-background dropShadow rounded-full h-11 w-11">
               <FontAwesomeIcon
                 icon={faArrowRight}
                 className="text-textBlueGrey"

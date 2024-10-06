@@ -99,7 +99,7 @@ const PriceRange = () => {
             <PiCurrencyDollarBold />
             <input
               type="number"
-              className="w-full border-none outline-none"
+              className="w-full bg-transparent border-none outline-none"
               value={minPrice}
               onChange={handleMinInputChange}
             />
@@ -112,7 +112,7 @@ const PriceRange = () => {
             <PiCurrencyDollarBold />
             <input
               type="number"
-              className="w-full border-none outline-none"
+              className="w-full bg-transparent border-none outline-none"
               value={maxPrice}
               onChange={handleMaxInputChange}
             />

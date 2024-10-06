@@ -1,24 +1,17 @@
 "use client";
 
+import AppCaptcha from "@/components/AppCaptcha/AppCaptcha";
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
 import AppFormInput from "@/components/ui/AppFormInput";
-import AppSmallLoading from "@/components/ui/AppSmallLoading";
 import { loginUser, setError } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import "react-phone-input-2/lib/material.css";
 import { toast } from "react-toastify";
-import ReCAPTCHA from "react-google-recaptcha";
-import config from "@/utils/config";
-import {
-  GoogleReCaptchaProvider,
-  GoogleReCaptcha,
-} from "react-google-recaptcha-v3";
-import AppCaptcha from "@/components/AppCaptcha/AppCaptcha";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 interface FormData {
   name: string;
   email: string;

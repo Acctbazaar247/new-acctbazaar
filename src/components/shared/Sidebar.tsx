@@ -49,7 +49,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-[1000] bg-white flex h-screen md:h-custom-dvh-md 2xl:h-custom-dvh flex-col overflow-y-auto duration-300 ease-linear lg:static lg:translate-x-0 py-5 md:py-2 pl-5 2xl:pl-7 w-[280px] 2xl:w-[300px] border-r ${
+      className={`absolute left-0 top-0 z-[1000] bg-background flex h-screen md:h-custom-dvh-md 2xl:h-custom-dvh flex-col overflow-y-auto duration-300 ease-linear lg:static lg:translate-x-0 py-5 md:py-2 pl-5 2xl:pl-7 w-[280px] 2xl:w-[300px] border-r ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -97,9 +97,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     }`}
                   >
                     <div
-                      className={`w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-white group-hover:text-textBlack p-1 ${
+                      className={`w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-background group-hover:text-textBlack p-1 ${
                         pathname === nav.path
-                          ? "bg-white text-textBlack"
+                          ? "bg-background text-textBlack"
                           : "bg-borderLight"
                       }`}
                     >
@@ -107,8 +107,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     </div>
                     <p className="">{nav.label}</p>
                     <div
-                      className={`group-hover:bg-white absolute h-4 w-1 right-0 top-[35%] rounded-l ${
-                        pathname === nav.path ? "bg-white" : ""
+                      className={`group-hover:bg-background absolute h-4 w-1 right-0 top-[35%] rounded-l ${
+                        pathname === nav.path ? "bg-background" : ""
                       }`}
                     ></div>
                   </Link>

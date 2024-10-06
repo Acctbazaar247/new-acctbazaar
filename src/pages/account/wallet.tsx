@@ -243,7 +243,7 @@ const Wallet = () => {
           <h2 className="title">Wallet</h2>
 
           {/* this is main div  */}
-          <div className="bg-white rounded flex  flex-col md:flex-row gap-6 min-h-[80dvh]  py-3 md:py-6 md:px-6 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
+          <div className="bg-background rounded flex  flex-col md:flex-row gap-6 min-h-[80dvh]  py-3 md:py-6 md:px-6 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
             <div className="md:w-1/4 space-y-6">
               {/* this is image div */}
               <div className="md:mx-2 h-[23dvh] md:h-[63vh] relative overflow-hidden">
@@ -275,7 +275,7 @@ const Wallet = () => {
                     {/* <h2 className="text-sm">USD ( $ ) </h2> */}
                   </div>
 
-                  <div className="bg-white/15 p-4 text-white gap-3 rounded-xl">
+                  <div className="bg-background/15 p-4 text-white gap-3 rounded-xl">
                     <div className="space-y-1">
                       {isLoading ? (
                         <Loading></Loading>

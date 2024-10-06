@@ -167,7 +167,7 @@ const MyPurchaseAccountCard = ({
               {/* <button className="flex items-center gap-1 text-sm ">
                             <MdOutlinePauseCircle /> Pause Ad
                         </button> */}
-              {/* <button onClick={() => deleteAccount(account?.id)} className="bg-white group p-2 rounded-full">
+              {/* <button onClick={() => deleteAccount(account?.id)} className="bg-background group p-2 rounded-full">
                             <AiOutlineDelete className="group-hover:text-red cursor-pointer text-lg" />
                         </button> */}
             </div>

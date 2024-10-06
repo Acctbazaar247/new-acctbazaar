@@ -56,7 +56,7 @@ export default function AccountCredentialCard({
           <button
             onClick={() => updateProgress(2)}
             type="button"
-            className="bg-white group p-2 rounded-full"
+            className="bg-background group p-2 rounded-full"
           >
             <BiEditAlt className="cursor-pointer text-textGrey text-lg" />
           </button>

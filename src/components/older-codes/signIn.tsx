@@ -91,7 +91,7 @@ const SignIn: React.FC = () => {
   return (
     <HomeLayout>
       <div className="flex items-center w-full justify-center py-20  md:mt-[50px]">
-        <div className="md:px-8 px-4 py-6  text-left bg-white shadow-lg">
+        <div className="md:px-8 px-4 py-6  text-left bg-background shadow-lg">
           <div className="flex justify-center mb-4">
             <Logo small={true}></Logo>
           </div>

@@ -15,7 +15,7 @@ export default function Dashboard() {
     {
       title: "Total amount",
       icon: <RiCoinsLine className="text-xl text-textGrey" />,
-      amount: data?.data?.totalMoney?.toFixed(2)
+      amount: data?.data?.totalMoney?.toFixed(2),
       // rate: 10,
       // increase: false,
       // timeRange: "month"
@@ -23,7 +23,7 @@ export default function Dashboard() {
     {
       title: "Total accounts",
       icon: <TbUserCircle className="text-xl text-textGrey" />,
-      amount: data?.data?.totalAccount
+      amount: data?.data?.totalAccount,
       // rate: 40,
       // increase: true,
       // timeRange: "month"
@@ -31,7 +31,7 @@ export default function Dashboard() {
     {
       title: "Accounts sold",
       icon: <TbUserDollar className="text-xl text-textGrey" />,
-      amount: data?.data?.totalSoldAccount
+      amount: data?.data?.totalSoldAccount,
       // rate: 40,
       // increase: true,
       // timeRange: "month"
@@ -39,11 +39,11 @@ export default function Dashboard() {
     {
       title: "Accounts approved",
       icon: <LiaUserCheckSolid className="text-xl text-textGrey" />,
-      amount: data?.data?.totalAccountApprove
+      amount: data?.data?.totalAccountApprove,
       // rate: 40,
       // increase: true,
       // timeRange: "month"
-    }
+    },
   ];
 
   return (
@@ -65,7 +65,7 @@ export default function Dashboard() {
           </div>
 
           {/* this is main div  */}
-          <div className="w-full space-y-2 md:space-y-6 bg-white md:p-5 2xl:p-6 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
+          <div className="w-full space-y-2 md:space-y-6 bg-background md:p-5 2xl:p-6 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 2xl:gap-6">
               {dashboardCards.map((card) => (
                 <DashboardCard key={card?.title} card={card} />

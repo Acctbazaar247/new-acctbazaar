@@ -11,7 +11,7 @@ type TMyPurchaseMain = {
 
 const MyPurchaseMain = ({ orders, setPage, data }: TMyPurchaseMain) => {
   return (
-    <div className="md:max-h-[60vh] overflow-auto bg-white">
+    <div className="md:max-h-[60vh] overflow-auto bg-background">
       {orders.map((order, i) => (
         <AnimationWrapper key={order.id} transition={{ delay: i * 0.08 }}>
           <MyPurchaseAccountCard

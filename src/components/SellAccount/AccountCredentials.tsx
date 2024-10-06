@@ -76,7 +76,7 @@ export default function AccountCredentials({
   };
 
   return (
-    <div className="bg-white rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
+    <div className="bg-background rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
       <div className="border-yellow-500 bg-yellow-50 flex flex-wrap gap-2 w-full rounded-lg border-l-4 2xl:border-l-[6px] p-3 md:p-4">
         <div className="">
           <GoAlert className="text-yellow-500 text-xl inline" /> You are in{" "}

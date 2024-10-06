@@ -63,7 +63,7 @@ export default function SellYourAccount() {
             {/* right side div  */}
             <div className="flex text-borderColor flex-col items-center justify-end gap-1">
               <div className="flex items-center">
-                <div className="p-2 rounded-full bg-white size-12 flex items-center justify-center">
+                <div className="p-2 rounded-full bg-background size-12 flex items-center justify-center">
                   {sellAccountState > 1 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
@@ -81,7 +81,7 @@ export default function SellYourAccount() {
                       : "border-textBlack"
                   }`}
                 ></div>
-                <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
+                <div className=" p-2 rounded-full bg-background size-12 flex items-center justify-center">
                   {sellAccountState > 2 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
@@ -101,7 +101,7 @@ export default function SellYourAccount() {
                     sellAccountState === 2 && "border-primary border-dashed"
                   }`}
                 ></div>
-                <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
+                <div className=" p-2 rounded-full bg-background size-12 flex items-center justify-center">
                   {sellAccountState > 3 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
@@ -121,7 +121,7 @@ export default function SellYourAccount() {
                     sellAccountState === 3 && "border-primary border-dashed"
                   }`}
                 ></div>
-                <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
+                <div className=" p-2 rounded-full bg-background size-12 flex items-center justify-center">
                   {sellAccountState > 4 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (

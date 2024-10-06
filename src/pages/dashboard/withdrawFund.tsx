@@ -163,7 +163,7 @@ const WithdrawFund = () => {
     setOpen(true);
   };
 
-  const handleOk = () => { };
+  const handleOk = () => {};
   const handleCancel = () => {
     setOpen(false);
   };
@@ -266,7 +266,8 @@ const WithdrawFund = () => {
                     {config.withdrawalMinMoney}
                   </span>{" "}
                   <br />
-                  When placing crypto withdrawal, the network fee will be from your payment.
+                  When placing crypto withdrawal, the network fee will be from
+                  your payment.
                 </p>
                 <FormInput
                   name="amount"
@@ -292,10 +293,11 @@ const WithdrawFund = () => {
                               setSelectedOption("bank");
                               // router.push("https://nowpayments.io/payment/?iid=4613115863");
                             }}
-                            className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${selectedOption === "bank"
-                              ? "border-orange-300 bg-orange-500 text-white"
-                              : "text-orange-500 border-orange-300"
-                              }`}
+                            className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${
+                              selectedOption === "bank"
+                                ? "border-orange-300 bg-orange-500 text-white"
+                                : "text-orange-500 border-orange-300"
+                            }`}
                           >
                             <div>
                               {/* <img src="" alt="" /> */}
@@ -313,10 +315,11 @@ const WithdrawFund = () => {
                               setSelectedOption("crypto");
                               // router.push("https://nowpayments.io/payment/?iid=4613115863");
                             }}
-                            className={`w-full py-4 px-2 border rounded transition-all ${selectedOption === "crypto"
-                              ? "border-orange-300 bg-orange-500 text-white"
-                              : "text-orange-500 border-orange-300"
-                              }`}
+                            className={`w-full py-4 px-2 border rounded transition-all ${
+                              selectedOption === "crypto"
+                                ? "border-orange-300 bg-orange-500 text-white"
+                                : "text-orange-500 border-orange-300"
+                            }`}
                           >
                             <div>
                               {/* <img src="" alt="" /> */}
@@ -331,7 +334,7 @@ const WithdrawFund = () => {
 
                         {/* Content based on the selected option */}
                         {selectedOption === "bank" && (
-                          <div className="border p-4 flex flex-col gap-4 rounded text-center bg-white">
+                          <div className="border p-4 flex flex-col gap-4 rounded text-center bg-background">
                             <div className="text-left">
                               <FormInput
                                 label="Enter full name"
@@ -363,7 +366,7 @@ const WithdrawFund = () => {
                         )}
 
                         {selectedOption === "crypto" && (
-                          <div className="border p-4 rounded bg-white">
+                          <div className="border p-4 rounded bg-background">
                             <p className="text-lg">Chose your USDT</p>
                             <div className="flex gap-4 mt-2">
                               <button
@@ -373,10 +376,11 @@ const WithdrawFund = () => {
                                   setSelectCrypto("trc");
                                   // router.push("https://nowpayments.io/payment/?iid=4613115863");
                                 }}
-                                className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${selectCrypto === "trc"
-                                  ? "border-orange-300 bg-orange-500 text-white"
-                                  : "text-orange-500 border-orange-300"
-                                  }`}
+                                className={`w-full py-4 px-2 border rounded transition-all disabled:opacity-90 ${
+                                  selectCrypto === "trc"
+                                    ? "border-orange-300 bg-orange-500 text-white"
+                                    : "text-orange-500 border-orange-300"
+                                }`}
                               >
                                 <div>
                                   {/* <img src="" alt="" /> */}
@@ -391,10 +395,11 @@ const WithdrawFund = () => {
                                   setSelectCrypto("bep");
                                   // router.push("https://nowpayments.io/payment/?iid=4613115863");
                                 }}
-                                className={`w-full py-4 px-2 border rounded transition-all ${selectCrypto === "bep"
-                                  ? "border-orange-300 bg-orange-500 text-white"
-                                  : "text-orange-500 border-orange-300"
-                                  }`}
+                                className={`w-full py-4 px-2 border rounded transition-all ${
+                                  selectCrypto === "bep"
+                                    ? "border-orange-300 bg-orange-500 text-white"
+                                    : "text-orange-500 border-orange-300"
+                                }`}
                               >
                                 <div>
                                   {/* <img src="" alt="" /> */}

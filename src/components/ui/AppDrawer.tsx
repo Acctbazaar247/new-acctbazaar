@@ -35,7 +35,7 @@ const AppDrawer = ({
               {title}
             </h4>
           </div>
-          <div className="mt-2 rounded bg-white h-full overflow-y-auto">
+          <div className="mt-2 rounded bg-background h-full overflow-y-auto">
             {children}
             <div className="flex justify-center">
               {showExtraBottomButton ? (

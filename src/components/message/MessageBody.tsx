@@ -114,7 +114,7 @@ const MessageBody: React.FC<props> = ({ orderId }) => {
       </div>
       <div className="p-4 2xl:p-5 ">
         {/* this is send divs  */}
-        <div className="bg-whiteGrey   rounded-xl py-2.5 px-4 pr-[33px] relative">
+        <div className="bg-backgroundGrey   rounded-xl py-2.5 px-4 pr-[33px] relative">
           <input
             type="text"
             placeholder="Enter message"

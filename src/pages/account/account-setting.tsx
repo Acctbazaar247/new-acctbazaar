@@ -25,8 +25,8 @@ const AccountSetting = () => {
           <h2 className="title">Account settings</h2>
 
           {/* this is main div  */}
-          <div className="bg-white rounded min-h-[80dvh] py-3 md:py-6 md:px-10 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
-            <div className='md:w-[95%] mx-auto'>
+          <div className="bg-background rounded min-h-[80dvh] py-3 md:py-6 md:px-10 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
+            <div className="md:w-[95%] mx-auto">
               <AppTabs
                 tabs={tabs}
                 activeTab={activeTab}

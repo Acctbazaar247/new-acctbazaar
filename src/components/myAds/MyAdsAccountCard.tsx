@@ -58,7 +58,7 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
               <>
                 <Link
                   href={`/dashboard/editService/${account.id}`}
-                  className="bg-white group p-2 rounded-full"
+                  className="bg-background group p-2 rounded-full"
                 >
                   <Tooltip title="Edit this ads">
                     <MdEdit />
@@ -67,7 +67,7 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
 
                 <button
                   onClick={() => deleteAccount(account?.id)}
-                  className="bg-white group p-2 rounded-full"
+                  className="bg-background group p-2 rounded-full"
                 >
                   <Tooltip title="Delete this ads">
                     <AiOutlineDelete className="group-hover:text-red cursor-pointer text-lg" />

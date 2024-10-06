@@ -79,7 +79,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
   };
 
   return (
-    <div className="bg-white rounded-2xl w-full min-h-[60vh] md:min-h-[80dvh] flex items-center justify-center flex-col">
+    <div className="bg-background rounded-2xl w-full min-h-[60vh] md:min-h-[80dvh] flex items-center justify-center flex-col">
       <h3 className="text-xl md:text-3xl font-bold">Make A One Time Payment</h3>
       <div className="py-6 space-y-6 md:w-[45%] mx-auto">
         <div

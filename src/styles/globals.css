@@ -135,7 +135,7 @@ html {
 .float-label-input input:not(:placeholder-shown) + label,
 .float-label-input textarea:not(:placeholder-shown) + label {
   transform: translateY(-1.5rem) scale(0.75) translateX(-0.7rem);
-  background-color: white;
+  /* background-color: white; */
   color: #ff5a35;
 }
 

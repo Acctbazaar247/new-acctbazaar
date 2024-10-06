@@ -67,7 +67,7 @@ const AccountReel = ({ title, accountType, category }: Props) => {
   } else if (isSuccess && data.data.length) {
     const info = data.data as IAccount[];
     content = (
-      <div className="bg-white p-4 ">
+      <div className="bg-background p-4 ">
         <h2 className="text-sm lg:text-lg mb-5  font-bold ">{title}</h2>
         <div className=" w-full ">
           {/* <AccountTable dataSource={info}></AccountTable> */}
@@ -90,10 +90,10 @@ const AccountReel = ({ title, accountType, category }: Props) => {
               ))}
             </Swiper>
             <div className="flex  gap-2  pointer-events-none absolute w-full justify-between top-1/2 z-20 -translate-y-1/2">
-              <button className="swiper-button-prev  rounded-full  hover:text-orange-500 bg-white/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
+              <button className="swiper-button-prev  rounded-full  hover:text-orange-500 bg-background/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
                 <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
               </button>
-              <button className="swiper-button-next  rounded-full  hover:text-orange-500 bg-white/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
+              <button className="swiper-button-next  rounded-full  hover:text-orange-500 bg-background/60 backdrop-blur-sm hover:border-orange-500 transition-all pointer-events-auto w-[25px] h-[25px]">
                 <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
               </button>
             </div>

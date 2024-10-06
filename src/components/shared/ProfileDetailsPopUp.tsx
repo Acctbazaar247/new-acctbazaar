@@ -37,7 +37,7 @@ export default function ProfileDetailsPopUp() {
                 animate={{ rotate: open ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <SlArrowDown className="text-xs md:text-base" />
+                <SlArrowDown className="text-xs text-textBlack md:text-base" />
               </motion.span>
             </div>
           }
