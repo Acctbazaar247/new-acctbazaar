@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const LeftSideAuthComponent = () => {
   return (
-    <div className="hidden lg:block lg:w-[42%] p-3 2xl:p-5">
-      <div className="relative bg-textBlack h-full w-full rounded-2xl lg:rounded-3xl">
+    <div className="hidden bg-background lg:block lg:w-[42%] p-3 2xl:p-5">
+      <div className="relative bg-[#1B1818] h-full w-full rounded-2xl lg:rounded-3xl">
         <img
           src="/assets/auth/Rectangle.png"
           alt="left side "

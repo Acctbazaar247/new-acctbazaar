@@ -95,7 +95,7 @@ module.exports = {
         khoyri: "#3C0A02", // Darker khoyri
         biskutColor: "#6A4E01", // Darkened biskut color
         zinc: "#52525B", // A darkened zinc
-        blue: "#3B82F6", // Brightened blue for contrast
+        blue: "#175CD3", // Brightened blue for contrast
         yellowShadow: "#1F2937", // Dark shadow tone
         yellowyellow: "#1f1501",
         yellowMore: "#FFEBCD", // Pale yellow for highlighting

@@ -1,20 +1,12 @@
 import AppCaptcha from "@/components/AppCaptcha/AppCaptcha";
 import CreateNewPassword from "@/components/CreateNewPassword/CreateNewPassword";
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
-import Loading from "@/components/ui/Loading";
 import { useEnterForgotOtpMutation } from "@/redux/features/auth/authSellerApi";
-import {
-  resendEmail,
-  userLoggedOut,
-  verifyUserWithToken,
-} from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useAppDispatch } from "@/redux/hook";
 import { ResponseSuccessType } from "@/types/common";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { use, useEffect, useState } from "react";
-import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
@@ -65,7 +57,7 @@ const EnterForgotOtp = () => {
   }
   return (
     <AppCaptcha>
-      <div className="flex lg:h-[100vh]">
+      <div className="flex bg-background  lg:h-[100vh]">
         {/* this is left side div  */}
         <LeftSideAuthComponent />
 

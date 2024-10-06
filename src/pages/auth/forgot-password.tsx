@@ -43,7 +43,7 @@ const ForgotPassword = () => {
 
   return (
     <AppCaptcha>
-      <div className="flex lg:h-[100vh]">
+      <div className="flex bg-background  lg:h-[100vh]">
         {/* this is left side div  */}
         <LeftSideAuthComponent />
         {/* this is form and other staff  */}

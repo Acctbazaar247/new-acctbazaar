@@ -75,7 +75,7 @@ const SignUp = () => {
 
   return (
     <AppCaptcha>
-      <div className="flex lg:h-[100vh]">
+      <div className="flex bg-background  lg:h-[100vh]">
         {/* this is left side div  */}
         <LeftSideAuthComponent />
 
@@ -136,8 +136,9 @@ const SignUp = () => {
                     value={value}
                     // enableAreaCodes={true}
                     specialLabel={""}
-                    inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-borderColor"
+                    inputClass="h-11 !bg-transparent 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-borderColor"
                     country={"ng"}
+                    autocompleteSearch={false}
                     placeholder="Phone Number"
                     inputProps={{
                       name,

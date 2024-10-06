@@ -345,7 +345,6 @@ html {
 
 /* this is antd design table change  */
 .ant-table-thead .ant-table-cell {
-  background-color: white !important;
   border: none;
 }
 .ant-table-thead .ant-table-cell::before {

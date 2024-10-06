@@ -27,7 +27,7 @@ const ThemeSwitcher = () => {
           className="hidden"
           type="checkbox"
         />
-        <div className="icon icon--moon size-6">
+        <div className="icon icon--moon text-black size-6">
           <svg
             fill="currentColor"
             viewBox="0 0 24 24"

@@ -31,6 +31,7 @@ const FormTextArea = ({
         render={({ field }) => (
           <Input.TextArea
             rows={rows}
+            className="bg-transparent border-borderColor placeholder:text-darkishGrey"
             placeholder={placeholder}
             {...field}
             defaultValue={value}

@@ -8,8 +8,7 @@ import {
 } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/router";
-import { use, useEffect, useState } from "react";
-import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
@@ -105,7 +104,7 @@ const EnterOtp = () => {
 
   return (
     <AppCaptcha>
-      <div className="flex lg:h-[100vh]">
+      <div className="flex bg-background  lg:h-[100vh]">
         {/* this is left side div  */}
         <LeftSideAuthComponent />
 
