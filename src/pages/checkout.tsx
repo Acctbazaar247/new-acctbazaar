@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 
 type Props = {};
 
-function Checkout({ }: Props) {
+function Checkout({}: Props) {
   const [successStatus, setSuccessStatus] = useState({
     totalItems: 0,
     isDone: false,
@@ -74,7 +74,7 @@ function Checkout({ }: Props) {
       mainData.forEach((ele) => {
         makeOrder({ accountId: ele.accountId })
           .unwrap()
-          .then((res) => { })
+          .then((res) => {})
           .catch((err) => {
             toast.error(err.message);
           });
@@ -84,7 +84,7 @@ function Checkout({ }: Props) {
 
   return (
     <HomeLayout>
-      <div className="bg-white shadow-xl mx-auto max-w-4xl w-11/12 rounded-md my-10 p-6">
+      <div className="bg-background shadow-xl mx-auto max-w-4xl w-11/12 rounded-md my-10 p-6">
         {/* Title */}
         <div className="mb-10">
           <div className="flex justify-between items-center">

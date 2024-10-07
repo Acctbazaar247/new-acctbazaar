@@ -12,9 +12,12 @@ const DashboardLayout: React.FC<props> = ({ children }) => {
 
   return (
     <PrivateLayout>
-      <div className="h-screen overflow-hidden w-full">
-        <DashboardNavbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className='flex h-custom-dvh-sm md:h-custom-dvh-md 2xl:h-custom-dvh'>
+      <div className="h-screen bg-background overflow-hidden w-full">
+        <DashboardNavbar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
+        <div className="flex h-custom-dvh-sm md:h-custom-dvh-md 2xl:h-custom-dvh">
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <div className="container px-4 py-4 md:px-4 md:py-4 lg:py-8 2xl:py-10 lg:max-w-[83%] 2xl:max-w-[80%]">
             {children}

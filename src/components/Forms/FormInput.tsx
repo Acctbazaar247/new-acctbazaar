@@ -47,6 +47,7 @@ const FormInput = ({
               type={type}
               size={size}
               placeholder={placeholder}
+              className="bg-transparent border-borderColor placeholder:text-darkishGrey"
               disabled={disabled}
               {...field}
               value={value ? value : field.value}
@@ -57,6 +58,7 @@ const FormInput = ({
               size={size}
               placeholder={placeholder}
               {...field}
+              className="bg-transparent border-borderColor placeholder:text-darkishGrey"
               disabled={disabled}
               value={value ? value : field.value}
             />

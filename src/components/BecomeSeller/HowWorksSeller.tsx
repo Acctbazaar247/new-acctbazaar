@@ -35,7 +35,7 @@ export default function HowWorksSeller() {
     },
   ];
   return (
-    <div className="bg-[#252120] text-white">
+    <div className="bg-darkBg text-white">
       <div
         className="container px-4 py-16 lg:py-20"
         data-aos="fade-up"

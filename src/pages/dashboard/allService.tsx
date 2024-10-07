@@ -1,32 +1,30 @@
-import Link from "next/link";
-import React, { ChangeEvent, useMemo, useState } from "react";
-import { Avatar, Button, Popconfirm } from "antd";
-import type { ColumnsType } from "antd/es/table";
+import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
+import Form from "@/components/Forms/Form";
+import FormSelectField, {
+  SelectOptions,
+} from "@/components/Forms/FormSelectField";
+import TableLoading from "@/components/shared/TableLoading";
+import AppInput from "@/components/ui/AppInput";
+import AppTable from "@/components/ui/AppTable";
+import useDebounce from "@/hooks/useDebounce";
 import {
-  AdminRole,
+  useDeleteAccountMutation,
+  useEditAccountMutation,
+  useGetAccountsQuery,
+} from "@/redux/features/account/accountApi";
+import { ACCOUNT_CATEGORIES } from "@/shared";
+import {
   EApprovedForSale,
   EPlans,
   IAccount,
   IUser,
-  UserRole
+  UserRole,
 } from "@/types/common";
-import {
-  useDeleteAccountMutation,
-  useEditAccountMutation,
-  useGetAccountsQuery
-} from "@/redux/features/account/accountApi";
-import FormSelectField, {
-  SelectOptions
-} from "@/components/Forms/FormSelectField";
-import useDebounce from "@/hooks/useDebounce";
-import Form from "@/components/Forms/Form";
 import { optionCreator } from "@/utils";
-import { ACCOUNT_CATEGORIES } from "@/shared";
-import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
-import AppInput from "@/components/ui/AppInput";
-import AppTable from "@/components/ui/AppTable";
-import TableLoading from "@/components/shared/TableLoading";
-// import PRAdminLayout from "@/layout/PRAdminLayout";
+import { Avatar, Button, Popconfirm } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import Link from "next/link";
+import React, { ChangeEvent, useMemo, useState } from "react";
 import AdminsLayout from "@/layout/AdminsLayout";
 
 type DataType = {} & IAccount;
@@ -56,7 +54,7 @@ function AllService() {
         ? approvedForSale.value
         : undefined,
 
-      planType: planStatus.value.length ? planStatus.value : undefined
+      planType: planStatus.value.length ? planStatus.value : undefined,
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -79,7 +77,7 @@ function AllService() {
           editService({
             id,
             approvedForSale: EApprovedForSale.approved,
-            messageFromAdmin: ""
+            messageFromAdmin: "",
           });
         }}
       >
@@ -91,7 +89,7 @@ function AllService() {
   const pendingButton = (id: string) => {
     return (
       <button
-        className="app-status-button text-xs lg:text-sm bg-blue-600"
+        className="app-status-button text-xs lg:text-sm bg-blue"
         onClick={() => {
           editService({ id, approvedForSale: EApprovedForSale.pending });
         }}
@@ -109,7 +107,7 @@ function AllService() {
           editService({
             id,
             approvedForSale: EApprovedForSale.denied,
-            messageFromAdmin: denyMessage
+            messageFromAdmin: denyMessage,
           });
         }}
       >
@@ -121,7 +119,7 @@ function AllService() {
           editService({
             id,
             approvedForSale: EApprovedForSale.denied,
-            messageFromAdmin: info.message
+            messageFromAdmin: info.message,
           });
         }}
       ></AccountDeniedFrom>
@@ -135,7 +133,7 @@ function AllService() {
         <Avatar src={single.imageUrl}></Avatar>
         <span>{single.label}</span>
       </div>
-    )
+    ),
   }));
 
   const approvedStatusOption =
@@ -160,7 +158,7 @@ function AllService() {
   const planOptions = Object.keys(EPlans).map((e) => {
     return {
       label: e.split("_").join(" ").toLowerCase(),
-      value: EPlans[e as keyof typeof EPlans]
+      value: EPlans[e as keyof typeof EPlans],
     };
   });
 
@@ -173,7 +171,7 @@ function AllService() {
       title: "Category",
       dataIndex: "category",
       key: "category",
-      className: "text-sm lg:text-base"
+      className: "text-sm lg:text-base",
     },
     {
       title: "Name",
@@ -195,7 +193,7 @@ function AllService() {
             )}
           </div>
         );
-      }
+      },
     },
     {
       title: "Price",
@@ -205,7 +203,7 @@ function AllService() {
 
       render: (price) => {
         return <span>${price}</span>;
-      }
+      },
     },
 
     {
@@ -226,7 +224,7 @@ function AllService() {
             </div>
           </div>
         );
-      }
+      },
     },
     {
       title: "Status",
@@ -245,9 +243,9 @@ function AllService() {
                   <div className="flex items-center justify-center">
                     <span
                       className={`border text-base text-white rounded-full py-0.5 px-2 ${
-                        (current === "pending" && "bg-blue-600") ||
+                        (current === "pending" && "bg-blue") ||
                         (current === "denied" && "bg-red") ||
-                        (current === "approved" && "bg-green-500")
+                        (current === "approved" && "bg-success")
                       }`}
                     >
                       {current}
@@ -276,7 +274,7 @@ function AllService() {
             </div>
           </div>
         );
-      }
+      },
     },
     {
       title: "Action",
@@ -288,14 +286,14 @@ function AllService() {
           {record.isSold ? null : (
             <>
               <Link href={`/dashboard/editService/${record.id}`}>
-                <Button className=" px-5">Edit</Button>
+                <Button className="px-5 border-borderColor">Edit</Button>
               </Link>
               <Popconfirm
                 title="Are your Sure to delete this faq?"
                 placement="leftTop"
                 onConfirm={() => deleteService(record.id)}
                 okButtonProps={{
-                  className: "!border !border-blue-300 text-blue-500"
+                  className: "!border !border-blue-300 text-blue-500",
                 }}
               >
                 <Button danger>Delete</Button>
@@ -303,8 +301,8 @@ function AllService() {
             </>
           )}
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -374,7 +372,7 @@ function AllService() {
           value={denyMessage}
           onChange={handleDenyMessageChange}
           placeholder="Enter Your Deny Message"
-          className={`w-full h-fit flex items-center gap-1 outline-none md:gap-2 text-sm md:text-base border  rounded md:rounded-md  2xl:rounded-lg px-2 py-1.5 md:px-4 md:py-1.5 lg:py-2 2xl:px-4 2xl:py-2.5 border-borderColor`}
+          className={`w-full h-fit flex  items-center gap-1 outline-none md:gap-2 text-sm md:text-base border  rounded md:rounded-md  bg-transparent placeholder:text-darkishGrey 2xl:rounded-lg px-2 py-1.5 md:px-4 md:py-1.5 lg:py-2 2xl:px-4 2xl:py-2.5 border-borderColor`}
         />
       </div>
 

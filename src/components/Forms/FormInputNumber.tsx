@@ -2,8 +2,7 @@
 
 import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
 import { InputNumber } from "antd";
-import { spawn } from "child_process";
-import { useFormContext, Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 interface IInput {
   name: string;
   size?: "large" | "small";
@@ -47,7 +46,7 @@ const FormInputNumber = ({
         }}
         render={({ field }) => (
           <InputNumber
-            className={className || "w-full"}
+            className={`w-full bg-transparent border-borderColor placeholder:text-darkishGrey ${className}`}
             type={"number"}
             size={size}
             placeholder={placeholder}

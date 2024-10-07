@@ -35,12 +35,11 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
     if (data?.meta?.total > 0) {
       setModalOpen(false);
     } else if (data?.meta?.total === 0) {
-      setModalOpen(true)
+      setModalOpen(true);
     }
     if (!user?.isPaidForSeller) {
       setModalOpen(true);
     }
-
   }, [data?.meta?.total, user?.isPaidForSeller]);
 
   const dispatch = useAppDispatch();
@@ -62,8 +61,9 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
     const floatValue = parseFloat(data?.price as string);
     if (!isNaN(floatValue) && floatValue > 0) {
       const submittedData = {
-        ...data, price: floatValue
-      }
+        ...data,
+        price: floatValue,
+      };
       dispatch(setAccountCard(submittedData));
       updateProgress(3);
     } else {
@@ -315,10 +315,8 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
         </div>
       </AppModal>
 
-      <div className="bg-white rounded-2xl w-full min-h-[80vh] pt-4 md:p-6 2xl:p-8">
-        <h2
-          className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center"
-        >
+      <div className="bg-background rounded-2xl w-full min-h-[80vh] pt-4 md:p-6 2xl:p-8">
+        <h2 className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
           Add Account
         </h2>
 

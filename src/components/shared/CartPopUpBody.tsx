@@ -62,14 +62,14 @@ export default function CartPopUpBody() {
             </div>
           </div>
 
-          <Link href={"shopping-cart"}>
+          <Link href={"/shopping-cart"}>
             <button className="appBtn w-full">
               Checkout {myCarts.length > 0 && `( ${myCarts.length} )`}
             </button>
           </Link>
         </>
       ) : (
-        <div className="p-4 text-[#828D99] flex items-center justify-center flex-col gap-2">
+        <div className="p-4 text-zinc flex items-center justify-center flex-col gap-2">
           <Image
             width={80}
             height={80}

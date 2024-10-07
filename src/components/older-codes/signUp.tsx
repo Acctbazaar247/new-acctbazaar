@@ -68,7 +68,7 @@ const SignUp: React.FC = () => {
   return (
     <HomeLayout>
       <div className="flex items-center md:pt-10 justify-center my-20 px-4">
-        <div className="md:px-8 px-3 py-6 mt-4 text-left bg-white shadow-lg">
+        <div className="md:px-8 px-3 py-6 mt-4 text-left bg-background shadow-lg">
           <div className="flex justify-center mb-4">
             <Logo small={true} />
           </div>

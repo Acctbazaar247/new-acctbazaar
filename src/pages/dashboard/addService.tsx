@@ -27,7 +27,7 @@ const AddService = () => {
             icon: "success",
             title: "Success!",
             text: "Account has been successfully added.",
-            confirmButtonText: "Ok"
+            confirmButtonText: "Ok",
           });
         }
       })
@@ -46,6 +46,7 @@ const AddService = () => {
             onSubmit={onSubmit}
           ></AddServiceForm>
         </div>
+
         <div className="p-6 pt-10 md:p-4 md:pt-8 upload-guide">
           <h2 className="text-center pb-4 font-bold text-xl">Upload Guide</h2>
           <div className="text-sm">

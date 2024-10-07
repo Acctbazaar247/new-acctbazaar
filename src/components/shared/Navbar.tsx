@@ -1,42 +1,30 @@
-import { ReactNode, useEffect, useState } from "react";
-import Logo from "../ui/Logo";
-import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { userLoggedOut } from "@/redux/features/auth/authSlice";
-import { Avatar, Badge, Drawer, MenuProps, Space } from "antd";
-import { useRouter } from "next/router";
-import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useGetMyCartsQuery } from "@/redux/features/cart/cartApi";
+import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { ICart, UserRole } from "@/types/common";
-import SingleCart from "../SingleCart/SingleCart";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Drawer } from "antd";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ReactNode, useState } from "react";
+import { FiMenu } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
-import { CiShop } from "react-icons/ci";
-import { FiDollarSign, FiMenu } from "react-icons/fi";
-import { IoMdSettings } from "react-icons/io";
-import {
-  MdOutlineDashboard,
-  MdOutlinePlaylistAddCheckCircle
-} from "react-icons/md";
-import { FaBuysellads } from "react-icons/fa6";
+import AppDrawer from "../ui/AppDrawer";
+import Logo from "../ui/Logo";
+import CartPopUp from "./CartPopUp";
+import CartPopUpBody from "./CartPopUpBody";
 import {
   loggedSellerNavLinks,
   loggedUserNavLinks,
-  nonUserNavLinks
+  nonUserNavLinks,
 } from "./NavbarData";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { SlArrowDown } from "react-icons/sl";
-import AppPopover from "../ui/AppPopover";
-import ProfileDetailsPopUp from "./ProfileDetailsPopUp";
-import NotificationsPopUp from "./NotificationsPopUp";
-import CartPopUp from "./CartPopUp";
-import AppDrawer from "../ui/AppDrawer";
-import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
 import NotificationBody from "./NotificationBody";
-import CartPopUpBody from "./CartPopUpBody";
+import NotificationsPopUp from "./NotificationsPopUp";
 import ProfileDetailsBody from "./ProfileDetailsBody";
+import ProfileDetailsPopUp from "./ProfileDetailsPopUp";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -68,6 +56,7 @@ const Navbar = () => {
       </span>
     </div>
   );
+
   const myCarts = (cartsInfo?.data as ICart[]) || ([] as ICart[]);
 
   type TNav = {
@@ -77,16 +66,16 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed w-full top-0 z-[500] md:shadow md:border-b border-b-[#D0D2D5]">
+    <header className="fixed w-full top-0 z-[500] md:shadow md:border-b border-b-borderColor">
       <div
         className={`
       px-4 md:px-4 lg:px-10 2xl:px-16 py-2 2xl:py-2.5  flex justify-between items-center text-black transition-all
       ${
         !isHome
-          ? "bg-[#FAFAFC] md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
+          ? "bg-borderLight md:bg-background/50 backdrop-blur-sm md:backdrop-blur-xl"
           : progress >= 0.06
-          ? "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
-          : "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl lg:bg-transparent lg:backdrop-blur-0"
+          ? "bg-background/80 md:bg-background/50 backdrop-blur-sm md:backdrop-blur-xl"
+          : "bg-background/80 md:bg-background/50 backdrop-blur-sm md:backdrop-blur-xl lg:bg-transparent lg:backdrop-blur-0"
       }
       `}
       >
@@ -159,7 +148,7 @@ const Navbar = () => {
               <Link
                 className={`${
                   router?.asPath === nav?.path && "text-primary"
-                } text-sm lg:text-base 2xl:text-lg font-medium hover:text-primary`}
+                } text-sm lg:text-base 2xl:text-lg text-textBlack font-medium hover:text-primary`}
                 href={nav?.path}
                 key={nav?.label}
               >
@@ -167,6 +156,8 @@ const Navbar = () => {
               </Link>
             )
           )}
+
+          <ThemeSwitcher />
 
           {/* this is login or logout section  */}
           <div className="pl-4 xl:pl-12">
@@ -253,9 +244,12 @@ const Navbar = () => {
                 >
                   log in
                 </Link>
-                <div className="appBtn !text-white !hover:text-white w-full mt-3">
-                  <Link href="/auth/sign-up">Sign up</Link>
-                </div>
+                <Link
+                  className="appBtn !text-white !hover:text-white w-full mt-3 block"
+                  href="/auth/sign-up"
+                >
+                  Sign up
+                </Link>
               </div>
             </Drawer>
           </div>

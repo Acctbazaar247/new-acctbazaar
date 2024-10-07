@@ -3,7 +3,7 @@ import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import {
   useGetCurrentPlanQuery,
-  useTakeAPlanMutation
+  useTakeAPlanMutation,
 } from "@/redux/features/plan/planApi";
 import { ResponseSuccessType } from "@/types/common";
 import CountDownPlanDays from "@/utils/countDownPlanDays";
@@ -30,37 +30,37 @@ const Plans = () => {
       offers: [
         {
           label: `${config.basicPlanLimit} Upload daily`,
-          isHave: true
+          isHave: true,
         },
         {
           label: "Limited Categories",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Basic Support",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Bulk upload",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Marketplace Featured Ads",
-          isHave: false
+          isHave: false,
         },
         {
           label: "First upload Approval",
-          isHave: false
+          isHave: false,
         },
         {
           label: "Advanced Security",
-          isHave: false
+          isHave: false,
         },
         {
           label: "Advance page analytics",
-          isHave: false
-        }
-      ]
+          isHave: false,
+        },
+      ],
     },
     {
       id: 2,
@@ -69,37 +69,37 @@ const Plans = () => {
       offers: [
         {
           label: `${config.proPlanLimit} Upload daily`,
-          isHave: true
+          isHave: true,
         },
         {
           label: "Unlimited categories",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Priority Support",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Bulk Uploads",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Marketplace Featured Ads",
-          isHave: true
+          isHave: true,
         },
         {
           label: "First upload Approval",
-          isHave: false
+          isHave: false,
         },
         {
           label: "Advanced Security",
-          isHave: false
+          isHave: false,
         },
         {
           label: "Advance page analytics",
-          isHave: false
-        }
-      ]
+          isHave: false,
+        },
+      ],
     },
     {
       id: 3,
@@ -108,38 +108,38 @@ const Plans = () => {
       offers: [
         {
           label: `${config.proPlusPlanLimit} Upload daily`,
-          isHave: true
+          isHave: true,
         },
         {
           label: "Unlimited categories",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Premium Support",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Bulk Uploads",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Marketplace Featured Ads",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Quick approval of uploaded accounts.",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Weekends Upload and approval",
-          isHave: true
+          isHave: true,
         },
         {
           label: "Advanced Security",
-          isHave: true
-        }
-      ]
-    }
+          isHave: true,
+        },
+      ],
+    },
   ];
 
   const handleTakeAPlan = async (value: string) => {
@@ -171,7 +171,7 @@ const Plans = () => {
       })
       .catch((res: any) => {
         return toast.error(res?.data?.message || "Plan updated unsuccessful!", {
-          toastId: 1
+          toastId: 1,
         });
       });
   };
@@ -217,7 +217,7 @@ const Plans = () => {
                 onClick={() => setActive(plan?.name)}
                 key={plan?.id}
                 className={`w-full relative cursor-pointer px-5 py-6 transition-colors duration-300 transform rounded-2xl md:mx-5 md:w-96 border border-primary ${
-                  plan.name === active ? "bg-primary" : "bg-white"
+                  plan.name === active ? "bg-primary" : "bg-background"
                 }`}
               >
                 <div className="text-center">
@@ -265,7 +265,7 @@ const Plans = () => {
                   <button
                     className={`appBtn lg:py-3 rounded-xl mt-6 w-full disabled:cursor-not-allowed flex items-center justify-center   ${
                       plan.name === active
-                        ? "bg-white disabled:bg-white hover:disabled:bg-white/90 hover:bg-white/90 disabled:text-primary text-primary disabled:border-primary"
+                        ? "bg-background disabled:bg-background hover:disabled:bg-background/90 hover:bg-background/90 disabled:text-primary text-primary disabled:border-primary"
                         : "disabled:text-white disabled:bg-primary disabled:border-primary"
                     }`}
                   >
@@ -277,7 +277,7 @@ const Plans = () => {
                     disabled={plan.name === currentPlan?.data?.planType}
                     className={`appBtn lg:py-3 rounded-xl mt-6 w-full disabled:cursor-not-allowed  ${
                       plan.name === active
-                        ? "bg-white disabled:bg-white hover:disabled:bg-white/90 hover:bg-white/90 disabled:text-primary text-primary disabled:border-primary"
+                        ? "bg-background disabled:bg-background hover:disabled:bg-background/90 hover:bg-background/90 disabled:text-primary text-primary disabled:border-primary"
                         : "disabled:text-white disabled:bg-primary disabled:border-primary"
                     }`}
                   >

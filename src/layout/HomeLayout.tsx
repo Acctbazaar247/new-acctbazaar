@@ -13,13 +13,16 @@ const HomeLayout = ({ children }: Props) => {
   return (
     <>
       <Navbar />
-      <main className={`mt-11 md:mt-14 lg:mt-16 2xl:mt-20 bg-white md:bg-[#FBFAFA] ${user?.id && "px-5 mb-10 md:mb-0 md:px-0"}`}>{children}</main>
-      {user?.id &&
-        <MobileNavbar />
-      }
-      {!user?.id &&
-        <Footer />
-      }
+      <main
+        className={`bg-background min-h-screen md:bg-borderLight ${
+          user?.id &&
+          "px-5 mb-10 md:mb-0 md:px-0 pt-11 md:pt-14 lg:pt-16 2xl:pt-20 "
+        }`}
+      >
+        {children}
+      </main>
+      {user?.id && <MobileNavbar />}
+      {!user?.id && <Footer />}
     </>
   );
 };

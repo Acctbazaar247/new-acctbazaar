@@ -2,7 +2,7 @@ import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
 import {
   useEditUserMutation,
-  useGetUsersQuery
+  useGetUsersQuery,
 } from "@/redux/features/user/userApi";
 import { IUser, UserRole } from "@/types/common";
 import { Avatar } from "antd";
@@ -23,7 +23,7 @@ const AddAdmin = () => {
     const info = {
       page,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
-      role: "user"
+      role: "user",
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -42,10 +42,22 @@ const AddAdmin = () => {
     editUser({ id, role })
       .unwrap()
       .then((res: any) => {
-        toast.success(`Make ${role === UserRole.PRAdmin && "Product Reviewer Admin" || role === UserRole.CCAdmin && "Customer Care Admin" || role === UserRole.FinanceAdmin && "Finance Admin"} successful.`);
+        toast.success(
+          `Make ${
+            (role === UserRole.PRAdmin && "Product Reviewer Admin") ||
+            (role === UserRole.CCAdmin && "Customer Care Admin") ||
+            (role === UserRole.FinanceAdmin && "Finance Admin")
+          } successful.`
+        );
       })
       .catch(() => {
-        toast.error(`Make ${role === UserRole.PRAdmin && "Product Reviewer Admin" || role === UserRole.CCAdmin && "Customer Care Admin" || role === UserRole.FinanceAdmin && "Finance Admin"}  unsuccessful!`);
+        toast.error(
+          `Make ${
+            (role === UserRole.PRAdmin && "Product Reviewer Admin") ||
+            (role === UserRole.CCAdmin && "Customer Care Admin") ||
+            (role === UserRole.FinanceAdmin && "Finance Admin")
+          }  unsuccessful!`
+        );
       });
   };
 
@@ -65,7 +77,7 @@ const AddAdmin = () => {
             <p className="line-clamp-1 text-base capitalize">{name}</p>
           </div>
         );
-      }
+      },
     },
     {
       title: "Email",
@@ -73,7 +85,7 @@ const AddAdmin = () => {
       className: "min-w-[120px] md:min-w-[255px]",
       render: (email: any) => {
         return <p className="line-clamp-1 max-w-[30dvw] text-base">{email}</p>;
-      }
+      },
     },
     {
       title: "Role",
@@ -81,7 +93,7 @@ const AddAdmin = () => {
       className: "min-w-[120px] md:min-w-[200px]",
       render: (role: any) => {
         return <p className="line-clamp-1 text-base">{role}</p>;
-      }
+      },
     },
     {
       title: "Action",
@@ -90,17 +102,23 @@ const AddAdmin = () => {
       render: (action: any, record: IUser) => {
         return (
           <div className="flex items-center justify-center gap-2 w-fit">
-            {record?.isVerified ?
+            {record?.isVerified ? (
               <>
                 <AppModal
                   key={action}
-                  button={<button className="appOutlineBtnSm">Make Product Reviewer Admin</button>}
+                  button={
+                    <button className="appOutlineBtnSm">
+                      Make Product Reviewer Admin
+                    </button>
+                  }
                   cancelButtonTitle="No, Don’t"
                   primaryButtonTitle="Yes. Make Product Reviewer Admin"
-                  primaryButtonAction={() => handleMakeAdmin(record?.id, UserRole.PRAdmin)}
+                  primaryButtonAction={() =>
+                    handleMakeAdmin(record?.id, UserRole.PRAdmin)
+                  }
                 >
                   <div className="max-w-80">
-                    <p className="text-center text-[#828282] pt-4 lg:text-lg">
+                    <p className="text-center text-darkishGrey pt-4 lg:text-lg">
                       Are you sure make Product Reviewer Admin{" "}
                       <span className="text-textDark font-medium">
                         {record?.name}{" "}
@@ -112,16 +130,23 @@ const AddAdmin = () => {
 
                 <AppModal
                   key={action}
-                  button={<button className="appOutlineBtnSm">Make Customer Care Admin</button>}
+                  button={
+                    <button className="appOutlineBtnSm">
+                      Make Customer Care Admin
+                    </button>
+                  }
                   cancelButtonTitle="No, Don’t"
                   primaryButtonTitle="Yes. Make Customer Care Admin"
-                  primaryButtonAction={() => handleMakeAdmin(record?.id, UserRole.CCAdmin)}
+                  primaryButtonAction={() =>
+                    handleMakeAdmin(record?.id, UserRole.CCAdmin)
+                  }
                 >
                   <div className="max-w-80">
-                    <p className="text-center text-[#828282] pt-4 lg:text-lg">
+                    <p className="text-center text-darkishGrey pt-4 lg:text-lg">
                       Are you sure Make Customer Care Admin
                       <span className="text-textDark font-medium">
-                        {" "} {record?.name}
+                        {" "}
+                        {record?.name}
                       </span>{" "}
                       from this Users list?
                     </p>
@@ -130,31 +155,38 @@ const AddAdmin = () => {
 
                 <AppModal
                   key={action}
-                  button={<button className="appOutlineBtnSm">Make Finance Admin</button>}
+                  button={
+                    <button className="appOutlineBtnSm">
+                      Make Finance Admin
+                    </button>
+                  }
                   cancelButtonTitle="No, Don’t"
                   primaryButtonTitle="Yes. Make Finance Admin"
-                  primaryButtonAction={() => handleMakeAdmin(record?.id, UserRole.FinanceAdmin)}
+                  primaryButtonAction={() =>
+                    handleMakeAdmin(record?.id, UserRole.FinanceAdmin)
+                  }
                 >
                   <div className="max-w-80">
-                    <p className="text-center text-[#828282] pt-4 lg:text-lg">
+                    <p className="text-center text-darkishGrey pt-4 lg:text-lg">
                       Are you sure Make Finance Admin
                       <span className="text-textDark font-medium">
-                        {" "}{record?.name}
+                        {" "}
+                        {record?.name}
                       </span>{" "}
                       from this Users list?
                     </p>
                   </div>
                 </AppModal>
               </>
-              :
-              <div className='flex items-center gap-1 justify-center'>
+            ) : (
+              <div className="flex items-center gap-1 justify-center">
                 <GoUnverified /> The user is not verified yet.
               </div>
-            }
+            )}
           </div>
         );
-      }
-    }
+      },
+    },
   ];
 
   return (

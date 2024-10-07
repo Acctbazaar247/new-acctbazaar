@@ -41,7 +41,7 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
 
           {user?.isVerifiedByAdmin && (
             <div className="flex items-center gap-1">
-              <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+              <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
               {!onlyBatch && (
                 <p
                   className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
@@ -57,13 +57,13 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
           <Image
             width={40}
             height={40}
-            className="size-7 md:size-9 rounded-full"
+            className="size-7 md:size-9 rounded-full aspect-square block object-cover"
             src={user?.profileImg as string}
             alt="country icon"
           />
           {user?.isVerifiedByAdmin && (
             <div className="absolute -bottom-0.5 md:-bottom-0.5 right-0 md:-right-1">
-              <RiVerifiedBadgeFill className="text-success text-sm md:text-base 2xl:text-lg bg-white rounded-full " />
+              <RiVerifiedBadgeFill className="text-success text-sm md:text-base 2xl:text-lg bg-background rounded-full " />
             </div>
           )}
         </div>

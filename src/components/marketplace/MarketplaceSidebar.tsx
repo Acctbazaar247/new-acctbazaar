@@ -9,9 +9,9 @@ import {
   GamingAccountCategories,
   GiftCardCategories,
   SocialMediaCategories,
-  ToolsAndResources,
+  // ToolsAndResources,
   VpnCategories,
-  WebsitesCategories
+  WebsitesCategories,
 } from "@/shared";
 
 const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
@@ -19,48 +19,48 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
     {
       imageUrl: "/assets/icons/like.png",
       label: "Social Media",
-      children: SocialMediaCategories
+      children: SocialMediaCategories,
     },
     {
       imageUrl: "/assets/icons/email.png",
       label: "Emails & Messaging Service ",
-      children: EmailMessagingCategories
+      children: EmailMessagingCategories,
     },
     {
       imageUrl: "/assets/icons/gift.png",
       label: "Giftcards",
-      children: GiftCardCategories
+      children: GiftCardCategories,
     },
     {
       imageUrl: "/assets/icons/vpn.png",
       label: "VPN & PROXYs",
-      children: VpnCategories
+      children: VpnCategories,
     },
     {
       imageUrl: "/assets/product/internet-websites.png",
       label: "Websites",
-      children: WebsitesCategories
+      children: WebsitesCategories,
     },
     {
       imageUrl: "/assets/icons/ecart.png",
       label: "E-commerce Platforms",
-      children: EcommerceCategories
+      children: EcommerceCategories,
     },
     {
       imageUrl: "/assets/icons/game.png",
       label: "Gaming",
-      children: GamingAccountCategories
+      children: GamingAccountCategories,
     },
     {
       imageUrl: "/assets/icons/tag-user.png",
       label: "Accounts & Subscriptions",
-      children: AccountsSubscriptionsCategories
+      children: AccountsSubscriptionsCategories,
     },
-    {
-      imageUrl: "/assets/icons/toolsandre.png",
-      label: "Tools & Resources",
-      children: ToolsAndResources
-    },
+    // {
+    //   imageUrl: "/assets/icons/toolsandre.png",
+    //   label: "Tools & Resources",
+    //   children: ToolsAndResources
+    // },
     {
       imageUrl: "/assets/icons/others.png",
       label: "Others",
@@ -68,10 +68,10 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
         {
           label: "Other",
           value: AccountCategory.Other,
-          imageUrl: "/assets/icons/other.png"
-        }
-      ]
-    }
+          imageUrl: "/assets/icons/other.png",
+        },
+      ],
+    },
   ];
 
   return (
@@ -82,7 +82,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
 
       {/* this is account category div  */}
       <div className={`${isHideTitle && "pt-3"}`}>
-        <h3 className="border-b border-b-[#E4E4E4] px-4 md:px-5 pb-2 md:pb4- text-textBlack font-medium">
+        <h3 className="border-b border-b-borderColor px-4 md:px-5 pb-2 md:pb4- text-textBlack font-medium">
           Account Category
         </h3>
         <div className="pt-2 max-h-[35dvh] 2xl:max-h-[40dvh] overflow-auto ">

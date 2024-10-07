@@ -23,8 +23,9 @@ const SingleMessageUser = ({
   return (
     <div
       onClick={() => setActiveChatId(orderId)}
-      className={`flex items-center cursor-pointer justify-between gap-2 md:gap-4 rounded-lg px-1.5 md:px-3 py-3 md:py-6 ${isActive && "bg-[#FBFAFA]"
-        }`}
+      className={`flex items-center cursor-pointer justify-between gap-2 md:gap-4 rounded-lg px-1.5 md:px-3 py-3 md:py-6 ${
+        isActive && "bg-borderLight"
+      }`}
     >
       {/* this is left div  */}
       <div className="flex items-center gap-1.5 md:gap-3">
@@ -36,9 +37,9 @@ const SingleMessageUser = ({
           alt="avatar"
         />
         <div className="space-y-1 2xl:space-y-1.5">
-          <h3 className="text-[#1D2939] font-semibold">{user?.name}</h3>
+          <h3 className="text-textBlueBlack font-semibold">{user?.name}</h3>
           {mainData ? (
-            <p className="line-clamp-1 text-sm text-[#667085]">
+            <p className="line-clamp-1 text-sm text-textBlueGrey">
               {mainData.data.length
                 ? mainData.data[mainData.data.length - 1].text
                 : null}
@@ -48,15 +49,15 @@ const SingleMessageUser = ({
       </div>
       {/* this is right div  */}
       <div className="space-y-2">
-        <p className="text-[#475467] text-xs md:text-sm">
+        <p className="text-textBlueGrey text-xs md:text-sm">
           {mainData?.data?.length
             ? dateFormat(
-              new Date(
-                mainData?.data[mainData?.data?.length - 1].createdAt ||
-                new Date()
-              ),
-              appDateFormate
-            )
+                new Date(
+                  mainData?.data[mainData?.data?.length - 1].createdAt ||
+                    new Date()
+                ),
+                appDateFormate
+              )
             : null}
         </p>
 

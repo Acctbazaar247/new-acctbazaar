@@ -74,7 +74,7 @@
     @apply font-bold text-xl lg:text-2xl 2xl:text-3xl;
   }
   .message {
-    @apply rounded-3xl py-2 text-sm px-4 my-1 w-fit bg-[#E6E6E6];
+    @apply rounded-3xl py-2 text-sm px-4 my-1 w-fit bg-borderLight;
   }
   .messageMine {
     @apply rounded-3xl py-2 text-sm px-4 my-1 w-fit bg-[#F9866C] text-white;
@@ -135,7 +135,7 @@ html {
 .float-label-input input:not(:placeholder-shown) + label,
 .float-label-input textarea:not(:placeholder-shown) + label {
   transform: translateY(-1.5rem) scale(0.75) translateX(-0.7rem);
-  background-color: white;
+  /* background-color: white; */
   color: #ff5a35;
 }
 
@@ -345,7 +345,6 @@ html {
 
 /* this is antd design table change  */
 .ant-table-thead .ant-table-cell {
-  background-color: white !important;
   border: none;
 }
 .ant-table-thead .ant-table-cell::before {
@@ -865,4 +864,38 @@ img {
     width: 19px;
     height: 19px;
   }
+}
+
+/* From Uiverse.io by Creatlydev */
+.toggle {
+  background-color: #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+.icon {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  transition: transform 500ms;
+}
+
+.icon--moon {
+  transition-delay: 200ms;
+}
+
+.icon--sun {
+  transform: scale(0);
+}
+
+#switch:checked + .icon--moon {
+  transform: rotate(360deg) scale(0);
+}
+
+#switch:checked ~ .icon--sun {
+  transition-delay: 200ms;
+  transform: scale(1) rotate(360deg);
 }

@@ -24,6 +24,16 @@ export const reviewApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: [tagTypes.Review],
     }),
+    addReply: builder.mutation({
+      query: (info) => {
+        return {
+          url: "/review/add-reply",
+          method: "POST",
+          body: info,
+        };
+      },
+      invalidatesTags: [tagTypes.Review],
+    }),
     editReview: builder.mutation({
       query: (info) => {
         return {
@@ -47,6 +57,7 @@ export const reviewApi = apiSlice.injectEndpoints({
 });
 export const {
   useGetReviewsQuery,
+  useAddReplyMutation,
   useAddReviewMutation,
   useDeleteReviewMutation,
   useEditReviewMutation,

@@ -10,9 +10,10 @@ export default function BannerHome() {
   }, []);
 
   return (
-    <div className="flex relative h-[120dvh] xl:h-[110dvh] overflow-hidden -mt-20  ">
+    <div className="flex relative h-[120dvh] xl:h-[110dvh] overflow-hidden ">
       <img className="w-1/2" src="/assets/home/shadowLeft.png" alt="" />
       <img className="w-1/2" src="/assets/home/shadowRight.png" alt="" />
+
       <div className="absolute top-0 left-0 w-full h-full pt-20">
         <div
           className="container px-4 w-full h-full flex flex-col lg:flex-row mx-auto"

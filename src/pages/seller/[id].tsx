@@ -2,6 +2,7 @@ import ReviewCard from "@/components/Seller/ReviewCard";
 import SellerProfileViewComponent from "@/components/Seller/SellerProfileViewComponent";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import AccountLoading from "@/components/shared/AccountLoading";
+import AnimationWrapper from "@/components/ui/AnimationWrapper";
 import AppErrorComponent from "@/components/ui/AppErrorComponent";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
@@ -12,13 +13,13 @@ import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
 import { useGetReviewsQuery } from "@/redux/features/review/reviewApi";
 import {
   useGetSellerOverviewQuery,
-  useGetSellerProfileByIdQuery
+  useGetSellerProfileByIdQuery,
 } from "@/redux/features/user/userApi";
 import {
   EApprovedForSale,
   IAccount,
   IGenericErrorMessage,
-  IReview
+  IReview,
 } from "@/types/common";
 import { Pagination } from "antd";
 import { useParams } from "next/navigation";
@@ -27,25 +28,27 @@ import { useMemo, useState } from "react";
 const SellerDetailsPage = () => {
   const tabs = [
     { value: "Ads", label: "Ads" },
-    { value: "Reviews", label: "Reviews" }
+    // { value: "Reviews", label: "Reviews" },
   ];
   const mobileTabs = [
     { value: "Info", label: "Info" },
     { value: "Ads", label: "Ads" },
-    { value: "Reviews", label: "Reviews" }
+    // { value: "Reviews", label: "Reviews" },
   ];
   const [activeTab, setActiveTab] = useState(tabs[0].value);
   const [activeReviewTab, setActiveReviewTab] = useState("All");
   const [page, setPage] = useState<number>(1);
   const [reviewPage, setReviewPage] = useState<number>(1);
   const pageQuery = useParams();
+
   const { isLoading, isFetching, isError, error, data } =
     useGetSellerProfileByIdQuery(pageQuery?.id);
   const reviewQueryString = useMemo(() => {
     const info = {
       page: reviewPage,
+      limit: 100,
       sellerId: pageQuery?.id,
-      reviewStatus: activeReviewTab.toLowerCase()
+      reviewStatus: activeReviewTab.toLowerCase(),
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -69,7 +72,7 @@ const SellerDetailsPage = () => {
       page,
       ownById: pageQuery?.id,
       approvedForSale: EApprovedForSale.approved,
-      isSold: false
+      isSold: false,
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -128,8 +131,8 @@ const SellerDetailsPage = () => {
               <div className="hidden md:block w-full xl:w-[30%]">
                 <SellerProfileViewComponent data={data.data} />
               </div>
-              <div className="hidden md:block border border-[#EFECEC]"></div>
-              <div className=" md:w-[68%] min-h-full bg-white  rounded-lg  p-2 md:p-4">
+              <div className="hidden md:block border border-whiteGrey"></div>
+              <div className=" md:w-[68%] min-h-full bg-background  rounded-lg  p-2 md:p-4">
                 <AppTabs
                   tabs={window.innerWidth > 1280 ? tabs : mobileTabs}
                   activeTab={activeTab}
@@ -139,7 +142,7 @@ const SellerDetailsPage = () => {
                   <SellerProfileViewComponent data={data.data} />
                 )}
                 {activeTab === "Ads" && (
-                  <div className="max-h-[67.8dvh] overflow-auto">
+                  <div className="max-h-[calc(100dvh-205px)] md:max-h-[67.8dvh] overflow-auto">
                     <AppRenderReduxData
                       queryData={queryData}
                       loadingComponent={<AccountLoading />}
@@ -147,14 +150,19 @@ const SellerDetailsPage = () => {
                         // console.log(data);
                         return (
                           <>
-                            {data.data.map((single: IAccount) => (
-                              <MarketplaceAccountCard
-                                account={single}
+                            {data.data.map((single: IAccount, i: number) => (
+                              <AnimationWrapper
                                 key={single.id}
-                              />
+                                transition={{ delay: i * 0.08 }}
+                              >
+                                <MarketplaceAccountCard account={single} />
+                              </AnimationWrapper>
                             ))}
                             <div className="flex justify-center items-center mt-5">
                               <Pagination
+                                size={
+                                  window.innerWidth > 668 ? "default" : "small"
+                                }
                                 showSizeChanger={false}
                                 pageSize={data.meta.limit}
                                 total={data.meta.total}
@@ -171,7 +179,7 @@ const SellerDetailsPage = () => {
                   </div>
                 )}
 
-                {activeTab === "Reviews" && (
+                {/* {activeTab === "Reviews" && (
                   <div className="max-h-[67.8dvh] overflow-auto">
                     <div className="flex items-center gap-4 text-sm py-4">
                       <button
@@ -206,8 +214,13 @@ const SellerDetailsPage = () => {
                         return (
                           <>
                             <div className="pr-2">
-                              {data.data.map((single: IReview) => (
-                                <ReviewCard data={single} key={single.id} />
+                              {data.data.map((single: IReview, i: number) => (
+                                <AnimationWrapper
+                                  key={single.id}
+                                  transition={{ delay: i * 0.08 }}
+                                >
+                                  <ReviewCard data={single} key={single.id} />
+                                </AnimationWrapper>
                               ))}
                             </div>
                             <div className="flex justify-center items-center mt-5">
@@ -226,7 +239,7 @@ const SellerDetailsPage = () => {
                       }}
                     />
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>

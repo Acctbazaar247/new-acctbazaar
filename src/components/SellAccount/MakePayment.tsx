@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
   useBecomeSellerMutation,
-  useBecomeSellerWithWalletMutation
+  useBecomeSellerWithWalletMutation,
 } from "@/redux/features/auth/authSellerApi";
 import { ResponseSuccessType } from "@/types/common";
 import { IoWalletOutline } from "react-icons/io5";
@@ -34,7 +34,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         .then((res: ResponseSuccessType) => {
           if (!res?.data) {
             toast.error(res?.data?.message || "something went wrong ", {
-              toastId: 1
+              toastId: 1,
             });
           } else {
             router.push(res?.data?.txId);
@@ -42,7 +42,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         })
         .catch((err) => {
           toast.error(err?.data?.message || "something went wrong", {
-            toastId: 1
+            toastId: 1,
           });
         });
     } else if (selectedOption === "crypto") {
@@ -51,7 +51,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         .then((res: ResponseSuccessType) => {
           if (!res?.data) {
             toast.error(res?.data?.message || "something went wrong ", {
-              toastId: 1
+              toastId: 1,
             });
           } else {
             router.push(res.data.txId);
@@ -59,7 +59,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         })
         .catch((err) => {
           toast.error(err?.data?.message || "something went wrong", {
-            toastId: 1
+            toastId: 1,
           });
         });
     } else if (selectedOption === "wallet") {
@@ -79,13 +79,13 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
   };
 
   return (
-    <div className="bg-white rounded-2xl w-full min-h-[60vh] md:min-h-[80dvh] flex items-center justify-center flex-col">
-      <h3 className="text-xl md:text-3xl font-bold">Make Payment</h3>
+    <div className="bg-background rounded-2xl w-full min-h-[60vh] md:min-h-[80dvh] flex items-center justify-center flex-col">
+      <h3 className="text-xl md:text-3xl font-bold">Make A One Time Payment</h3>
       <div className="py-6 space-y-6 md:w-[45%] mx-auto">
         <div
           onClick={() => setSelectedOption("bank")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
-            selectedOption === "bank" ? "border-primary" : "border-[#C5C5C5]"
+            selectedOption === "bank" ? "border-primary" : "border-borderColor"
           }`}
         >
           <Image
@@ -106,7 +106,9 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         <div
           onClick={() => setSelectedOption("crypto")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
-            selectedOption === "crypto" ? "border-primary" : "border-[#C5C5C5]"
+            selectedOption === "crypto"
+              ? "border-primary"
+              : "border-borderColor"
           }`}
         >
           <Image
@@ -128,14 +130,16 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
         <div
           onClick={() => setSelectedOption("wallet")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
-            selectedOption === "wallet" ? "border-primary" : "border-[#C5C5C5]"
+            selectedOption === "wallet"
+              ? "border-primary"
+              : "border-borderColor"
           }`}
         >
           <IoWalletOutline className="text-2xl" />
           <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Wallet</h3>
+            <h3 className="text-textBlack font-bold">Acctbazaar Wallet</h3>
             <p className="text-sm text-textGrey">
-              Make payment using your own wallet
+              Make payment using your Acctbazaar account Balance
             </p>
           </div>
         </div>

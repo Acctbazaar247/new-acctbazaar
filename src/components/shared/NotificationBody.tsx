@@ -28,11 +28,11 @@ export default function NotificationBody() {
             <p className="size-2 rounded-full bg-primary shadow absolute top-1 -left-1" />
             <h4 className="capitalize flex items-center gap-2 justify-between">
               <span>{notification.title}</span>
-              <span className="text-xs text-[#828D99]">
+              <span className="text-xs text-zinc">
                 {dateFormat(new Date(notification.createdAt), appDateFormate)}
               </span>
             </h4>
-            <p className="textG text-[#828D99]">{notification.message}</p>
+            <p className="textG text-zinc">{notification.message}</p>
             <div className="py-2">
               {notification.link ? (
                 <Link
@@ -50,7 +50,7 @@ export default function NotificationBody() {
           </div>
         ))
       ) : (
-        <div className="p-4 text-[#828D99] flex items-center justify-center flex-col gap-2">
+        <div className="p-4 text-zinc flex items-center justify-center flex-col gap-2">
           <IoNotificationsOffOutline className="text-3xl" />
           No notification found
         </div>

@@ -4,9 +4,7 @@ import AddMoneyModal from "@/components/wallet/AddMoneyModal";
 import AddWithdrawModal from "@/components/wallet/AddWithdrawModal";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
-import {
-  useGetCurrencyOfLoggedInUserQuery,
-} from "@/redux/features/currency/currencyApi";
+import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
 import { useGetWithdrawFundsQuery } from "@/redux/features/withdrawFund/withdrawFundApi";
 import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
@@ -110,10 +108,11 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
-                (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
-                (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
-                }`}
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
+                (text === "pending" && "text-brown bg-yellowShadow") ||
+                (text === "failed" && "text-red bg-red/10") ||
+                (text === "success" && "text-success bg-success/10")
+              }`}
             >
               <GoDotFill />
               {text}
@@ -173,10 +172,11 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
-                (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
-                (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
-                }`}
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
+                (text === "pending" && "text-brown bg-yellowShadow") ||
+                (text === "failed" && "text-red bg-red/10") ||
+                (text === "success" && "text-success bg-success/10")
+              }`}
             >
               <GoDotFill />
               {text}
@@ -221,10 +221,11 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
-                (text === "denied" && "text-[#B42318] bg-[#FEF3F2]") ||
-                (text === "approved" && "text-[#027A48] bg-[#ECFDF3]")
-                }`}
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
+                (text === "pending" && "text-brown bg-yellowShadow") ||
+                (text === "denied" && "text-red bg-red/10") ||
+                (text === "approved" && "text-success bg-success/10")
+              }`}
             >
               <GoDotFill />
               {text}
@@ -242,7 +243,7 @@ const Wallet = () => {
           <h2 className="title">Wallet</h2>
 
           {/* this is main div  */}
-          <div className="bg-white rounded flex  flex-col md:flex-row gap-6 min-h-[80dvh]  py-3 md:py-6 md:px-6 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
+          <div className="bg-background rounded flex  flex-col md:flex-row gap-6 min-h-[80dvh]  py-3 md:py-6 md:px-6 mt-2 md:mt-4 lg:mt-5 2xl:mt-6">
             <div className="md:w-1/4 space-y-6">
               {/* this is image div */}
               <div className="md:mx-2 h-[23dvh] md:h-[63vh] relative overflow-hidden">
@@ -274,7 +275,7 @@ const Wallet = () => {
                     {/* <h2 className="text-sm">USD ( $ ) </h2> */}
                   </div>
 
-                  <div className="bg-white/15 p-4 text-white gap-3 rounded-xl">
+                  <div className="bg-background/15 p-4 text-white gap-3 rounded-xl">
                     <div className="space-y-1">
                       {isLoading ? (
                         <Loading></Loading>
@@ -297,7 +298,7 @@ const Wallet = () => {
 
             {/* this is table div  */}
             <div className="md:w-3/4">
-              <h2 className="text-md 2xl:text-[22px] text-[#4F4F4F] pb-2 md:pb-4 ">
+              <h2 className="text-md 2xl:text-[22px] text-textGrey pb-2 md:pb-4 ">
                 <span>Showing Details of {user?.role} </span>
                 {user?.role === UserRole.User ? (
                   "Add money"
@@ -318,7 +319,7 @@ const Wallet = () => {
                 )}
               </h2>
 
-              <div className="border mb-4 md:mb-5 border-[#F3F3F3] rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
+              <div className="border mb-4 md:mb-5 border-borderLight rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
                 {showWithdraw ? (
                   <>
                     <div className="hidden md:block">
@@ -413,10 +414,7 @@ const Wallet = () => {
                   </>
                 )}
               </div>
-              <AppButton
-                label="Report transaction"
-                href="/contactus"
-              />
+              <AppButton label="Report transaction" href="/contactus" />
             </div>
           </div>
         </div>

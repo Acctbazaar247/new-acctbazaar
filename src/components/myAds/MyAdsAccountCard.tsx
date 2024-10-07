@@ -13,7 +13,7 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
   const [deleteAccount] = useDeleteAccountMutation();
   return (
     <div
-      className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 hover:bg-[#FBFAFA]`}
+      className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-whiteGrey p-2 md:p-4 2xl:p-5 hover:bg-borderLight`}
     >
       <Image
         src={findImageUrlByCategory(account?.category)}
@@ -36,11 +36,10 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
           <p
             className={`text-sm  capitalize  py-1 px-2 rounded-full ${
               (account?.approvedForSale === "pending" &&
-                "text-[#B54708] bg-[#FFFAEB]") ||
-              (account?.approvedForSale === "denied" &&
-                "text-[#B42318] bg-[#FEF3F2]") ||
+                "text-brown bg-yellowShadow") ||
+              (account?.approvedForSale === "denied" && "text-red bg-red/10") ||
               (account?.approvedForSale === "approved" &&
-                "text-[#175CD3] bg-[#EFF8FF]")
+                "text-blue bg-zinc/20")
             }`}
           >
             {account?.approvedForSale}
@@ -54,12 +53,12 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
             {account?.price}
           </h2>
           {/* this is icons div view cart message  */}
-          <div className="flex items-center justify-between gap-4 text-[#4F4F4F]">
+          <div className="flex items-center justify-between gap-4 text-textGrey">
             {!account.isSold ? (
               <>
                 <Link
                   href={`/dashboard/editService/${account.id}`}
-                  className="bg-white group p-2 rounded-full"
+                  className="bg-background group p-2 rounded-full"
                 >
                   <Tooltip title="Edit this ads">
                     <MdEdit />
@@ -68,7 +67,7 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
 
                 <button
                   onClick={() => deleteAccount(account?.id)}
-                  className="bg-white group p-2 rounded-full"
+                  className="bg-background group p-2 rounded-full"
                 >
                   <Tooltip title="Delete this ads">
                     <AiOutlineDelete className="group-hover:text-red cursor-pointer text-lg" />
@@ -80,11 +79,11 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
         </div>
         <div>
           {account.approvedForSale === EApprovedForSale.denied ? (
-            <div className="p-2 rounded w-full md:w-1/2 bg-[#FFFAE6] mt-2 ">
-              <span className="flex gap-2 items-center  mb-3 text-[#A77207] ">
+            <div className="p-2 rounded w-full md:w-1/2 bg-yellowShadow mt-2 ">
+              <span className="flex gap-2 items-center  mb-3 text-biskutColor ">
                 <MdErrorOutline></MdErrorOutline> Reason for denied
               </span>{" "}
-              <p className="text-[#A77207] ml-2">
+              <p className="text-biskutColor ml-2">
                 {account.messageFromAdmin || "No Message"}
               </p>
             </div>

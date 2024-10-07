@@ -21,7 +21,7 @@ const ForgotPassword = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
   const [token, setToken] = useState<null | string>(null);
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -43,7 +43,7 @@ const ForgotPassword = () => {
 
   return (
     <AppCaptcha>
-      <div className="flex lg:h-[100vh]">
+      <div className="flex bg-background  lg:h-[100vh]">
         {/* this is left side div  */}
         <LeftSideAuthComponent />
         {/* this is form and other staff  */}
@@ -52,7 +52,7 @@ const ForgotPassword = () => {
             <h2 className="text-2xl lg:text-4xl font-bold text-textBlack pb-1 lg:pb-2">
               Forgot Password
             </h2>
-            <p className="text-[#645D5D] text-xs lg:text-sm">
+            <p className="text-textGrey text-xs lg:text-sm">
               Please enter your email address so we’ll send you link to get back
               into your account.
             </p>

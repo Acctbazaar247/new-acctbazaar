@@ -87,13 +87,13 @@ const PaySelection = ({
 
           {/* Content based on the selected option */}
           {/* {selectedOption === "bank" && (
-            <div className="border p-4 rounded text-center bg-white">
+            <div className="border p-4 rounded text-center bg-background">
               <p className="text-center text-xl font-bold">Coming soon!</p>
             </div>
           )} */}
 
           {/* {selectedOption === "crypto" && (
-            <div className="border p-4 rounded bg-white">
+            <div className="border p-4 rounded bg-background">
               <p className="text-center text-xl mb-2">Crypto Payment Details</p>
               <strong>Bitcoin wallet -</strong>
               bc1qssf3erlnus8x268app9eqrn2yyumx9u7h0gtu2

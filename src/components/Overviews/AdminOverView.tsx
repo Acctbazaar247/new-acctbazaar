@@ -1,34 +1,25 @@
-import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
-import Loading from "../ui/Loading";
-import {
-  EApprovedForSale,
-  IAccount,
-  IUser,
-} from "@/types/common";
-import ErrorCompo from "../ui/AppErrorComponent";
-import { Avatar, Button, Pagination, Popconfirm, Table } from "antd";
-import Link from "next/link";
+import useIsMobile from "@/hooks/useIsMobile";
+import SuperAdminLayout from "@/layout/SuperAdminLayout";
 import {
   useDeleteAccountMutation,
   useEditAccountMutation,
   useGetAccountsQuery,
 } from "@/redux/features/account/accountApi";
-import FormSelectField from "../Forms/FormSelectField";
-import { ColumnsType } from "antd/es/table";
-import Form from "../Forms/Form";
-import { optionCreator } from "@/utils";
-import useIsMobile from "@/hooks/useIsMobile";
 import { useGetAdminOverviewQuery } from "@/redux/features/user/userApi";
-import AppTable from "../ui/AppTable";
-import TableLoading from "../shared/TableLoading";
+import { EApprovedForSale, IAccount, IUser } from "@/types/common";
+import { optionCreator } from "@/utils";
+import { Avatar, Button, Popconfirm } from "antd";
+import { ColumnsType } from "antd/es/table";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 import AccountDeniedFrom from "../Forms/AccountDeniedFrom";
-import SuperAdminLayout from "@/layout/SuperAdminLayout";
+import TableLoading from "../shared/TableLoading";
+import AppTable from "../ui/AppTable";
+import Loading from "../ui/Loading";
 
 type DataType = {} & IAccount;
 
 const AdminOverView = () => {
-
   const { data: adminOverviewInfo, isLoading: isAdminOverviewLoading } =
     useGetAdminOverviewQuery("");
   const [page, setPage] = useState<number>(1);
@@ -100,7 +91,7 @@ const AdminOverView = () => {
           editService({
             id,
             approvedForSale: EApprovedForSale.approved,
-            messageFromAdmin: ""
+            messageFromAdmin: "",
           });
         }}
       >
@@ -129,7 +120,7 @@ const AdminOverView = () => {
           editService({
             id,
             approvedForSale: EApprovedForSale.denied,
-            messageFromAdmin: info.message
+            messageFromAdmin: info.message,
           });
         }}
       ></AccountDeniedFrom>
@@ -141,7 +132,7 @@ const AdminOverView = () => {
       title: "Category",
       dataIndex: "category",
       key: "category",
-      className: "text-sm lg:text-base"
+      className: "text-sm lg:text-base",
     },
     {
       title: "Name",
@@ -163,7 +154,7 @@ const AdminOverView = () => {
             )}
           </div>
         );
-      }
+      },
     },
     {
       title: "Price",
@@ -173,7 +164,7 @@ const AdminOverView = () => {
 
       render: (price) => {
         return <span>${price}</span>;
-      }
+      },
     },
 
     {
@@ -187,12 +178,14 @@ const AdminOverView = () => {
           <div className="flex gap-2 items-center">
             <Avatar src={ownBy?.profileImg}></Avatar>
             <div>
-              <span className=" text-xs lg:text-sm capitalize">{ownBy.name}</span>
+              <span className=" text-xs lg:text-sm capitalize">
+                {ownBy.name}
+              </span>
               <p className="text-xs">{ownBy.email}</p>
             </div>
           </div>
         );
-      }
+      },
     },
     {
       title: "Status",
@@ -208,7 +201,7 @@ const AdminOverView = () => {
                 <p className="font-bold text-center">Sold</p>
               ) : (
                 <div>
-                  <div className='flex items-center justify-center'>
+                  <div className="flex items-center justify-center">
                     <span className="border text-xs rounded-full py-0.5 px-2">
                       {current}
                     </span>
@@ -236,7 +229,7 @@ const AdminOverView = () => {
             </div>
           </div>
         );
-      }
+      },
     },
     {
       title: "Action",
@@ -255,7 +248,7 @@ const AdminOverView = () => {
                 placement="leftTop"
                 onConfirm={() => deleteService(record.id)}
                 okButtonProps={{
-                  className: "!border !border-blue-300 text-blue-500"
+                  className: "!border !border-blue-300 text-blue-500",
                 }}
               >
                 <Button danger>Delete</Button>
@@ -263,8 +256,8 @@ const AdminOverView = () => {
             </>
           )}
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -289,14 +282,12 @@ const AdminOverView = () => {
       </div>
       <h2 className="text-xl font-bold mb-6 ">Manage Accounts</h2>
 
-      <div className='max-h-[45dvh] overflow-auto'>
+      <div className="max-h-[45dvh] overflow-auto">
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
           setPage={setPage}
-          loadingComponent={
-            <TableLoading columnNumber={columns.length} />
-          }
+          loadingComponent={<TableLoading columnNumber={columns.length} />}
         />
       </div>
     </SuperAdminLayout>

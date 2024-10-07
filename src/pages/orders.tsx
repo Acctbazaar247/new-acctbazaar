@@ -1,5 +1,6 @@
 import OrderAccountCard from "@/components/orders/OrderAccountCard";
 import AccountLoading from "@/components/shared/AccountLoading";
+import AnimationWrapper from "@/components/ui/AnimationWrapper";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
@@ -23,6 +24,7 @@ const Orders = () => {
   const [activeTab, setActiveTab] = useState(tabs[0].label);
   const { user } = useAppSelector((state) => state.user);
   const [page, setPage] = useState<number>(1);
+
   const queryString = useMemo(() => {
     const info = {
       status: activeTab !== "All" ? activeTab.toLocaleLowerCase() : undefined,
@@ -39,8 +41,8 @@ const Orders = () => {
     }, "");
     return queryString;
   }, [page, user, activeTab]);
+
   const orderQuery = useGetOrdersQuery(queryString);
-  // console.log(queryString);
 
   return (
     <HomeLayout>
@@ -67,9 +69,9 @@ const Orders = () => {
           </div>
 
           {/* this is main div  */}
-          <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
+          <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-2">
             <div>
-              <div className="bg-white rounded-2xl w-full min-h-[80vh] md:p-6 2xl:p-8">
+              <div className="bg-background rounded-2xl w-full min-h-[60vh] md:pt-6 md:px-6 2xl:pt-8">
                 <AppTabs
                   tabs={tabs}
                   activeTab={activeTab}
@@ -81,19 +83,37 @@ const Orders = () => {
                   loadingComponent={<AccountLoading />}
                   showData={(data) => {
                     return (
-                      <div className="py-4 md:py-6 space-y-6">
+                      <div className=" pt-2 md:px-6 md:pt-4 lg:pb-4 space-y-6">
                         {data?.data.length > 0 ? (
-                          <div className="max-h-[70dvh] overflow-auto space-y-3 md:space-y-4">
-                            {data.data.map((single: IOrder) => (
-                              <OrderAccountCard
-                                orderInfo={single}
+                          <div className="max-h-[calc(100dvh-210px)] md:max-h-[60dvh] overflow-auto space-y-3 md:space-y-4">
+                            {data.data.map((single: IOrder, i: number) => (
+                              <AnimationWrapper
                                 key={single.id}
-                                notShowDetails={true}
-                              />
+                                transition={{ delay: i * 0.08 }}
+                              >
+                                <OrderAccountCard
+                                  orderInfo={single}
+                                  notShowDetails={true}
+                                />
+                              </AnimationWrapper>
                             ))}
+                            <div className="flex justify-center">
+                              <Pagination
+                                size={
+                                  window.innerWidth > 668 ? "default" : "small"
+                                }
+                                showSizeChanger={false}
+                                pageSize={data.meta.limit}
+                                total={data.meta.total}
+                                current={data.meta.page}
+                                onChange={(value) => {
+                                  setPage(value);
+                                }}
+                              ></Pagination>
+                            </div>
                           </div>
                         ) : (
-                          <div className="bg-white rounded-2xl w-full min-h-[60vh] flex items-center justify-center flex-col">
+                          <div className="bg-background rounded-2xl w-full min-h-[48vh] flex items-center justify-center flex-col">
                             <Image
                               width={120}
                               height={120}
@@ -117,17 +137,6 @@ const Orders = () => {
                             </div>
                           </div>
                         )}
-                        <div className="flex justify-center mt-5">
-                          <Pagination
-                            showSizeChanger={false}
-                            pageSize={data.meta.limit}
-                            total={data.meta.total}
-                            current={data.meta.page}
-                            onChange={(value) => {
-                              setPage(value);
-                            }}
-                          ></Pagination>
-                        </div>
                       </div>
                     );
                   }}

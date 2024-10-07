@@ -4,7 +4,7 @@ import {
   EOrderStatus,
   IAccount,
   IOrder,
-  IUser
+  IUser,
 } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import { Tooltip } from "antd";
@@ -13,7 +13,7 @@ import Link from "next/link";
 import {
   AiOutlineDelete,
   AiOutlineDislike,
-  AiOutlineLike
+  AiOutlineLike,
 } from "react-icons/ai";
 import { MdOutlinePauseCircle, MdOutlineReviews } from "react-icons/md";
 import { PiCurrencyDollarBold } from "react-icons/pi";
@@ -37,7 +37,7 @@ interface FormData {
 const MyPurchaseAccountCard = ({
   account,
   orderId,
-  order
+  order,
 }: {
   account: IAccount;
   order: IOrder;
@@ -49,7 +49,7 @@ const MyPurchaseAccountCard = ({
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
 
   const [makeReview] = useAddReviewMutation();
@@ -61,8 +61,8 @@ const MyPurchaseAccountCard = ({
         accountId: account?.id,
         reviewText: data?.reviewText,
         reviewStatus: feedback,
-        isAnonymous: data?.isAnonymous
-      }
+        isAnonymous: data?.isAnonymous,
+      },
     ];
     console.log(submittedData);
     await makeReview(submittedData)
@@ -73,7 +73,7 @@ const MyPurchaseAccountCard = ({
       })
       .catch((res: any) => {
         toast.error(res?.data?.message || "Something went wrong", {
-          toastId: 1
+          toastId: 1,
         });
       });
   };
@@ -81,7 +81,7 @@ const MyPurchaseAccountCard = ({
   return (
     <>
       <div
-        className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 hover:bg-[#FBFAFA]`}
+        className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-whiteGrey p-2 md:p-4 2xl:p-5 hover:bg-borderLight`}
       >
         <Image
           src={findImageUrlByCategory(account?.category)}
@@ -104,9 +104,9 @@ const MyPurchaseAccountCard = ({
             <p
               className={`text-sm   py-1 px-2 rounded-full ${
                 (order?.status === EOrderStatus.CANCELLED &&
-                  "text-[#B42318] bg-[#FEF3F2]") ||
+                  "text-red bg-red/10") ||
                 (order?.status === EOrderStatus.COMPLETED &&
-                  "text-[#175CD3] bg-[#EFF8FF]")
+                  "text-blue bg-blue/10")
               }`}
             >
               {order?.status}
@@ -121,18 +121,18 @@ const MyPurchaseAccountCard = ({
             </h2>
 
             {/* this is icons div view cart message  */}
-            <div className="flex items-center justify-between gap-4 text-[#4F4F4F]">
-              {!account?.Review?.id &&
+            <div className="flex items-center justify-between gap-4 text-textGrey">
+              {/* {!account?.Review?.id &&
                 order?.status !== EOrderStatus.CANCELLED && (
                   <div
                     className="w-fit h-fit"
                     onClick={() => setModalOpen(true)}
                   >
                     <Tooltip title="Give a Review">
-                      <VscFeedback className="cursor-pointer text-[18px] md:text-[20px] text-[#69645ad9]" />
+                      <VscFeedback className="cursor-pointer text-[18px] md:text-[20px]" />
                     </Tooltip>
                   </div>
-                )}
+                )} */}
 
               {order?.status !== EOrderStatus.CANCELLED && (
                 <AppModal
@@ -167,7 +167,7 @@ const MyPurchaseAccountCard = ({
               {/* <button className="flex items-center gap-1 text-sm ">
                             <MdOutlinePauseCircle /> Pause Ad
                         </button> */}
-              {/* <button onClick={() => deleteAccount(account?.id)} className="bg-white group p-2 rounded-full">
+              {/* <button onClick={() => deleteAccount(account?.id)} className="bg-background group p-2 rounded-full">
                             <AiOutlineDelete className="group-hover:text-red cursor-pointer text-lg" />
                         </button> */}
             </div>

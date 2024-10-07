@@ -71,12 +71,11 @@ const MarketplaceAccountCard = ({
     }
   };
 
-  // console.log(account);
-
   return (
     <div
-      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${existOnCart && "bg-[#FBFAFA] opacity-50"
-        }`}
+      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-whiteGrey p-2 md:p-4 2xl:p-5 ${
+        existOnCart && "bg-borderLight opacity-50"
+      }`}
     >
       {/* this is image and description div  */}
       <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -90,14 +89,16 @@ const MarketplaceAccountCard = ({
         {/* this is description div  */}
         <div className="">
           <h3
-            className={`text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal ${!isModal && "line-clamp-1"
-              }`}
+            className={`text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal ${
+              !isModal && "line-clamp-1"
+            }`}
           >
             {account?.name}
           </h3>
           <p
-            className={`text-textGrey pt-0.5 text-xs md:text-sm ${!isModal && "line-clamp-1"
-              }`}
+            className={`text-textGrey pt-0.5 text-xs md:text-sm ${
+              !isModal && "line-clamp-1"
+            }`}
           >
             {account?.description}
           </p>
@@ -110,22 +111,22 @@ const MarketplaceAccountCard = ({
       <div className="flex flex-col gap-1 md:gap-4 justify-between">
         <h2 className="text-textBlack font-bold flex items-center justify-end">
           <PiCurrencyDollarBold />
-          <span>
-            {account?.price}
-          </span>
+          <span>{account?.price}</span>
         </h2>
         {/* this is icons div view cart message  */}
         <div className="flex justify-between gap-4">
           {!existOnCart?.accountId && (
             <Tooltip title="Add to cart">
-              <Image
-                src={"/assets/icons/cart.png"}
-                width={40}
-                height={40}
-                className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
-                alt="cart"
-                onClick={handleAddCart}
-              />
+              <button disabled={account?.ownBy?.id === user?.id}>
+                <Image
+                  src={"/assets/icons/cart.png"}
+                  width={40}
+                  height={40}
+                  className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                  alt="cart"
+                  onClick={handleAddCart}
+                />
+              </button>
             </Tooltip>
           )}
 

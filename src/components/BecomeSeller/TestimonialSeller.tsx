@@ -34,7 +34,7 @@ export default function TestimonialSeller() {
     },
   ];
   return (
-    <div className="bg-[#F8F6F6]">
+    <div className="bg-red/5">
       <div
         className="container py-16 lg:py-20 px-4"
         data-aos="fade-up"
@@ -72,11 +72,17 @@ export default function TestimonialSeller() {
           </div>
 
           <div className="flex items-end justify-end lg:justify-center gap-6 lg:mb-10">
-            <button className="cursor-pointer swiper-testimonial-prev bg-white dropShadow rounded-full h-11 w-11">
-              <FontAwesomeIcon icon={faArrowLeft} className="text-[#667085]" />
+            <button className="cursor-pointer swiper-testimonial-prev bg-background dropShadow rounded-full h-11 w-11">
+              <FontAwesomeIcon
+                icon={faArrowLeft}
+                className="text-textBlueGrey"
+              />
             </button>
-            <button className="cursor-pointer swiper-testimonial-next bg-white dropShadow rounded-full h-11 w-11">
-              <FontAwesomeIcon icon={faArrowRight} className="text-[#667085]" />
+            <button className="cursor-pointer swiper-testimonial-next bg-background dropShadow rounded-full h-11 w-11">
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                className="text-textBlueGrey"
+              />
             </button>
           </div>
         </div>

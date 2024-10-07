@@ -71,6 +71,7 @@ const MarketPlaceSidebarFilterElement = ({
           <SlArrowDown />
         </motion.div>
       </div>
+
       {open && (
         <motion.div
           initial={{ height: 0, opacity: 0 }}

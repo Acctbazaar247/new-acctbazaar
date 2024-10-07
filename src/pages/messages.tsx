@@ -76,7 +76,7 @@ const Messages = () => {
           {/* this is main div  */}
           <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
             {mainData.length ? (
-              <div className="flex flex-col md:flex-row gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[70dvh] bg-white pt-2 md:p-4 lg:p-5 2xl:p-6">
+              <div className="flex flex-col md:flex-row gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[70dvh] bg-background pt-2 md:p-4 lg:p-5 2xl:p-6">
                 <div className="w-full md:w-[35%] max-h-[70dvh] overflow-auto space-y-3 2xl:space-y-4">
                   {mainData.map((single) => (
                     <>
@@ -116,7 +116,7 @@ const Messages = () => {
                     </>
                   ))}
                 </div>
-                <div className="hidden md:block border border-[#EFECEC]"></div>
+                <div className="hidden md:block border border-whiteGrey"></div>
                 <div className="hidden md:block md:w-[63%] h-full">
                   {activeMessageBoxInfo && activeChatId ? (
                     <MessageMain
@@ -133,7 +133,7 @@ const Messages = () => {
                 </div>
               </div>
             ) : (
-              <div className="bg-white rounded-2xl w-full min-h-[80dvh] flex items-center justify-center flex-col">
+              <div className="bg-background rounded-2xl w-full min-h-[80dvh] flex items-center justify-center flex-col">
                 <Image
                   width={120}
                   height={120}

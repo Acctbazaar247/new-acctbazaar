@@ -28,7 +28,7 @@ export default function AccountCredentialCard({
   // );
   return (
     <div
-      className={` flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg p-2 md:p-3 2xl:p-4 bg-[#FBFAFA]`}
+      className={` flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg p-2 md:p-3 2xl:p-4 bg-borderLight`}
     >
       <Image
         src={findImageUrlByCategory(account?.category as AccountCategory)}
@@ -56,7 +56,7 @@ export default function AccountCredentialCard({
           <button
             onClick={() => updateProgress(2)}
             type="button"
-            className="bg-white group p-2 rounded-full"
+            className="bg-background group p-2 rounded-full"
           >
             <BiEditAlt className="cursor-pointer text-textGrey text-lg" />
           </button>

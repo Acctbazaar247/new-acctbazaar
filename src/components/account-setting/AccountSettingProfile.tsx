@@ -163,11 +163,11 @@ const AccountSettingProfile = () => {
 
     return selectedCountryDetails?.isoCode
       ? State.getStatesOfCountry(selectedCountryDetails.isoCode).map(
-        (state) => ({
-          value: state.isoCode,
-          label: state.name,
-        })
-      )
+          (state) => ({
+            value: state.isoCode,
+            label: state.name,
+          })
+        )
       : [];
   }, [selectedCountry]);
 
@@ -181,12 +181,12 @@ const AccountSettingProfile = () => {
 
     return selectedCountryDetails?.isoCode && stateDetails?.isoCode
       ? City.getCitiesOfState(
-        selectedCountryDetails.isoCode,
-        stateDetails?.isoCode
-      ).map((city) => ({
-        value: city.name,
-        label: city.name,
-      }))
+          selectedCountryDetails.isoCode,
+          stateDetails?.isoCode
+        ).map((city) => ({
+          value: city.name,
+          label: city.name,
+        }))
       : [];
   }, [selectedCountry, selectedState]);
 
@@ -215,9 +215,9 @@ const AccountSettingProfile = () => {
               register={register}
               error={errors?.name}
               defaultValue={user?.name}
-              readOnly={readOnly}
+              readOnly={user?.isVerifiedByAdmin || readOnly}
             />
-            {readOnly && (
+            {!user?.isVerifiedByAdmin && readOnly && (
               <p className="text-xs text-zinc-400">
                 You can update your name after {daysLeft} days
               </p>
@@ -246,7 +246,7 @@ const AccountSettingProfile = () => {
                 value={value}
                 // enableAreaCodes={true}
                 specialLabel={""}
-                inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-[#D0D2D5]"
+                inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-borderColor"
                 country={"ng"}
                 placeholder="Phone Number"
                 inputProps={{
@@ -267,7 +267,7 @@ const AccountSettingProfile = () => {
         </div>
       </div>
 
-      <div className="border border-[#F2F4F7]"></div>
+      <div className="border border-borderLight"></div>
 
       <div className="flex flex-col md:flex-row gap-3 justify-between">
         {/* this is left side text  */}
@@ -297,8 +297,9 @@ const AccountSettingProfile = () => {
               className="hidden"
             />
             <div
-              className={`border border-borderColor rounded border-dashed ${loading && "h-20 w-56"
-                }`}
+              className={`border border-borderColor rounded border-dashed ${
+                loading && "h-20 w-56"
+              }`}
             >
               {loading ? (
                 <AppSmallLoading />
@@ -322,7 +323,7 @@ const AccountSettingProfile = () => {
                 //     src="/assets/icons/gallry.png"
                 //     alt=""
                 //   />
-                //   <h2 className="text-[#7D7878] text-xs font-light">
+                //   <h2 className="text-xs font-light">
                 //     <span className="font-medium text-gray-700">
                 //       Click to replace
                 //     </span>{" "}
@@ -336,7 +337,7 @@ const AccountSettingProfile = () => {
         </div>
       </div>
 
-      <div className="border border-[#F2F4F7]"></div>
+      <div className="border border-borderLight"></div>
 
       <div className="flex flex-col md:flex-row gap-3 justify-between">
         {/* this is left side text  */}
@@ -417,7 +418,7 @@ const AccountSettingProfile = () => {
           />
         </div>
       </div>
-      <div className="border border-[#F2F4F7]"></div>
+      <div className="border border-borderLight"></div>
 
       <div className="flex items-center justify-end">
         {isLoading ? (

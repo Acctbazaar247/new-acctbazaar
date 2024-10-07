@@ -21,7 +21,7 @@ const OrdersMain: React.FC<Props> = ({ onChange, data }) => {
     }
   }, [activeTab, onChange]);
   return (
-    <div className="bg-white rounded-2xl w-full min-h-[90vh] p-6 2xl:p-8">
+    <div className="bg-background rounded-2xl w-full min-h-[90vh] p-6 2xl:p-8">
       <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="w-3/4 py-6 space-y-6">
         {data.map((single) => {

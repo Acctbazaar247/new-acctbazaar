@@ -29,6 +29,7 @@ import { toast } from "react-toastify";
 import AppButton from "@/components/ui/AppButton";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { FiCheck } from "react-icons/fi";
+import { useAppSelector } from "@/redux/hook";
 
 interface FormData {
   reviewText: string;
@@ -39,11 +40,11 @@ const OrderDetails = () => {
   const isCancelled = false;
   const [feedback, setFeedback] = useState("");
   const [makeReview] = useAddReviewMutation();
-
+  const { user } = useAppSelector((state) => state.user);
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
   const location = useParams();
   const [copied, setCopied] = useState(false);
@@ -79,9 +80,9 @@ const OrderDetails = () => {
     preview: mainData.account.preview || "",
     additionalEmail: mainData.account.additionalEmail || "",
     additionalPassword: mainData.account.additionalPassword || "",
-    additionalDescription: mainData.account.additionalDescription || ""
+    additionalDescription: mainData.account.additionalDescription || "",
   };
-  console.log(mainData);
+  // console.log(mainData);
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const submittedData = [
       {
@@ -89,8 +90,8 @@ const OrderDetails = () => {
         accountId: mainData?.account?.id,
         reviewText: data?.reviewText,
         reviewStatus: feedback,
-        isAnonymous: data?.isAnonymous
-      }
+        isAnonymous: data?.isAnonymous,
+      },
     ];
     console.log(submittedData);
     await makeReview(submittedData)
@@ -101,7 +102,7 @@ const OrderDetails = () => {
       })
       .catch((res: any) => {
         toast.error(res?.data?.message || "Something went wrong", {
-          toastId: 1
+          toastId: 1,
         });
       });
   };
@@ -148,23 +149,21 @@ const OrderDetails = () => {
                 )}
               </p>
               <p
-                className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${
+                className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-success bg-success/10 ${
                   (mainData.status === "pending" &&
-                    "text-[#B54708] bg-[#FFFAEB]") ||
-                  (mainData.status === "cancelled" &&
-                    "text-[#B42318] bg-[#FEF3F2]") ||
+                    "text-brown bg-yellowShadow") ||
+                  (mainData.status === "cancelled" && "text-red bg-red/10") ||
                   (mainData.status === "completed" &&
-                    "text-[#027A48] bg-[#ECFDF3]")
+                    "text-success bg-success/10")
                 }`}
               >
                 <GoDotFill
                   className={`${
                     (mainData.status === "pending" &&
-                      "text-[#B54708] bg-[#FFFAEB]") ||
-                    (mainData.status === "cancelled" &&
-                      "text-[#B42318] bg-[#FEF3F2]") ||
+                      "text-brown bg-yellowShadow") ||
+                    (mainData.status === "cancelled" && "text-red bg-red/10") ||
                     (mainData.status === "completed" &&
-                      "text-[#027A48] bg-[#ECFDF3]")
+                      "text-success bg-success/10")
                   }`}
                 />
                 {mainData.status}
@@ -179,10 +178,10 @@ const OrderDetails = () => {
           </div>
 
           {/* this is main div  */}
-          <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl 2xl:max-h-[75vh] overflow-auto bg-white md:p-4 lg:p-5 2xl:p-6">
+          <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl 2xl:max-h-[75vh] overflow-auto bg-background md:p-4 lg:p-5 2xl:p-6">
             <div className="w-full md:w-[55%] h-full space-y-3 2xl:space-y-4">
               <div
-                className={`w-full flex flex-col md:flex-row items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-[#FBFAFA] p-2 md:p-4 2xl:p-5`}
+                className={`w-full flex flex-col md:flex-row items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-borderLight p-2 md:p-4 2xl:p-5`}
               >
                 {/* this is image and description div  */}
                 <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -255,11 +254,11 @@ const OrderDetails = () => {
                   {/* <div className="">
                   <h4>Leave a Review</h4>
                   <div className="flex items-center gap-6 pt-2.5">
-                    <button className="bg-[#F4F5F5] text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
+                    <button className=" text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
                       <BiLike />
                       Positive
                     </button>
-                    <button className="bg-[#F4F5F5] text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
+                    <button className="bg- text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
                       <BiDislike />
                       Negative
                     </button>
@@ -267,8 +266,9 @@ const OrderDetails = () => {
                 </div> */}
                 </>
               )}
-              {!mainData?.account?.Review?.id &&
-                mainData?.status !== EOrderStatus.CANCELLED && (
+              {/* {!mainData?.account?.Review?.id &&
+                mainData?.status !== EOrderStatus.CANCELLED &&
+                mainData.account.ownById !== user?.id && (
                   <div className="  flex justify-center w-full">
                     <button
                       onClick={() => setModalOpen(true)}
@@ -277,7 +277,7 @@ const OrderDetails = () => {
                       Leave a review
                     </button>
                   </div>
-                )}
+                )} */}
               <p className="bg-yellow-100 rounded p-2 md:p-4 text-sm md:text-base text-gray-800">
                 “When logging into your social media account, it is highly
                 recommended to use a VPN or proxy. These tools provide an extra
@@ -285,7 +285,7 @@ const OrderDetails = () => {
                 masking your IP address. GET VPN”
               </p>
             </div>
-            <div className="hidden md:block border border-[#EFECEC]"></div>
+            <div className="hidden md:block border border-whiteGrey"></div>
             <div className="hidden md:block w-[43%] h-full">
               <OrderDetailsMessaging order={mainData} />
             </div>

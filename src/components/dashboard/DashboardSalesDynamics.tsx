@@ -20,7 +20,7 @@ export default function DashboardSalesDynamics() {
   const queryInfo = useGetSellerOverviewQuery("");
 
   return (
-    <div className="w-full rounded-lg shadow-md pt-4 pb-12 px-5 border border-[#FAFAFA] ">
+    <div className="w-full rounded-lg shadow-md pt-4 pb-12 px-5 border border-borderLight ">
       <div className="text-textBlueBlack flex items-center justify-between pb-6">
         <h2 className="text-xl">Sales Dynamics</h2>
         <h2 className="text-sm">2024</h2>

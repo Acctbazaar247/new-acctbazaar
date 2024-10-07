@@ -1,20 +1,12 @@
 import AppCaptcha from "@/components/AppCaptcha/AppCaptcha";
 import CreateNewPassword from "@/components/CreateNewPassword/CreateNewPassword";
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
-import Loading from "@/components/ui/Loading";
 import { useEnterForgotOtpMutation } from "@/redux/features/auth/authSellerApi";
-import {
-  resendEmail,
-  userLoggedOut,
-  verifyUserWithToken
-} from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useAppDispatch } from "@/redux/hook";
 import { ResponseSuccessType } from "@/types/common";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { use, useEffect, useState } from "react";
-import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
@@ -27,7 +19,7 @@ const EnterForgotOtp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
   const email = router.query.email;
@@ -65,7 +57,7 @@ const EnterForgotOtp = () => {
   }
   return (
     <AppCaptcha>
-      <div className="flex lg:h-[100vh]">
+      <div className="flex bg-background  lg:h-[100vh]">
         {/* this is left side div  */}
         <LeftSideAuthComponent />
 
@@ -75,7 +67,7 @@ const EnterForgotOtp = () => {
             <h2 className="text-2xl lg:text-4xl font-bold text-textBlack pb-1 lg:pb-2">
               Enter OTP
             </h2>
-            <p className="text-[#645D5D] text-xs lg:text-sm">
+            <p className="text-textGrey text-xs lg:text-sm">
               A 6-digit OTP (one time password) has been sent to your e-mail for
               Forgot you password.
             </p>
@@ -93,7 +85,7 @@ const EnterForgotOtp = () => {
                       {...props}
                       placeholder="-"
                       type="number"
-                      className="size-11 lg:size-14 mr-2 md:mr-10 bg-[#F2F4F7] rounded text-center focus:border-2 !w-[30px] md:!w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
+                      className="size-11 lg:size-14 mr-2 md:mr-10 bg-borderLight rounded text-center focus:border-2 !w-[30px] md:!w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
                     />
                   )}
                 />

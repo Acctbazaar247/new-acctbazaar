@@ -62,7 +62,7 @@ const Messages = () => {
         {/* this is main div  */}
         <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
           {mainData.length ? (
-            <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[90vh] bg-white p-2 md:p-4 lg:p-5 2xl:p-6">
+            <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[90vh] bg-background p-2 md:p-4 lg:p-5 2xl:p-6">
               <div className="w-[35%] h-full space-y-3 2xl:space-y-4">
                 {mainData.map((single) => (
                   <SingleMessageUser
@@ -74,7 +74,7 @@ const Messages = () => {
                   />
                 ))}
               </div>
-              <div className="border border-[#EFECEC]"></div>
+              <div className="border border-whiteGrey"></div>
               <div className="w-[63%] h-full">
                 {activeMessageBoxInfo && activeChatId ? (
                   <MessageMain
@@ -88,7 +88,7 @@ const Messages = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl w-full min-h-[90vh] flex items-center justify-center flex-col">
+            <div className="bg-background rounded-2xl w-full min-h-[90vh] flex items-center justify-center flex-col">
               <Image
                 width={120}
                 height={120}

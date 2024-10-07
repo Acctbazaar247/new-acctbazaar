@@ -1,15 +1,15 @@
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Logo from "../ui/Logo";
 import DropdownUser from "./DropdownUser";
 import "./Header";
-import Link from "next/link";
-import Logo from "../ui/Logo";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
   return (
-    <header className="sticky header-wrap top-0 z-[200] min-w-[200px] z-999 flex w-full bg-white  ">
+    <header className="sticky header-wrap top-0 z-[200] min-w-[200px] z-999 flex w-full bg-background  ">
       <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
         <button
           aria-controls="sidebar"
@@ -17,7 +17,7 @@ const Header = (props: {
             e.stopPropagation();
             props.setSidebarOpen(!props.sidebarOpen);
           }}
-          className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+          className="z-99999 block rounded-sm border border-stroke bg-background p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
         >
           <FontAwesomeIcon icon={faBars} />
         </button>

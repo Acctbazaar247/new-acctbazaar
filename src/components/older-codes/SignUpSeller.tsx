@@ -22,9 +22,7 @@ const SignUpSeller = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-
-  };
+  const onSubmit: SubmitHandler<FormData> = (data) => {};
   return (
     <div className="flex lg:h-[100vh]">
       {/* this is left side div  */}
@@ -55,7 +53,7 @@ const SignUpSeller = () => {
               <h1 className="font-bold text-4xl 2xl:text-5xl text-white mr-10">
                 Connect. Trade. Transform Your Influence
               </h1>
-              <p className="pt-4 2xl:pt-8 text-[#F5F5F5] 2xl:text-lg">
+              <p className="pt-4 2xl:pt-8 text-borderLight 2xl:text-lg">
                 Empower your social journey by discovering and trading social
                 media accounts on a platform that values integrity and fosters
                 ethical engagement. Your next digital adventure starts here
@@ -70,7 +68,7 @@ const SignUpSeller = () => {
           <h2 className="text-2xl lg:text-4xl font-bold text-textBlack pb-1 lg:pb-2">
             Welcome to Acctbazaar 👋🏾
           </h2>
-          <p className="text-[#645D5D] text-sm">
+          <p className="text-textGrey text-sm">
             Already have an account?{" "}
             <span className="text-primary font-medium">
               <Link href="/signIn">Login</Link>

@@ -20,7 +20,7 @@ const SuperAdminLayout = ({ children }: Props) => {
 
   if (user?.role !== UserRole.SuperAdmin) {
     router.push({
-      pathname: "/",
+      pathname: "/"
       //   query: { from: router.pathname },
     });
     return (

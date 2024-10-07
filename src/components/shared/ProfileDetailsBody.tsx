@@ -8,7 +8,14 @@ import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import AvatarComponent from "./AvatarComponent";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { PopupLinksSuperAdmin, ccAdminPopUpLinks, financeAdminPopUpLinks, popupLinksForUser, popupNavbarLinks, prAdminPopUpLinks } from "./NavbarData";
+import {
+  PopupLinksSuperAdmin,
+  ccAdminPopUpLinks,
+  financeAdminPopUpLinks,
+  popupLinksForUser,
+  popupNavbarLinks,
+  prAdminPopUpLinks,
+} from "./NavbarData";
 
 type ProfileDetailsBody = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -36,7 +43,6 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
     setModalOpen(true);
     setOpen(false);
   };
-
 
   const getNavItems = () => {
     if (user?.role === UserRole.SuperAdmin || user?.role === UserRole.Admin) {
@@ -98,13 +104,13 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
 
       {/* this is main component  */}
       <div>
-        <div className="border-b border-b-[#EDF2F7] pb-2 pl-2 pt-2">
+        <div className="border-b border-b-borderLight pb-2 pl-2 pt-2">
           <div className=" hidden md:flex flex-col md:flex-row items-center justify-between gap-2 md:gap-10 pb-1">
             <h4 className="text-sm md:text-base flex items-center gap-1">
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
                 <div className="flex items-center gap-1">
-                  <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+                  <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
                   <p
                     className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                   >
@@ -133,7 +139,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   {user?.role === UserRole.Seller &&
                     user?.isVerifiedByAdmin && (
                       <div className="flex items-center gap-1">
-                        <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-white rounded-full " />
+                        <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
                         <p
                           className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] leading-4 md:leading-3 md:text-xs text-primary bg-primary/5 border border-primary h-fit py-0`}
                         >
@@ -158,26 +164,25 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
         </div>
 
         <div className="space-y-2 pt-2 p-2">
-          {
-            navItems.map((nav: any) =>
-              nav?.label === "Log out" ? (
-                <div
-                  key={nav?.label}
-                  onClick={() => dispatch(userLoggedOut())}
-                  className="flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg cursor-pointer"
-                >
-                  <nav.Icon /> {nav?.label}
-                </div>
-              ) : (
-                <Link
-                  href={nav?.path}
-                  key={nav?.label}
-                  className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg`}
-                >
-                  <nav.Icon /> {nav?.label}
-                </Link>
-              )
-            )}
+          {navItems.map((nav: any) =>
+            nav?.label === "Log out" ? (
+              <div
+                key={nav?.label}
+                onClick={() => dispatch(userLoggedOut())}
+                className="flex items-center gap-3 text-645D5D hover:text-primary text-base 2xl:text-lg cursor-pointer"
+              >
+                <nav.Icon /> {nav?.label}
+              </div>
+            ) : (
+              <Link
+                href={nav?.path}
+                key={nav?.label}
+                className={`flex items-center gap-3 text-645D5D hover:text-primary text-base 2xl:text-lg`}
+              >
+                <nav.Icon /> {nav?.label}
+              </Link>
+            )
+          )}
         </div>
 
         {/* this is for mobile  */}
@@ -192,6 +197,6 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
       </div>
     </>
   );
-}
+};
 
 export default ProfileDetailsBody;

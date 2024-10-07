@@ -11,7 +11,7 @@ export default function WelcomeModal() {
     if (user?.isPaidForSeller) {
       setModalOpen(false);
     }
-  }, [user?.isPaidForSeller])
+  }, [user?.isPaidForSeller]);
 
   return (
     <AppModal
@@ -51,7 +51,10 @@ export default function WelcomeModal() {
                   <h4>Make payment</h4>
                   <p className="text-sm">
                     Make a one time payment fee of $10,{" "}
-                    <span onClick={() => setModalOpen(false)} className="text-primary font-medium">
+                    <span
+                      onClick={() => setModalOpen(false)}
+                      className="text-primary font-medium"
+                    >
                       Make payment
                     </span>
                   </p>
@@ -91,7 +94,7 @@ export default function WelcomeModal() {
                 </div>
               </div>
             </div>
-            <div className="bg-[#F9F7F7] text-sm space-y-2 p-3 rounded-lg">
+            <div className="bg-borderLight text-sm space-y-2 p-3 rounded-lg">
               <p>
                 As a plus, you can become a{" "}
                 <span className="text-textBlack font-medium">

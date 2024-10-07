@@ -10,6 +10,7 @@ type IState = {
   user: IUser | null;
   accessToken: string | null;
   error: string | null;
+  theme: string;
 };
 
 interface ICredential {
@@ -17,12 +18,17 @@ interface ICredential {
   password: string;
 }
 
+const darkThemePreference = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-color-scheme:dark)").matches;
+
 const initialState: IState = {
   isLoading: true,
   isError: false,
   error: null,
   user: null,
   accessToken: null,
+  theme: darkThemePreference() ? "dark" : "light",
 };
 
 type ICreateUser = {
@@ -142,6 +148,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setTheme: (state, action) => {
+      state.theme = action.payload;
+    },
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -263,6 +272,7 @@ export const {
   setError,
   addWithdrawalPin,
   setMakeSeller,
+  setTheme,
 } = authSlice.actions;
 
 export default authSlice.reducer;
