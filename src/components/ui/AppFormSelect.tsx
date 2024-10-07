@@ -15,6 +15,7 @@ type SelectFieldProps = {
   label?: string | any;
   required?: boolean;
   className?: string;
+  showSearch?: boolean;
   defaultValue?: SelectOptions;
   handleChange?: (el: string) => void;
   control: Control<any>;
@@ -32,6 +33,7 @@ const AppFormSelect = ({
   required,
   handleChange,
   className,
+  showSearch
 }: SelectFieldProps) => {
   return (
     <Controller
@@ -40,7 +42,7 @@ const AppFormSelect = ({
       rules={
         required
           ? {
-              required: `${name} field is required`,
+              required: `${name} field is required`
             }
           : undefined
       }
@@ -53,6 +55,7 @@ const AppFormSelect = ({
             </label>
           )}
           <Select
+            showSearch={true}
             onChange={handleChange ? handleChange : onChange}
             size={size}
             popupClassName="capitalize"
