@@ -1,17 +1,15 @@
 import DashboardLayout from "@/layout/DashboardLayout";
-import { IUser } from "@/types/common";
-import React from "react";
-import Loading from "../ui/Loading";
-import useFormUploadImage from "../Forms/useFormUploadImage";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { useEditUserMutation } from "@/redux/features/user/userApi";
-import { toast } from "react-toastify";
 import { userLoggedIn } from "@/redux/features/auth/authSlice";
+import { useEditUserMutation } from "@/redux/features/user/userApi";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { IUser } from "@/types/common";
 import { Avatar, Input } from "antd";
-import FormUploadImage from "../Forms/FormUploadImage";
+import { toast } from "react-toastify";
 import Form from "../Forms/Form";
 import FormInput from "../Forms/FormInput";
 import FormInputCheck from "../Forms/FormInputCheck";
+import useFormUploadImage from "../Forms/useFormUploadImage";
+import Loading from "../ui/Loading";
 
 type Props = {};
 
@@ -34,6 +32,7 @@ const ProfileInfo = (props: Props) => {
       </DashboardLayout>
     );
   }
+
   const { id, name, email, profileImg, shouldSendEmail } = user;
   const onSubmit = (data: any) => {
     if (imageUploadLoading) {

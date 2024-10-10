@@ -50,6 +50,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
           Select: {
             optionSelectedColor: theme === "light" ? "#181C14" : "#181C14",
             colorTextPlaceholder: "#999",
+            colorBorder: theme === "light" ? "#D5D8DB" : "#374151",
           },
           Checkbox: {
             colorBgContainer: theme === "light" ? "#fff" : "#fff", // Background color
@@ -57,6 +58,23 @@ const RootLayout: React.FC<Props> = ({ children }) => {
             colorBorder: "#878787", // Border color
             // colorPrimaryHover: "#878787"
             colorInfoBorderHover: "red",
+          },
+          Button: {
+            colorText: theme === "light" ? "#181C14" : "#fff",
+            colorBorder: theme === "light" ? "#181C14" : "#fff",
+            // colorPrimaryHover: "#878787",
+            // colorPrimary: "#878787",
+            // colorInfoBorderHover: "red",
+            // colorTextDisabled: "#999",
+            // colorBorderDisabled: "#878787",
+            // colorPrimaryDisabled: "#878787",
+            // colorTextHoverDisabled: "#999",
+            // colorBorderHoverDisabled: "#878787",
+            // colorPrimaryHoverDisabled: "#8787
+          },
+          Pagination: {
+            colorIcon: theme === "light" ? "#181C14" : "#fff",
+            colorText: theme === "light" ? "#181C14" : "#fff",
           },
         },
       }}

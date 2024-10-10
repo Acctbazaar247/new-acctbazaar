@@ -1,13 +1,8 @@
 // import { useGetSingleUserBookingByUserIdQuery } from "@/redux/features/booking/bookingApi";
 // import { useGetSingleUserCartsQuery } from "@/redux/features/cart/cartApi";
-import React from "react";
-import Loading from "../ui/Loading";
-import { Booking, BookingStatus } from "@/types/common";
+import { useGetSellerOverviewQuery } from "@/redux/features/user/userApi";
 import { useRouter } from "next/router";
-import {
-  useGetAdminOverviewQuery,
-  useGetSellerOverviewQuery,
-} from "@/redux/features/user/userApi";
+import Loading from "../ui/Loading";
 
 type Props = {};
 
@@ -37,9 +32,11 @@ const SellerOverView = () => {
       value: "$" + sellerOverviewInfo?.data?.totalMoney,
     },
   ];
+
   if (isLoading) {
     return <Loading></Loading>;
   }
+
   return (
     <div>
       <div className="grid  grid-cols-2 gap-2 md:gap-5 pb-10">

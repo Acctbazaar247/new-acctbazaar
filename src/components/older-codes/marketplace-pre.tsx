@@ -1,11 +1,9 @@
-import AccountCard from "@/components/AccountCard/AccountCard";
 import AccountTable from "@/components/AccountReel/AccountTable";
-import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Form from "@/components/Forms/Form";
-import FormInput from "@/components/Forms/FormInput";
 import FormSelectField, {
   SelectOptions,
 } from "@/components/Forms/FormSelectField";
+import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
 import useDebounce from "@/hooks/useDebounce";
 import HomeLayout from "@/layout/HomeLayout";
@@ -13,9 +11,8 @@ import PrivateLayout from "@/layout/PrivateLayout";
 import RootLayout from "@/layout/RootLayout";
 import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
 import { ACCOUNT_CATEGORIES } from "@/shared";
-import { AccountCategory, EApprovedForSale, IAccount } from "@/types/common";
-import { optionCreator } from "@/utils";
-import { Avatar, Input, Pagination, Slider } from "antd";
+import { IAccount } from "@/types/common";
+import { Avatar, Input, Pagination } from "antd";
 import { SliderMarks } from "antd/es/slider";
 import React, { useMemo, useState } from "react";
 
@@ -119,7 +116,7 @@ const Marketplace = () => {
               <div className="flex flex-col md:flex-row lg:items-center gap-4 mb-5 justify-between">
                 <div className="flex flex-wrap gap-4">
                   <div className="w-[200px] ">
-                    <Form submitHandler={() => { }}>
+                    <Form submitHandler={() => {}}>
                       <FormSelectField
                         name="category"
                         handleChange={handleCategoryChange}

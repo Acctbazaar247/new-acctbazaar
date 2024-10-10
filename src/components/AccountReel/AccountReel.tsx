@@ -1,27 +1,19 @@
 "use client";
-import { ACCOUNT_CATEGORIES, findImageUrlByCategory } from "@/shared";
-import { AccountCategory, EApprovedForSale, IAccount } from "@/types/common";
-import { Pagination } from "antd";
-import Image from "next/image";
-import React, { useMemo, useState } from "react";
-import Loading from "../ui/Loading";
-import ErrorCompo from "../ui/AppErrorComponent";
+
 import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
+import { EApprovedForSale, IAccount } from "@/types/common";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faArrowRight,
-  faCartPlus,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
-import AccountTable from "./AccountTable";
-import AccountCard from "../AccountCard/AccountCard";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useMemo, useState } from "react";
 import "swiper/css";
-import { FreeMode, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import AccountCard from "../AccountCard/AccountCard";
+import Loading from "../ui/Loading";
+
 type Props = { title: string; category?: string; accountType?: string };
+
 const breakpoints = {
-  // Breakpoints for different screen sizes
   20: {
     spaceBetween: 10,
     slidesPerView: 1,
@@ -35,6 +27,7 @@ const breakpoints = {
     slidesPerView: 3.4,
   },
 };
+
 const AccountReel = ({ title, accountType, category }: Props) => {
   const [page, setPage] = useState<number>(1);
 

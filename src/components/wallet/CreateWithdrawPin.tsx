@@ -1,16 +1,11 @@
+import { addWithdrawalPin } from "@/redux/features/auth/authSlice";
 import { useAddWithdrawPinMutation } from "@/redux/features/user/userApi";
+import { useAppDispatch } from "@/redux/hook";
 import { ResponseErrorType, ResponseSuccessType } from "@/types/common";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
-import Loading from "../ui/Loading";
 import AppSmallLoading from "../ui/AppSmallLoading";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import {
-  addWithdrawalPin,
-  userLoggedIn,
-} from "@/redux/features/auth/authSlice";
 
 type TCreateWithdrawPin = {
   setNotCreatePin: Dispatch<SetStateAction<boolean>>;

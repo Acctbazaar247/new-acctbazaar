@@ -109,7 +109,7 @@ const Messages = () => {
                               orderId={activeChatId}
                             />
                           ) : (
-                            <Loading></Loading>
+                            <Loading screen="half"></Loading>
                           )}
                         </AppDrawer>
                       </div>
@@ -128,7 +128,7 @@ const Messages = () => {
                       orderId={activeChatId}
                     />
                   ) : (
-                    <Loading></Loading>
+                    <Loading screen="half"></Loading>
                   )}
                 </div>
               </div>

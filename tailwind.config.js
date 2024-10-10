@@ -47,7 +47,7 @@ module.exports = {
           // sm: "2rem",
           // lg: "2rem",
           xl: "2rem",
-          "2xl": "2rem",
+          "2xl": "1rem",
         },
       },
     },
@@ -55,6 +55,7 @@ module.exports = {
   plugins: [
     createThemes({
       light: {
+        loader: "#000",
         background: "#ffffff",
         primary: "#FF5A35",
         textBlack: "#1B1818",
@@ -80,6 +81,7 @@ module.exports = {
         red: "#E11C1B",
       },
       dark: {
+        loader: "#FFFFFF",
         background: "#181C14",
         primary: "#FF8A65", // A brighter version of primary to stand out on dark backgrounds
         textBlack: "#EDEDED", // Lightened for better readability

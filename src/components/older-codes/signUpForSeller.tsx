@@ -1,28 +1,19 @@
+import PaySelection from "@/components/PaySelection/PaySelection";
 import Loading from "@/components/ui/Loading";
 import Logo from "@/components/ui/Logo";
-import PaySelection from "@/components/PaySelection/PaySelection";
 import UserCreateOptions from "@/components/UserCreateOptions/UserCreateOptions";
 import HomeLayout from "@/layout/HomeLayout";
-import {
-  createUser,
-  setError,
-  userLoggedOut,
-} from "@/redux/features/auth/authSlice";
+import { setError, userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
+import config from "@/utils/config";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import {
-  useForm,
-  SubmitHandler,
-  ChangeHandler,
-  Controller,
-} from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
-import { toast } from "react-toastify";
 import "react-phone-input-2/lib/material.css";
-import config from "@/utils/config";
+import { toast } from "react-toastify";
 interface FormData {
   name: string;
   email: string;

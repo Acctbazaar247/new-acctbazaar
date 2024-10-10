@@ -103,7 +103,7 @@ const AdminOverView = () => {
   const pendingButton = (id: string) => {
     return (
       <button
-        className="app-status-button text-xs lg:text-sm bg-blue-600"
+        className="app-status-button text-xs lg:text-sm bg-blue"
         onClick={() => {
           editService({ id, approvedForSale: EApprovedForSale.pending });
         }}

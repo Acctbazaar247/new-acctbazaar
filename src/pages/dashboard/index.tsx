@@ -1,11 +1,9 @@
-import Loading from "@/components/ui/Loading";
 import AdminOverView from "@/components/Overviews/AdminOverView";
 import SellerOverView from "@/components/Overviews/SellerOverView";
 import UserOverView from "@/components/Overviews/UserOverView";
-import DashboardLayout from "@/layout/DashboardLayout";
+import Loading from "@/components/ui/Loading";
 import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
-import React from "react";
 import { useRouter } from "next/router";
 
 const Dashboard = () => {

@@ -1,11 +1,8 @@
-import React, { ReactNode } from "react";
-import { useAppSelector } from "@/redux/hook";
-import { useRouter } from "next/router";
 import Loading from "@/components/ui/Loading";
+import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
-import DashboardLayout from "./DashboardLayout";
-import Link from "next/link";
-import HomeLayout from "./HomeLayout";
+import { useRouter } from "next/router";
+import React, { ReactNode } from "react";
 
 interface AdminLayoutProps {
   children: ReactNode;

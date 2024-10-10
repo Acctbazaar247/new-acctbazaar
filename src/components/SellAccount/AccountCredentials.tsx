@@ -78,7 +78,7 @@ export default function AccountCredentials({
   return (
     <div className="bg-background rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
       <div className="border-yellow-500 bg-yellow-50 flex flex-wrap gap-2 w-full rounded-lg border-l-4 2xl:border-l-[6px] p-3 md:p-4">
-        <div className="">
+        <div className="text-black/80">
           <GoAlert className="text-yellow-500 text-xl inline" /> You are in{" "}
           <span className="font-bold inline">
             {(currentPlan?.data?.planType === "default" && "DEFAULT PLAN") ||
@@ -93,7 +93,7 @@ export default function AccountCredentials({
           </span>{" "}
           if you want to upload more account, upgrade your plan.
         </div>
-        <div className="">
+        <div className="text-black/80">
           <Link href={"/seller/plans"} className="appOutlineBtnSm  inline">
             Choose Your Plan Here
           </Link>
@@ -101,7 +101,7 @@ export default function AccountCredentials({
         {isLoading
           ? null
           : currentPlan?.data?.planType !== "default" && (
-              <div className="flex flex-wrap gap-1 items-center md:pl-6">
+              <div className="flex text-black/80 flex-wrap gap-1 items-center md:pl-6">
                 Time remaining on your plan
                 <CountDownPlanDays
                   targetDate={currentPlan?.data?.createdAt}

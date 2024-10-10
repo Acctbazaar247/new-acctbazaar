@@ -81,7 +81,11 @@ const Navbar = () => {
       >
         {user?.id && (
           <div className="md:hidden">
-            <AppDrawer button={<FiMenu className="md:hidden text-xl" />}>
+            <AppDrawer
+              button={
+                <FiMenu className="md:hidden text-textDarkGrey text-xl" />
+              }
+            >
               <ProfileDetailsBody setOpen={setOpen} />
             </AppDrawer>
           </div>
@@ -91,6 +95,7 @@ const Navbar = () => {
 
         {user?.id && (
           <div className="md:hidden flex items-center gap-1">
+            <ThemeSwitcher />
             <AppDrawer
               title="Notifications"
               button={

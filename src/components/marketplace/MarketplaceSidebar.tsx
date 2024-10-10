@@ -77,15 +77,17 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
   return (
     <div>
       {!isHideTitle && (
-        <h2 className="font-bold text-textBlack py-4 px-6">Filter</h2>
+        <h2 className="font-bold text-textBlack 2xl:text-lg pb-2 px-6">
+          Filter
+        </h2>
       )}
 
       {/* this is account category div  */}
       <div className={`${isHideTitle && "pt-3"}`}>
-        <h3 className="border-b border-b-borderColor px-4 md:px-5 pb-2 md:pb4- text-textBlack font-medium">
+        <h3 className="border-b border-b-borderColor px-4 md:px-5 pb-2 md:pb-4 text-textBlack font-medium">
           Account Category
         </h3>
-        <div className="pt-2 max-h-[35dvh] 2xl:max-h-[40dvh] overflow-auto ">
+        <div className="pt-2 h-[35dvh] 2xl:h-[calc(100dvh-500px)] no-scrollbar overflow-y-auto">
           {sidebarMenu.map((sidebar: any) => (
             <MarketPlaceSidebarFilterElement
               key={sidebar?.label}

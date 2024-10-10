@@ -19,7 +19,7 @@ const ThemeSwitcher = () => {
 
   return (
     <>
-      <label className="toggle size-9" htmlFor="switch">
+      <label className="toggle size-5 md:size-9" htmlFor="switch">
         <input
           checked={isChecked}
           onChange={handleToggle}
@@ -27,7 +27,7 @@ const ThemeSwitcher = () => {
           className="hidden"
           type="checkbox"
         />
-        <div className="icon icon--moon text-black size-6">
+        <div className="icon icon--moon text-black size-4 md:size-6">
           <svg
             fill="currentColor"
             viewBox="0 0 24 24"
@@ -41,7 +41,7 @@ const ThemeSwitcher = () => {
           </svg>
         </div>
 
-        <div className="icon size-6 icon--sun">
+        <div className="icon size-4 md:size-6 icon--sun">
           <svg
             fill="currentColor"
             viewBox="0 0 24 24"

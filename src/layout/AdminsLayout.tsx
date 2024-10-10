@@ -1,17 +1,19 @@
-import React, { ReactNode } from "react";
-import { useAppSelector } from "@/redux/hook";
-import { useRouter } from "next/router";
 import Loading from "@/components/ui/Loading";
+import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
+import { useRouter } from "next/router";
+import React, { ReactNode } from "react";
 import DashboardLayout from "./DashboardLayout";
 
 interface AdminsLayoutLayoutProps {
   children: ReactNode;
-  roles: UserRole[]
+  roles: UserRole[];
 }
 
-const AdminsLayout: React.FC<AdminsLayoutLayoutProps> = ({ children, roles }) => {
-
+const AdminsLayout: React.FC<AdminsLayoutLayoutProps> = ({
+  children,
+  roles,
+}) => {
   const { isLoading, user } = useAppSelector((state) => state.user);
   const router = useRouter();
 
@@ -21,7 +23,7 @@ const AdminsLayout: React.FC<AdminsLayoutLayoutProps> = ({ children, roles }) =>
         <Loading></Loading>
       </div>
     );
-  };
+  }
 
   const userHasRole = user && roles.includes(user?.role);
 
@@ -41,7 +43,6 @@ const AdminsLayout: React.FC<AdminsLayoutLayoutProps> = ({ children, roles }) =>
       </div>
     );
   }
-
 };
 
 export default AdminsLayout;

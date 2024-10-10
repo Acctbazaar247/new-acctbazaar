@@ -1,14 +1,13 @@
 "use client";
 import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
-import { setLoading } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hook";
 import { IUser } from "@/types/common";
 import config from "@/utils/config";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 

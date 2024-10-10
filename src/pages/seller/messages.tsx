@@ -83,7 +83,7 @@ const Messages = () => {
                     orderId={activeChatId}
                   />
                 ) : (
-                  <Loading></Loading>
+                  <Loading screen="half"></Loading>
                 )}
               </div>
             </div>

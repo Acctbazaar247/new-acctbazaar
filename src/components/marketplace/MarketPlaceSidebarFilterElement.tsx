@@ -1,12 +1,11 @@
+import { toggleCategory } from "@/redux/features/categories/categorySlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { AccountCategory } from "@/types/common";
+import { Checkbox } from "antd";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { SlArrowDown } from "react-icons/sl";
-import { motion } from "framer-motion";
-import { Checkbox } from "antd";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { toggleCategory } from "@/redux/features/categories/categorySlice";
-import { toast } from "react-toastify";
-import { AccountCategory } from "@/types/common";
 
 type TMarketPlaceSidebarFilterElement = {
   sidebar: {
@@ -53,7 +52,7 @@ const MarketPlaceSidebarFilterElement = ({
       >
         <h2 className="flex items-center gap-1 2xl:gap-1.5 text-sm md:text-base font-medium text-textBlack">
           <Image
-            className="size-5"
+            className="size-5 dark:contrast-0"
             width={120}
             height={120}
             quality={1}

@@ -1,24 +1,17 @@
-import { ACCOUNT_CATEGORIES, findImageUrlByCategory } from "@/shared";
-import { AccountCategory, EApprovedForSale, IAccount } from "@/types/common";
+import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
+import { ACCOUNT_CATEGORIES } from "@/shared";
+import { EApprovedForSale, IAccount } from "@/types/common";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Pagination } from "antd";
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
-import Loading from "../ui/Loading";
-import ErrorCompo from "../ui/AppErrorComponent";
-import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faArrowRight,
-  faCartPlus,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
-import CurrencyLogo from "../CurrencyLogo/CurrencyLogo";
-import AccountCard from "../AccountCard/AccountCard";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useMemo, useState } from "react";
 import "swiper/css";
-import AccountTable from "../AccountReel/AccountTable";
 import { FreeMode, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import AccountTable from "../AccountReel/AccountTable";
+import ErrorCompo from "../ui/AppErrorComponent";
+import Loading from "../ui/Loading";
 type Props = {};
 
 const FilterAndFindAccountSection = (props: Props) => {

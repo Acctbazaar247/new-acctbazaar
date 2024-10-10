@@ -4,16 +4,14 @@ import {
   useUpdateSeenMessageMutation,
 } from "@/redux/features/message/messageApi";
 import { useAppSelector } from "@/redux/hook";
+import { IMessage } from "@/types/common";
+import appDateFormate from "@/utils/appDateFormate";
+import { Popover } from "antd";
+import dateFormat from "dateformat";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { FiPaperclip } from "react-icons/fi";
 import { LuSendHorizonal } from "react-icons/lu";
-import { MdAddReaction } from "react-icons/md";
 import Loading from "../ui/Loading";
-import dateFormat from "dateformat";
-import { IMessage } from "@/types/common";
-import { Popover } from "antd";
-import appDateFormate from "@/utils/appDateFormate";
 
 const transition = {
   type: "spring",
