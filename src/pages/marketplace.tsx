@@ -81,26 +81,27 @@ const Marketplace = () => {
         >
           {/* this is top section div  */}
           <AppAlert isShow={isShow} setIsShow={setIsShow} message={message} />
-          <div className="flex flex-col md:flex-row justify-between gap-1 py-2 md:py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto fixed bg-background md:static z-40">
+          <div className="flex flex-col md:flex-row justify-between md:gap-1 md:py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto max-sm:h-20 fixed bg-background md:static z-40">
             <div className="md:pl-4 2xl:pl-6">
               <h2 className="title">Marketplace</h2>
-              <p className="text-textGrey text-xs md:text-sm">
+              <p className="text-textGrey text-[11px] md:text-sm">
                 Access all products on the marketplace by our verified sellers
               </p>
             </div>
 
-            <div className="w-full md:w-1/4 pt-2 md:pt-0 flex items-center gap-3">
+            <div className="w-full md:w-1/4 pt-2 md:pt-0 flex items-center gap-2 md:gap-3">
               <AppInput
                 onChange={handleSearchChange}
                 type="text"
                 placeholder="Search by name or description"
                 value={search}
+                className="max-sm:!py-0.5"
               />
               <AppDrawer
                 title="Filter"
                 showExtraBottomButton={true}
                 button={
-                  <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-1.5 text-lg">
+                  <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-0.5 md:py-1.5 text-lg">
                     <IoFilter />
                   </div>
                 }
@@ -111,15 +112,16 @@ const Marketplace = () => {
           </div>
 
           {/* this is main div  */}
-          <div className="flex gap-4 bg-background overflow-hidden xl:h-[calc(100dvh-200px)] 2xl:h-[calc(100dvh-240px)] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-2">
+          <div className="max-sm:fixed top-[136px] left-0 max-sm:px-2 md:flex gap-4 bg-background overflow-hidden h-[calc(100dvh-200px)] xl:h-[calc(100dvh-200px)] 2xl:h-[calc(100dvh-240px)] w-full 2xl:gap-6 md:pt-4 lg:pt-5 2xl:pt-2">
             <div className="hidden md:block  md:w-[30%] min-w-[330px]">
               <MarketplaceSidebar />
             </div>
             <div className="hidden md:block border border-borderColor"></div>
-            <div className="w-full mt-[120px] md:mt-0 px-2 md:px-4 2xl:px-6">
-              <h2 className="text-xl font-bold">Latest account</h2>
 
-              <div className="max-h-[calc(100dvh-248px)] md:max-h-[74dvh] xl:max-h-[calc(100dvh-300px)] 2xl:h-[calc(100dvh-335px)] overflow-y-auto">
+            <div className="w-full px-2 md:px-4 2xl:px-6">
+              <h2 className="md:text-xl md:font-bold">Latest account</h2>
+
+              <div className="h-[calc(100dvh-250px)] md:h-[calc(100dvh-400px)] xl:h-[calc(100dvh-300px)] 2xl:h-[calc(100dvh-335px)] overflow-y-auto">
                 {data?.data?.length === 0 ? (
                   <Empty
                     description="No Data Found"
@@ -146,7 +148,7 @@ const Marketplace = () => {
                 pageSize={data?.meta?.limit}
                 total={data?.meta?.total}
                 current={data?.meta?.page}
-                className="mx-auto w-fit py-2"
+                className="mx-auto w-fit md:py-2"
                 onChange={(value) => {
                   setPage(value);
                 }}
