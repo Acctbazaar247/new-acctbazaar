@@ -17,6 +17,7 @@ import {
   IGenericErrorMessage,
   ResponseErrorType,
   ResponseSuccessType,
+  TBusinessKyc,
   TKyc,
 } from "@/types/common";
 import { City, Country, State } from "country-state-city";
@@ -28,7 +29,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CgFileAdd } from "react-icons/cg";
 import { toast } from "react-toastify";
 
-const VerifyAccount = () => {
+const VerifyBusinessAccount = () => {
   const [kycPending, setKycPending] = useState(false);
   const [kycDenied, setKycDenied] = useState(false);
   const [denyMessage, setDenyMessage] = useState("");
@@ -50,9 +51,9 @@ const VerifyAccount = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useForm<TKyc>();
+  } = useForm<TBusinessKyc>();
 
-  const onSubmit: SubmitHandler<TKyc> = async (data) => {
+  const onSubmit: SubmitHandler<TBusinessKyc> = async (data) => {
     if (!identityImage) {
       return toast.error("Please upload your identity image and try again", {
         toastId: 1,
@@ -63,9 +64,7 @@ const VerifyAccount = () => {
       id: user?.id,
       ...data,
       identityImage,
-      identificationNumber: data.identificationNumber.toString(),
       ...(kycDenied && { status: "pending", messageByAdmin: "" }),
-      telegramNumber: `${data?.telegramNumber}`,
     };
 
     if (!kycDenied) {
@@ -105,45 +104,6 @@ const VerifyAccount = () => {
       })),
     []
   );
-
-  const selectedCountry = watch("country");
-
-  const selectedState = watch("state");
-
-  const stateOptions = useMemo(() => {
-    const selectedCountryDetails = Country.getAllCountries().find(
-      (single) => single.isoCode === selectedCountry
-    );
-
-    return selectedCountryDetails?.isoCode
-      ? State.getStatesOfCountry(selectedCountryDetails.isoCode).map(
-          (state) => ({
-            value: state.isoCode,
-            label: state.name,
-          })
-        )
-      : [];
-  }, [selectedCountry]);
-
-  const cityOption = useMemo(() => {
-    const selectedCountryDetails = Country.getAllCountries().find(
-      (single) => single.isoCode === selectedCountry
-    );
-
-    const stateDetails = State.getStatesOfCountry(
-      selectedCountryDetails?.isoCode
-    ).find((single) => single.isoCode === selectedState);
-
-    return selectedCountryDetails?.isoCode && stateDetails?.isoCode
-      ? City.getCitiesOfState(
-          selectedCountryDetails.isoCode,
-          stateDetails?.isoCode
-        ).map((city) => ({
-          value: city.name,
-          label: city.name,
-        }))
-      : [];
-  }, [selectedCountry, selectedState]);
 
   const handleModal = () => {
     setModalOpen(false);
@@ -199,20 +159,8 @@ const VerifyAccount = () => {
       setDenyMessage(data?.data?.messageByAdmin);
       setValue("name", data?.data?.name || user?.name);
       setValue("phoneNumber", data?.data?.phoneNumber || user?.phoneNumber);
-      setValue("whatsAppNumber", data?.data?.whatsAppNumber);
-      setValue("telegramNumber", data?.data?.telegramNumber);
       setValue("address", data?.data?.address);
       setValue("birthDate", data?.data?.birthDate);
-      setValue("country", data?.data?.country);
-      setValue("state", data?.data?.state);
-      setValue("city", data?.data?.city);
-      setValue("userName", data?.data?.userName);
-      setValue("identificationNumber", data?.data?.identificationNumber);
-      setValue("meansOfIdentification", data?.data?.meansOfIdentification);
-      setValue(
-        "identificationExpiredDate",
-        data?.data?.identificationExpiredDate
-      );
       setIdentityImage(data?.data?.identityImage);
     }
   }, [data, kycPending, router, setValue, user]);
@@ -239,16 +187,16 @@ const VerifyAccount = () => {
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
-                    <h3 className="font-semibold">Personal Information</h3>
+                    <h3 className="font-semibold">Business Information</h3>
                     <p className="text-textGrey text-sm">
-                      Make adjustments to your personal <br /> information and
+                      Make adjustments to your Business <br /> information and
                       save them.
                     </p>
                   </div>
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
                     <AppFormInput
-                      label="Full Name"
+                      label="Business Name"
                       name="name"
                       type="text"
                       required
@@ -258,21 +206,12 @@ const VerifyAccount = () => {
                     />
 
                     <AppFormInput
-                      label="Email"
-                      name="email"
-                      type="email"
-                      register={register}
-                      defaultValue={user?.email}
-                      readOnly={true}
-                    />
-
-                    <AppFormInput
-                      label="Username"
-                      name="userName"
+                      label="Business Registration Number"
+                      name="businessRegistrationNumber"
                       type="text"
                       required
                       register={register}
-                      error={errors?.userName}
+                      error={errors?.businessRegistrationNumber}
                     />
 
                     <AppPhoneInput
@@ -283,7 +222,7 @@ const VerifyAccount = () => {
                       error={errors?.phoneNumber}
                     />
 
-                    <AppPhoneInput
+                    {/* <AppPhoneInput
                       name="whatsAppNumber"
                       control={control}
                       label="WhatsApp Number"
@@ -298,14 +237,15 @@ const VerifyAccount = () => {
                       register={register}
                       error={errors?.telegramNumber}
                       required
-                    />
+                    /> */}
                   </div>
                 </div>
-                <div className="border border-borderLight"></div>
+
+                <hr className="border border-borderLight" />
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
-                    <h3 className="font-semibold">Residential Details</h3>
+                    <h3 className="font-semibold">Contact Information</h3>
                     <p className="text-textGrey text-sm">
                       Add your current home address.
                     </p>
@@ -326,7 +266,7 @@ const VerifyAccount = () => {
                       required
                     />
 
-                    <AppFormSelect
+                    {/* <AppFormSelect
                       control={control}
                       placeholder="Select State"
                       name="state"
@@ -337,15 +277,15 @@ const VerifyAccount = () => {
                           : undefined
                       }
                       options={stateOptions}
-                    />
+                    /> */}
 
-                    <AppFormSelect
+                    {/* <AppFormSelect
                       control={control}
                       placeholder="Select City"
                       name="city"
                       required
                       options={cityOption ? cityOption : []}
-                    />
+                    /> */}
 
                     <AppFormInput
                       label="User address"
@@ -358,11 +298,13 @@ const VerifyAccount = () => {
                     />
                   </div>
                 </div>
-                <div className="border border-borderLight"></div>
+
+                <hr className="border border-borderLight" />
+
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
-                    <h3 className="font-semibold">Means of Identification</h3>
+                    <h3 className="font-semibold">Ownership Information</h3>
                     <p className="text-textGrey text-sm">
                       Kindly provide your correct means of ID.
                     </p>
@@ -382,7 +324,7 @@ const VerifyAccount = () => {
                       required={true}
                       options={meansOfIdentificationOptions}
                     />
-                    <AppFormInput
+                    {/* <AppFormInput
                       label="Enter Identification Number"
                       name="identificationNumber"
                       type={
@@ -394,8 +336,8 @@ const VerifyAccount = () => {
                       register={register}
                       required
                       error={errors?.identificationNumber}
-                    />
-                    {watch("meansOfIdentification") === "PASSPORT" && (
+                    /> */}
+                    {/* {watch("meansOfIdentification") === "PASSPORT" && (
                       <>
                         <AppFormDatePicker
                           control={control}
@@ -404,7 +346,7 @@ const VerifyAccount = () => {
                           placeholder="Enter Expired Date"
                         />
                       </>
-                    )}
+                    )} */}
 
                     <div className="">
                       <input
@@ -453,7 +395,124 @@ const VerifyAccount = () => {
                     </div>
                   </div>
                 </div>
-                <div className="border border-borderLight"></div>
+                <hr className="border border-borderLight" />
+
+                <div className="flex flex-col md:flex-row justify-between">
+                  {/* this is left side text  */}
+                  <div className="text-textBlueBlack space-y-1">
+                    <h3 className="font-semibold">Contact Information</h3>
+                    <p className="text-textGrey text-sm">
+                      Add your current home address.
+                    </p>
+                  </div>
+                  {/* this is right side text  */}
+                  <div className="w-full md:w-[40%] space-y-3">
+                    <AppFormSelect
+                      control={control}
+                      placeholder="Country of residence"
+                      name="country"
+                      //   required={true}
+                      options={countryOptions}
+                      defaultValue={
+                        user?.state
+                          ? { value: user?.state, label: user?.state }
+                          : undefined
+                      }
+                      required
+                    />
+
+                    {/* <AppFormSelect
+                      control={control}
+                      placeholder="Select State"
+                      name="state"
+                      required
+                      defaultValue={
+                        user?.state
+                          ? { value: user?.state, label: user?.state }
+                          : undefined
+                      }
+                      options={stateOptions}
+                    />
+
+                    <AppFormSelect
+                      control={control}
+                      placeholder="Select City"
+                      name="city"
+                      required
+                      options={cityOption ? cityOption : []}
+                    /> */}
+
+                    <AppFormInput
+                      label="User address"
+                      name="address"
+                      type="text"
+                      required
+                      placeholder="Type your address here"
+                      register={register}
+                      error={errors?.address}
+                    />
+                  </div>
+                </div>
+
+                <hr className="border border-borderLight" />
+                <div className="flex flex-col md:flex-row justify-between">
+                  {/* this is left side text  */}
+                  <div className="text-textBlueBlack space-y-1">
+                    <h3 className="font-semibold">Contact Information</h3>
+                    <p className="text-textGrey text-sm">
+                      Add your current home address.
+                    </p>
+                  </div>
+                  {/* this is right side text  */}
+                  <div className="w-full md:w-[40%] space-y-3">
+                    <AppFormSelect
+                      control={control}
+                      placeholder="Country of residence"
+                      name="country"
+                      //   required={true}
+                      options={countryOptions}
+                      defaultValue={
+                        user?.state
+                          ? { value: user?.state, label: user?.state }
+                          : undefined
+                      }
+                      required
+                    />
+
+                    {/* <AppFormSelect
+                      control={control}
+                      placeholder="Select State"
+                      name="state"
+                      required
+                      defaultValue={
+                        user?.state
+                          ? { value: user?.state, label: user?.state }
+                          : undefined
+                      }
+                      options={stateOptions}
+                    />
+
+                    <AppFormSelect
+                      control={control}
+                      placeholder="Select City"
+                      name="city"
+                      required
+                      options={cityOption ? cityOption : []}
+                    /> */}
+
+                    <AppFormInput
+                      label="User address"
+                      name="address"
+                      type="text"
+                      required
+                      placeholder="Type your address here"
+                      register={register}
+                      error={errors?.address}
+                    />
+                  </div>
+                </div>
+
+                <hr className="border border-borderLight" />
                 {!kycPending && (
                   <div className="flex items-center justify-end">
                     {/* {isLoading || loading || updateLoading ? (
@@ -519,4 +578,4 @@ const VerifyAccount = () => {
   );
 };
 
-export default VerifyAccount;
+export default VerifyBusinessAccount;

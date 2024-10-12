@@ -18,11 +18,8 @@ const AppPhoneInput = ({
   error,
 }: TPhoneInput) => {
   return (
-    <div className="">
-      <label
-        className="md:pb-1 block text-black/80 text-sm lg:text-base"
-        htmlFor={name}
-      >
+    <div className="text-textDarkGrey">
+      <label className="md:pb-1 block text-sm lg:text-base" htmlFor={name}>
         {label}
       </label>
       <Controller
@@ -36,9 +33,10 @@ const AppPhoneInput = ({
             value={value}
             // enableAreaCodes={true}
             specialLabel={""}
-            inputClass="h-11 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-borderColor"
+            inputClass="h-11 !bg-transparent 2xl:h-12 !w-full focus:!border-2 focus-visible:!ring-0 focus:!outline-none focus:!border-primary hover:!border-borderColor"
             country={"ng"}
-            placeholder={placeholder}
+            autocompleteSearch={false}
+            placeholder={placeholder || "Phone Number"}
             inputProps={{
               name,
               onBlur,
@@ -48,6 +46,7 @@ const AppPhoneInput = ({
           />
         )}
       />
+
       {/* <FormInputNumber name="phone"/> */}
       {error && (
         <span className="text-xs tracking-wide text-red">

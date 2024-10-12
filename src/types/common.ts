@@ -86,6 +86,38 @@ export interface TKyc {
   identityImage: string;
 }
 
+export interface TBusinessKyc {
+  // id: string;
+  name: string;
+  businessRegistrationNumber: string;
+  businessType: string;
+
+  industry: string;
+  businessAddress: string;
+  businessWebsite: string;
+
+  primaryContactPerson: string;
+  position: string;
+  email: string;
+  phoneNumber: string;
+  beneficialOwners: string;
+  businessFullName: string;
+  ownershipPercentage: string;
+
+  address: string;
+  birthDate: string;
+  identityImage: string;
+  bankAccountNumber: string;
+  bankName: string;
+  taxIdentificationNumber: string;
+
+  businessRegistrationDocument: string;
+  certificateOfIncorporation: string;
+
+  proofOfAddress: string;
+  financialStatements: string;
+}
+
 export interface IAllCategoryOfPcService {
   _count: {
     _all: number;

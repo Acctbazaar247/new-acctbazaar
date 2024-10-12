@@ -83,7 +83,7 @@ module.exports = {
       dark: {
         loader: "#FFFFFF",
         background: "#181C14",
-        primary: "#FF8A65", // A brighter version of primary to stand out on dark backgrounds
+        primary: "#FF5A35", // A brighter version of primary to stand out on dark backgrounds
         textBlack: "#EDEDED", // Lightened for better readability
         textBlueBlack: "#CBD5E1", // Lighter variant of blue-black
         textBlueGrey: "#94A3B8", // Softer blue-grey for text on dark backgrounds

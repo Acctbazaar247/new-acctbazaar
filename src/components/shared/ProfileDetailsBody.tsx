@@ -33,6 +33,10 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
       router.push("/account/verify-account");
       setModalOpen(false);
       setOpen(false);
+    } else if (value === "business") {
+      router.push("/account/verify-business-account");
+      setModalOpen(false);
+      setOpen(false);
     } else if (value === "close") {
       setModalOpen(false);
       setOpen(false);
@@ -85,12 +89,20 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
               Buyers trust Merchant with verified account than not.
             </p>
             <div className="flex items-center justify-center flex-col gap-2">
-              <button
-                onClick={() => handleModal("go")}
-                className="appBtn mt-8 px-12"
-              >
-                Begin KYC Verification
-              </button>
+              <div className="flex mt-8 items-center justify-center gap-4">
+                <button
+                  onClick={() => handleModal("go")}
+                  className="appBtn px-6 text-sm"
+                >
+                  Begin KYC Verification
+                </button>
+                <button
+                  onClick={() => handleModal("business")}
+                  className="appBtn  px-6 text-sm"
+                >
+                  Business KYC Verification
+                </button>
+              </div>
               <button
                 onClick={() => handleModal("close")}
                 className="text-textBlack hover:text-primary"

@@ -396,16 +396,15 @@ html {
 }
 /* Assuming your Select component has a className of 'my-select' */
 .my-select .ant-select-selection-placeholder {
-  color: #1b1818;
+  /* color: #1b1818; */
   font-weight: 400;
 }
 /* Assuming your DatePicker component has a className of 'my-date-picker' */
 .my-date-picker .ant-picker-input > input::placeholder {
-  color: #1b1818;
   font-weight: 400;
 }
 .my-date-picker .ant-picker-input > input {
-  color: #1b1818;
+  /* color: #1b1818; */
   font-weight: 400;
 }
 .ant-table-cell,
