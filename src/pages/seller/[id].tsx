@@ -1,4 +1,3 @@
-import ReviewCard from "@/components/Seller/ReviewCard";
 import SellerProfileViewComponent from "@/components/Seller/SellerProfileViewComponent";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import AccountLoading from "@/components/shared/AccountLoading";
@@ -11,16 +10,8 @@ import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
 import { useGetReviewsQuery } from "@/redux/features/review/reviewApi";
-import {
-  useGetSellerOverviewQuery,
-  useGetSellerProfileByIdQuery,
-} from "@/redux/features/user/userApi";
-import {
-  EApprovedForSale,
-  IAccount,
-  IGenericErrorMessage,
-  IReview,
-} from "@/types/common";
+import { useGetSellerProfileByIdQuery } from "@/redux/features/user/userApi";
+import { EApprovedForSale, IAccount } from "@/types/common";
 import { Pagination } from "antd";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";

@@ -1,3 +1,4 @@
+import AppButton from "@/components/ui/AppButton";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import Loading from "@/components/ui/Loading";
 import AddMoneyModal from "@/components/wallet/AddMoneyModal";
@@ -5,16 +6,15 @@ import AddWithdrawModal from "@/components/wallet/AddWithdrawModal";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
+import { useGetCurrencyRequestsQuery } from "@/redux/features/currencyRequest/currencyRequestApi";
 import { useGetWithdrawFundsQuery } from "@/redux/features/withdrawFund/withdrawFundApi";
 import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
 import appDateFormate from "@/utils/appDateFormate";
 import { Table } from "antd";
+import dateFormat from "dateformat";
 import { useMemo, useState } from "react";
 import { GoDotFill } from "react-icons/go";
-import dateFormat from "dateformat";
-import { useGetCurrencyRequestsQuery } from "@/redux/features/currencyRequest/currencyRequestApi";
-import AppButton from "@/components/ui/AppButton";
 
 const Wallet = () => {
   const [page, setPage] = useState<number>(1);
@@ -278,7 +278,7 @@ const Wallet = () => {
                   <div className="bg-background/15 p-4 text-white gap-3 rounded-xl">
                     <div className="space-y-1">
                       {isLoading ? (
-                        <Loading></Loading>
+                        <Loading screen="half"></Loading>
                       ) : (
                         <h2 className="text-2xl md:text-3xl text-center w-full font-medium">
                           ${data?.data?.amount?.toFixed(2) || 0}

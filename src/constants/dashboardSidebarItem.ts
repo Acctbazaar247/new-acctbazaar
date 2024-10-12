@@ -6,6 +6,7 @@ import { IoHome, IoPersonAddSharp, IoSettingsSharp } from "react-icons/io5";
 import {
   MdAddToPhotos,
   MdAdminPanelSettings,
+  MdEmail,
   MdSwitchAccount,
   MdVerified,
   MdWorkspacePremium,
@@ -78,6 +79,11 @@ export const supperItems: TNavItemsList[] = [
         label: "Make Admin",
         path: "/dashboard/addAdmin",
         Icon: IoPersonAddSharp,
+      },
+      {
+        label: "Send Email",
+        path: "/dashboard/send-email",
+        Icon: MdEmail,
       },
     ],
   },

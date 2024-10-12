@@ -12,7 +12,7 @@ import { ICart } from "@/types/common";
 import config from "@/utils/config";
 import { Image } from "antd";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 type Props = {};

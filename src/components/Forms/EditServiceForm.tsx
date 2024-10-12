@@ -1,24 +1,23 @@
 import { useEditAccountMutation } from "@/redux/features/account/accountApi";
+import { useAppSelector } from "@/redux/hook";
 import {
   AccountCategory,
   EApprovedForSale,
   IAccount,
   UserRole,
 } from "@/types/common";
-import React from "react";
+import { optionCreator } from "@/utils";
+import hasScientificNotation from "@/utils/hasScientificNotation";
+import { Button } from "antd";
+import { MdErrorOutline } from "react-icons/md";
 import { toast } from "react-toastify";
+import ErrorCompo from "../ui/AppErrorComponent";
+import Loading from "../ui/Loading";
 import Form from "./Form";
 import FormInput from "./FormInput";
 import FormInputNumber from "./FormInputNumber";
 import FormSelectField from "./FormSelectField";
-import { Button } from "antd";
 import FormTextArea from "./FormTextArea";
-import { optionCreator } from "@/utils";
-import { useAppSelector } from "@/redux/hook";
-import ErrorCompo from "../ui/AppErrorComponent";
-import hasScientificNotation from "@/utils/hasScientificNotation";
-import Loading from "../ui/Loading";
-import { MdErrorOutline } from "react-icons/md";
 
 type Props = { data: IAccount };
 
@@ -78,6 +77,7 @@ const EditServiceForm = ({ data }: Props) => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+
   const isStatusSuccess = data.approvedForSale === EApprovedForSale.approved;
 
   return (

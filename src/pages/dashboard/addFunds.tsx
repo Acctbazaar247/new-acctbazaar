@@ -1,9 +1,6 @@
 import CurrencyLogo from "@/components/CurrencyLogo/CurrencyLogo";
-import Form from "@/components/Forms/Form";
-import FormInput from "@/components/Forms/FormInput";
-import FormInputNumber from "@/components/Forms/FormInputNumber";
-import Loading from "@/components/ui/Loading";
 import PaySelection from "@/components/PaySelection/PaySelection";
+import Loading from "@/components/ui/Loading";
 import DashboardLayout from "@/layout/DashboardLayout";
 import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
 import {
@@ -13,12 +10,9 @@ import {
 import { useAppSelector } from "@/redux/hook";
 import { UserRole } from "@/types/common";
 import config from "@/utils/config";
-import { Button, Input } from "antd";
-import axios from "axios";
+import { Input } from "antd";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 type Props = {};
@@ -90,6 +84,7 @@ const AddFunds = (props: Props) => {
       // console.log("his");
     }
   };
+
   if (isLoading || isPayStackLoading) {
     return (
       <DashboardLayout>
@@ -97,6 +92,7 @@ const AddFunds = (props: Props) => {
       </DashboardLayout>
     );
   }
+
   return (
     <DashboardLayout>
       {user?.role === UserRole.Admin ? (
@@ -152,8 +148,8 @@ const AddFunds = (props: Props) => {
                   <PaySelection
                     onChange={setSelectedOption}
                     isDisabled={isLoading}
-                  // handleCryptoClick={handlePay}
-                  // handleBankClick={handllePayWithPayStack}
+                    // handleCryptoClick={handlePay}
+                    // handleBankClick={handllePayWithPayStack}
                   ></PaySelection>
                 </div>
                 <button

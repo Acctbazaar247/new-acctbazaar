@@ -1,8 +1,8 @@
-import React from "react";
-import Loading from "./Loading";
 import { UseQueryHookResult } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import { Empty } from "antd";
+import React from "react";
 import AppErrorComponent from "./AppErrorComponent";
+import Loading from "./Loading";
 
 type Props = {
   queryData: UseQueryHookResult<any>;
@@ -19,7 +19,7 @@ const AppRenderReduxData = ({
   renderErrorComponent,
   loadingComponent,
   notAllowIsFetching,
-  isEmptyComponentHave
+  isEmptyComponentHave,
 }: Props) => {
   const { data, isFetching, isLoading, isError, error } = queryData;
 
@@ -28,21 +28,23 @@ const AppRenderReduxData = ({
   const shouldFetch = notAllowIsFetching === true ? false : isFetching;
 
   if (shouldFetch || isLoading) {
-    content = loadingComponent || <Loading />;
+    content = loadingComponent || <Loading screen="half" />;
   } else if (isError) {
     content = renderErrorComponent ? (
       renderErrorComponent(error)
     ) : (
       <AppErrorComponent />
     );
-
   } else if ((data as any)?.data && isEmptyComponentHave) {
     content = showData(data);
   } else if ((data as any)?.data?.length > 0) {
     content = showData(data);
   } else {
     content = (
-      <Empty description="No Data Found" className="min-h-[70dvh] flex flex-col text-xl font-medium gap-4 items-center justify-center" />
+      <Empty
+        description="No Data Found"
+        className="min-h-[58dvh] flex flex-col text-xl font-medium gap-4 items-center justify-center"
+      />
     );
   }
   return <>{content}</>;

@@ -1,19 +1,17 @@
-import ErrorCompo from "@/components/ui/AppErrorComponent";
-import AddServiceForm from "@/components/Forms/AddServiceForm";
 import EditServiceForm from "@/components/Forms/EditServiceForm";
+import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
+import AdminsLayout from "@/layout/AdminsLayout";
+import HomeLayout from "@/layout/HomeLayout";
 import SellerLayout from "@/layout/SellerLayout";
 import { useGetAccountByIdQuery } from "@/redux/features/account/accountApi";
+import { useAppSelector } from "@/redux/hook";
 import { IAccount, UserRole } from "@/types/common";
 import { useRouter } from "next/router";
-import React from "react";
-import HomeLayout from "@/layout/HomeLayout";
-import AdminsLayout from "@/layout/AdminsLayout";
-import { useAppSelector } from "@/redux/hook";
 
 const EditSingleService = () => {
   const {
-    query: { serviceId }
+    query: { serviceId },
   } = useRouter();
   const user = useAppSelector((state) => state.user.user);
   const { data, isLoading, isError, isFetching } =

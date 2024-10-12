@@ -1,9 +1,7 @@
 import CurrencyLogo from "@/components/CurrencyLogo/CurrencyLogo";
-import ErrorCompo from "@/components/ui/AppErrorComponent";
-import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
+import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
-import OrdersCard from "@/components/OrdersCard/OrdersCard";
 import DashboardLayout from "@/layout/DashboardLayout";
 import SellerLayout from "@/layout/SellerLayout";
 import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
@@ -14,11 +12,7 @@ import {
   useGetWithdrawFundsQuery,
 } from "@/redux/features/withdrawFund/withdrawFundApi";
 import { useAppSelector } from "@/redux/hook";
-import {
-  EStatusOfWithdrawalRequest,
-  IOrder,
-  IWithdrawalRequest,
-} from "@/types/common";
+import { EStatusOfWithdrawalRequest, IWithdrawalRequest } from "@/types/common";
 import config from "@/utils/config";
 import {
   faBank,
@@ -26,10 +20,10 @@ import {
   faMoneyBillTransfer,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Input, Modal, Popconfirm, Table } from "antd";
+import { Modal, Popconfirm, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -143,6 +137,7 @@ const WithdrawFund = () => {
       },
     },
   ];
+
   if (isMyFundRequestLoading || isMyFundRequestFetching) {
     content = <Loading></Loading>;
   } else if (isMyFundRequestError) {

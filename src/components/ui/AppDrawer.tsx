@@ -29,7 +29,7 @@ const AppDrawer = ({
           <div className="flex items-center text-center">
             <HiOutlineArrowLeft
               onClick={() => setOpen(false)}
-              className="text-3xl font-bold p-1 rounded-full border"
+              className="text-3xl font-bold p-1 rounded-full border text-textDarkGrey"
             />
             <h4 className="text-center w-full text-base text-textBlack font-semibold">
               {title}

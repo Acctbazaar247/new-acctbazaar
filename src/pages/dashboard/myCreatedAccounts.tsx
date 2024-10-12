@@ -1,30 +1,24 @@
-import SellerLayout from "@/layout/SellerLayout";
 import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
+import SellerLayout from "@/layout/SellerLayout";
+import { AccountCategory, EApprovedForSale, IAccount } from "@/types/common";
+import { Button, Input, Pagination, Popconfirm, Table } from "antd";
+import type { ColumnsType } from "antd/es/table";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
-import { Avatar, Button, Input, Pagination, Popconfirm } from "antd";
-import { Space, Table, Tag } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import {
-  AccountCategory,
-  EApprovedForSale,
-  IAccount,
-  IUser,
-} from "@/types/common";
 // import ServiceCard from "@/components/ServiceCard/ServiceCard";
+import Form from "@/components/Forms/Form";
+import FormSelectField, {
+  SelectOptions,
+} from "@/components/Forms/FormSelectField";
+import useDebounce from "@/hooks/useDebounce";
 import {
   useDeleteAccountMutation,
   useEditAccountMutation,
   useGetAccountsQuery,
 } from "@/redux/features/account/accountApi";
-import FormSelectField, {
-  SelectOptions,
-} from "@/components/Forms/FormSelectField";
-import useDebounce from "@/hooks/useDebounce";
-import Form from "@/components/Forms/Form";
-import { optionCreator } from "@/utils";
 import { useAppSelector } from "@/redux/hook";
+import { optionCreator } from "@/utils";
 type Props = {};
 type DataType = {} & IAccount;
 
@@ -180,7 +174,7 @@ const MyCreatedAccounts = (props: Props) => {
             <div className="flex flex-col md:flex-row items-center gap-4 mb-5 justify-between">
               <div className="flex flex-wrap gap-4">
                 <div className="w-[200px] ">
-                  <Form submitHandler={() => { }}>
+                  <Form submitHandler={() => {}}>
                     <FormSelectField
                       name="category"
                       handleChange={handleCategoryChange}
@@ -191,7 +185,7 @@ const MyCreatedAccounts = (props: Props) => {
                   </Form>
                 </div>
                 <div className="w-[230px] ">
-                  <Form submitHandler={() => { }}>
+                  <Form submitHandler={() => {}}>
                     <FormSelectField
                       name="approvedForSale"
                       handleChange={handleApprovedChange}

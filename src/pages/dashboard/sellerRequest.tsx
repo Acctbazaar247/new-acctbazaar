@@ -1,14 +1,13 @@
-import ErrorCompo from "@/components/ui/AppErrorComponent";
-import Loading from "@/components/ui/Loading";
 import ManageSellerSingleRow from "@/components/ManageAllUserTable/ManageSellerSingleRow";
 import ManageSellerTable from "@/components/ManageAllUserTable/ManageSellerTable";
+import ErrorCompo from "@/components/ui/AppErrorComponent";
+import Loading from "@/components/ui/Loading";
 import useDebounce from "@/hooks/useDebounce";
+import AdminsLayout from "@/layout/AdminsLayout";
 import { useGetUsersQuery } from "@/redux/features/user/userApi";
 import { IUser, UserRole } from "@/types/common";
 import { Input, Pagination } from "antd";
-import React, { useState, useMemo } from "react";
-import AdminsLayout from "@/layout/AdminsLayout";
-
+import React, { useMemo, useState } from "react";
 
 const SellerRequest = () => {
   const defaultValue = { value: "", label: "" };

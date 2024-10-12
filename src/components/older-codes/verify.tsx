@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 type Props = {};

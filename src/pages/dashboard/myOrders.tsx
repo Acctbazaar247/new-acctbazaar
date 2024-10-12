@@ -1,13 +1,11 @@
+import OrdersCard from "@/components/OrdersCard/OrdersCard";
 import ErrorCompo from "@/components/ui/AppErrorComponent";
 import Loading from "@/components/ui/Loading";
-import OrdersCard from "@/components/OrdersCard/OrdersCard";
 // import OrdersCard from "@/components/OrdersCard/OrdersCard";
 import DashboardLayout from "@/layout/DashboardLayout";
 import { useGetMyOrdersQuery } from "@/redux/features/order/orderApi";
 // import { useGetSingleUserBookingByUserIdQuery } from "@/redux/features/booking/bookingApi";
-import { useAppSelector } from "@/redux/hook";
-import { Booking, IOrder } from "@/types/common";
-import React from "react";
+import { IOrder } from "@/types/common";
 
 type Props = {};
 

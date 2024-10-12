@@ -169,7 +169,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
               <div
                 key={nav?.label}
                 onClick={() => dispatch(userLoggedOut())}
-                className="flex items-center gap-3 text-645D5D hover:text-primary text-base 2xl:text-lg cursor-pointer"
+                className="flex items-center text-textBlack gap-3 text-645D5D hover:text-primary text-base 2xl:text-lg cursor-pointer"
               >
                 <nav.Icon /> {nav?.label}
               </div>
@@ -177,7 +177,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
               <Link
                 href={nav?.path}
                 key={nav?.label}
-                className={`flex items-center gap-3 text-645D5D hover:text-primary text-base 2xl:text-lg`}
+                className={`flex text-textBlack items-center gap-3 text-645D5D hover:text-primary text-base 2xl:text-lg`}
               >
                 <nav.Icon /> {nav?.label}
               </Link>

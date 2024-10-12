@@ -1,12 +1,10 @@
-import React from "react";
+import { useEditUserMutation } from "@/redux/features/user/userApi";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { toast } from "react-toastify";
 import Form from "../Forms/Form";
 import FormInput from "../Forms/FormInput";
-import { toast } from "react-toastify";
-import DashboardLayout from "@/layout/DashboardLayout";
-import Loading from "../ui/Loading";
 import useFormUploadImage from "../Forms/useFormUploadImage";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { useEditUserMutation } from "@/redux/features/user/userApi";
+import Loading from "../ui/Loading";
 
 type Props = {};
 
@@ -29,6 +27,7 @@ const ChangePassword = (props: Props): any => {
       </>
     );
   }
+
   const { id, name, email, profileImg } = user;
 
   const onSubmit = (data: any) => {

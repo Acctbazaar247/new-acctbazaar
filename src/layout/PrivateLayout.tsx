@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect } from "react";
+import AppButton from "@/components/ui/AppButton";
+import Loading from "@/components/ui/Loading";
 import { useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/router";
-import Loading from "@/components/ui/Loading";
-import AppButton from "@/components/ui/AppButton";
+import React, { ReactNode, useEffect } from "react";
 
 interface PrivateLayoutProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
     if (!user?.email && !isLoading) {
       router.push({
         pathname: "/auth/sign-in",
-        query: { from: router?.asPath }
+        query: { from: router?.asPath },
       });
     }
   }, [user, router, isLoading]);
@@ -26,6 +26,7 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
       }, 2000);
     }
   }, [user]);
+
   if (isLoading) {
     return (
       <div className="flex justify-center">
@@ -37,7 +38,7 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
   if (!user?.email) {
     router.push({
       pathname: "/auth/sign-in",
-      query: { from: router?.asPath }
+      query: { from: router?.asPath },
     });
 
     return (

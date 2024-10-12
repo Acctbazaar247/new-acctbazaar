@@ -1,29 +1,27 @@
-import "react-phone-input-2/lib/material.css";
-import AppFormDatePicker from "../ui/AppFormDatePicker";
-import AppFormSelect from "../ui/AppFormSelect";
-import Image from "next/image";
-import PhoneInput from "react-phone-input-2";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import AppFormInput from "../ui/AppFormInput";
-import { useAppSelector } from "@/redux/hook";
 import {
   useEditUserMutation,
   useUploadImageMutation,
 } from "@/redux/features/user/userApi";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useAppSelector } from "@/redux/hook";
 import {
   IGenericErrorMessage,
-  IGenericErrorResponse,
   ResponseErrorType,
   ResponseSuccessType,
 } from "@/types/common";
-import { toast } from "react-toastify";
-import AppSmallLoading from "../ui/AppSmallLoading";
-import { useEffect, useMemo, useState } from "react";
 import getDaysRemaining from "@/utils/getDaysRemaining";
-import { City, Country, ICountry, State } from "country-state-city";
+import { City, Country, State } from "country-state-city";
+import { useMemo, useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
+import { toast } from "react-toastify";
 import FormUploadImage from "../Forms/FormUploadImage";
 import useFormUploadImage from "../Forms/useFormUploadImage";
+import AppFormDatePicker from "../ui/AppFormDatePicker";
+import AppFormInput from "../ui/AppFormInput";
+import AppFormSelect from "../ui/AppFormSelect";
+import AppSmallLoading from "../ui/AppSmallLoading";
 
 interface FormData {
   name: string;
@@ -69,6 +67,7 @@ const AccountSettingProfile = () => {
     url,
     setUrl,
   } = useFormUploadImage();
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const countryObj = Country.getCountryByCode(data.country);
     const stateObj = State.getStateByCodeAndCountry(data.country, data.state);
@@ -110,6 +109,7 @@ const AccountSettingProfile = () => {
         toast.error(res?.data?.message || "Something went wrong");
       });
   };
+
   const handleFileUpload = async (value: any) => {
     setLoading(true);
     const formData = new FormData();
@@ -146,6 +146,7 @@ const AccountSettingProfile = () => {
         setLoading(false);
       });
   };
+
   const countryOptions = useMemo(
     () =>
       Country.getAllCountries().map((country) => ({
