@@ -86,37 +86,37 @@ export interface TKyc {
   identityImage: string;
 }
 
-export interface TBusinessKyc {
-  // id: string;
-  name: string;
-  businessRegistrationNumber: string;
-  businessType: string;
+type BeneficialOwner = {
+  fullName: string;
+  ownershipPercentage: string;
+  address: string;
+  dateOfBirth: string;
+  identificationDocument: string;
+};
 
+export type TBusinessKyc = {
+  businessName: string;
+  businessRegistration: string;
+  businessType: string;
   industry: string;
   businessAddress: string;
-  businessWebsite: string;
-
   primaryContactPerson: string;
-  position: string;
-  email: string;
+  businessWebsite: string;
+  positionOrTitle: string;
+  emailAddress: string;
   phoneNumber: string;
-  beneficialOwners: string;
-  businessFullName: string;
-  ownershipPercentage: string;
-
-  address: string;
-  birthDate: string;
-  identityImage: string;
+  beneficialOwner: BeneficialOwner[];
   bankAccountNumber: string;
   bankName: string;
   taxIdentificationNumber: string;
-
   businessRegistrationDocument: string;
-  certificateOfIncorporation: string;
-
+  CertificateOfIncorporation: string;
   proofOfAddress: string;
   financialStatements: string;
-}
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export interface IAllCategoryOfPcService {
   _count: {

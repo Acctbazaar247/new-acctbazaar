@@ -67,6 +67,9 @@ const RootLayout: React.FC<Props> = ({ children }) => {
             colorBorder: theme === "light" ? "#D5D8DB" : "#374151",
             colorTextPlaceholder: theme === "light" ? "#181C14" : "#fff",
           },
+          Modal: {
+            colorIcon: theme === "light" ? "#181C14" : "#fff",
+          },
         },
       }}
     >

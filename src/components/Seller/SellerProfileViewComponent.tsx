@@ -1,25 +1,24 @@
-import { useAppSelector } from "@/redux/hook";
+import { setSellerTabShow } from "@/redux/features/account/accountSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { TSellerProfileInfo } from "@/types/common";
 import { Avatar } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { FiCheck, FiCopy } from "react-icons/fi";
+import { IoIosCloseCircle } from "react-icons/io";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { toast } from "react-toastify";
-import greenCheck from "./assets/greenCheck.png";
 import {
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
   Radar,
   RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
 } from "recharts";
-import Image from "next/image";
-import { IoIosCloseCircle } from "react-icons/io";
 
 const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
+  const dispatch = useAppDispatch();
   const [domain, setDomain] = useState("");
   const [copied, setCopied] = useState(false);
   const user = useAppSelector((state) => state?.user);
@@ -66,6 +65,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
       console.error("Failed to copy:", error);
     }
   };
+
   const graphData = [
     {
       subject: "Positive Review",
@@ -183,7 +183,12 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
         <h2 className="font-bold lg:text-lg">Profile</h2>
 
         <h3 className="flex items-center justify-between">
-          <span>Total reviews</span>
+          <span
+            onClick={() => dispatch(setSellerTabShow("reviews"))}
+            className="cursor-pointer hover:font-medium"
+          >
+            Total reviews
+          </span>
           <span className="font-bold">{data.totalReviews}</span>
         </h3>
         <h3 className="flex items-center justify-between">
