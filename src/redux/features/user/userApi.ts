@@ -5,95 +5,95 @@ export const userApi = apiSlice.injectEndpoints({
     getUsers: builder.query({
       query: (query) => {
         return {
-          url: `/users?${query}`
+          url: `/users?${query}`,
         };
       },
-      providesTags: [tagTypes.user]
+      providesTags: [tagTypes.user],
     }),
     getAdminOverview: builder.query({
-      query: () => `/users/admin/overview`
+      query: () => `/users/admin/overview`,
     }),
     getSellerOverview: builder.query({
-      query: () => `/users/seller/overview`
+      query: () => `/users/seller/overview`,
     }),
     getUserOverview: builder.query({
-      query: () => `/users/user/overview`
+      query: () => `/users/user/overview`,
     }),
     getUserById: builder.query({
-      query: (id) => `/users/${id}`
+      query: (id) => `/users/${id}`,
     }),
     getSellerProfileById: builder.query({
-      query: (id) => `/users/seller/profile/${id}`
+      query: (id) => `/users/seller/profile/${id}`,
     }),
     addUser: builder.mutation({
       query: (info) => {
         return {
           url: "/user",
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user],
     }),
     editUser: builder.mutation({
       query: (info) => {
         return {
           url: `/users/${info.id}`,
           method: "PATCH",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user, tagTypes.kyc, tagTypes.businessKyc],
     }),
     deleteUser: builder.mutation({
       query: (id) => {
         return {
           url: `/users/${id}`,
-          method: "DELETE"
+          method: "DELETE",
         };
       },
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user],
     }),
     addWithdrawPin: builder.mutation({
       query: (info) => {
         return {
           url: `/auth/add-withdrawal-password-first-time`,
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user],
     }),
     changePassword: builder.mutation({
       query: (info) => {
         return {
           url: `/auth/change-password`,
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user],
     }),
     forgotPassword: builder.mutation({
       query: (forgotEmail) => {
         return {
           url: `/auth/send-forgot-email/${forgotEmail}`,
-          method: "POST"
+          method: "POST",
         };
       },
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user],
     }),
     uploadImage: builder.mutation({
       query: (info) => {
         return {
           url: `https://acct-media-server.onrender.com/api/v1/uploadImg`,
           method: "POST",
-          body: info
+          body: info,
         };
       },
-      invalidatesTags: [tagTypes.user]
-    })
-  })
+      invalidatesTags: [tagTypes.user],
+    }),
+  }),
 });
 
 export const {
@@ -109,5 +109,5 @@ export const {
   useGetSellerOverviewQuery,
   useGetUserOverviewQuery,
   useAddWithdrawPinMutation,
-  useGetSellerProfileByIdQuery
+  useGetSellerProfileByIdQuery,
 } = userApi;

@@ -5,7 +5,7 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 type TAppFormInputProps = {
   label?: string;
   placeholder?: string;
-  type: "text" | "number" | "password" | "url" | "email";
+  type: "text" | "number" | "password" | "url" | "email" | "tel" | "date";
   name: string;
   required?: true | false;
   register: UseFormRegister<any>;

@@ -11,7 +11,7 @@ import {
   MdVerified,
   MdWorkspacePremium,
 } from "react-icons/md";
-import { RiRefund2Fill } from "react-icons/ri";
+import { RiRefund2Fill, RiVerifiedBadgeLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 
 const common: any[] = [
@@ -104,6 +104,11 @@ export const supperItems: TNavItemsList[] = [
       {
         label: "Manage KYC",
         path: "/dashboard/manage-kyc",
+        Icon: RiVerifiedBadgeLine,
+      },
+      {
+        label: "Manage Business KYC",
+        path: "/dashboard/manage-business-kyc",
         Icon: MdVerified,
       },
       {

@@ -115,11 +115,13 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           ) : null}
           {data.sellerInfo.isVerifiedByAdmin ? (
             <div className="flex absolute w-[200px] items-center gap-1">
-              <p
-                className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary rounded mt-2`}
-              >
-                verified merchant
-              </p>
+              {data.sellerInfo?.badgeTitle && (
+                <p
+                  className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                >
+                  {data.sellerInfo.badgeTitle}
+                </p>
+              )}
             </div>
           ) : null}
         </div>

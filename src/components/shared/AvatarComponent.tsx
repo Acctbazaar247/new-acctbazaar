@@ -41,12 +41,19 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
 
           {user?.isVerifiedByAdmin && (
             <div className="flex items-center gap-1">
-              <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
-              {!onlyBatch && (
+              {user?.badge && (
+                <RiVerifiedBadgeFill
+                  className={`2xl:text-lg bg-background rounded-full ${
+                    (user?.badge == "blue" && "text-success") ||
+                    (user?.badge == "gold" && "text-amber-400")
+                  }`}
+                />
+              )}
+              {!onlyBatch && user?.badgeTitle && (
                 <p
                   className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                 >
-                  verified merchant
+                  {user.badgeTitle}
                 </p>
               )}
             </div>

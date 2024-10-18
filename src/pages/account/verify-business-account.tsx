@@ -1,4 +1,6 @@
+import { KycImageUpload } from "@/components/kyc/KycImageUpload";
 import AttentionAlert from "@/components/shared/AttentionAlert";
+import AppButton from "@/components/ui/AppButton";
 import AppFormDatePicker from "@/components/ui/AppFormDatePicker";
 import AppFormInput from "@/components/ui/AppFormInput";
 import AppFormSelect from "@/components/ui/AppFormSelect";
@@ -7,37 +9,33 @@ import AppPhoneInput from "@/components/ui/AppPhoneInput";
 import HomeLayout from "@/layout/HomeLayout";
 import SellerLayout from "@/layout/SellerLayout";
 import {
-  useGetSingleUserKycQuery,
-  useMakeKycRequestMutation,
-  useUpdateKycRequestMutation,
-} from "@/redux/features/kyc/kycApi";
-import { useUploadImageMutation } from "@/redux/features/user/userApi";
+  useGetSingleUserBusinessKycQuery,
+  useMakeBusinessKycRequestMutation,
+  useUpdateBusinessKycRequestMutation,
+} from "@/redux/features/businesskyc/businesskycApi";
 import { useAppSelector } from "@/redux/hook";
 import {
-  IGenericErrorMessage,
   ResponseErrorType,
   ResponseSuccessType,
   TBusinessKyc,
-  TKyc,
 } from "@/types/common";
-import { City, Country, State } from "country-state-city";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { CgFileAdd } from "react-icons/cg";
+import { useEffect, useState } from "react";
+import { set, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { RxCrossCircled } from "react-icons/rx";
 import { toast } from "react-toastify";
 
 const VerifyBusinessAccount = () => {
   const router = useRouter();
   const user = useAppSelector((state) => state.user.user);
 
-  const [addKycRequest, { isLoading }] = useMakeKycRequestMutation();
-  const [uploadImage, { isLoading: imageLoading }] = useUploadImageMutation();
+  const [addBusinessKycRequest, { isLoading }] =
+    useMakeBusinessKycRequestMutation();
+
   const [updateKyc, { isLoading: updateLoading }] =
-    useUpdateKycRequestMutation();
-  const { data, refetch } = useGetSingleUserKycQuery("");
+    useUpdateBusinessKycRequestMutation();
+  const { data, refetch } = useGetSingleUserBusinessKycQuery("");
 
   const [kycPending, setKycPending] = useState(false);
   const [kycDenied, setKycDenied] = useState(false);
@@ -53,63 +51,71 @@ const VerifyBusinessAccount = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useForm<TBusinessKyc>();
+  } = useForm<TBusinessKyc>({
+    defaultValues: {
+      beneficialOwner: [
+        {
+          fullName: "",
+          ownershipPercentage: "",
+          address: "",
+          dateOfBirth: "",
+          identificationDocument: "",
+        },
+      ],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "beneficialOwner",
+  });
+
+  const handleAppend = () => {
+    append({
+      fullName: "",
+      ownershipPercentage: "",
+      address: "",
+      dateOfBirth: "",
+      identificationDocument: "",
+    });
+  };
 
   const onSubmit: SubmitHandler<TBusinessKyc> = async (data) => {
-    if (!identityImage) {
-      return toast.error("Please upload your identity image and try again", {
-        toastId: 1,
-      });
-    }
-
     const submittedData = {
       id: user?.id,
       ...data,
       identityImage,
-      ...(kycDenied && { status: "pending", messageByAdmin: "" }),
+      status: "isOptional",
     };
-    console.log(
-      "🚀 ~ constonSubmit:SubmitHandler<TBusinessKyc>= ~ submittedData:",
-      submittedData
-    );
 
-    // if (!kycDenied) {
-    //   // console.log(submittedData);
-    //   await addKycRequest(submittedData)
-    //     .unwrap()
-    //     .then((res: ResponseErrorType | ResponseSuccessType) => {
-    //       toast.success("KYC request send successfully!", { toastId: 1 });
-    //       setModalOpen(true);
-    //     })
-    //     .catch((res: ResponseErrorType | ResponseSuccessType) => {
-    //       toast.error(res?.data?.message || "Something went wrong", {
-    //         toastId: 1,
-    //       });
-    //     });
-    // } else if (kycDenied) {
-    //   await updateKyc(submittedData)
-    //     .unwrap()
-    //     .then((res: ResponseErrorType | ResponseSuccessType) => {
-    //       toast.success("KYC request updated successfully!", { toastId: 1 });
-    //       setModalOpen(true);
-    //       setKycDenied(false);
-    //     })
-    //     .catch((res: ResponseErrorType | ResponseSuccessType) => {
-    //       toast.error(res?.data?.message || "Something went wrong", {
-    //         toastId: 1,
-    //       });
-    //     });
-    // }
+    if (!kycDenied) {
+      // console.log(submittedData);
+      await addBusinessKycRequest(submittedData)
+        .unwrap()
+        .then((res) => {
+          toast.success("KYC request send successfully!", { toastId: 1 });
+          setModalOpen(true);
+        })
+        .catch((res) => {
+          toast.error(res?.data?.message || "Something went wrong", {
+            toastId: 1,
+          });
+        });
+    } else if (kycDenied) {
+      await updateKyc(submittedData)
+        .unwrap()
+        .then((res: ResponseErrorType | ResponseSuccessType) => {
+          toast.success("KYC request updated successfully!", { toastId: 1 });
+          setModalOpen(true);
+          setKycDenied(false);
+        })
+        .catch((res: ResponseErrorType | ResponseSuccessType) => {
+          toast.error(res?.data?.message || "Something went wrong", {
+            toastId: 1,
+          });
+        });
+    }
   };
-
-  const countryOptions = useMemo(
-    () =>
-      Country.getAllCountries().map((country) => ({
-        value: country.isoCode,
-        label: country.name,
-      })),
-    []
-  );
 
   const handleModal = () => {
     setModalOpen(false);
@@ -117,52 +123,12 @@ const VerifyBusinessAccount = () => {
     refetch();
   };
 
-  const handleFileUpload = async (value: any) => {
-    setLoading(true);
-    const formData = new FormData();
-    const maxSizeInBytes = 2 * 1024 * 1024;
-
-    if (value?.size && value?.size > maxSizeInBytes) {
-      setLoading(false);
-      return toast.error("Your file was more than 2 Megabyte!", { toastId: 1 });
-    }
-
-    formData.append("image", value);
-    await uploadImage(formData)
-      .unwrap()
-      .then((res) => {
-        if (!res.success) {
-          toast.error(res?.message || "Something went wrong", { toastId: 1 });
-          setLoading(false);
-        }
-        toast.success("File upload successfully!", { toastId: 1 });
-        setIdentityImage(res?.data?.url);
-        setLoading(false);
-      })
-      .catch((res: IGenericErrorMessage) => {
-        toast.error(res?.message || "Something went wrong", { toastId: 1 });
-        setLoading(false);
-      });
-  };
-
   const businessType = [
-    { value: "Sole Proprietorship", label: "Sole Proprietorship" },
-    { value: "Partnership", label: "Partnership" },
-    { value: "Corporation", label: "Corporation" },
-    { value: "LLC", label: "LLC" },
-  ];
-
-  const IndustryOptions = [
-    { value: "Sole Proprietorship", label: "Sole Proprietorship" },
-    { value: "Partnership", label: "Partnership" },
-    { value: "Corporation", label: "Corporation" },
-    { value: "LLC", label: "LLC" },
-  ];
-
-  const meansOfIdentificationOptions = [
-    { value: "PASSPORT", label: "PASSPORT" },
-    { value: "DRIVER_LICENSE", label: "Driver LICENSE" },
-    { value: "NATIONAL_ID", label: "NATIONAL ID (NIN)" },
+    { value: "soleProprietorship", label: "Sole Proprietorship" },
+    { value: "partnership", label: "Partnership" },
+    { value: "corporation", label: "Corporation" },
+    { value: "llc", label: "LLC" },
+    { value: "others", label: "Others" },
   ];
 
   useEffect(() => {
@@ -178,10 +144,32 @@ const VerifyBusinessAccount = () => {
       }
       setDenyMessage(data?.data?.messageByAdmin);
       setValue("businessName", data?.data?.businessName);
+      setValue("businessRegistration", data?.data?.businessRegistration);
+      setValue("industry", data?.data?.industry);
+      setValue("businessWebsite", data?.data?.businessWebsite);
+      setValue("businessType", data?.data?.businessType);
       setValue("phoneNumber", data?.data?.phoneNumber || user?.phoneNumber);
       setValue("businessAddress", data?.data?.businessAddress);
+      setValue("primaryContactPerson", data?.data?.primaryContactPerson);
+      setValue("positionOrTitle", data?.data?.positionOrTitle);
+      setValue("emailAddress", data?.data?.emailAddress);
+      setValue("bankAccountNumber", data?.data?.bankAccountNumber);
+      setValue("bankName", data?.data?.bankName);
+      setValue("taxIdentificationNumber", data?.data?.taxIdentificationNumber);
+      setValue(
+        "businessRegistrationDocument",
+        data?.data?.businessRegistrationDocument
+      );
+      setValue("proofOfAddress", data?.data?.proofOfAddress);
+      setValue("financialStatements", data?.data?.financialStatements);
+      setValue(
+        "CertificateOfIncorporation",
+        data?.data?.CertificateOfIncorporation
+      );
+      setValue("beneficialOwner", data?.data?.beneficialOwner);
       setIdentityImage(data?.data?.identityImage);
     }
+    console.log(data?.data?.beneficialOwner);
   }, [data, kycPending, router, setValue, user]);
 
   return (
@@ -220,6 +208,7 @@ const VerifyBusinessAccount = () => {
                       type="text"
                       required
                       register={register}
+                      error={errors?.businessName}
                       // defaultValue={user?.name}
                       // readOnly={user?.businessName}
                     />
@@ -237,16 +226,17 @@ const VerifyBusinessAccount = () => {
                       control={control}
                       placeholder="Business Type"
                       name="businessType"
-                      required={true}
+                      required
                       options={businessType}
                     />
 
-                    <AppFormSelect
-                      control={control}
-                      placeholder="Industry"
+                    <AppFormInput
+                      label="Industry"
                       name="industry"
-                      required={true}
-                      options={IndustryOptions}
+                      type="text"
+                      register={register}
+                      required
+                      error={errors?.businessAddress}
                     />
 
                     <AppFormInput
@@ -262,15 +252,13 @@ const VerifyBusinessAccount = () => {
                       label="Business Website"
                       name="businessWebsite"
                       type="text"
+                      required
                       register={register}
                       error={errors?.businessWebsite}
-                      required
                     />
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
-
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
@@ -279,6 +267,7 @@ const VerifyBusinessAccount = () => {
                       Add your current home address.
                     </p>
                   </div>
+
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
                     <AppFormInput
@@ -304,7 +293,7 @@ const VerifyBusinessAccount = () => {
                     <AppFormInput
                       label="Email Address"
                       name="emailAddress"
-                      type="text"
+                      type="email"
                       required
                       placeholder="Type your email here"
                       register={register}
@@ -320,9 +309,7 @@ const VerifyBusinessAccount = () => {
                     />
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
-
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
@@ -331,103 +318,87 @@ const VerifyBusinessAccount = () => {
                       Kindly provide your correct means of ID.
                     </p>
                   </div>
+
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
-                    {/* <AppFormSelect
-                      control={control}
-                      placeholder="Means of Identification"
-                      name="meansOfIdentification"
-                      required={true}
-                      options={meansOfIdentificationOptions}
-                    /> */}
+                    {fields.map((owner, index) => (
+                      <div key={owner.id} className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <p className="text-textBlueBlack font-semibold">
+                            Beneficial Owner person: {index > 8 ? "" : "0"}
+                            {index + 1}
+                          </p>
+                          <button
+                            onClick={() => remove(index)}
+                            className="text-textBlueBlack text-2xl cursor-pointer hover:text-primary"
+                          >
+                            <RxCrossCircled />
+                          </button>
+                        </div>
 
-                    <AppFormInput
-                      label="Beneficial Owners"
-                      name="beneficialOwner"
-                      type="text"
-                      required
-                      placeholder="Type your address here"
-                      register={register}
-                      error={errors?.beneficialOwner}
-                    />
+                        <AppFormInput
+                          label={`Beneficial Owner`}
+                          name={`beneficialOwner[${index}].fullName`}
+                          type="text"
+                          required
+                          placeholder="Full Name"
+                          defaultValue={owner.fullName}
+                          register={register}
+                          error={errors?.beneficialOwner?.[index]?.fullName}
+                        />
 
-                    <AppFormInput
-                      label="Ownership Percentage"
-                      name="ownershipPercentage"
-                      type="number"
-                      required
-                      placeholder="Type your address here"
-                      register={register}
-                      // error={errors?.ownershipPercentage}
-                    />
+                        <AppFormInput
+                          label="Ownership Percentage"
+                          name={`beneficialOwner[${index}].ownershipPercentage`}
+                          type="text"
+                          required
+                          placeholder="Ownership Percentage"
+                          defaultValue={owner.ownershipPercentage}
+                          register={register}
+                          error={
+                            errors?.beneficialOwner?.[index]
+                              ?.ownershipPercentage
+                          }
+                        />
 
-                    <AppFormInput
-                      label="User address"
-                      name="proofOfAddress"
-                      type="text"
-                      required
-                      placeholder="Type your address here"
-                      register={register}
-                      error={errors?.proofOfAddress}
-                    />
+                        <AppFormInput
+                          label="Address"
+                          name={`beneficialOwner[${index}].address`}
+                          type="text"
+                          required
+                          placeholder="Address"
+                          defaultValue={owner.address}
+                          register={register}
+                          error={errors?.beneficialOwner?.[index]?.address}
+                        />
 
-                    <AppFormDatePicker
-                      control={control}
-                      name="dateOfBirth"
-                      label="Date Of Birth"
-                      placeholder="Date of birth (DD/MM/YY)"
-                    />
+                        <AppFormDatePicker
+                          control={control}
+                          name={`beneficialOwner[${index}].dateOfBirth`}
+                          defaultValue={owner.dateOfBirth}
+                          placeholder="Date of Birth"
+                        />
 
-                    <div className="">
-                      <input
-                        onChange={(e) =>
-                          handleFileUpload(e.target.files && e.target.files[0])
-                        }
-                        type="file"
-                        id="file"
-                        className="hidden"
-                        accept="image/*"
+                        <KycImageUpload
+                          control={control}
+                          name={`beneficialOwner[${index}].identificationDocument`}
+                          required
+                          placeholder="Identification Document"
+                        />
+                      </div>
+                    ))}
+                    <div className="flex justify-center">
+                      <AppButton
+                        label="Add Beneficial Owner"
+                        type="button"
+                        onClick={handleAppend}
+                        size="small"
+                        variant="outline"
                       />
-                      <label
-                        htmlFor="file"
-                        className="cursor-pointer border border-borderColor rounded hover:bg-zinc/20 border-dashed flex items-center gap-1 justify-between"
-                      >
-                        {loading || imageLoading ? (
-                          <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
-                        ) : (
-                          <>
-                            {identityImage === "" ||
-                            identityImage === undefined ? (
-                              <div className="flex items-center justify-between p-3 w-full">
-                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm">
-                                  <CgFileAdd />
-                                  Upload Valid Identity Document
-                                </h2>
-                                <p className="text-primary text-xs font-medium">
-                                  Select File
-                                </p>
-                              </div>
-                            ) : (
-                              <Image
-                                width={600}
-                                height={200}
-                                src={identityImage}
-                                alt="identity image"
-                                className="w-full rounded min-h-40 max-h-44 object-cover"
-                              />
-                            )}
-                          </>
-                        )}
-                      </label>
-                      <h2 className="text-darkishGrey pt-1 text-xs">
-                        JPEG, PNG, PDF. Max file size: 2mb
-                      </h2>
                     </div>
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
-
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
@@ -441,7 +412,7 @@ const VerifyBusinessAccount = () => {
                     <AppFormInput
                       label="Bank Account Number"
                       name="bankAccountNumber"
-                      type="number"
+                      type="text"
                       required
                       placeholder="Type your bank Account Number here"
                       register={register}
@@ -450,7 +421,7 @@ const VerifyBusinessAccount = () => {
                     <AppFormInput
                       label="Bank Name"
                       name="bankName"
-                      type="number"
+                      type="text"
                       required
                       placeholder="Type your Bank Name here"
                       register={register}
@@ -459,7 +430,7 @@ const VerifyBusinessAccount = () => {
                     <AppFormInput
                       label="Tax Identification Number"
                       name="taxIdentificationNumber"
-                      type="number"
+                      type="text"
                       required
                       placeholder="Type your Tax Identification Number here"
                       register={register}
@@ -467,9 +438,7 @@ const VerifyBusinessAccount = () => {
                     />
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
-
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
@@ -478,207 +447,41 @@ const VerifyBusinessAccount = () => {
                       Add your current home address.
                     </p>
                   </div>
+
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
-                    <div className="">
-                      <input
-                        onChange={(e) =>
-                          handleFileUpload(e.target.files && e.target.files[0])
-                        }
-                        type="file"
-                        id="file"
-                        className="hidden"
-                        accept="image/*"
-                      />
-                      <label
-                        htmlFor="file"
-                        className="cursor-pointer border border-borderColor rounded hover:bg-zinc/20 border-dashed flex items-center gap-1 justify-between"
-                      >
-                        {loading || imageLoading ? (
-                          <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
-                        ) : (
-                          <>
-                            {identityImage === "" ||
-                            identityImage === undefined ? (
-                              <div className="flex items-center justify-between p-3 w-full">
-                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm">
-                                  <CgFileAdd />
-                                  Upload Valid Identity Document
-                                </h2>
-                                <p className="text-primary text-xs font-medium">
-                                  Select File
-                                </p>
-                              </div>
-                            ) : (
-                              <Image
-                                width={600}
-                                height={200}
-                                src={identityImage}
-                                alt="identity image"
-                                className="w-full rounded min-h-40 max-h-44 object-cover"
-                              />
-                            )}
-                          </>
-                        )}
-                      </label>
-                      <h2 className="text-darkishGrey pt-1 text-xs">
-                        JPEG, PNG, PDF. Max file size: 2mb
-                      </h2>
-                    </div>
-                    <div className="">
-                      <input
-                        onChange={(e) =>
-                          handleFileUpload(e.target.files && e.target.files[0])
-                        }
-                        type="file"
-                        id="file"
-                        className="hidden"
-                        accept="image/*"
-                      />
-                      <label
-                        htmlFor="file"
-                        className="cursor-pointer border border-borderColor rounded hover:bg-zinc/20 border-dashed flex items-center gap-1 justify-between"
-                      >
-                        {loading || imageLoading ? (
-                          <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
-                        ) : (
-                          <>
-                            {identityImage === "" ||
-                            identityImage === undefined ? (
-                              <div className="flex items-center justify-between p-3 w-full">
-                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm">
-                                  <CgFileAdd />
-                                  Upload Valid Identity Document
-                                </h2>
-                                <p className="text-primary text-xs font-medium">
-                                  Select File
-                                </p>
-                              </div>
-                            ) : (
-                              <Image
-                                width={600}
-                                height={200}
-                                src={identityImage}
-                                alt="identity image"
-                                className="w-full rounded min-h-40 max-h-44 object-cover"
-                              />
-                            )}
-                          </>
-                        )}
-                      </label>
-                      <h2 className="text-darkishGrey pt-1 text-xs">
-                        JPEG, PNG, PDF. Max file size: 2mb
-                      </h2>
-                    </div>
-                    <div className="">
-                      <input
-                        onChange={(e) =>
-                          handleFileUpload(e.target.files && e.target.files[0])
-                        }
-                        type="file"
-                        id="file"
-                        className="hidden"
-                        accept="image/*"
-                      />
-                      <label
-                        htmlFor="file"
-                        className="cursor-pointer border border-borderColor rounded hover:bg-zinc/20 border-dashed flex items-center gap-1 justify-between"
-                      >
-                        {loading || imageLoading ? (
-                          <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
-                        ) : (
-                          <>
-                            {identityImage === "" ||
-                            identityImage === undefined ? (
-                              <div className="flex items-center justify-between p-3 w-full">
-                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm">
-                                  <CgFileAdd />
-                                  Upload Valid Identity Document
-                                </h2>
-                                <p className="text-primary text-xs font-medium">
-                                  Select File
-                                </p>
-                              </div>
-                            ) : (
-                              <Image
-                                width={600}
-                                height={200}
-                                src={identityImage}
-                                alt="identity image"
-                                className="w-full rounded min-h-40 max-h-44 object-cover"
-                              />
-                            )}
-                          </>
-                        )}
-                      </label>
-                      <h2 className="text-darkishGrey pt-1 text-xs">
-                        JPEG, PNG, PDF. Max file size: 2mb
-                      </h2>
-                    </div>
-                    <div className="">
-                      <input
-                        onChange={(e) =>
-                          handleFileUpload(e.target.files && e.target.files[0])
-                        }
-                        type="file"
-                        id="file"
-                        className="hidden"
-                        accept="image/*"
-                      />
-                      <label
-                        htmlFor="file"
-                        className="cursor-pointer border border-borderColor rounded hover:bg-zinc/20 border-dashed flex items-center gap-1 justify-between"
-                      >
-                        {loading || imageLoading ? (
-                          <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
-                        ) : (
-                          <>
-                            {identityImage === "" ||
-                            identityImage === undefined ? (
-                              <div className="flex items-center justify-between p-3 w-full">
-                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm">
-                                  <CgFileAdd />
-                                  Upload Valid Identity Document
-                                </h2>
-                                <p className="text-primary text-xs font-medium">
-                                  Select File
-                                </p>
-                              </div>
-                            ) : (
-                              <Image
-                                width={600}
-                                height={200}
-                                src={identityImage}
-                                alt="identity image"
-                                className="w-full rounded min-h-40 max-h-44 object-cover"
-                              />
-                            )}
-                          </>
-                        )}
-                      </label>
-                      <h2 className="text-darkishGrey pt-1 text-xs">
-                        JPEG, PNG, PDF. Max file size: 2mb
-                      </h2>
-                    </div>
+                    <KycImageUpload
+                      name="businessRegistrationDocument"
+                      control={control}
+                      required
+                      placeholder="Upload Business Registration Document"
+                    />
+
+                    <KycImageUpload
+                      name="proofOfAddress"
+                      control={control}
+                      required
+                      placeholder="Upload Proof of Address Document"
+                    />
+
+                    <KycImageUpload
+                      name="financialStatements"
+                      control={control}
+                      placeholder="Upload Valid Financial Statements Document"
+                    />
+
+                    <KycImageUpload
+                      name="CertificateOfIncorporation"
+                      control={control}
+                      placeholder="Upload Certificate of Incorporation Document"
+                      required
+                    />
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
+                asdfasdf
                 {!kycPending && (
                   <div className="flex items-center justify-end">
-                    {/* {isLoading || loading || updateLoading ? (
-                                            <button
-                                                type="button"
-                                                className="appBtn px-14 flex items-center justify-center"
-                                            >
-                                                <AiOutlineLoading3Quarters className="animate-spin text-white text-2xl" />
-                                            </button>
-                                        ) : (
-                                            <button type="submit" className="appBtn">
-                                                Save & Proceed
-                                            </button>
-                                        )} */}
-
                     <button
                       disabled={isLoading || loading || updateLoading}
                       type="submit"
@@ -711,9 +514,7 @@ const VerifyBusinessAccount = () => {
                     </AppModal>
                   </div>
                 )}
-
                 {kycPending && <AttentionAlert />}
-
                 {kycDenied && (
                   <AttentionAlert
                     kycDenied={kycDenied}

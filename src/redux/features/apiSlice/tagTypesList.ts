@@ -7,6 +7,7 @@ export enum tagTypes {
   order = "order",
   withdraw = "withdraw",
   kyc = "kyc",
+  businessKyc = "businessKyc",
   referral = "referral",
   plan = "plan",
   Review = "Review",

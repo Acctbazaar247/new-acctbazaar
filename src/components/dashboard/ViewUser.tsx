@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IUser } from "../../types/common";
 import { City, Country, State } from "country-state-city";
+import Image from "next/image";
 
 type TEditUserProps = {
   record: IUser | any;
@@ -73,10 +74,12 @@ const ViewUser = ({ record }: TEditUserProps) => {
   return (
     <div className="w-[560px] space-y-5 p-4 ">
       <div className="flex items-center justify-center py-3">
-        <img
+        <Image
           src={record?.ownBy?.profileImg || ""}
           alt={record?.ownBy?.name}
           className="w-[120px] 2xl:w-[150px] h-[120px] 2xl:h-[150px] rounded-full bg-gray-200"
+          width={150}
+          height={150}
         />
       </div>
 
@@ -93,10 +96,12 @@ const ViewUser = ({ record }: TEditUserProps) => {
               This is a pdf file : {record?.identityImage}
             </span>
           ) : (
-            <img
+            <Image
               src={record?.identityImage}
               alt="identity image"
               className="w-full rounded min-h-24 max-h-44 object-cover"
+              width={180}
+              height={180}
             />
           )}
         </Link>

@@ -116,7 +116,7 @@ const AccountCard = (props: Props) => {
                   className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-yellowShadow`}
                 >
                   <GoDotFill />
-                  verified merchant
+                  {ownBy?.badgeTitle}
                 </p>
               )}
             </div>

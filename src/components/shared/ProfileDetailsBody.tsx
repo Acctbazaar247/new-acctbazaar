@@ -16,6 +16,7 @@ import {
   popupNavbarLinks,
   prAdminPopUpLinks,
 } from "./NavbarData";
+import { useGetSingleUserBusinessKycQuery } from "@/redux/features/businesskyc/businesskycApi";
 
 type ProfileDetailsBody = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -23,9 +24,9 @@ type ProfileDetailsBody = {
 
 const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
   const user = useAppSelector((state) => state.user.user);
+  console.log("🚀 ~ ProfileDetailsBody ~ user:", user);
   const dispatch = useAppDispatch();
   const [modalOpen, setModalOpen] = useState(false);
-
   const router = useRouter();
 
   const handleModal = (value: string) => {
@@ -68,53 +69,6 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
 
   return (
     <>
-      {modalOpen && (
-        <AppModal
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          closeable={false}
-          title="Become Verified"
-        >
-          <div className="md:w-[450px] text-center pt-4">
-            <Image
-              width={200}
-              height={160}
-              src="/assets/icons/verification-keyc.png"
-              alt=""
-              className="mx-auto size-28 mb-4"
-            />
-            <h2 className="subTitle pb-1">Complete your KYC Verification</h2>
-            <p className="textG">
-              Verify your Identity with us. This gives you more edge a merchant.
-              Buyers trust Merchant with verified account than not.
-            </p>
-            <div className="flex items-center justify-center flex-col gap-2">
-              <div className="flex mt-8 items-center justify-center gap-4">
-                <button
-                  onClick={() => handleModal("go")}
-                  className="appBtn px-6 text-sm"
-                >
-                  Begin KYC Verification
-                </button>
-                <button
-                  onClick={() => handleModal("business")}
-                  className="appBtn  px-6 text-sm"
-                >
-                  Business KYC Verification
-                </button>
-              </div>
-              <button
-                onClick={() => handleModal("close")}
-                className="text-textBlack hover:text-primary"
-              >
-                I’ll do this later
-              </button>
-            </div>
-          </div>
-        </AppModal>
-      )}
-
-      {/* this is main component  */}
       <div>
         <div className="border-b border-b-borderLight pb-2 pl-2 pt-2">
           <div className=" hidden md:flex flex-col md:flex-row items-center justify-between gap-2 md:gap-10 pb-1">
@@ -122,23 +76,35 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
                 <div className="flex items-center gap-1">
-                  <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
-                  <p
-                    className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
-                  >
-                    verified merchant
-                  </p>
+                  {user?.badge && (
+                    <RiVerifiedBadgeFill
+                      className={`2xl:text-lg bg-background rounded-full ${
+                        (user?.badge == "blue" && "text-success") ||
+                        (user?.badge == "gold" && "text-amber-400")
+                      }`}
+                    />
+                  )}
+                  {user?.badgeTitle && (
+                    <p
+                      className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                    >
+                      {user?.badgeTitle}
+                    </p>
+                  )}
                 </div>
               )}
             </h4>
-            {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
-              <button
-                onClick={openModal}
-                className="appOutlineBtnSm py-1 px-2 text-xs rounded hidden md:block"
-              >
-                Become Verified
-              </button>
-            )}
+            {user?.role === UserRole.Seller &&
+              (!user?.isVerifiedByAdmin ||
+                !user?.isVerifiedByAdmin ||
+                !user?.isBusinessVerified) && (
+                <button
+                  onClick={openModal}
+                  className="appOutlineBtnSm py-1 px-2 text-xs rounded hidden md:block"
+                >
+                  Become Verified
+                </button>
+              )}
           </div>
 
           <p className="textG hidden md:block">{user?.email}</p>
@@ -151,12 +117,21 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   {user?.role === UserRole.Seller &&
                     user?.isVerifiedByAdmin && (
                       <div className="flex items-center gap-1">
-                        <RiVerifiedBadgeFill className="text-success 2xl:text-lg bg-background rounded-full " />
-                        <p
-                          className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] leading-4 md:leading-3 md:text-xs text-primary bg-primary/5 border border-primary h-fit py-0`}
-                        >
-                          verified merchant
-                        </p>
+                        {user?.badge && (
+                          <RiVerifiedBadgeFill
+                            className={`2xl:text-lg bg-background rounded-full ${
+                              (user?.badge == "blue" && "text-success") ||
+                              (user?.badge == "gold" && "text-amber-400")
+                            }`}
+                          />
+                        )}
+                        {user?.badgeTitle && (
+                          <p
+                            className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                          >
+                            {user.badgeTitle}
+                          </p>
+                        )}
                       </div>
                     )}
                 </h4>
@@ -207,6 +182,54 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
           </Link>
         </div>
       </div>
+
+      {modalOpen && (
+        <AppModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          closeable={false}
+          title="Become Verified"
+        >
+          <div className="md:w-[450px] text-center pt-4">
+            <Image
+              width={200}
+              height={160}
+              src="/assets/icons/verification-keyc.png"
+              alt=""
+              className="mx-auto size-28 mb-4"
+            />
+            <h2 className="subTitle pb-1">Complete your KYC Verification</h2>
+            <p className="textG">
+              Verify your Identity with us. This gives you more edge a merchant.
+              Buyers trust Merchant with verified account than not.
+            </p>
+            <div className="flex items-center justify-center flex-col gap-2">
+              <div className="flex mt-8 items-center justify-center gap-4">
+                {!user?.isVerifiedByAdmin && (
+                  <button
+                    onClick={() => handleModal("go")}
+                    className="appBtn px-6 text-sm"
+                  >
+                    Begin KYC Verification
+                  </button>
+                )}
+                <button
+                  onClick={() => handleModal("business")}
+                  className="appBtn  px-6 text-sm"
+                >
+                  Business KYC Verification
+                </button>
+              </div>
+              <button
+                onClick={() => handleModal("close")}
+                className="text-textBlack hover:text-primary"
+              >
+                I’ll do this later
+              </button>
+            </div>
+          </div>
+        </AppModal>
+      )}
     </>
   );
 };

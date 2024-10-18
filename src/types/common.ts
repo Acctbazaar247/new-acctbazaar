@@ -46,6 +46,8 @@ export interface IUser {
   email: string;
   password: string;
   role: UserRole;
+  badge: string;
+  badgeTitle: string;
   phoneNumber?: string;
   address?: string;
   state: string;
@@ -55,6 +57,7 @@ export interface IUser {
   txId?: string;
   isVerified?: Boolean;
   isApprovedForSeller?: Boolean;
+  isBusinessVerified: Boolean;
   isBlocked?: Boolean;
   shouldSendEmail?: Boolean;
   isVerifiedByAdmin: boolean;
@@ -94,14 +97,26 @@ type BeneficialOwner = {
   identificationDocument: string;
 };
 
+export enum EBadge {
+  blue = "blue",
+  gold = "gold",
+  noBadge = "noBadge",
+}
+
+export enum EBadgeTitle {
+  verifiedMerchant = "verifiedMerchant",
+  verifiedBusiness = "verifiedBusiness",
+  noBadgeTitle = "noBadgeTitle",
+}
+
 export type TBusinessKyc = {
   businessName: string;
   businessRegistration: string;
   businessType: string;
-  industry: string;
-  businessAddress: string;
-  primaryContactPerson: string;
   businessWebsite: string;
+  businessAddress: string;
+  industry: string;
+  primaryContactPerson: string;
   positionOrTitle: string;
   emailAddress: string;
   phoneNumber: string;
@@ -109,13 +124,15 @@ export type TBusinessKyc = {
   bankAccountNumber: string;
   bankName: string;
   taxIdentificationNumber: string;
+
   businessRegistrationDocument: string;
   CertificateOfIncorporation: string;
   proofOfAddress: string;
   financialStatements: string;
+
   status: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export interface IAllCategoryOfPcService {
@@ -539,7 +556,14 @@ export type TSellerProfileInfo = {
   totalReviews: number;
   sellerInfo: Pick<
     IUser,
-    "name" | "id" | "profileImg" | "isVerifiedByAdmin" | "country" | "createdAt"
+    | "name"
+    | "id"
+    | "profileImg"
+    | "isVerifiedByAdmin"
+    | "country"
+    | "createdAt"
+    | "badge"
+    | "badgeTitle"
   >;
 };
 
