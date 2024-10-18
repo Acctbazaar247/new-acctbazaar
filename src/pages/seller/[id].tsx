@@ -1,3 +1,4 @@
+import ReviewCard from "@/components/Seller/ReviewCard";
 import SellerProfileViewComponent from "@/components/Seller/SellerProfileViewComponent";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import AccountLoading from "@/components/shared/AccountLoading";
@@ -9,14 +10,19 @@ import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
+import { setSellerTabShow } from "@/redux/features/account/accountSlice";
 import { useGetReviewsQuery } from "@/redux/features/review/reviewApi";
 import { useGetSellerProfileByIdQuery } from "@/redux/features/user/userApi";
-import { EApprovedForSale, IAccount } from "@/types/common";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { EApprovedForSale, IAccount, IReview } from "@/types/common";
 import { Pagination } from "antd";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
+import { IoArrowUndoCircleOutline } from "react-icons/io5";
 
 const SellerDetailsPage = () => {
+  const dispatch = useAppDispatch();
+  const sellerTabShow = useAppSelector((state) => state.account.sellerTabShow);
   const tabs = [
     { value: "Ads", label: "Ads" },
     // { value: "Reviews", label: "Reviews" },
@@ -124,15 +130,25 @@ const SellerDetailsPage = () => {
               </div>
               <div className="hidden md:block border border-whiteGrey"></div>
               <div className=" md:w-[68%] min-h-full bg-background  rounded-lg  p-2 md:p-4">
-                <AppTabs
+                {/* <AppTabs
                   tabs={window.innerWidth > 1280 ? tabs : mobileTabs}
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
-                />
-                {activeTab === "Info" && (
+                /> */}
+
+                {/* {activeTab === "Info" && (
                   <SellerProfileViewComponent data={data.data} />
-                )}
-                {activeTab === "Ads" && (
+                )} */}
+                <span className="capitalize flex items-center gap-1 text-primary font-medium">
+                  {sellerTabShow === "reviews" && (
+                    <IoArrowUndoCircleOutline
+                      onClick={() => dispatch(setSellerTabShow("Ads"))}
+                      className="text-lg cursor-pointer"
+                    />
+                  )}
+                  {sellerTabShow}
+                </span>
+                {sellerTabShow === "Ads" && (
                   <div className="max-h-[calc(100dvh-205px)] md:max-h-[67.8dvh] overflow-auto">
                     <AppRenderReduxData
                       queryData={queryData}
@@ -170,30 +186,33 @@ const SellerDetailsPage = () => {
                   </div>
                 )}
 
-                {/* {activeTab === "Reviews" && (
+                {sellerTabShow === "reviews" && (
                   <div className="max-h-[67.8dvh] overflow-auto">
                     <div className="flex items-center gap-4 text-sm py-4">
                       <button
                         onClick={() => setActiveReviewTab("All")}
                         className={`${
-                          activeReviewTab === "All" && "border"
-                        } px-2 py-1 rounded hover:bg-gray-100`}
+                          activeReviewTab === "All" &&
+                          "border border-borderColor bg-zinc/20"
+                        } px-2 py-1 rounded hover:bg-zinc/20`}
                       >
                         All( {data?.data?.totalReviews} )
                       </button>
                       <button
                         onClick={() => setActiveReviewTab("Positive")}
                         className={`${
-                          activeReviewTab === "Positive" && "border"
-                        } px-2 py-1 rounded hover:bg-gray-100`}
+                          activeReviewTab === "Positive" &&
+                          "border border-borderColor bg-zinc/20"
+                        } px-2 py-1 rounded hover:bg-zinc/20`}
                       >
                         Positive({data?.data?.totalPositiveReviews})
                       </button>
                       <button
                         onClick={() => setActiveReviewTab("Negative")}
                         className={`${
-                          activeReviewTab === "Negative" && "border"
-                        } px-2 py-1 rounded hover:bg-gray-100`}
+                          activeReviewTab === "Negative" &&
+                          "border border-borderColor bg-zinc/20"
+                        } px-2 py-1 rounded hover:bg-zinc/20`}
                       >
                         Negative({data?.data?.totalNegativeReviews})
                       </button>
@@ -230,7 +249,7 @@ const SellerDetailsPage = () => {
                       }}
                     />
                   </div>
-                )} */}
+                )}
               </div>
             </div>
           </div>

@@ -1,4 +1,6 @@
+import { KycImageUpload } from "@/components/kyc/KycImageUpload";
 import AttentionAlert from "@/components/shared/AttentionAlert";
+import AppButton from "@/components/ui/AppButton";
 import AppFormDatePicker from "@/components/ui/AppFormDatePicker";
 import AppFormInput from "@/components/ui/AppFormInput";
 import AppFormSelect from "@/components/ui/AppFormSelect";
@@ -7,42 +9,40 @@ import AppPhoneInput from "@/components/ui/AppPhoneInput";
 import HomeLayout from "@/layout/HomeLayout";
 import SellerLayout from "@/layout/SellerLayout";
 import {
-  useGetSingleUserKycQuery,
-  useMakeKycRequestMutation,
-  useUpdateKycRequestMutation,
-} from "@/redux/features/kyc/kycApi";
-import { useUploadImageMutation } from "@/redux/features/user/userApi";
+  useGetSingleUserBusinessKycQuery,
+  useMakeBusinessKycRequestMutation,
+  useUpdateBusinessKycRequestMutation,
+} from "@/redux/features/businesskyc/businesskycApi";
 import { useAppSelector } from "@/redux/hook";
 import {
-  IGenericErrorMessage,
   ResponseErrorType,
   ResponseSuccessType,
   TBusinessKyc,
-  TKyc,
 } from "@/types/common";
-import { City, Country, State } from "country-state-city";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { CgFileAdd } from "react-icons/cg";
+import { useEffect, useState } from "react";
+import { set, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { RxCrossCircled } from "react-icons/rx";
 import { toast } from "react-toastify";
 
 const VerifyBusinessAccount = () => {
+  const router = useRouter();
+  const user = useAppSelector((state) => state.user.user);
+
+  const [addBusinessKycRequest, { isLoading }] =
+    useMakeBusinessKycRequestMutation();
+
+  const [updateKyc, { isLoading: updateLoading }] =
+    useUpdateBusinessKycRequestMutation();
+  const { data, refetch } = useGetSingleUserBusinessKycQuery("");
+
   const [kycPending, setKycPending] = useState(false);
   const [kycDenied, setKycDenied] = useState(false);
   const [denyMessage, setDenyMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [identityImage, setIdentityImage] = useState("");
-  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
-  const user = useAppSelector((state) => state.user.user);
-  const [addKycRequest, { isLoading }] = useMakeKycRequestMutation();
-  const [updateKyc, { isLoading: updateLoading }] =
-    useUpdateKycRequestMutation();
-  const [uploadImage, { isLoading: imageLoading }] = useUploadImageMutation();
-  const { data, refetch } = useGetSingleUserKycQuery("");
 
   const {
     register,
@@ -51,31 +51,52 @@ const VerifyBusinessAccount = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useForm<TBusinessKyc>();
+  } = useForm<TBusinessKyc>({
+    defaultValues: {
+      beneficialOwner: [
+        {
+          fullName: "",
+          ownershipPercentage: "",
+          address: "",
+          dateOfBirth: "",
+          identificationDocument: "",
+        },
+      ],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "beneficialOwner",
+  });
+
+  const handleAppend = () => {
+    append({
+      fullName: "",
+      ownershipPercentage: "",
+      address: "",
+      dateOfBirth: "",
+      identificationDocument: "",
+    });
+  };
 
   const onSubmit: SubmitHandler<TBusinessKyc> = async (data) => {
-    if (!identityImage) {
-      return toast.error("Please upload your identity image and try again", {
-        toastId: 1,
-      });
-    }
-
     const submittedData = {
       id: user?.id,
       ...data,
       identityImage,
-      ...(kycDenied && { status: "pending", messageByAdmin: "" }),
+      status: "isOptional",
     };
 
     if (!kycDenied) {
       // console.log(submittedData);
-      await addKycRequest(submittedData)
+      await addBusinessKycRequest(submittedData)
         .unwrap()
-        .then((res: ResponseErrorType | ResponseSuccessType) => {
+        .then((res) => {
           toast.success("KYC request send successfully!", { toastId: 1 });
           setModalOpen(true);
         })
-        .catch((res: ResponseErrorType | ResponseSuccessType) => {
+        .catch((res) => {
           toast.error(res?.data?.message || "Something went wrong", {
             toastId: 1,
           });
@@ -96,53 +117,18 @@ const VerifyBusinessAccount = () => {
     }
   };
 
-  const countryOptions = useMemo(
-    () =>
-      Country.getAllCountries().map((country) => ({
-        value: country.isoCode,
-        label: country.name,
-      })),
-    []
-  );
-
   const handleModal = () => {
     setModalOpen(false);
     router.push("/marketplace");
     refetch();
   };
 
-  const handleFileUpload = async (value: any) => {
-    setLoading(true);
-    const formData = new FormData();
-    const maxSizeInBytes = 2 * 1024 * 1024;
-
-    if (value?.size && value?.size > maxSizeInBytes) {
-      setLoading(false);
-      return toast.error("Your file was more than 2 Megabyte!", { toastId: 1 });
-    }
-
-    formData.append("image", value);
-    await uploadImage(formData)
-      .unwrap()
-      .then((res: any) => {
-        if (!res.success) {
-          toast.error(res?.message || "Something went wrong", { toastId: 1 });
-          setLoading(false);
-        }
-        toast.success("File upload successfully!", { toastId: 1 });
-        setIdentityImage(res?.data?.url);
-        setLoading(false);
-      })
-      .catch((res: IGenericErrorMessage) => {
-        toast.error(res?.message || "Something went wrong", { toastId: 1 });
-        setLoading(false);
-      });
-  };
-
-  const meansOfIdentificationOptions = [
-    { value: "PASSPORT", label: "PASSPORT" },
-    { value: "DRIVER_LICENSE", label: "Driver LICENSE" },
-    { value: "NATIONAL_ID", label: "NATIONAL ID (NIN)" },
+  const businessType = [
+    { value: "soleProprietorship", label: "Sole Proprietorship" },
+    { value: "partnership", label: "Partnership" },
+    { value: "corporation", label: "Corporation" },
+    { value: "llc", label: "LLC" },
+    { value: "others", label: "Others" },
   ];
 
   useEffect(() => {
@@ -157,12 +143,33 @@ const VerifyBusinessAccount = () => {
         router?.push("/marketplace");
       }
       setDenyMessage(data?.data?.messageByAdmin);
-      setValue("name", data?.data?.name || user?.name);
+      setValue("businessName", data?.data?.businessName);
+      setValue("businessRegistration", data?.data?.businessRegistration);
+      setValue("industry", data?.data?.industry);
+      setValue("businessWebsite", data?.data?.businessWebsite);
+      setValue("businessType", data?.data?.businessType);
       setValue("phoneNumber", data?.data?.phoneNumber || user?.phoneNumber);
-      setValue("address", data?.data?.address);
-      setValue("birthDate", data?.data?.birthDate);
+      setValue("businessAddress", data?.data?.businessAddress);
+      setValue("primaryContactPerson", data?.data?.primaryContactPerson);
+      setValue("positionOrTitle", data?.data?.positionOrTitle);
+      setValue("emailAddress", data?.data?.emailAddress);
+      setValue("bankAccountNumber", data?.data?.bankAccountNumber);
+      setValue("bankName", data?.data?.bankName);
+      setValue("taxIdentificationNumber", data?.data?.taxIdentificationNumber);
+      setValue(
+        "businessRegistrationDocument",
+        data?.data?.businessRegistrationDocument
+      );
+      setValue("proofOfAddress", data?.data?.proofOfAddress);
+      setValue("financialStatements", data?.data?.financialStatements);
+      setValue(
+        "CertificateOfIncorporation",
+        data?.data?.CertificateOfIncorporation
+      );
+      setValue("beneficialOwner", data?.data?.beneficialOwner);
       setIdentityImage(data?.data?.identityImage);
     }
+    console.log(data?.data?.beneficialOwner);
   }, [data, kycPending, router, setValue, user]);
 
   return (
@@ -171,7 +178,7 @@ const VerifyBusinessAccount = () => {
         <div className="container py-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
           <div className="space-y-1">
-            <h2 className="title">Verify your account</h2>
+            <h2 className="title">Verify your business account</h2>
             <p className="text-textGrey text-xs md:text-sm">
               This helps us ensure you comply with regulations
             </p>
@@ -197,21 +204,100 @@ const VerifyBusinessAccount = () => {
                   <div className="w-full md:w-[40%] space-y-3">
                     <AppFormInput
                       label="Business Name"
-                      name="name"
+                      name="businessName"
                       type="text"
                       required
                       register={register}
-                      defaultValue={user?.name}
-                      readOnly={user?.isVerifiedByAdmin}
+                      error={errors?.businessName}
+                      // defaultValue={user?.name}
+                      // readOnly={user?.businessName}
                     />
 
                     <AppFormInput
                       label="Business Registration Number"
-                      name="businessRegistrationNumber"
+                      name="businessRegistration"
                       type="text"
                       required
                       register={register}
-                      error={errors?.businessRegistrationNumber}
+                      error={errors?.businessRegistration}
+                    />
+
+                    <AppFormSelect
+                      control={control}
+                      placeholder="Business Type"
+                      name="businessType"
+                      required
+                      options={businessType}
+                    />
+
+                    <AppFormInput
+                      label="Industry"
+                      name="industry"
+                      type="text"
+                      register={register}
+                      required
+                      error={errors?.businessAddress}
+                    />
+
+                    <AppFormInput
+                      label="Business Address"
+                      name="businessAddress"
+                      type="text"
+                      register={register}
+                      error={errors?.businessAddress}
+                      required
+                    />
+
+                    <AppFormInput
+                      label="Business Website"
+                      name="businessWebsite"
+                      type="text"
+                      required
+                      register={register}
+                      error={errors?.businessWebsite}
+                    />
+                  </div>
+                </div>
+                <hr className="border border-borderLight" />
+                <div className="flex flex-col md:flex-row justify-between">
+                  {/* this is left side text  */}
+                  <div className="text-textBlueBlack space-y-1">
+                    <h3 className="font-semibold">Contact Information</h3>
+                    <p className="text-textGrey text-sm">
+                      Add your current home address.
+                    </p>
+                  </div>
+
+                  {/* this is right side text  */}
+                  <div className="w-full md:w-[40%] space-y-3">
+                    <AppFormInput
+                      label="Primary Contact Person"
+                      name="primaryContactPerson"
+                      type="text"
+                      required
+                      placeholder="Type your person name here"
+                      register={register}
+                      error={errors?.primaryContactPerson}
+                    />
+
+                    <AppFormInput
+                      label="Position/Title"
+                      name="positionOrTitle"
+                      type="text"
+                      required
+                      placeholder="Type your position here"
+                      register={register}
+                      error={errors?.positionOrTitle}
+                    />
+
+                    <AppFormInput
+                      label="Email Address"
+                      name="emailAddress"
+                      type="email"
+                      required
+                      placeholder="Type your email here"
+                      register={register}
+                      error={errors?.emailAddress}
                     />
 
                     <AppPhoneInput
@@ -221,86 +307,9 @@ const VerifyBusinessAccount = () => {
                       placeholder="Phone Number"
                       error={errors?.phoneNumber}
                     />
-
-                    {/* <AppPhoneInput
-                      name="whatsAppNumber"
-                      control={control}
-                      label="WhatsApp Number"
-                      placeholder="WhatsApp Number"
-                      error={errors?.whatsAppNumber}
-                    />
-
-                    <AppFormInput
-                      label="Telegram Username"
-                      name="telegramNumber"
-                      type="text"
-                      register={register}
-                      error={errors?.telegramNumber}
-                      required
-                    /> */}
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
-                <div className="flex flex-col md:flex-row justify-between">
-                  {/* this is left side text  */}
-                  <div className="text-textBlueBlack space-y-1">
-                    <h3 className="font-semibold">Contact Information</h3>
-                    <p className="text-textGrey text-sm">
-                      Add your current home address.
-                    </p>
-                  </div>
-                  {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
-                    <AppFormSelect
-                      control={control}
-                      placeholder="Country of residence"
-                      name="country"
-                      //   required={true}
-                      options={countryOptions}
-                      defaultValue={
-                        user?.state
-                          ? { value: user?.state, label: user?.state }
-                          : undefined
-                      }
-                      required
-                    />
-
-                    {/* <AppFormSelect
-                      control={control}
-                      placeholder="Select State"
-                      name="state"
-                      required
-                      defaultValue={
-                        user?.state
-                          ? { value: user?.state, label: user?.state }
-                          : undefined
-                      }
-                      options={stateOptions}
-                    /> */}
-
-                    {/* <AppFormSelect
-                      control={control}
-                      placeholder="Select City"
-                      name="city"
-                      required
-                      options={cityOption ? cityOption : []}
-                    /> */}
-
-                    <AppFormInput
-                      label="User address"
-                      name="address"
-                      type="text"
-                      required
-                      placeholder="Type your address here"
-                      register={register}
-                      error={errors?.address}
-                    />
-                  </div>
-                </div>
-
-                <hr className="border border-borderLight" />
-
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
@@ -309,225 +318,170 @@ const VerifyBusinessAccount = () => {
                       Kindly provide your correct means of ID.
                     </p>
                   </div>
+
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
-                    <AppFormDatePicker
-                      control={control}
-                      name="birthDate"
-                      label="Date Of Birth"
-                      placeholder="Date of birth (DD/MM/YY)"
-                    />
-                    <AppFormSelect
-                      control={control}
-                      placeholder="Means of Identification"
-                      name="meansOfIdentification"
-                      required={true}
-                      options={meansOfIdentificationOptions}
-                    />
-                    {/* <AppFormInput
-                      label="Enter Identification Number"
-                      name="identificationNumber"
-                      type={
-                        watch("meansOfIdentification") === "PASSPORT"
-                          ? "number"
-                          : "text"
-                      }
-                      placeholder="Type your Identification Number here"
-                      register={register}
-                      required
-                      error={errors?.identificationNumber}
-                    /> */}
-                    {/* {watch("meansOfIdentification") === "PASSPORT" && (
-                      <>
+                    {fields.map((owner, index) => (
+                      <div key={owner.id} className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <p className="text-textBlueBlack font-semibold">
+                            Beneficial Owner person: {index > 8 ? "" : "0"}
+                            {index + 1}
+                          </p>
+                          <button
+                            onClick={() => remove(index)}
+                            className="text-textBlueBlack text-2xl cursor-pointer hover:text-primary"
+                          >
+                            <RxCrossCircled />
+                          </button>
+                        </div>
+
+                        <AppFormInput
+                          label={`Beneficial Owner`}
+                          name={`beneficialOwner[${index}].fullName`}
+                          type="text"
+                          required
+                          placeholder="Full Name"
+                          defaultValue={owner.fullName}
+                          register={register}
+                          error={errors?.beneficialOwner?.[index]?.fullName}
+                        />
+
+                        <AppFormInput
+                          label="Ownership Percentage"
+                          name={`beneficialOwner[${index}].ownershipPercentage`}
+                          type="text"
+                          required
+                          placeholder="Ownership Percentage"
+                          defaultValue={owner.ownershipPercentage}
+                          register={register}
+                          error={
+                            errors?.beneficialOwner?.[index]
+                              ?.ownershipPercentage
+                          }
+                        />
+
+                        <AppFormInput
+                          label="Address"
+                          name={`beneficialOwner[${index}].address`}
+                          type="text"
+                          required
+                          placeholder="Address"
+                          defaultValue={owner.address}
+                          register={register}
+                          error={errors?.beneficialOwner?.[index]?.address}
+                        />
+
                         <AppFormDatePicker
                           control={control}
-                          name="identificationExpiredDate"
-                          label="Passport Expire Date"
-                          placeholder="Enter Expired Date"
+                          name={`beneficialOwner[${index}].dateOfBirth`}
+                          defaultValue={owner.dateOfBirth}
+                          placeholder="Date of Birth"
                         />
-                      </>
-                    )} */}
 
-                    <div className="">
-                      <input
-                        onChange={(e) =>
-                          handleFileUpload(e.target.files && e.target.files[0])
-                        }
-                        type="file"
-                        id="file"
-                        className="hidden"
-                        accept="image/*"
+                        <KycImageUpload
+                          control={control}
+                          name={`beneficialOwner[${index}].identificationDocument`}
+                          required
+                          placeholder="Identification Document"
+                        />
+                      </div>
+                    ))}
+                    <div className="flex justify-center">
+                      <AppButton
+                        label="Add Beneficial Owner"
+                        type="button"
+                        onClick={handleAppend}
+                        size="small"
+                        variant="outline"
                       />
-                      <label
-                        htmlFor="file"
-                        className="cursor-pointer border border-borderColor rounded hover:bg-zinc/20 border-dashed flex items-center gap-1 justify-between"
-                      >
-                        {loading || imageLoading ? (
-                          <AiOutlineLoading3Quarters className="animate-spin text-primary text-xl text-center mx-auto my-3" />
-                        ) : (
-                          <>
-                            {identityImage === "" ||
-                            identityImage === undefined ? (
-                              <div className="flex items-center justify-between p-3 w-full">
-                                <h2 className="text-darkishGrey flex items-center gap-1 text-sm">
-                                  <CgFileAdd />
-                                  Upload Valid Identity Document
-                                </h2>
-                                <p className="text-primary text-xs font-medium">
-                                  Select File
-                                </p>
-                              </div>
-                            ) : (
-                              <Image
-                                width={600}
-                                height={200}
-                                src={identityImage}
-                                alt="identity image"
-                                className="w-full rounded min-h-40 max-h-44 object-cover"
-                              />
-                            )}
-                          </>
-                        )}
-                      </label>
-                      <h2 className="text-darkishGrey pt-1 text-xs">
-                        JPEG, PNG, PDF. Max file size: 2mb
-                      </h2>
                     </div>
                   </div>
                 </div>
                 <hr className="border border-borderLight" />
-
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
-                    <h3 className="font-semibold">Contact Information</h3>
+                    <h3 className="font-semibold">Financial Information</h3>
                     <p className="text-textGrey text-sm">
                       Add your current home address.
                     </p>
                   </div>
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
-                    <AppFormSelect
-                      control={control}
-                      placeholder="Country of residence"
-                      name="country"
-                      //   required={true}
-                      options={countryOptions}
-                      defaultValue={
-                        user?.state
-                          ? { value: user?.state, label: user?.state }
-                          : undefined
-                      }
-                      required
-                    />
-
-                    {/* <AppFormSelect
-                      control={control}
-                      placeholder="Select State"
-                      name="state"
-                      required
-                      defaultValue={
-                        user?.state
-                          ? { value: user?.state, label: user?.state }
-                          : undefined
-                      }
-                      options={stateOptions}
-                    />
-
-                    <AppFormSelect
-                      control={control}
-                      placeholder="Select City"
-                      name="city"
-                      required
-                      options={cityOption ? cityOption : []}
-                    /> */}
-
                     <AppFormInput
-                      label="User address"
-                      name="address"
+                      label="Bank Account Number"
+                      name="bankAccountNumber"
                       type="text"
                       required
-                      placeholder="Type your address here"
+                      placeholder="Type your bank Account Number here"
                       register={register}
-                      error={errors?.address}
+                      error={errors?.bankAccountNumber}
+                    />
+                    <AppFormInput
+                      label="Bank Name"
+                      name="bankName"
+                      type="text"
+                      required
+                      placeholder="Type your Bank Name here"
+                      register={register}
+                      error={errors?.bankName}
+                    />
+                    <AppFormInput
+                      label="Tax Identification Number"
+                      name="taxIdentificationNumber"
+                      type="text"
+                      required
+                      placeholder="Type your Tax Identification Number here"
+                      register={register}
+                      error={errors?.taxIdentificationNumber}
                     />
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
                 <div className="flex flex-col md:flex-row justify-between">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
-                    <h3 className="font-semibold">Contact Information</h3>
+                    <h3 className="font-semibold">Documents Upload</h3>
                     <p className="text-textGrey text-sm">
                       Add your current home address.
                     </p>
                   </div>
+
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
-                    <AppFormSelect
+                    <KycImageUpload
+                      name="businessRegistrationDocument"
                       control={control}
-                      placeholder="Country of residence"
-                      name="country"
-                      //   required={true}
-                      options={countryOptions}
-                      defaultValue={
-                        user?.state
-                          ? { value: user?.state, label: user?.state }
-                          : undefined
-                      }
                       required
+                      placeholder="Upload Business Registration Document"
                     />
 
-                    {/* <AppFormSelect
+                    <KycImageUpload
+                      name="proofOfAddress"
                       control={control}
-                      placeholder="Select State"
-                      name="state"
                       required
-                      defaultValue={
-                        user?.state
-                          ? { value: user?.state, label: user?.state }
-                          : undefined
-                      }
-                      options={stateOptions}
+                      placeholder="Upload Proof of Address Document"
                     />
 
-                    <AppFormSelect
+                    <KycImageUpload
+                      name="financialStatements"
                       control={control}
-                      placeholder="Select City"
-                      name="city"
-                      required
-                      options={cityOption ? cityOption : []}
-                    /> */}
+                      placeholder="Upload Valid Financial Statements Document"
+                    />
 
-                    <AppFormInput
-                      label="User address"
-                      name="address"
-                      type="text"
+                    <KycImageUpload
+                      name="CertificateOfIncorporation"
+                      control={control}
+                      placeholder="Upload Certificate of Incorporation Document"
                       required
-                      placeholder="Type your address here"
-                      register={register}
-                      error={errors?.address}
                     />
                   </div>
                 </div>
-
                 <hr className="border border-borderLight" />
+                asdfasdf
                 {!kycPending && (
                   <div className="flex items-center justify-end">
-                    {/* {isLoading || loading || updateLoading ? (
-                                            <button
-                                                type="button"
-                                                className="appBtn px-14 flex items-center justify-center"
-                                            >
-                                                <AiOutlineLoading3Quarters className="animate-spin text-white text-2xl" />
-                                            </button>
-                                        ) : (
-                                            <button type="submit" className="appBtn">
-                                                Save & Proceed
-                                            </button>
-                                        )} */}
-
                     <button
                       disabled={isLoading || loading || updateLoading}
                       type="submit"

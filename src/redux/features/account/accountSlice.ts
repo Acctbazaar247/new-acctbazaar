@@ -9,6 +9,8 @@ interface IInitialState {
     price: number;
   };
 
+  sellerTabShow: "Ads" | "reviews";
+
   accountCredentials: {
     id: string;
     username: string;
@@ -25,6 +27,7 @@ interface IInitialState {
 const initialState: IInitialState = {
   accountCard: {} as IInitialState["accountCard"],
   accountCredentials: [],
+  sellerTabShow: "Ads",
 };
 
 export const accountSlice = createSlice({
@@ -45,6 +48,9 @@ export const accountSlice = createSlice({
     emptyAccountCredentials: (state) => {
       state.accountCredentials = [];
     },
+    setSellerTabShow: (state, action) => {
+      state.sellerTabShow = action.payload;
+    },
   },
 });
 
@@ -53,6 +59,7 @@ export const {
   setAccountCredentials,
   deleteAccountCredentials,
   emptyAccountCredentials,
+  setSellerTabShow,
 } = accountSlice.actions;
 
 export default accountSlice.reducer;

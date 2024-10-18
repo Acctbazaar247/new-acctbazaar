@@ -4,6 +4,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 type TAppButtonProps = {
   isLoading?: boolean;
   href?: string;
+  type?: "button" | "submit" | "reset";
   label: string;
   variant?: "solid" | "outline" | "deleteOutline" | "deleteSolid";
   size?: "small" | "medium" | "default";
@@ -19,6 +20,7 @@ const AppButton = ({
   variant = "solid",
   size = "default",
   className,
+  type = "submit",
 }: TAppButtonProps) => {
   let btnStyle = "appBtn";
 
@@ -80,7 +82,7 @@ const AppButton = ({
         <button
           onClick={onClick}
           disabled={isLoading}
-          type="submit"
+          type={type}
           className={`${btnStyle} ${className}`}
         >
           {label}

@@ -64,7 +64,6 @@ const MyPurchaseAccountCard = ({
         isAnonymous: data?.isAnonymous,
       },
     ];
-    console.log(submittedData);
     await makeReview(submittedData)
       .unwrap()
       .then((res: any) => {

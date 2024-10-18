@@ -106,7 +106,7 @@ export default function SellYourAccount() {
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <BiMessageSquareDetail
-                      className={`text-2xl ${
+                      className={`text-2xl text-darkishGrey ${
                         sellAccountState === 3 && "text-primary"
                       }`}
                     />
@@ -126,7 +126,7 @@ export default function SellYourAccount() {
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <TbMessage2Search
-                      className={`text-2xl ${
+                      className={`text-2xl text-darkishGrey  ${
                         sellAccountState === 4 && "text-primary"
                       }`}
                     />
@@ -144,22 +144,22 @@ export default function SellYourAccount() {
                 </p>
                 <p
                   className={`${sellAccountState === 2 && "text-primary"} ${
-                    sellAccountState > 2 && "text-textBlack"
+                    sellAccountState > 2 && "text-darkishGrey "
                   } min-w-20 md:min-w-24 text-center ml-4`}
                 >
                   Add account
                 </p>
                 <p
                   className={`${sellAccountState === 3 && "text-primary"} ${
-                    sellAccountState > 3 && "text-textBlack"
+                    sellAccountState > 3 && "text-darkishGrey "
                   } min-w-16 md:min-w-24 text-end mx-2`}
                 >
                   Credentials
                 </p>
                 <p
                   className={`${sellAccountState === 4 && "text-primary"} ${
-                    sellAccountState > 4 && "text-textBlack"
-                  } min-w-16 md:min-w-24 text-end md:pr-2`}
+                    sellAccountState > 4 && "text-darkishGrey "
+                  } min-w-16 md:min-w-24 text-end md:pr-4`}
                 >
                   Review
                 </p>

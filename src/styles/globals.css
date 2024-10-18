@@ -362,7 +362,7 @@ html {
   inset-inline-end: 0;
   width: 0px !important;
   height: 0em !important;
-  background-color: #fff;
+  /* background-color: #fff; */
   transform: translateY(-50%);
   transition: background-color 0.2s;
   content: "";

@@ -1,4 +1,4 @@
-import ViewUser from "@/components/dashboard/ViewUser";
+import ViewBusinessKyc from "@/components/dashboard/ViewBusinessKyc";
 import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
 import Form from "@/components/Forms/Form";
 import FormSelectField, {
@@ -12,19 +12,21 @@ import AppTable from "@/components/ui/AppTable";
 import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
 import {
-  useGetAllKycRequestQuery,
-  useUpdateStatusBySuperAdminKycRequestMutation,
-} from "@/redux/features/kyc/kycApi";
+  useGetAllBusinessKycRequestQuery,
+  useUpdateStatusBySuperAdminBusinessKycRequestMutation,
+} from "@/redux/features/businesskyc/businesskycApi";
 import { useEditUserMutation } from "@/redux/features/user/userApi";
 import {
   EBadge,
   EBadgeTitle,
   KycStatus,
   ResponseSuccessType,
+  TBusinessKyc,
 } from "@/types/common";
 import { optionCreator } from "@/utils";
 import { formatDate } from "@/utils/formateDate";
-import { Country } from "country-state-city";
+import { ColumnProps } from "antd/es/table";
+import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
@@ -33,11 +35,33 @@ const ManageKYC = () => {
   const defaultValue = { value: "", label: "" };
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const debouncedSearch = useDebounce(search, 500); // 500ms debounce delay
+  const debouncedSearch = useDebounce(search, 500);
   const [status, setStatus] = useState<SelectOptions>(defaultValue);
 
-  const [updateKyc] = useUpdateStatusBySuperAdminKycRequestMutation();
+  const [updateKyc] = useUpdateStatusBySuperAdminBusinessKycRequestMutation();
   const [updateUser] = useEditUserMutation();
+
+  const handleBadgeUpdate = async (
+    badge: EBadge,
+    badgeTitle: EBadgeTitle,
+    id: string
+  ) => {
+    const updateData = {
+      id,
+      badge,
+      badgeTitle,
+    };
+    await updateUser(updateData)
+      .unwrap()
+      .then(() => {
+        toast.success("KYC Batch updated successful!", { toastId: 1 });
+      })
+      .catch((res) => {
+        return toast.error(res?.data.message || "Something went wrong!", {
+          toastId: 1,
+        });
+      });
+  };
 
   const handleStatusUpdate = async (
     status: string,
@@ -60,28 +84,6 @@ const ManageKYC = () => {
         toast.success("KYC updated successful!", { toastId: 1 });
       })
       .catch((res: any) => {
-        return toast.error(res?.data.message || "Something went wrong!", {
-          toastId: 1,
-        });
-      });
-  };
-
-  const handleBadgeUpdate = async (
-    badge: EBadge,
-    badgeTitle: EBadgeTitle,
-    id: string
-  ) => {
-    const updateData = {
-      id,
-      badge,
-      badgeTitle,
-    };
-    await updateUser(updateData)
-      .unwrap()
-      .then(() => {
-        toast.success("KYC Batch updated successful!", { toastId: 1 });
-      })
-      .catch((res) => {
         return toast.error(res?.data.message || "Something went wrong!", {
           toastId: 1,
         });
@@ -124,7 +126,7 @@ const ManageKYC = () => {
     },
   ];
 
-  const columns = [
+  const columns: ColumnProps<TBusinessKyc>[] = [
     {
       title: "Name",
       dataIndex: "ownBy",
@@ -132,9 +134,11 @@ const ManageKYC = () => {
       render: (ownBy: any) => {
         return (
           <div className="flex items-center gap-1 text-base">
-            <img
+            <Image
               src={ownBy?.profileImg}
               alt=""
+              width={40}
+              height={40}
               className="rounded-full object-cover size-9"
             />
             <p className="line-clamp-1">{ownBy?.name}</p>
@@ -143,34 +147,29 @@ const ManageKYC = () => {
       },
     },
     {
-      title: "Country",
-      dataIndex: "country",
+      title: "Business Name",
+      dataIndex: "businessName",
       className: "min-w-[105px]",
-      render: (country: string) => {
-        const selectedCountryDetails = Country.getAllCountries().find(
-          (single) => single.isoCode === country
-        );
+      render: (businessName: string) => {
         return (
-          <p className="line-clamp-1 max-w-[30dvw] text-base">
-            {selectedCountryDetails?.name}
-          </p>
+          <p className="line-clamp-1 max-w-[30dvw] text-base">{businessName}</p>
         );
       },
     },
     {
-      title: "Email",
-      dataIndex: "ownBy",
+      title: "Business Type",
+      dataIndex: "businessType",
       className: "min-w-[105px]",
-      render: (ownBy: any) => {
-        return <p className="line-clamp-1 text-base">{ownBy?.email}</p>;
+      render: (businessType: any) => {
+        return <p className="line-clamp-1 text-base">{businessType}</p>;
       },
     },
     {
-      title: "Phone Number",
-      dataIndex: "ownBy",
+      title: "Business Address",
+      dataIndex: "businessAddress",
       className: "min-w-[105px]",
-      render: (ownBy: any) => {
-        return <p className="line-clamp-1  text-base">{ownBy?.phoneNumber}</p>;
+      render: (businessAddress: any) => {
+        return <p className="line-clamp-1  text-base">{businessAddress}</p>;
       },
     },
     {
@@ -244,7 +243,7 @@ const ManageKYC = () => {
                           }
                         >
                           <div className="max-w-80">
-                            <p className="text-center text-darkishGrey pt-4 text-lg">
+                            <p className="text-center text-textDarkGrey pt-4 text-lg">
                               Are you sure Update status {record?.status} to
                               <span className="text-textDark font-medium">
                                 {" "}
@@ -269,8 +268,6 @@ const ManageKYC = () => {
       dataIndex: "ownBy",
       className: "min-w-[85px]",
       render: (ownBy: any, record: any) => {
-        console.log("🚀 ~ ManageKYC ~ record:", record);
-
         return (
           <div className="flex items-center gap-2">
             <div className="pt-1 flex items-center gap-1">
@@ -282,13 +279,11 @@ const ManageKYC = () => {
                       ownBy?.badge === EBadge.blue && "bg-blue text-white"
                     } ${
                       ownBy?.badge === EBadge.gold &&
-                      "bg-yellowShadow text-white"
+                      "bg-amber-400   text-white"
                     } ${
                       ownBy?.badge === EBadge.noBadge &&
                       "bg-darkishGrey  cursor-pointer"
-                    }
-                    ${!ownBy?.badge && "bg-darkishGrey"}
-                    `}
+                    }`}
                   >
                     <h3>{ownBy?.badge ? ownBy?.badge : "No Badge"}</h3>
                     <IoIosArrowDown />
@@ -353,7 +348,7 @@ const ManageKYC = () => {
                       " bg-blue text-white"
                     } ${
                       ownBy?.badgeTitle === EBadgeTitle.verifiedBusiness &&
-                      " bg-yellowShadow   cursor-pointer"
+                      " bg-amber-400  text-white  cursor-pointer"
                     }`}
                   >
                     <h3>
@@ -405,10 +400,10 @@ const ManageKYC = () => {
         return (
           <div className="flex items-center justify-evenly">
             <AppModal
-              title="User Details"
+              title="Business Kyc Details"
               button={<button className="appOutlineBtnSm">View details</button>}
             >
-              <ViewUser record={record} />
+              <ViewBusinessKyc record={record} />
             </AppModal>
           </div>
         );
@@ -433,7 +428,7 @@ const ManageKYC = () => {
     return queryString;
   }, [status, debouncedSearch, page]);
 
-  const queryInfo = useGetAllKycRequestQuery(queryString);
+  const queryInfo = useGetAllBusinessKycRequestQuery(queryString);
 
   const statusOption = Object.values(KycStatus).map(optionCreator);
 
@@ -447,7 +442,8 @@ const ManageKYC = () => {
 
   return (
     <SuperAdminLayout>
-      <h2 className="title text-center mb-5">Manage KYC</h2>
+      <h2 className="title text-center mb-5">Manage Business KYC</h2>
+
       <div className="flex flex-col md:flex-row items-center gap-4 my-5 md:my-10 justify-between">
         <div className="flex gap-4">
           <div className="min-w-[180px] ">

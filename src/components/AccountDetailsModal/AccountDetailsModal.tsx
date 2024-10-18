@@ -1,15 +1,13 @@
+import { useAddOrderMutation } from "@/redux/features/order/orderApi";
+import { useAppSelector } from "@/redux/hook";
 import { findImageUrlByCategory } from "@/shared";
 import { IAccount, IUser } from "@/types/common";
-import { Avatar, Modal, Popconfirm } from "antd";
+import { Modal, Popconfirm } from "antd";
 import Image from "next/image";
-import React from "react";
-import CurrencyLogo from "../CurrencyLogo/CurrencyLogo";
-import { useAddOrderMutation } from "@/redux/features/order/orderApi";
-import { toast } from "react-toastify";
-import { useAppSelector } from "@/redux/hook";
 import Link from "next/link";
-import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import CurrencyLogo from "../CurrencyLogo/CurrencyLogo";
 import AvatarComponent from "../shared/AvatarComponent";
 
 type Props = {

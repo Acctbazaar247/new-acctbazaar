@@ -1,26 +1,18 @@
-import { AccountCategory, IAccount, ICart, IUser } from "@/types/common";
-import { getImageUrlByCategory } from "@/utils/getImageUrl";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { PiCurrencyDollarBold } from "react-icons/pi";
-import { RiVerifiedBadgeFill } from "react-icons/ri";
-import AppModal from "../ui/AppModal";
-import { FiMinus, FiPlus } from "react-icons/fi";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { addCart } from "@/redux/features/cart/cartSlice";
 import {
   useAddCartMutation,
   useGetMyCartsQuery,
 } from "@/redux/features/cart/cartApi";
-import { toast } from "react-toastify";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { Tooltip } from "antd";
-import Link from "next/link";
-import { GoDotFill } from "react-icons/go";
+import { useAppSelector } from "@/redux/hook";
 import { findImageUrlByCategory } from "@/shared";
+import { AccountCategory, IAccount, ICart, IUser } from "@/types/common";
+import { Tooltip } from "antd";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { FaRegEye } from "react-icons/fa6";
+import { PiCurrencyDollarBold } from "react-icons/pi";
+import { toast } from "react-toastify";
 import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
 import AvatarComponent from "../shared/AvatarComponent";
-import { FaRegEye } from "react-icons/fa6";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -122,7 +114,7 @@ const MarketplaceAccountCard = ({
                   src={"/assets/icons/cart.png"}
                   width={40}
                   height={40}
-                  className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                  className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5 dark:contrast-0"
                   alt="cart"
                   onClick={handleAddCart}
                 />
@@ -146,7 +138,7 @@ const MarketplaceAccountCard = ({
                   disabled={isLoading}
                   onClick={() => setIsModalOpen(true)}
                 >
-                  <FaRegEye className="text-textGrey text-lg" />
+                  <FaRegEye className="text-textGrey text-lg mt-1" />
                 </button>
               </Tooltip>
 
