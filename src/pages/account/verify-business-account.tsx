@@ -519,7 +519,7 @@ const VerifyBusinessAccount = () => {
                   <AttentionAlert
                     kycDenied={kycDenied}
                     variant="danger"
-                    title="Your Kyc Request are denied for some reason, Resubmit with valid information."
+                    title="Your Business Kyc Request are denied for some reason, Resubmit with valid information."
                     description={denyMessage}
                   />
                 )}

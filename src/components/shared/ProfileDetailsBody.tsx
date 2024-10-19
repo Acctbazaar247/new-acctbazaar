@@ -71,7 +71,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
     <>
       <div>
         <div className="border-b border-b-borderLight pb-2 pl-2 pt-2">
-          <div className=" hidden md:flex flex-col md:flex-row items-center justify-between gap-2 md:gap-10 pb-1">
+          <div className=" hidden md:flex flex-col md:flex-row items-center gap-2 md:gap-5 pb-1">
             <h4 className="text-sm md:text-base flex items-center gap-1">
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
@@ -102,7 +102,9 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   onClick={openModal}
                   className="appOutlineBtnSm py-1 px-2 text-xs rounded hidden md:block"
                 >
-                  Become Verified
+                  {user?.isVerifiedByAdmin && !user?.isBusinessVerified
+                    ? "Register as business"
+                    : "Become Verified"}
                 </button>
               )}
           </div>
