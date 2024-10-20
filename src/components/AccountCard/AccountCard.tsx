@@ -1,4 +1,4 @@
-import { IAccount, ICart } from "@/types/common";
+import { EBadgeTitle, IAccount, ICart } from "@/types/common";
 import React, { useEffect, useState } from "react";
 import CurrencyLogo from "../CurrencyLogo/CurrencyLogo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,7 @@ import { useAppSelector } from "@/redux/hook";
 import AccountAction from "../AccountReel/AccountAction";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { GoDotFill } from "react-icons/go";
+import { badgeTitleShow } from "@/utils/badgeTitleShow";
 type Props = {} & IAccount;
 
 const AccountCard = (props: Props) => {
@@ -116,7 +117,8 @@ const AccountCard = (props: Props) => {
                   className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-yellowShadow`}
                 >
                   <GoDotFill />
-                  {ownBy?.badgeTitle}
+
+                  {badgeTitleShow(ownBy?.badgeTitle as EBadgeTitle)}
                 </p>
               )}
             </div>
@@ -128,6 +130,7 @@ const AccountCard = (props: Props) => {
         handelOk={handleOk}
         isModalOpen={isModalOpen}
         handleCancel={handleCancel}
+        existOnCart={existOnCart}
         {...props}
       ></AccountDetailsModal>
     </div>

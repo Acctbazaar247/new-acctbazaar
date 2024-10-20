@@ -1,6 +1,7 @@
 import { setSellerTabShow } from "@/redux/features/account/accountSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { TSellerProfileInfo } from "@/types/common";
+import { useAppDispatch } from "@/redux/hook";
+import { EBadgeTitle, TSellerProfileInfo } from "@/types/common";
+import { badgeTitleShow } from "@/utils/badgeTitleShow";
 import { Avatar } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
@@ -22,9 +23,9 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
   const dispatch = useAppDispatch();
   const [domain, setDomain] = useState("");
   const [copied, setCopied] = useState(false);
-  const user = useAppSelector((state) => state?.user);
   const positiveReviews = data.totalPositiveReviews;
   const negativeReviews = data.totalNegativeReviews;
+
   const percentages = useMemo(() => {
     const totalReviews = positiveReviews + negativeReviews;
 
@@ -128,12 +129,12 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           )}
 
           {data.sellerInfo.isVerifiedByAdmin ? (
-            <div className="flex absolute w-[200px] items-center gap-1">
+            <div className="flex absolute w-[200px] pt-1 items-center gap-1">
               {data.sellerInfo?.badgeTitle && (
                 <p
-                  className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                  className={`capitalize rounded font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                 >
-                  {data.sellerInfo.badgeTitle}
+                  {badgeTitleShow(data.sellerInfo.badgeTitle as EBadgeTitle)}
                 </p>
               )}
             </div>

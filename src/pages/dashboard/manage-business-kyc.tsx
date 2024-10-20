@@ -24,6 +24,7 @@ import {
   TBusinessKyc,
 } from "@/types/common";
 import { optionCreator } from "@/utils";
+import { badgeTitleShow } from "@/utils/badgeTitleShow";
 import { formatDate } from "@/utils/formateDate";
 import { ColumnProps } from "antd/es/table";
 import Image from "next/image";
@@ -352,7 +353,9 @@ const ManageKYC = () => {
                     }`}
                   >
                     <h3>
-                      {ownBy?.badgeTitle ? ownBy?.badgeTitle : "No Badge Title"}
+                      {ownBy?.badgeTitle
+                        ? badgeTitleShow(ownBy?.badgeTitle as EBadgeTitle)
+                        : "No Badge Title"}
                     </h3>
                     <IoIosArrowDown />
                   </div>

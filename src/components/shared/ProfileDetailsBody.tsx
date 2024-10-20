@@ -1,4 +1,4 @@
-import { UserRole } from "@/types/common";
+import { EBadgeTitle, UserRole } from "@/types/common";
 import Link from "next/link";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
@@ -17,6 +17,7 @@ import {
   prAdminPopUpLinks,
 } from "./NavbarData";
 import { useGetSingleUserBusinessKycQuery } from "@/redux/features/businesskyc/businesskycApi";
+import { badgeTitleShow } from "@/utils/badgeTitleShow";
 
 type ProfileDetailsBody = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -87,7 +88,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                     <p
                       className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                     >
-                      {user?.badgeTitle}
+                      {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
                     </p>
                   )}
                 </div>
@@ -130,7 +131,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                           <p
                             className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                           >
-                            {user.badgeTitle}
+                            {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
                           </p>
                         )}
                       </div>

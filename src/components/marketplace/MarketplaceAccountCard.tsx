@@ -147,6 +147,8 @@ const MarketplaceAccountCard = ({
                 isModalOpen={isModalOpen}
                 handleCancel={() => setIsModalOpen(false)}
                 handelOk={() => setIsModalOpen(false)}
+                existOnCart={existOnCart}
+                handleAddCart={handleAddCart}
               ></AccountDetailsModal>
             </div>
             // <AppModal

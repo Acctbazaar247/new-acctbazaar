@@ -1,7 +1,7 @@
 import { useAddOrderMutation } from "@/redux/features/order/orderApi";
 import { useAppSelector } from "@/redux/hook";
 import { findImageUrlByCategory } from "@/shared";
-import { IAccount, IUser } from "@/types/common";
+import { IAccount, ICart, IUser } from "@/types/common";
 import { Modal, Popconfirm, Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,11 +11,14 @@ import CurrencyLogo from "../CurrencyLogo/CurrencyLogo";
 import AvatarComponent from "../shared/AvatarComponent";
 import { FaRegEye } from "react-icons/fa6";
 import { PiCurrencyDollarBold } from "react-icons/pi";
+import AppButton from "@/components/ui/AppButton";
 
 type Props = {
   isModalOpen: boolean;
   handelOk: () => void;
   handleCancel: () => void;
+  existOnCart: ICart | null | undefined;
+  handleAddCart?: () => void;
 } & IAccount;
 
 const AccountDetailsModal = ({
@@ -30,9 +33,12 @@ const AccountDetailsModal = ({
   isSold,
   ownBy,
   preview,
+  existOnCart,
+  handleAddCart,
 }: Props) => {
   const [makeOrder, { isError, isLoading, isSuccess }] = useAddOrderMutation();
   const user = useAppSelector((state) => state.user.user);
+
   const handleBuyAccount = () => {
     if (!user?.id) {
       toast.error("Your are not logged in");
@@ -57,17 +63,22 @@ const AccountDetailsModal = ({
         toast.error(err?.data?.message || "Failed To Order");
       });
   };
+
   return (
     <Modal
-      title={name + " details"}
+      title={
+        <span className="capitalize line-clamp-1">
+          {name.slice(0, 40) + " details"}
+        </span>
+      }
       open={isModalOpen}
       onOk={handelOk}
       onCancel={handleCancel}
       footer={null}
       centered
     >
-      <div className="flex items-center ">
-        <div className="md:gap-2 2xl:gap-3 flex flex-col gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">
+      <div className="flex max-sm:flex-col items-center ">
+        <div className="md:gap-2 2xl:gap-3 flex gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">
           <Image
             src={findImageUrlByCategory(category)}
             className="size-9 md:size-10 lg:size-14 2xl:size-16"
@@ -82,22 +93,22 @@ const AccountDetailsModal = ({
             >
               {name}
             </h3>
-            <p className={`text-textGrey pt-0.5 text-xs md:text-sm`}>
+            <p className={`text-textGrey py-2 text-xs md:text-sm`}>
               {description}
             </p>
             {/* this is profile div  */}
-            <AvatarComponent user={ownBy as IUser} withName size="large" />
+            <AvatarComponent user={ownBy as IUser} withName onlyBatch />
           </div>
         </div>
 
-        <div className="flex flex-col gap-1 md:gap-4 justify-between">
+        <div className="flex md:flex-col gap-1 md:gap-4 max-sm:pt-4 max-sm:w-full max-sm:pl-12  justify-between">
           <h2 className="text-textBlack font-bold flex items-center justify-end">
             <PiCurrencyDollarBold />
             <span>{price}</span>
           </h2>
           {/* this is icons div view cart message  */}
           <div className="flex justify-between gap-4">
-            {!id && (
+            {!existOnCart?.id && (
               <Tooltip title="Add to cart">
                 <button disabled={ownBy?.id === user?.id}>
                   <Image
@@ -106,7 +117,7 @@ const AccountDetailsModal = ({
                     height={40}
                     className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5 dark:contrast-0"
                     alt="cart"
-                    // onClick={handleAddCart}
+                    onClick={handleAddCart}
                   />
                 </button>
               </Tooltip>
@@ -114,14 +125,27 @@ const AccountDetailsModal = ({
 
             <Tooltip title="View account details">
               <button
-                disabled={isLoading}
+                disabled={isSold || isLoading}
                 // onClick={() => setIsModalOpen(true)}
               >
-                <FaRegEye className="text-textGrey text-lg mt-1" />
+                <Link href={preview as string} target="_blank">
+                  <FaRegEye className="text-textGrey text-lg mt-1" />
+                </Link>
               </button>
             </Tooltip>
           </div>
         </div>
+      </div>
+
+      <div className="pt-6 pb-2 flex items-center justify-center">
+        <Popconfirm
+          disabled={isLoading}
+          onConfirm={handleBuyAccount}
+          title="You want to buy this account?"
+          okButtonProps={{ className: "bg-orange-500" }}
+        >
+          <AppButton label="Buy Now" />
+        </Popconfirm>
       </div>
       {/* <div className="flex flex-col gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">
         <Image

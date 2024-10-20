@@ -1,4 +1,5 @@
-import { IUser, UserRole } from "@/types/common";
+import { EBadgeTitle, IUser, UserRole } from "@/types/common";
+import { badgeTitleShow } from "@/utils/badgeTitleShow";
 import { Avatar } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -57,7 +58,7 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
                 <p
                   className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                 >
-                  {user.badgeTitle}
+                  {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
                 </p>
               )}
             </div>

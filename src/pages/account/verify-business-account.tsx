@@ -6,6 +6,7 @@ import AppFormInput from "@/components/ui/AppFormInput";
 import AppFormSelect from "@/components/ui/AppFormSelect";
 import AppModal from "@/components/ui/AppModal";
 import AppPhoneInput from "@/components/ui/AppPhoneInput";
+import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
 import SellerLayout from "@/layout/SellerLayout";
 import {
@@ -22,7 +23,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { set, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { RxCrossCircled } from "react-icons/rx";
 import { toast } from "react-toastify";
 
@@ -35,7 +36,11 @@ const VerifyBusinessAccount = () => {
 
   const [updateKyc, { isLoading: updateLoading }] =
     useUpdateBusinessKycRequestMutation();
-  const { data, refetch } = useGetSingleUserBusinessKycQuery("");
+  const {
+    data,
+    refetch,
+    isLoading: kycLoading,
+  } = useGetSingleUserBusinessKycQuery("");
 
   const [kycPending, setKycPending] = useState(false);
   const [kycDenied, setKycDenied] = useState(false);
@@ -169,8 +174,11 @@ const VerifyBusinessAccount = () => {
       setValue("beneficialOwner", data?.data?.beneficialOwner);
       setIdentityImage(data?.data?.identityImage);
     }
-    console.log(data?.data?.beneficialOwner);
   }, [data, kycPending, router, setValue, user]);
+
+  if (kycLoading) {
+    return <Loading />;
+  }
 
   return (
     <HomeLayout>

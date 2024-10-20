@@ -23,6 +23,7 @@ import {
   ResponseSuccessType,
 } from "@/types/common";
 import { optionCreator } from "@/utils";
+import { badgeTitleShow } from "@/utils/badgeTitleShow";
 import { formatDate } from "@/utils/formateDate";
 import { Country } from "country-state-city";
 import React, { useMemo, useState } from "react";
@@ -357,7 +358,9 @@ const ManageKYC = () => {
                     }`}
                   >
                     <h3>
-                      {ownBy?.badgeTitle ? ownBy?.badgeTitle : "No Badge Title"}
+                      {ownBy?.badgeTitle
+                        ? badgeTitleShow(ownBy?.badgeTitle as EBadgeTitle)
+                        : "No Badge Title"}
                     </h3>
                     <IoIosArrowDown />
                   </div>

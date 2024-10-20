@@ -357,7 +357,7 @@ export interface IAccount {
   isApprovedForSeller: boolean;
   updatedAt: Date;
   approvedForSale: EApprovedForSale;
-  isSold: Boolean;
+  isSold: boolean;
   ownById: string;
   ownBy?: IUser;
   Orders: IOrder[];
