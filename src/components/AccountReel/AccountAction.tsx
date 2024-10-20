@@ -6,7 +6,7 @@ import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons";
 import {
   useAddCartMutation,
   useDeleteCartMutation,
-  useGetMyCartsQuery,
+  useGetMyCartsQuery
 } from "@/redux/features/cart/cartApi";
 import { useAppSelector } from "@/redux/hook";
 import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
@@ -27,7 +27,7 @@ const AccountAction = (props: Props) => {
     ownById,
     price,
     updatedAt,
-    ownBy,
+    ownBy
   } = props;
   const user = useAppSelector((state) => state.user.user);
 
@@ -38,8 +38,8 @@ const AccountAction = (props: Props) => {
     {
       isLoading: isAddToCartLoading,
       isError: isAddToCartError,
-      error: addToCartError,
-    },
+      error: addToCartError
+    }
   ] = useAddCartMutation();
   const [deleteCart, { isLoading: isDeleteLoading }] = useDeleteCartMutation();
   const { data, isLoading, isError, isFetching, isSuccess } =

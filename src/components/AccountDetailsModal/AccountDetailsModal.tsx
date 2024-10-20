@@ -17,7 +17,7 @@ type Props = {
   isModalOpen: boolean;
   handelOk: () => void;
   handleCancel: () => void;
-  existOnCart: ICart | null | undefined;
+  existOnCart?: ICart | null | undefined;
   handleAddCart?: () => void;
 } & IAccount;
 
@@ -34,7 +34,7 @@ const AccountDetailsModal = ({
   ownBy,
   preview,
   existOnCart,
-  handleAddCart,
+  handleAddCart
 }: Props) => {
   const [makeOrder, { isError, isLoading, isSuccess }] = useAddOrderMutation();
   const user = useAppSelector((state) => state.user.user);
@@ -55,7 +55,7 @@ const AccountDetailsModal = ({
             title: "Success!",
             text: "You have successfully buy this account",
 
-            confirmButtonText: "Ok",
+            confirmButtonText: "Ok"
           });
         }
       })
