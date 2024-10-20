@@ -5,7 +5,6 @@ import AccountLoading from "@/components/shared/AccountLoading";
 import AnimationWrapper from "@/components/ui/AnimationWrapper";
 import AppErrorComponent from "@/components/ui/AppErrorComponent";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
-import AppTabs from "@/components/ui/AppTabs";
 import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
@@ -40,6 +39,7 @@ const SellerDetailsPage = () => {
 
   const { isLoading, isFetching, isError, error, data } =
     useGetSellerProfileByIdQuery(pageQuery?.id);
+
   const reviewQueryString = useMemo(() => {
     const info = {
       page: reviewPage,
@@ -85,6 +85,7 @@ const SellerDetailsPage = () => {
     }, "");
     return queryString;
   }, [pageQuery, page]);
+
   const queryData = useGetAccountsQuery(queryString);
 
   if (isLoading) {
@@ -111,6 +112,7 @@ const SellerDetailsPage = () => {
       </HomeLayout>
     );
   }
+
   return (
     <HomeLayout>
       <PrivateLayout>
@@ -148,6 +150,7 @@ const SellerDetailsPage = () => {
                   )}
                   {sellerTabShow}
                 </span>
+
                 {sellerTabShow === "Ads" && (
                   <div className="max-h-[calc(100dvh-205px)] md:max-h-[67.8dvh] overflow-auto">
                     <AppRenderReduxData
@@ -217,6 +220,7 @@ const SellerDetailsPage = () => {
                         Negative({data?.data?.totalNegativeReviews})
                       </button>
                     </div>
+
                     <AppRenderReduxData
                       queryData={reviewQuery}
                       loadingComponent={<AccountLoading />}

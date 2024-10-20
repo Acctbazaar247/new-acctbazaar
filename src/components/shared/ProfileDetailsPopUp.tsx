@@ -20,6 +20,7 @@ export default function ProfileDetailsPopUp() {
       <div className="md:hidden">
         <AvatarComponent user={user} />
       </div>
+
       <div className="hidden md:block">
         <AppPopover
           popupOpen={open}

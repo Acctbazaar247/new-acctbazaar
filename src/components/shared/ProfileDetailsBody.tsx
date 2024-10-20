@@ -24,7 +24,6 @@ type ProfileDetailsBody = {
 
 const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
   const user = useAppSelector((state) => state.user.user);
-  console.log("🚀 ~ ProfileDetailsBody ~ user:", user);
   const dispatch = useAppDispatch();
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
@@ -86,7 +85,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   )}
                   {user?.badgeTitle && (
                     <p
-                      className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                      className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                     >
                       {user?.badgeTitle}
                     </p>

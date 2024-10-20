@@ -85,7 +85,7 @@ const VerifyBusinessAccount = () => {
       id: user?.id,
       ...data,
       identityImage,
-      status: "isOptional",
+      status: "pending",
     };
 
     if (!kycDenied) {

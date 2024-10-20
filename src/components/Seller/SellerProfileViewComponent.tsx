@@ -7,6 +7,7 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { FiCheck, FiCopy } from "react-icons/fi";
 import { IoIosCloseCircle } from "react-icons/io";
 import { IoCheckmarkCircle } from "react-icons/io5";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { toast } from "react-toastify";
 import {
   PolarAngleAxis,
@@ -42,6 +43,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
       negativePercentage: Math.round(negativePercentage),
     };
   }, [positiveReviews, negativeReviews]);
+
   const referralLink = `${domain}/seller/${data?.sellerInfo?.id}`;
 
   useEffect(() => {
@@ -104,7 +106,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
             className="size-20 2xl:size-28 rounded-full object-cover"
           />
 
-          {data.sellerInfo.isVerifiedByAdmin ? (
+          {/* {data.sellerInfo.isVerifiedByAdmin ? (
             <div className="absolute bottom-[5px] right-[5px]">
               <img
                 className="w-[20px]"
@@ -112,7 +114,19 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
                 alt="asdfdf"
               />
             </div>
-          ) : null}
+          ) : null} */}
+
+          {data.sellerInfo?.isVerifiedByAdmin && (
+            <div className="absolute bottom-[5px] right-[5px] md:right-1">
+              <RiVerifiedBadgeFill
+                className={`text-base lg:text-lg 2xl:text-xl bg-background rounded-full ${
+                  (data.sellerInfo?.badge == "blue" && "text-success") ||
+                  (data.sellerInfo?.badge == "gold" && "text-amber-400")
+                }`}
+              />
+            </div>
+          )}
+
           {data.sellerInfo.isVerifiedByAdmin ? (
             <div className="flex absolute w-[200px] items-center gap-1">
               {data.sellerInfo?.badgeTitle && (
