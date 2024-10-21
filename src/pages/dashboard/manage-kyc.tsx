@@ -2,7 +2,7 @@ import ViewUser from "@/components/dashboard/ViewUser";
 import AccountDeniedFrom from "@/components/Forms/AccountDeniedFrom";
 import Form from "@/components/Forms/Form";
 import FormSelectField, {
-  SelectOptions,
+  SelectOptions
 } from "@/components/Forms/FormSelectField";
 import TableLoading from "@/components/shared/TableLoading";
 import AppInput from "@/components/ui/AppInput";
@@ -13,14 +13,14 @@ import useDebounce from "@/hooks/useDebounce";
 import SuperAdminLayout from "@/layout/SuperAdminLayout";
 import {
   useGetAllKycRequestQuery,
-  useUpdateStatusBySuperAdminKycRequestMutation,
+  useUpdateStatusBySuperAdminKycRequestMutation
 } from "@/redux/features/kyc/kycApi";
 import { useEditUserMutation } from "@/redux/features/user/userApi";
 import {
   EBadge,
   EBadgeTitle,
   KycStatus,
-  ResponseSuccessType,
+  ResponseSuccessType
 } from "@/types/common";
 import { optionCreator } from "@/utils";
 import { badgeTitleShow } from "@/utils/badgeTitleShow";
@@ -48,21 +48,21 @@ const ManageKYC = () => {
     const updateData = {
       id,
       status,
-      messageByAdmin: denyMessage,
+      messageByAdmin: denyMessage
     };
     await updateKyc(updateData)
       .unwrap()
       .then((res: ResponseSuccessType) => {
         if (!res.success) {
           return toast.error(res?.data.message || "KYC updated unsuccessful!", {
-            toastId: 1,
+            toastId: 1
           });
         }
         toast.success("KYC updated successful!", { toastId: 1 });
       })
       .catch((res: any) => {
         return toast.error(res?.data.message || "Something went wrong!", {
-          toastId: 1,
+          toastId: 1
         });
       });
   };
@@ -75,7 +75,7 @@ const ManageKYC = () => {
     const updateData = {
       id,
       badge,
-      badgeTitle,
+      badgeTitle
     };
     await updateUser(updateData)
       .unwrap()
@@ -84,45 +84,46 @@ const ManageKYC = () => {
       })
       .catch((res) => {
         return toast.error(res?.data.message || "Something went wrong!", {
-          toastId: 1,
+          toastId: 1
         });
       });
   };
 
   const statusOptions = [
     {
-      status: KycStatus.PENDING,
+      status: KycStatus.PENDING
     },
     {
-      status: KycStatus.APPROVED,
+      status: KycStatus.APPROVED
     },
     {
-      status: KycStatus.DENIED,
-    },
+      status: KycStatus.DENIED
+    }
   ];
 
   const badgeOptions = [
     {
       status: EBadge.blue,
+      label: "green"
     },
     {
-      status: EBadge.gold,
+      status: EBadge.gold
     },
     {
-      status: EBadge.noBadge,
-    },
+      status: EBadge.noBadge
+    }
   ];
 
   const badgeTitleOptions = [
     {
-      status: EBadgeTitle.noBadgeTitle,
+      status: EBadgeTitle.noBadgeTitle
     },
     {
-      status: EBadgeTitle.verifiedMerchant,
+      status: EBadgeTitle.verifiedMerchant
     },
     {
-      status: EBadgeTitle.verifiedBusiness,
-    },
+      status: EBadgeTitle.verifiedBusiness
+    }
   ];
 
   const columns = [
@@ -141,7 +142,7 @@ const ManageKYC = () => {
             <p className="line-clamp-1">{ownBy?.name}</p>
           </div>
         );
-      },
+      }
     },
     {
       title: "Country",
@@ -156,7 +157,7 @@ const ManageKYC = () => {
             {selectedCountryDetails?.name}
           </p>
         );
-      },
+      }
     },
     {
       title: "Email",
@@ -164,7 +165,7 @@ const ManageKYC = () => {
       className: "min-w-[105px]",
       render: (ownBy: any) => {
         return <p className="line-clamp-1 text-base">{ownBy?.email}</p>;
-      },
+      }
     },
     {
       title: "Phone Number",
@@ -172,7 +173,7 @@ const ManageKYC = () => {
       className: "min-w-[105px]",
       render: (ownBy: any) => {
         return <p className="line-clamp-1  text-base">{ownBy?.phoneNumber}</p>;
-      },
+      }
     },
     {
       title: "Date",
@@ -180,7 +181,7 @@ const ManageKYC = () => {
       className: "min-w-[115px]",
       render: (date: string) => {
         return <p className="line-clamp-1">{formatDate(date)}</p>;
-      },
+      }
     },
     {
       title: "Status",
@@ -263,7 +264,7 @@ const ManageKYC = () => {
             </div>
           </div>
         );
-      },
+      }
     },
     {
       title: "Badge",
@@ -291,7 +292,13 @@ const ManageKYC = () => {
                     ${!ownBy?.badge && "bg-darkishGrey"}
                     `}
                   >
-                    <h3>{ownBy?.badge ? ownBy?.badge : "No Badge"}</h3>
+                    <h3>
+                      {ownBy?.badge
+                        ? ownBy?.badge === "blue"
+                          ? "green"
+                          : ownBy?.badge
+                        : "No Badge"}
+                    </h3>
                     <IoIosArrowDown />
                   </div>
                 }
@@ -302,7 +309,7 @@ const ManageKYC = () => {
                       key={stat.status}
                       button={
                         <button className="hover:bg-blue-50 w-full">
-                          {stat.status}
+                          {stat.label || stat.status}
                         </button>
                       }
                       cancelButtonTitle="No, Don’t"
@@ -332,7 +339,7 @@ const ManageKYC = () => {
             </div>
           </div>
         );
-      },
+      }
     },
     {
       title: "Badge Title",
@@ -398,7 +405,7 @@ const ManageKYC = () => {
             </div>
           </div>
         );
-      },
+      }
     },
     {
       title: "Action",
@@ -415,8 +422,8 @@ const ManageKYC = () => {
             </AppModal>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
 
   const queryString = useMemo(() => {
@@ -424,7 +431,7 @@ const ManageKYC = () => {
       status: status.value.length ? status.value : undefined,
       page,
       limit: 50,
-      email: debouncedSearch.length ? debouncedSearch : undefined,
+      email: debouncedSearch.length ? debouncedSearch : undefined
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];

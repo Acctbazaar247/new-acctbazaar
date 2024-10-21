@@ -29,7 +29,7 @@ const LeftSideAuthComponent = () => {
             <h1 className="font-bold text-4xl 2xl:text-5xl text-white mr-10">
               Connect. Trade. Transform Your Influence
             </h1>
-            <p className="pt-4 2xl:pt-8 text-borderLight 2xl:text-lg">
+            <p className="pt-4 2xl:pt-8 text-borderLight 2xl:text-lg text-white">
               Empower your social journey by discovering and trading social
               media accounts on a platform that values integrity and fosters
               ethical engagement. Your next digital adventure starts here
