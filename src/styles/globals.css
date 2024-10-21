@@ -997,16 +997,9 @@ img {
 
 .loader {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   transform: rotate(45deg);
-}
-
-@media screen and (max-width: 768px) {
-  .loader {
-    width: 25px;
-    height: 25px;
-  }
 }
 
 .loader-square {
@@ -1021,6 +1014,17 @@ img {
   background-position: center;
   background-attachment: fixed;
   animation: square-animation 10s ease-in-out infinite both;
+}
+
+@media screen and (max-width: 768px) {
+  .loader {
+    width: 25px;
+    height: 25px;
+  }
+  .loader-square {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .loader-square:nth-of-type(0) {

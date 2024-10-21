@@ -2,7 +2,7 @@ const Loading = ({ screen = "full" }: { screen?: "full" | "half" }) => {
   return (
     <div
       className={`flex items-center justify-center gap-4 ${
-        screen === "full" ? "h-screen" : " h-[50dvh]"
+        screen === "full" ? "h-[90dvh]" : " h-[50dvh]"
       }`}
     >
       <div className="loader">
