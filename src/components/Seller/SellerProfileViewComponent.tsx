@@ -19,7 +19,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
+const SellerProfileViewComponent = ({
+  data,
+  setActiveTab,
+  mobileTabs,
+  setActiveReviewTab,
+}: {
+  data: TSellerProfileInfo;
+  setActiveTab?: (tab: "Ads" | "Reviews") => void;
+  mobileTabs?: { value: string; label: string }[];
+  setActiveReviewTab?: (tab: string) => void;
+}) => {
   const dispatch = useAppDispatch();
   const [domain, setDomain] = useState("");
   const [copied, setCopied] = useState(false);
@@ -117,20 +127,21 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
             </div>
           ) : null} */}
 
-          {data.sellerInfo?.isVerifiedByAdmin && (
-            <div className="absolute bottom-[5px] right-[5px] md:right-1">
-              <RiVerifiedBadgeFill
-                className={`text-base lg:text-lg 2xl:text-xl bg-background rounded-full ${
-                  (data.sellerInfo?.badge == "blue" && "text-success") ||
-                  (data.sellerInfo?.badge == "gold" && "text-amber-400")
-                }`}
-              />
-            </div>
-          )}
+          {data.sellerInfo?.isVerifiedByAdmin &&
+            data?.sellerInfo?.badge !== "noBadge" && (
+              <div className="absolute bottom-[5px] right-[5px] md:right-1">
+                <RiVerifiedBadgeFill
+                  className={`text-base lg:text-lg 2xl:text-xl bg-background rounded-full ${
+                    (data.sellerInfo?.badge == "blue" && "text-success") ||
+                    (data.sellerInfo?.badge == "gold" && "text-amber-400")
+                  }`}
+                />
+              </div>
+            )}
 
           {data.sellerInfo.isVerifiedByAdmin ? (
             <div className="flex absolute w-[200px] pt-1 items-center gap-1">
-              {data.sellerInfo?.badgeTitle && (
+              {data.sellerInfo?.badgeTitle !== "noBadgeTitle" && (
                 <p
                   className={`capitalize rounded font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                 >
@@ -140,6 +151,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
             </div>
           ) : null}
         </div>
+
         <div className="">
           <h2 className="text-xl font-bold capitalize">
             {data?.sellerInfo?.name}
@@ -162,6 +174,7 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
               <IoCheckmarkCircle className="text-green-500" /> Email
             </h2>
           </div>
+
           <div className="flex items-center gap-2 text-sm">
             <p>{data.sellerInfo?.country}</p>
             {data.sellerInfo?.country ? (
@@ -201,7 +214,15 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
 
         <h3 className="flex items-center justify-between">
           <span
-            onClick={() => dispatch(setSellerTabShow("reviews"))}
+            onClick={() => {
+              dispatch(setSellerTabShow("reviews"));
+              if (setActiveTab) {
+                setActiveTab("Reviews");
+              }
+              if (mobileTabs) {
+                mobileTabs.push({ value: "Reviews", label: "Reviews" });
+              }
+            }}
             className="cursor-pointer hover:font-medium"
           >
             Total reviews
@@ -209,7 +230,23 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           <span className="font-bold">{data.totalReviews}</span>
         </h3>
         <h3 className="flex items-center justify-between">
-          <span>Positive reviews</span>
+          <span
+            onClick={() => {
+              dispatch(setSellerTabShow("reviews"));
+              if (setActiveTab) {
+                setActiveTab("Reviews");
+              }
+              if (setActiveReviewTab) {
+                setActiveReviewTab("Positive");
+              }
+              if (mobileTabs) {
+                mobileTabs.push({ value: "Reviews", label: "Reviews" });
+              }
+            }}
+            className="cursor-pointer hover:font-medium"
+          >
+            Positive reviews
+          </span>
           <p className="font-bold flex items-center gap-1">
             <AiOutlineLike className="text-green-500 text-base" />
             {percentages.positivePercentage}%{" "}
@@ -217,7 +254,23 @@ const SellerProfileViewComponent = ({ data }: { data: TSellerProfileInfo }) => {
           </p>
         </h3>
         <h3 className="flex items-center justify-between">
-          <span>Negative reviews</span>
+          <span
+            onClick={() => {
+              dispatch(setSellerTabShow("reviews"));
+              if (setActiveTab) {
+                setActiveTab("Reviews");
+              }
+              if (setActiveReviewTab) {
+                setActiveReviewTab("Negative");
+              }
+              if (mobileTabs) {
+                mobileTabs.push({ value: "Reviews", label: "Reviews" });
+              }
+            }}
+            className="cursor-pointer hover:font-medium"
+          >
+            Negative reviews
+          </span>
           <p className="font-bold flex items-center gap-1">
             <AiOutlineDislike className="text-red text-base" />
             {percentages.negativePercentage}%{" "}

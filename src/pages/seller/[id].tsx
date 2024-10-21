@@ -5,7 +5,9 @@ import AccountLoading from "@/components/shared/AccountLoading";
 import AnimationWrapper from "@/components/ui/AnimationWrapper";
 import AppErrorComponent from "@/components/ui/AppErrorComponent";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
+import AppTabs from "@/components/ui/AppTabs";
 import Loading from "@/components/ui/Loading";
+import useIsMobile from "@/hooks/useIsMobile";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
@@ -16,12 +18,13 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { EApprovedForSale, IAccount, IReview } from "@/types/common";
 import { Pagination } from "antd";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IoArrowUndoCircleOutline } from "react-icons/io5";
 
 const SellerDetailsPage = () => {
   const dispatch = useAppDispatch();
   const sellerTabShow = useAppSelector((state) => state.account.sellerTabShow);
+  const isMobile = useIsMobile();
   const tabs = [
     { value: "Ads", label: "Ads" },
     // { value: "Reviews", label: "Reviews" },
@@ -29,8 +32,15 @@ const SellerDetailsPage = () => {
   const mobileTabs = [
     { value: "Info", label: "Info" },
     { value: "Ads", label: "Ads" },
-    // { value: "Reviews", label: "Reviews" },
   ];
+
+  // useEffect(() => {
+
+  // }, [mobileTabs]);
+
+  // if (isMobile) {
+  //   mobileTabs.push({ value: "Reviews", label: "Reviews" });
+  // }
   const [activeTab, setActiveTab] = useState(tabs[0].value);
   const [activeReviewTab, setActiveReviewTab] = useState("All");
   const [page, setPage] = useState<number>(1);
@@ -132,26 +142,43 @@ const SellerDetailsPage = () => {
               </div>
               <div className="hidden md:block border border-whiteGrey"></div>
               <div className=" md:w-[68%] min-h-full bg-background  rounded-lg  p-2 md:p-4">
+                {isMobile && (
+                  <AppTabs
+                    tabs={mobileTabs}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                  />
+                )}
                 {/* <AppTabs
                   tabs={window.innerWidth > 1280 ? tabs : mobileTabs}
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
                 /> */}
 
-                {/* {activeTab === "Info" && (
-                  <SellerProfileViewComponent data={data.data} />
-                )} */}
+                {activeTab === "Info" && (
+                  <SellerProfileViewComponent
+                    setActiveTab={setActiveTab}
+                    data={data.data}
+                    mobileTabs={mobileTabs}
+                    setActiveReviewTab={setActiveReviewTab}
+                  />
+                )}
+
                 <span className="capitalize flex items-center gap-1 text-primary font-medium">
                   {sellerTabShow === "reviews" && (
                     <IoArrowUndoCircleOutline
-                      onClick={() => dispatch(setSellerTabShow("Ads"))}
+                      onClick={() => {
+                        mobileTabs.pop();
+                        dispatch(setSellerTabShow("Ads"));
+                        setActiveTab("Ads");
+                      }}
                       className="text-lg cursor-pointer"
                     />
                   )}
-                  {sellerTabShow}
+                  {isMobile && sellerTabShow === "Ads" ? "" : sellerTabShow}
                 </span>
 
-                {sellerTabShow === "Ads" && (
+                {activeTab === "Ads" && sellerTabShow === "Ads" && (
                   <div className="max-h-[calc(100dvh-205px)] md:max-h-[67.8dvh] overflow-auto">
                     <AppRenderReduxData
                       queryData={queryData}

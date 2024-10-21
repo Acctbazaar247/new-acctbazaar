@@ -195,10 +195,11 @@ const Navbar = () => {
         </div>
 
         {!user?.id && (
-          <div className="md:hidden cursor-pointer flex justify-end ml-auto">
+          <div className="md:hidden cursor-pointer flex items-center gap-4 justify-end ml-auto">
+            <ThemeSwitcher />
             <button
               onClick={() => setMobileMenu(true)}
-              className="hover:text-orange-500 transition-all flex justify-center items-center border p-2 rounded hover:border-orange-500"
+              className="hover:text-orange-500 text-textDarkGrey transition-all flex justify-center items-center border p-1 rounded hover:border-orange-500"
             >
               <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
             </button>
@@ -227,7 +228,7 @@ const Navbar = () => {
                     className={`flex items-center gap-1 nav-single-item  ${
                       router?.asPath === link.path
                         ? "!text-primary !hover:text-primary"
-                        : "text-textBlack"
+                        : "text-textDarkGrey"
                     }`}
                     href={link.path}
                   >

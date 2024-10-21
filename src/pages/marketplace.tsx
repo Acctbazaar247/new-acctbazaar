@@ -95,13 +95,13 @@ const Marketplace = () => {
                 type="text"
                 placeholder="Search by name or description"
                 value={search}
-                className="max-sm:!py-0.5"
+                className="max-sm:!py-1"
               />
               <AppDrawer
                 title="Filter"
                 showExtraBottomButton={true}
                 button={
-                  <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-0.5 md:py-1.5 text-lg">
+                  <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-1 md:py-1.5 text-lg">
                     <IoFilter />
                   </div>
                 }
@@ -119,9 +119,11 @@ const Marketplace = () => {
             <div className="hidden md:block border border-borderColor"></div>
 
             <div className="w-full px-2 md:px-4 2xl:px-6">
-              <h2 className="md:text-xl md:font-bold">Latest account</h2>
+              <h2 className="text-lg font-semibold md:text-xl md:font-bold">
+                Latest account
+              </h2>
 
-              <div className="h-[calc(100dvh-250px)] md:h-[calc(100dvh-400px)] xl:h-[calc(100dvh-300px)] 2xl:h-[calc(100dvh-335px)] overflow-y-auto">
+              <div className="h-[calc(100dvh-260px)] md:h-[calc(100dvh-400px)] xl:h-[calc(100dvh-300px)] 2xl:h-[calc(100dvh-335px)] overflow-y-auto">
                 {data?.data?.length === 0 ? (
                   <Empty
                     description="No Data Found"

@@ -12,6 +12,7 @@ import AvatarComponent from "../shared/AvatarComponent";
 import { FaRegEye } from "react-icons/fa6";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import AppButton from "@/components/ui/AppButton";
+import useIsMobile from "@/hooks/useIsMobile";
 
 type Props = {
   isModalOpen: boolean;
@@ -34,11 +35,11 @@ const AccountDetailsModal = ({
   ownBy,
   preview,
   existOnCart,
-  handleAddCart
+  handleAddCart,
 }: Props) => {
   const [makeOrder, { isError, isLoading, isSuccess }] = useAddOrderMutation();
   const user = useAppSelector((state) => state.user.user);
-
+  const isMobile = useIsMobile();
   const handleBuyAccount = () => {
     if (!user?.id) {
       toast.error("Your are not logged in");
@@ -55,7 +56,7 @@ const AccountDetailsModal = ({
             title: "Success!",
             text: "You have successfully buy this account",
 
-            confirmButtonText: "Ok"
+            confirmButtonText: "Ok",
           });
         }
       })
@@ -97,7 +98,11 @@ const AccountDetailsModal = ({
               {description}
             </p>
             {/* this is profile div  */}
-            <AvatarComponent user={ownBy as IUser} withName onlyBatch />
+            <AvatarComponent
+              nameClassName="!text-primary cursor-pointer"
+              user={ownBy as IUser}
+              withName
+            />
           </div>
         </div>
 
@@ -123,7 +128,7 @@ const AccountDetailsModal = ({
               </Tooltip>
             )}
 
-            <Tooltip title="View account details">
+            {/* <Tooltip title="View account details">
               <button
                 disabled={isSold || isLoading}
                 // onClick={() => setIsModalOpen(true)}
@@ -132,19 +137,31 @@ const AccountDetailsModal = ({
                   <FaRegEye className="text-textGrey text-lg mt-1" />
                 </Link>
               </button>
-            </Tooltip>
+            </Tooltip> */}
           </div>
         </div>
       </div>
 
-      <div className="pt-6 pb-2 flex items-center justify-center">
+      <div className="pt-6 pb-2 flex items-center justify-center gap-5">
+        {preview && (
+          <Tooltip title="View account details">
+            <AppButton
+              disabled={isSold || isLoading}
+              href={preview as string}
+              target="_blank"
+              label="Preview"
+              size={isMobile ? "small" : "default"}
+            />
+          </Tooltip>
+        )}
+
         <Popconfirm
           disabled={isLoading}
           onConfirm={handleBuyAccount}
           title="You want to buy this account?"
           okButtonProps={{ className: "bg-orange-500" }}
         >
-          <AppButton label="Buy Now" />
+          <AppButton label="Purchase" size={isMobile ? "small" : "default"} />
         </Popconfirm>
       </div>
       {/* <div className="flex flex-col gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">

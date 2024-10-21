@@ -1,4 +1,4 @@
-import { EBadgeTitle, IUser, UserRole } from "@/types/common";
+import { EBadge, EBadgeTitle, IUser, UserRole } from "@/types/common";
 import { badgeTitleShow } from "@/utils/badgeTitleShow";
 import { Avatar } from "antd";
 import Image from "next/image";
@@ -10,9 +10,16 @@ type TAvatar = {
   withName?: boolean;
   onlyBatch?: boolean;
   size?: "large";
+  nameClassName?: string;
 };
 
-const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
+const AvatarComponent = ({
+  user,
+  withName,
+  size,
+  onlyBatch,
+  nameClassName,
+}: TAvatar) => {
   const router = useRouter();
 
   const handleSellerClick = () => {
@@ -38,14 +45,14 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
               size === "large"
                 ? "text-sm md:text-base font-medium"
                 : "text-xs md:text-sm"
-            }`}
+            } ${nameClassName}`}
           >
             {user?.name}
           </p>
 
           {user?.isVerifiedByAdmin && (
             <div className="flex items-center gap-1">
-              {user?.badge && (
+              {user?.badge !== EBadge.noBadge && (
                 <RiVerifiedBadgeFill
                   className={`2xl:text-lg bg-background rounded-full ${
                     (user?.badge == "blue" && "text-success") ||
@@ -54,7 +61,7 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
                 />
               )}
 
-              {!onlyBatch && user?.badgeTitle && (
+              {!onlyBatch && user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
                 <p
                   className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                 >
@@ -74,7 +81,7 @@ const AvatarComponent = ({ user, withName, size, onlyBatch }: TAvatar) => {
             alt="country icon"
           />
 
-          {user?.isVerifiedByAdmin && (
+          {user?.isVerifiedByAdmin && user?.badge !== EBadge.noBadge && (
             <div className="absolute -bottom-0.5 md:-bottom-0.5 right-0 md:-right-1">
               <RiVerifiedBadgeFill
                 className={`text-sm md:text-base 2xl:text-lg bg-background rounded-full ${

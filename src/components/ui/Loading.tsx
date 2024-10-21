@@ -6,13 +6,13 @@ const Loading = ({ screen = "full" }: { screen?: "full" | "half" }) => {
       }`}
     >
       <div className="loader">
-        <div className="loader-square bg-loader"></div>
-        <div className="loader-square bg-loader"></div>
-        <div className="loader-square bg-loader"></div>
-        <div className="loader-square bg-loader"></div>
-        <div className="loader-square bg-loader"></div>
-        <div className="loader-square bg-loader"></div>
-        <div className="loader-square bg-loader"></div>
+        <div className="loader-square bg-primary"></div>
+        <div className="loader-square bg-primary"></div>
+        <div className="loader-square bg-primary"></div>
+        <div className="loader-square bg-primary"></div>
+        <div className="loader-square bg-primary"></div>
+        <div className="loader-square bg-primary"></div>
+        <div className="loader-square bg-primary"></div>
       </div>
     </div>
   );

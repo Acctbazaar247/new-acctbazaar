@@ -211,7 +211,7 @@ const VerifyBusinessAccount = () => {
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
                     <AppFormInput
-                      label="Business Name"
+                      label="User Name"
                       name="businessName"
                       type="text"
                       required
@@ -256,14 +256,14 @@ const VerifyBusinessAccount = () => {
                       required
                     />
 
-                    <AppFormInput
+                    {/* <AppFormInput
                       label="Business Website"
                       name="businessWebsite"
                       type="text"
                       required
                       register={register}
                       error={errors?.businessWebsite}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <hr className="border border-borderLight" />
@@ -459,6 +459,13 @@ const VerifyBusinessAccount = () => {
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
                     <KycImageUpload
+                      name="CertificateOfIncorporation"
+                      control={control}
+                      placeholder="Upload Certificate of Incorporation Document"
+                      required
+                    />
+
+                    <KycImageUpload
                       name="businessRegistrationDocument"
                       control={control}
                       required
@@ -472,22 +479,14 @@ const VerifyBusinessAccount = () => {
                       placeholder="Upload Proof of Address Document"
                     />
 
-                    <KycImageUpload
+                    {/* <KycImageUpload
                       name="financialStatements"
                       control={control}
                       placeholder="Upload Valid Financial Statements Document"
-                    />
-
-                    <KycImageUpload
-                      name="CertificateOfIncorporation"
-                      control={control}
-                      placeholder="Upload Certificate of Incorporation Document"
-                      required
-                    />
+                    /> */}
                   </div>
                 </div>
                 <hr className="border border-borderLight" />
-                asdfasdf
                 {!kycPending && (
                   <div className="flex items-center justify-end">
                     <button

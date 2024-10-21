@@ -1,4 +1,4 @@
-import { EBadgeTitle, UserRole } from "@/types/common";
+import { EBadge, EBadgeTitle, UserRole } from "@/types/common";
 import Link from "next/link";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
@@ -76,7 +76,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
                 <div className="flex items-center gap-1">
-                  {user?.badge && (
+                  {user?.badge !== EBadge.noBadge && (
                     <RiVerifiedBadgeFill
                       className={`2xl:text-lg bg-background rounded-full ${
                         (user?.badge == "blue" && "text-success") ||
@@ -84,7 +84,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                       }`}
                     />
                   )}
-                  {user?.badgeTitle && (
+                  {user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
                     <p
                       className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                     >
@@ -119,7 +119,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   {user?.role === UserRole.Seller &&
                     user?.isVerifiedByAdmin && (
                       <div className="flex items-center gap-1">
-                        {user?.badge && (
+                        {user?.badge !== "noBadge" && (
                           <RiVerifiedBadgeFill
                             className={`2xl:text-lg bg-background rounded-full ${
                               (user?.badge == "blue" && "text-success") ||
@@ -127,7 +127,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                             }`}
                           />
                         )}
-                        {user?.badgeTitle && (
+                        {user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
                           <p
                             className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
                           >

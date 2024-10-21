@@ -10,6 +10,8 @@ type TAppButtonProps = {
   size?: "small" | "medium" | "default";
   onClick?: () => void;
   className?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  disabled?: boolean;
 };
 
 const AppButton = ({
@@ -21,6 +23,8 @@ const AppButton = ({
   size = "default",
   className,
   type = "submit",
+  target,
+  disabled,
 }: TAppButtonProps) => {
   let btnStyle = "appBtn";
 
@@ -69,8 +73,12 @@ const AppButton = ({
   return (
     <>
       {href ? (
-        <Link href={href}>
-          <button disabled={isLoading} type="submit" className={btnStyle}>
+        <Link href={href} target={target}>
+          <button
+            disabled={disabled || isLoading}
+            type="submit"
+            className={btnStyle}
+          >
             {label}
           </button>
         </Link>
@@ -81,7 +89,7 @@ const AppButton = ({
       ) : (
         <button
           onClick={onClick}
-          disabled={isLoading}
+          disabled={disabled || isLoading}
           type={type}
           className={`${btnStyle} ${className}`}
         >
