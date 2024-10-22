@@ -119,7 +119,7 @@ const Marketplace = () => {
             <div className="hidden md:block border border-borderColor"></div>
 
             <div className="w-full px-2 md:px-4 2xl:px-6">
-              <h2 className="text-lg font-semibold md:text-xl md:font-bold">
+              <h2 className="text-lg font-semibold md:text-xl md:font-bold max-sm:pt-1">
                 Latest account
               </h2>
 

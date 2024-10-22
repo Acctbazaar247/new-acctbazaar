@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 type TAppDrawer = {
   button: ReactNode;
@@ -15,17 +16,21 @@ const AppDrawer = ({
   showExtraBottomButton,
 }: TAppDrawer) => {
   const [open, setOpen] = useState(false);
+
   return (
     <>
       {button && <div onClick={() => setOpen(true)}>{button}</div>}
-      <div
+      <motion.div
+        initial={{ opacity: 0, x: 300 }}
+        animate={{ opacity: open ? 1 : 0, x: open ? 0 : 100 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={`${
           open
-            ? "md:hidden fixed bottom-0 min-h-screen inset-0 z-50 bg-transparent"
+            ? "md:hidden fixed bottom-0 top-0 right-0 left-0 min-h-[100dvh] z-[99999999] bg-transparent"
             : "hidden"
-        } `}
+        }`}
       >
-        <div className="bg-borderLight h-full p-4  mt-11">
+        <div className="bg-borderLight h-full p-4 mt-11">
           <div className="flex items-center text-center">
             <HiOutlineArrowLeft
               onClick={() => setOpen(false)}
@@ -49,7 +54,7 @@ const AppDrawer = ({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

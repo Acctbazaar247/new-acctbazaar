@@ -42,6 +42,16 @@ const SellerDetailsPage = () => {
   //   mobileTabs.push({ value: "Reviews", label: "Reviews" });
   // }
   const [activeTab, setActiveTab] = useState(tabs[0].value);
+
+  useEffect(() => {
+    if (isMobile) {
+      if (activeTab === "Ads") {
+        setActiveReviewTab("null");
+        dispatch(setSellerTabShow("Ads"));
+      }
+    }
+  }, [activeTab]);
+
   const [activeReviewTab, setActiveReviewTab] = useState("All");
   const [page, setPage] = useState<number>(1);
   const [reviewPage, setReviewPage] = useState<number>(1);
@@ -55,7 +65,8 @@ const SellerDetailsPage = () => {
       page: reviewPage,
       limit: 100,
       sellerId: pageQuery?.id,
-      reviewStatus: activeReviewTab.toLowerCase(),
+      reviewStatus:
+        activeReviewTab !== "null" ? activeReviewTab.toLowerCase() : undefined,
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -138,9 +149,14 @@ const SellerDetailsPage = () => {
           <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
             <div className="flex flex-col md:flex-row gap-4 2xl:gap-6 min-h-[75dvh]">
               <div className="hidden md:block w-full xl:w-[30%]">
-                <SellerProfileViewComponent data={data.data} />
+                <SellerProfileViewComponent
+                  setActiveReviewTab={setActiveReviewTab}
+                  data={data.data}
+                />
               </div>
+
               <div className="hidden md:block border border-whiteGrey"></div>
+
               <div className=" md:w-[68%] min-h-full bg-background  rounded-lg  p-2 md:p-4">
                 {isMobile && (
                   <AppTabs
@@ -164,7 +180,7 @@ const SellerDetailsPage = () => {
                   />
                 )}
 
-                <span className="capitalize flex items-center gap-1 text-primary font-medium">
+                <span className="max-sm:hidden capitalize flex items-center gap-1 text-primary font-medium">
                   {sellerTabShow === "reviews" && (
                     <IoArrowUndoCircleOutline
                       onClick={() => {
@@ -216,7 +232,7 @@ const SellerDetailsPage = () => {
                   </div>
                 )}
 
-                {sellerTabShow === "reviews" && (
+                {sellerTabShow === "reviews" && activeReviewTab !== "null" && (
                   <div className="max-h-[67.8dvh] overflow-auto">
                     <div className="flex items-center gap-4 text-sm py-4">
                       <button

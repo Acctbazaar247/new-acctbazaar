@@ -84,13 +84,14 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                       }`}
                     />
                   )}
-                  {user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
-                    <p
-                      className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
-                    >
-                      {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
-                    </p>
-                  )}
+                  {user?.badgeTitle &&
+                    user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
+                      <p
+                        className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                      >
+                        {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
+                      </p>
+                    )}
                 </div>
               )}
             </h4>
@@ -127,13 +128,14 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                             }`}
                           />
                         )}
-                        {user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
-                          <p
-                            className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
-                          >
-                            {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
-                          </p>
-                        )}
+                        {user?.badgeTitle &&
+                          user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
+                            <p
+                              className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                            >
+                              {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
+                            </p>
+                          )}
                       </div>
                     )}
                 </h4>

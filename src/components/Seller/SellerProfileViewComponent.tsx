@@ -128,6 +128,7 @@ const SellerProfileViewComponent = ({
           ) : null} */}
 
           {data.sellerInfo?.isVerifiedByAdmin &&
+            data?.sellerInfo?.badge &&
             data?.sellerInfo?.badge !== "noBadge" && (
               <div className="absolute bottom-[5px] right-[5px] md:right-1">
                 <RiVerifiedBadgeFill
@@ -141,13 +142,14 @@ const SellerProfileViewComponent = ({
 
           {data.sellerInfo.isVerifiedByAdmin ? (
             <div className="flex absolute w-[200px] pt-1 items-center gap-1">
-              {data.sellerInfo?.badgeTitle !== "noBadgeTitle" && (
-                <p
-                  className={`capitalize rounded font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
-                >
-                  {badgeTitleShow(data.sellerInfo.badgeTitle as EBadgeTitle)}
-                </p>
-              )}
+              {data.sellerInfo?.badgeTitle &&
+                data.sellerInfo?.badgeTitle !== "noBadgeTitle" && (
+                  <p
+                    className={`capitalize rounded font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                  >
+                    {badgeTitleShow(data.sellerInfo.badgeTitle as EBadgeTitle)}
+                  </p>
+                )}
             </div>
           ) : null}
         </div>
@@ -218,6 +220,9 @@ const SellerProfileViewComponent = ({
               dispatch(setSellerTabShow("reviews"));
               if (setActiveTab) {
                 setActiveTab("Reviews");
+              }
+              if (setActiveReviewTab) {
+                setActiveReviewTab("All");
               }
               if (mobileTabs) {
                 mobileTabs.push({ value: "Reviews", label: "Reviews" });

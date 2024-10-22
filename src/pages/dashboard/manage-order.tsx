@@ -170,7 +170,6 @@ const ManageAllOrder = () => {
       dataIndex: "account",
       className: "min-w-[105px]",
       render: ({ ownBy }: { ownBy: IUser }) => {
-        console.log(ownBy);
         return (
           <div>
             <div className="flex items-center gap-2 text-base">

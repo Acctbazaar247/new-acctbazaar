@@ -61,13 +61,15 @@ const AvatarComponent = ({
                 />
               )}
 
-              {!onlyBatch && user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
-                <p
-                  className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
-                >
-                  {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
-                </p>
-              )}
+              {!onlyBatch &&
+                user?.badgeTitle &&
+                user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
+                  <p
+                    className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
+                  >
+                    {badgeTitleShow(user.badgeTitle as EBadgeTitle)}
+                  </p>
+                )}
             </div>
           )}
         </div>

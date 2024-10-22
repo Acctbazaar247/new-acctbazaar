@@ -106,6 +106,7 @@ const Marketplace = () => {
     0: "$0",
     5000: "$5000",
   };
+
   return (
     <RootLayout>
       <HomeLayout>
