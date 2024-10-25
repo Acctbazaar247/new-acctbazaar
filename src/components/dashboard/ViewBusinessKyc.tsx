@@ -86,6 +86,10 @@ const ViewBusinessKyc = ({ record }: TEditUserProps) => {
     },
   ];
 
+  if (!businessKycData.length || !imageDocs.length) {
+    return null;
+  }
+
   return (
     <div className="md:w-[50vw] overflow-auto space-y-5 p-4 2xl:max-h-[60vh]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
@@ -132,7 +136,7 @@ const ViewBusinessKyc = ({ record }: TEditUserProps) => {
               <p className="text-textDarkGrey">{data?.label}</p>
 
               <Image
-                src={data?.value as string}
+                src={data?.value || ""}
                 alt="identity image"
                 className="w-full rounded min-h-24 max-h-36 object-cover"
                 width={180}

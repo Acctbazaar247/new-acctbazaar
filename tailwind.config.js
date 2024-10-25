@@ -17,6 +17,9 @@ module.exports = {
         "custom-dvh-md": "calc(100dvh - 64px)",
         "custom-dvh-sm": "calc(100dvh - 56px)",
       },
+      screens: {
+        "3xl": "1600px",
+      },
       // colors: {
       //   primary: "#FF5A35",
       //   textBlack: "#1B1818",

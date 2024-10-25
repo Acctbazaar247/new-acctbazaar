@@ -79,7 +79,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   {user?.badge !== EBadge.noBadge && (
                     <RiVerifiedBadgeFill
                       className={`2xl:text-lg bg-background rounded-full ${
-                        (user?.badge == "blue" && "text-success") ||
+                        (user?.badge == "blue" && "text-blue") ||
                         (user?.badge == "gold" && "text-amber-400")
                       }`}
                     />
@@ -123,7 +123,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                         {user?.badge !== "noBadge" && (
                           <RiVerifiedBadgeFill
                             className={`2xl:text-lg bg-background rounded-full ${
-                              (user?.badge == "blue" && "text-success") ||
+                              (user?.badge == "blue" && "text-blue") ||
                               (user?.badge == "gold" && "text-amber-400")
                             }`}
                           />

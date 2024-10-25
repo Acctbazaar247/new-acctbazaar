@@ -211,7 +211,7 @@ const VerifyBusinessAccount = () => {
                   {/* this is right side text  */}
                   <div className="w-full md:w-[40%] space-y-3">
                     <AppFormInput
-                      label="User Name"
+                      label="Business Name"
                       name="businessName"
                       type="text"
                       required

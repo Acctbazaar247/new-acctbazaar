@@ -3,9 +3,9 @@ import { EBadgeTitle } from "@/types/common";
 export const badgeTitleShow = (badge: EBadgeTitle) => {
   switch (badge) {
     case EBadgeTitle.verifiedMerchant:
-      return "Verified Merchant";
+      return "Merchant";
     case EBadgeTitle.verifiedBusiness:
-      return "Verified Business";
+      return "Business";
     case EBadgeTitle.noBadgeTitle:
       return "";
   }

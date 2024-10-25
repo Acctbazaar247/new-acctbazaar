@@ -34,7 +34,7 @@ export default function CartPopUpBody() {
               <CartAccountCard account={account} key={index} />
             ))}
           </div>
-          <div className="pt-1">
+          <div className="py-1">
             <h4 className="text-end">Summary</h4>
             <div className="py-1">
               <div className="flex items-center justify-end gap-4">

@@ -133,7 +133,7 @@ const SellerProfileViewComponent = ({
               <div className="absolute bottom-[5px] right-[5px] md:right-1">
                 <RiVerifiedBadgeFill
                   className={`text-base lg:text-lg 2xl:text-xl bg-background rounded-full ${
-                    (data.sellerInfo?.badge == "blue" && "text-success") ||
+                    (data.sellerInfo?.badge == "blue" && "text-blue") ||
                     (data.sellerInfo?.badge == "gold" && "text-amber-400")
                   }`}
                 />
@@ -141,7 +141,7 @@ const SellerProfileViewComponent = ({
             )}
 
           {data.sellerInfo.isVerifiedByAdmin ? (
-            <div className="flex absolute w-[200px] pt-1 items-center gap-1">
+            <div className="flex absolute w-[80px] justify-center pt-1 items-center gap-1 3xl:pl-4">
               {data.sellerInfo?.badgeTitle &&
                 data.sellerInfo?.badgeTitle !== "noBadgeTitle" && (
                   <p
@@ -230,7 +230,7 @@ const SellerProfileViewComponent = ({
             }}
             className="cursor-pointer hover:font-medium"
           >
-            Total reviews
+            See All Reviews
           </span>
           <span className="font-bold">{data.totalReviews}</span>
         </h3>
@@ -336,7 +336,7 @@ const SellerProfileViewComponent = ({
 
       <div className="rounded bg-primary/5 flex flex-col  items-center justify-between w-full py-2 2xl:py-2.5 px-4">
         <span className="textG min-w-fit">Merchant link:</span>
-        <p onClick={copyText} className="flex textB items-center   gap-1">
+        <p onClick={copyText} className="flex textB items-center gap-1">
           <span className="whitespace-pre-wrap text-wrap inline-block  ">
             {/* https://new-acctbazaar-development.onrender.com/seller/a0a5cc97-21f9-4f4f-b9aa-42ddd03c5546 */}
             {referralLink}

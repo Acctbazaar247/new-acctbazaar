@@ -34,6 +34,10 @@ const RootLayout: React.FC<Props> = ({ children }) => {
     }
   }, [dispatch]);
 
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <ConfigProvider
       theme={{

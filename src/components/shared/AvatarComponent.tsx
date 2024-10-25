@@ -55,7 +55,7 @@ const AvatarComponent = ({
               {user?.badge !== EBadge.noBadge && (
                 <RiVerifiedBadgeFill
                   className={`2xl:text-lg bg-background rounded-full ${
-                    (user?.badge == "blue" && "text-success") ||
+                    (user?.badge == "blue" && "text-blue") ||
                     (user?.badge == "gold" && "text-amber-400")
                   }`}
                 />
@@ -87,7 +87,7 @@ const AvatarComponent = ({
             <div className="absolute -bottom-0.5 md:-bottom-0.5 right-0 md:-right-1">
               <RiVerifiedBadgeFill
                 className={`text-sm md:text-base 2xl:text-lg bg-background rounded-full ${
-                  (user?.badge == "blue" && "text-success") ||
+                  (user?.badge == "blue" && "text-blue") ||
                   (user?.badge == "gold" && "text-amber-400")
                 }`}
               />

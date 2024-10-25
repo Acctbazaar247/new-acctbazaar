@@ -67,11 +67,11 @@ const AccountDetailsModal = ({
 
   return (
     <Modal
-      title={
-        <span className="capitalize line-clamp-1">
-          {name.slice(0, 40) + " details"}
-        </span>
-      }
+      // title={
+      //   <span className="capitalize line-clamp-1">
+      //     {name.slice(0, 40) + " details"}
+      //   </span>
+      // }
       open={isModalOpen}
       onOk={handelOk}
       onCancel={handleCancel}
@@ -99,7 +99,7 @@ const AccountDetailsModal = ({
             </p>
             {/* this is profile div  */}
             <AvatarComponent
-              nameClassName="!text-primary cursor-pointer"
+              nameClassName="cursor-pointer"
               user={ownBy as IUser}
               withName
             />
@@ -107,7 +107,7 @@ const AccountDetailsModal = ({
         </div>
 
         <div className="flex md:flex-col gap-1 md:gap-4 max-sm:pt-4 max-sm:w-full max-sm:pl-12  justify-between">
-          <h2 className="text-textBlack font-bold flex items-center justify-end">
+          <h2 className="text-textBlack font-bold flex items-center justify-end text-base">
             <PiCurrencyDollarBold />
             <span>{price}</span>
           </h2>
@@ -150,19 +150,24 @@ const AccountDetailsModal = ({
               href={preview as string}
               target="_blank"
               label="Preview"
+              variant="outline"
               size={isMobile ? "small" : "default"}
             />
           </Tooltip>
         )}
+        <AppButton
+          onClick={handleBuyAccount}
+          label="Purchase"
+          size={isMobile ? "small" : "default"}
+        />
 
-        <Popconfirm
+        {/* <Popconfirm
           disabled={isLoading}
           onConfirm={handleBuyAccount}
           title="You want to buy this account?"
           okButtonProps={{ className: "bg-orange-500" }}
         >
-          <AppButton label="Purchase" size={isMobile ? "small" : "default"} />
-        </Popconfirm>
+        </Popconfirm> */}
       </div>
       {/* <div className="flex flex-col gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">
         <Image

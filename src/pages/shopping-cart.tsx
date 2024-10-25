@@ -270,11 +270,27 @@ export default function ShoppingCart() {
                 View order details
               </Link>
 
-              {/* <h3 className="text-sm lg:text-lg  font-medium text-textBlack">Leave a review</h3>
-              <div className='flex items-center gap-4 pt-2'>
-                <button onClick={() => setFeedback("positive")} className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-green-500 text-green-500 ${feedback === "positive" && "bg-green-500 text-white"}`}><AiOutlineLike /> Positive</button>
-                <button onClick={() => setFeedback("negative")} className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-red text-red  ${feedback === "negative" && "bg-red text-white"}`}><AiOutlineDislike /> Negative</button>
-              </div> */}
+              <h3 className="text-sm lg:text-lg  font-medium text-textBlack">
+                Leave a review
+              </h3>
+              <div className="flex items-center gap-4 pt-2">
+                <button
+                  onClick={() => setFeedback("positive")}
+                  className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-green-500 text-green-500 ${
+                    feedback === "positive" && "bg-green-500 text-white"
+                  }`}
+                >
+                  <AiOutlineLike /> Positive
+                </button>
+                <button
+                  onClick={() => setFeedback("negative")}
+                  className={`flex items-center gap-1 border rounded-full px-2 py-0.5 border-red text-red  ${
+                    feedback === "negative" && "bg-red text-white"
+                  }`}
+                >
+                  <AiOutlineDislike /> Negative
+                </button>
+              </div>
 
               {(feedback === "positive" || feedback === "negative") && (
                 <form

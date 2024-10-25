@@ -121,7 +121,7 @@ const MyPurchaseAccountCard = ({
 
             {/* this is icons div view cart message  */}
             <div className="flex items-center justify-between gap-4 text-textGrey">
-              {/* {!account?.Review?.id &&
+              {!account?.Review?.id &&
                 order?.status !== EOrderStatus.CANCELLED && (
                   <div
                     className="w-fit h-fit"
@@ -131,7 +131,7 @@ const MyPurchaseAccountCard = ({
                       <VscFeedback className="cursor-pointer text-[18px] md:text-[20px]" />
                     </Tooltip>
                   </div>
-                )} */}
+                )}
 
               {order?.status !== EOrderStatus.CANCELLED && (
                 <AppModal
@@ -142,7 +142,7 @@ const MyPurchaseAccountCard = ({
                         src={"/assets/icons/eye.png"}
                         width={40}
                         height={40}
-                        className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                        className="size-6 md:size-7 contrast-0 cursor-pointer min-w-5 md:min-w-6 min-h-5 md:min-h-6"
                         alt="eye"
                       />
                     </Tooltip>
@@ -158,7 +158,7 @@ const MyPurchaseAccountCard = ({
                     src={"/assets/icons/message.png"}
                     width={40}
                     height={40}
-                    className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                    className="size-5 contrast-0 md:size-6 cursor-pointer min-w-5 md:min-w-6 min-h-5 md:min-h-6"
                     alt="message"
                   />
                 </Tooltip>
