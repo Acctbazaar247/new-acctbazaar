@@ -155,6 +155,19 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
         </div>
 
         <div className="space-y-2 pt-2 p-2">
+          {user?.role === UserRole.Seller &&
+            (!user?.isVerifiedByAdmin ||
+              !user?.isVerifiedByAdmin ||
+              !user?.isBusinessVerified) && (
+              <button
+                onClick={openModal}
+                className="appOutlineBtnSm py-1 px-2 text-xs rounded w-fit md:hidden"
+              >
+                {user?.isVerifiedByAdmin && !user?.isBusinessVerified
+                  ? "Register as business"
+                  : "Become Verified"}
+              </button>
+            )}
           {navItems.map((nav: any) =>
             nav?.label === "Log out" ? (
               <div

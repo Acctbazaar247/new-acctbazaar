@@ -43,6 +43,7 @@ export interface IFaq {
 export interface IUser {
   id: string;
   name: string;
+  userName: string;
   email: string;
   password: string;
   role: UserRole;
@@ -557,9 +558,11 @@ export type TSellerProfileInfo = {
   sellerInfo: Pick<
     IUser,
     | "name"
+    | "userName"
     | "id"
     | "profileImg"
     | "isVerifiedByAdmin"
+    | "isBusinessVerified"
     | "country"
     | "createdAt"
     | "badge"

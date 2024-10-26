@@ -156,7 +156,9 @@ const SellerProfileViewComponent = ({
 
         <div className="">
           <h2 className="text-xl font-bold capitalize">
-            {data?.sellerInfo?.name}
+            {data?.sellerInfo?.isBusinessVerified
+              ? data?.sellerInfo?.userName || data?.sellerInfo?.name
+              : data?.sellerInfo?.name}
           </h2>
 
           <div className="flex items-center flex-wrap gap-x-4 text-xs 2xl:text-sm py-3">

@@ -40,6 +40,7 @@ const AccountDetailsModal = ({
   const [makeOrder, { isError, isLoading, isSuccess }] = useAddOrderMutation();
   const user = useAppSelector((state) => state.user.user);
   const isMobile = useIsMobile();
+
   const handleBuyAccount = () => {
     if (!user?.id) {
       toast.error("Your are not logged in");
