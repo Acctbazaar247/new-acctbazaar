@@ -34,7 +34,7 @@ export default function CartPopUpBody() {
               <CartAccountCard account={account} key={index} />
             ))}
           </div>
-          <div className="py-1">
+          <div className="py-1 pr-3">
             <h4 className="text-end">Summary</h4>
             <div className="py-1">
               <div className="flex items-center justify-end gap-4">
@@ -61,12 +61,13 @@ export default function CartPopUpBody() {
               </h2>
             </div>
           </div>
-
-          <Link href={"/shopping-cart"}>
-            <button className="appBtn w-full">
-              Checkout {myCarts.length > 0 && `( ${myCarts.length} )`}
-            </button>
-          </Link>
+          <div className="p-2">
+            <Link href={"/shopping-cart"}>
+              <button className="appBtn w-full">
+                Checkout {myCarts.length > 0 && `( ${myCarts.length} )`}
+              </button>
+            </Link>
+          </div>
         </>
       ) : (
         <div className="p-4 text-zinc flex items-center justify-center flex-col gap-2">

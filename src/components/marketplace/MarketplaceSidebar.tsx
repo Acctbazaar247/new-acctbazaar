@@ -75,7 +75,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
   ];
 
   return (
-    <div>
+    <div className="h-[calc(100dvh-200px)] overflow-auto no-scrollbar">
       {!isHideTitle && (
         <h2 className="font-bold text-textBlack 2xl:text-lg pb-2 px-6">
           Filter

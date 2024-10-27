@@ -1,5 +1,5 @@
 import { useAddOrderMutation } from "@/redux/features/order/orderApi";
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { findImageUrlByCategory } from "@/shared";
 import { IAccount, ICart, IUser } from "@/types/common";
 import { Modal, Popconfirm, Tooltip } from "antd";
@@ -13,6 +13,7 @@ import { FaRegEye } from "react-icons/fa6";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import AppButton from "@/components/ui/AppButton";
 import useIsMobile from "@/hooks/useIsMobile";
+import { setModalOpen } from "@/redux/features/marketplace/marketplaceSlice";
 
 type Props = {
   isModalOpen: boolean;
@@ -40,7 +41,7 @@ const AccountDetailsModal = ({
   const [makeOrder, { isError, isLoading, isSuccess }] = useAddOrderMutation();
   const user = useAppSelector((state) => state.user.user);
   const isMobile = useIsMobile();
-
+  const dispatch = useAppDispatch();
   const handleBuyAccount = () => {
     if (!user?.id) {
       toast.error("Your are not logged in");
@@ -52,13 +53,14 @@ const AccountDetailsModal = ({
         if (res.error) {
           toast.error("Something Went Wrong");
         } else {
-          return Swal.fire({
-            icon: "success",
-            title: "Success!",
-            text: "You have successfully buy this account",
+          // return Swal.fire({
+          //   icon: "success",
+          //   title: "Success!",
+          //   text: "You have successfully buy this account",
 
-            confirmButtonText: "Ok",
-          });
+          //   confirmButtonText: "Ok",
+          // });
+          return dispatch(setModalOpen(true));
         }
       })
       .catch((err) => {
@@ -157,6 +159,7 @@ const AccountDetailsModal = ({
           </Tooltip>
         )}
         <AppButton
+          isLoading={isLoading}
           onClick={handleBuyAccount}
           label="Purchase"
           size={isMobile ? "small" : "default"}
