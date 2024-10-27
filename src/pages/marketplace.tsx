@@ -32,7 +32,6 @@ const Marketplace = () => {
 
   const { minPrice, maxPrice } = useAppSelector((state) => state.marketplace);
 
-  // console.log(minPrice, maxPrice);
   // const debouncedPrice = useDebounce([minPrice, maxPrice], 500);
   const minPriceDe = useDebounce(minPrice, 500);
   const maxPriceDe = useDebounce(maxPrice, 500);
