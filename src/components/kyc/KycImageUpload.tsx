@@ -47,20 +47,6 @@ const KycImageUpload = ({
       });
   };
 
-  useEffect(() => {
-    const isValidImage = (url: string) => {
-      if (!url) return false;
-      const image = new Image();
-      image.src = url;
-      return image.width !== 0;
-    };
-
-    if (image && !isValidImage(image)) {
-      toast.error("Please upload a valid image", { toastId: 2 });
-      setImage("");
-    }
-  }, [image]);
-
   return (
     <Controller
       name={name}
