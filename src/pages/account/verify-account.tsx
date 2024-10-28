@@ -236,7 +236,7 @@ const VerifyAccount = () => {
                 className="w-full py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between max-md:gap-5">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
                     <h3 className="font-semibold">Personal Information</h3>
@@ -246,7 +246,7 @@ const VerifyAccount = () => {
                     </p>
                   </div>
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     <AppFormInput
                       label="Full Name"
                       name="name"
@@ -311,7 +311,7 @@ const VerifyAccount = () => {
                     </p>
                   </div>
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     <AppFormSelect
                       control={control}
                       placeholder="Country of residence"
@@ -359,7 +359,7 @@ const VerifyAccount = () => {
                   </div>
                 </div>
                 <div className="border border-borderLight"></div>
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between max-md:gap-5">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
                     <h3 className="font-semibold">Means of Identification</h3>
@@ -368,7 +368,7 @@ const VerifyAccount = () => {
                     </p>
                   </div>
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     <AppFormDatePicker
                       control={control}
                       name="birthDate"
@@ -455,7 +455,7 @@ const VerifyAccount = () => {
                 </div>
                 <div className="border border-borderLight"></div>
                 {!kycPending && (
-                  <div className="flex items-center justify-end">
+                  <div className="flex items-center justify-end max-md:gap-5">
                     {/* {isLoading || loading || updateLoading ? (
                                             <button
                                                 type="button"

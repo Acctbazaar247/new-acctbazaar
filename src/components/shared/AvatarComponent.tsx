@@ -47,7 +47,9 @@ const AvatarComponent = ({
                 : "text-xs md:text-sm"
             } ${nameClassName}`}
           >
-            {user?.name}
+            {user?.isBusinessVerified
+              ? user?.userName || user?.name
+              : user?.name}
           </p>
 
           {user?.isVerifiedByAdmin && (

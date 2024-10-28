@@ -139,14 +139,15 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                       </div>
                     )}
                 </h4>
-                {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
+
+                {/* {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
                   <button
                     onClick={openModal}
                     className="appOutlineBtnSm w-fit mt-2 md:hidden"
                   >
                     Become Verified
                   </button>
-                )}
+                )} */}
               </div>
 
               <p className="textG">{user?.email}</p>
@@ -168,6 +169,7 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   : "Become Verified"}
               </button>
             )}
+
           {navItems.map((nav: any) =>
             nav?.label === "Log out" ? (
               <div
