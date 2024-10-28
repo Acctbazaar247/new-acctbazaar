@@ -199,7 +199,7 @@ const VerifyBusinessAccount = () => {
                 className="w-full py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between max-md:gap-5">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
                     <h3 className="font-semibold">Business Information</h3>
@@ -209,7 +209,7 @@ const VerifyBusinessAccount = () => {
                     </p>
                   </div>
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     <AppFormInput
                       label="Business Name"
                       name="businessName"
@@ -267,7 +267,7 @@ const VerifyBusinessAccount = () => {
                   </div>
                 </div>
                 <hr className="border border-borderLight" />
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between max-md:gap-5">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
                     <h3 className="font-semibold">Contact Information</h3>
@@ -277,7 +277,7 @@ const VerifyBusinessAccount = () => {
                   </div>
 
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     <AppFormInput
                       label="Primary Contact Person"
                       name="primaryContactPerson"
@@ -318,7 +318,7 @@ const VerifyBusinessAccount = () => {
                   </div>
                 </div>
                 <hr className="border border-borderLight" />
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between max-md:gap-5">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
                     <h3 className="font-semibold">Ownership Information</h3>
@@ -328,7 +328,7 @@ const VerifyBusinessAccount = () => {
                   </div>
 
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     {fields.map((owner, index) => (
                       <div key={owner.id} className="space-y-3">
                         <div className="flex justify-between items-center">
@@ -397,7 +397,7 @@ const VerifyBusinessAccount = () => {
                     ))}
                     <div className="flex justify-center">
                       <AppButton
-                        label="Add Beneficial Owner"
+                        label="Add Another Beneficial Owner"
                         type="button"
                         onClick={handleAppend}
                         size="small"
@@ -407,7 +407,7 @@ const VerifyBusinessAccount = () => {
                   </div>
                 </div>
                 <hr className="border border-borderLight" />
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between max-md:gap-5">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
                     <h3 className="font-semibold">Financial Information</h3>
@@ -416,7 +416,7 @@ const VerifyBusinessAccount = () => {
                     </p>
                   </div>
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     <AppFormInput
                       label="Bank Account Number"
                       name="bankAccountNumber"
@@ -447,7 +447,7 @@ const VerifyBusinessAccount = () => {
                   </div>
                 </div>
                 <hr className="border border-borderLight" />
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between max-md:gap-5">
                   {/* this is left side text  */}
                   <div className="text-textBlueBlack space-y-1">
                     <h3 className="font-semibold">Documents Upload</h3>
@@ -457,7 +457,7 @@ const VerifyBusinessAccount = () => {
                   </div>
 
                   {/* this is right side text  */}
-                  <div className="w-full md:w-[40%] space-y-3">
+                  <div className="w-full md:w-[40%] space-y-5 md:space-y-3">
                     <KycImageUpload
                       name="CertificateOfIncorporation"
                       control={control}

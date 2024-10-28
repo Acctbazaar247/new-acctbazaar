@@ -1,5 +1,5 @@
 import { useUploadImageMutation } from "@/redux/features/user/userApi";
-import Image from "next/image";
+import NextImage from "next/image";
 import { useEffect, useState } from "react";
 import { Control, Controller } from "react-hook-form";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -20,7 +20,7 @@ const KycImageUpload = ({
   placeholder,
 }: IKycImageUpload) => {
   const [uploadImage, { isLoading }] = useUploadImageMutation();
-  const [image, setImage] = useState<string | undefined>("");
+  const [image, setImage] = useState<string>("");
 
   const handleFileUpload = async (
     value: File,
@@ -39,13 +39,27 @@ const KycImageUpload = ({
       .unwrap()
       .then((res) => {
         toast.success("File upload successfully!", { toastId: 1 });
-        setImage(res?.data?.url);
         onChange(res?.data?.url);
+        setImage(res?.data?.url);
       })
       .catch((res) => {
         toast.error(res?.message || "Something went wrong", { toastId: 1 });
       });
   };
+
+  useEffect(() => {
+    const isValidImage = (url: string) => {
+      if (!url) return false;
+      const image = new Image();
+      image.src = url;
+      return image.width !== 0;
+    };
+
+    if (image && !isValidImage(image)) {
+      toast.error("Please upload a valid image", { toastId: 2 });
+      setImage("");
+    }
+  }, [image]);
 
   return (
     <Controller
@@ -97,7 +111,7 @@ const KycImageUpload = ({
                       </p>
                     </div>
                   ) : (
-                    <Image
+                    <NextImage
                       width={600}
                       height={200}
                       src={image}
