@@ -80,10 +80,10 @@ const ViewBusinessKyc = ({ record }: TEditUserProps) => {
       label: "Proof Of Address",
       value: record?.proofOfAddress,
     },
-    {
-      label: "Financial Statements",
-      value: record?.financialStatements,
-    },
+    // {
+    //   label: "Financial Statements",
+    //   value: record?.financialStatements,
+    // },
   ];
 
   if (!businessKycData.length || !imageDocs.length) {
