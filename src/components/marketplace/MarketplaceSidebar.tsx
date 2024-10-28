@@ -1,7 +1,3 @@
-import { getImageUrlByCategory } from "@/utils/getImageUrl";
-import MarketPlaceSidebarFilterElement from "./MarketPlaceSidebarFilterElement";
-import PriceRange from "./PriceRange";
-import { AccountCategory } from "@/types/common";
 import {
   AccountsSubscriptionsCategories,
   EcommerceCategories,
@@ -13,6 +9,12 @@ import {
   VpnCategories,
   WebsitesCategories,
 } from "@/shared";
+import { AccountCategory } from "@/types/common";
+import MarketPlaceSidebarFilterElement from "./MarketPlaceSidebarFilterElement";
+import PriceRange from "./PriceRange";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { clearSelectedCategories } from "@/redux/features/categories/categorySlice";
+import AppButton from "@/components/ui/AppButton";
 
 const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
   const sidebarMenu: any = [
@@ -73,6 +75,10 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
       ],
     },
   ];
+  const selectedCategories = useAppSelector(
+    (state) => state.categories.selectedCategories
+  );
+  const dispatch = useAppDispatch();
 
   return (
     <div className="h-[calc(100dvh-200px)] overflow-auto no-scrollbar">
@@ -87,6 +93,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
         <h3 className="border-b border-b-borderColor px-4 md:px-5 pb-2 md:pb-4 text-textBlack font-medium">
           Account Category
         </h3>
+
         <div className="pt-2 h-[40dvh] lg:h-[35dvh] 2xl:h-[calc(100dvh-500px)] no-scrollbar overflow-y-auto">
           {sidebarMenu.map((sidebar: any) => (
             <MarketPlaceSidebarFilterElement
@@ -95,8 +102,20 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
             />
           ))}
         </div>
+
+        {selectedCategories && selectedCategories.length > 0 && (
+          <div className="flex justify-end px-4">
+            <AppButton
+              size="small"
+              label="Reset Filter"
+              className="w-fit"
+              onClick={() => dispatch(clearSelectedCategories())}
+            />
+          </div>
+        )}
+
         {/* this is price range  */}
-        <div className="mb-2 p-2 md:p-4">
+        <div className="mb-2 pb-2 px-2 md:px-4 md:pb-4">
           <h4>Price range</h4>
           <PriceRange />
         </div>
