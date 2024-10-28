@@ -75,6 +75,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
       ],
     },
   ];
+
   const selectedCategories = useAppSelector(
     (state) => state.categories.selectedCategories
   );
