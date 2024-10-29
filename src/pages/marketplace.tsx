@@ -82,10 +82,10 @@ const Marketplace = () => {
         >
           {/* this is top section div  */}
           <AppAlert isShow={isShow} setIsShow={setIsShow} message={message} />
-          <div className="flex flex-col md:flex-row justify-between md:gap-1 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto fixed bg-background md:static z-40">
+          <div className="flex flex-col md:flex-row justify-between md:gap-1 max-xxs:py-3 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto fixed bg-background md:static z-40">
             <div className="md:pl-4 2xl:pl-6">
               <h2 className="title">Marketplace</h2>
-              <p className="text-textGrey text-xs md:text-sm">
+              <p className="text-textGrey max-xxs:text-[11px] text-xs md:text-sm">
                 Access all products on the marketplace by our verified sellers
               </p>
             </div>

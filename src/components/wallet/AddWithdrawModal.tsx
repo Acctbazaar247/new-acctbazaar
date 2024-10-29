@@ -90,7 +90,7 @@ export default function AddWithdrawModal() {
     handleSubmit,
     reset,
     watch,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -109,7 +109,7 @@ export default function AddWithdrawModal() {
         accountNumber: data?.accountNumber,
         fullName: data?.accountName,
         bankName: data.bankName,
-        amount
+        amount,
       });
       setShowPinModal(true);
     } else if (cryptoW) {
@@ -120,7 +120,7 @@ export default function AddWithdrawModal() {
       setWithdrawData({
         isTrc: tronSelect,
         address: data.address,
-        amount
+        amount,
       });
       setShowPinModal(true);
     }
@@ -138,7 +138,7 @@ export default function AddWithdrawModal() {
   const banksOption = data?.data
     ? data?.data?.data?.map((single: any) => ({
         value: single?.name,
-        label: single?.name
+        label: single?.name,
       }))
     : [];
 
@@ -280,15 +280,6 @@ export default function AddWithdrawModal() {
                         options={banksOption}
                       />
                       <AppFormInput
-                        label="Account Name"
-                        name="accountName"
-                        type="text"
-                        placeholder="Type your Account Name here"
-                        register={register}
-                        required
-                        error={errors?.accountName}
-                      />
-                      <AppFormInput
                         label="Account Number"
                         name="accountNumber"
                         type="text"
@@ -296,6 +287,15 @@ export default function AddWithdrawModal() {
                         register={register}
                         required
                         error={errors?.accountNumber}
+                      />
+                      <AppFormInput
+                        label="Account Name"
+                        name="accountName"
+                        type="text"
+                        placeholder="Type your Account Name here"
+                        register={register}
+                        required
+                        error={errors?.accountName}
                       />
                       <div className="flex items-center justify-end">
                         <button
