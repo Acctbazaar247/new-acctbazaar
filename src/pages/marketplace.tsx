@@ -78,7 +78,9 @@ const Marketplace = () => {
     <HomeLayout>
       <PrivateLayout>
         <div
-          className={`container  overflow-hidden py-2 md:py-4 lg:py-5 2xl:py-7`}
+          className={`container  overflow-hidden ${
+            isShow ? "py-1  lg:py-1 2xl:py-3" : "py-2 md:py-4 lg:py-5 2xl:py-7"
+          }`}
         >
           {/* this is top section div  */}
           <AppAlert isShow={isShow} setIsShow={setIsShow} message={message} />

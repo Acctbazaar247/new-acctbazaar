@@ -361,9 +361,10 @@ const ManageKYC = () => {
                     }`}
                   >
                     <h3>
-                      {ownBy?.badgeTitle
+                      {ownBy?.badgeTitle &&
+                      ownBy?.badgeTitle !== EBadgeTitle.noBadgeTitle
                         ? badgeTitleShow(ownBy?.badgeTitle as EBadgeTitle)
-                        : "No Badge Title"}
+                        : "No Badge"}
                     </h3>
                     <IoIosArrowDown />
                   </div>
