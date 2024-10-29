@@ -119,8 +119,8 @@ const Marketplace = () => {
             <div className="hidden md:block border border-borderColor"></div>
 
             <div className="w-full px-4 lg:px-5 2xl:px-6">
-              <div className="h-[calc(100dvh-225px)] md:h-[calc(100dvh-290px)] lg:h-[calc(100dvh-290px)] xl:h-[calc(100dvh-300px)] 2xl:h-[calc(100dvh-335px)] overflow-y-auto">
-                <h2 className="text-xl font-semibold md:font-bold max-sm:pt-10">
+              <div className="h-[calc(100dvh-225px)] md:h-[calc(100dvh-260px)] lg:h-[calc(100dvh-265px)] xl:h-[calc(100dvh-270px)] 2xl:h-[calc(100dvh-295px)] overflow-y-auto">
+                <h2 className="text-xl font-semibold xl:text-2xl max-sm:pt-10">
                   Latest account
                 </h2>
                 {data?.data?.length === 0 ? (
