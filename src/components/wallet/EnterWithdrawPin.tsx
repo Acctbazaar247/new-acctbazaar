@@ -21,7 +21,7 @@ type TEnterWithdrawPin = {
 export default function EnterWithdrawPin({
   setModalOpen,
   withdrawData,
-  refresh,
+  refresh
 }: TEnterWithdrawPin) {
   const user = useAppSelector((state) => state.user.user);
   const [otp, setOtp] = useState("");
@@ -45,7 +45,7 @@ export default function EnterWithdrawPin({
         ...withdrawData,
         withdrawalPin: otp,
         amount: parseFloat(withdrawData.amount),
-        walletAddress: withdrawData.address || undefined,
+        walletAddress: withdrawData.address || undefined
       };
 
       await makeWithdrawRequest(submittedData)
@@ -55,9 +55,12 @@ export default function EnterWithdrawPin({
             toast.error(res?.data?.message || "Something went wrong");
           } else {
             setModalOpen(true);
-            toast.success("withdraw request are send successfully!", {
-              toastId: 1,
-            });
+            toast.success(
+              "Your withdrawal request has been submitted and is being processed!",
+              {
+                toastId: 1
+              }
+            );
             refresh();
           }
         })
