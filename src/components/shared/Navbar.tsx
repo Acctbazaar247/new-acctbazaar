@@ -95,7 +95,7 @@ const Navbar = () => {
 
         {user?.id && (
           <div className="md:hidden flex items-center gap-1">
-            <ThemeSwitcher />
+            {!user?.id && <ThemeSwitcher />}
             <AppDrawer
               title="Notifications"
               button={
@@ -161,8 +161,7 @@ const Navbar = () => {
               </Link>
             )
           )}
-
-          <ThemeSwitcher />
+          {!user?.id && <ThemeSwitcher />}
 
           {/* this is login or logout section  */}
           <div className="pl-4 xl:pl-12">

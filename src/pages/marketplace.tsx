@@ -79,7 +79,7 @@ const Marketplace = () => {
       <PrivateLayout>
         <div
           className={`container  overflow-hidden ${
-            isShow ? "py-1  lg:py-1 2xl:py-3" : "py-2 md:py-4 lg:py-5 2xl:py-7"
+            isShow ? "pt-1  lg:pt-1 2xl:pt-3" : "py-2 md:py-4 lg:py-5 2xl:py-7"
           }`}
         >
           {/* this is top section div  */}

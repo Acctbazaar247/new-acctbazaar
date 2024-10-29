@@ -14,10 +14,11 @@ import {
   financeAdminPopUpLinks,
   popupLinksForUser,
   popupNavbarLinks,
-  prAdminPopUpLinks
+  prAdminPopUpLinks,
 } from "./NavbarData";
 import { useGetSingleUserBusinessKycQuery } from "@/redux/features/businesskyc/businesskycApi";
 import { badgeTitleShow } from "@/utils/badgeTitleShow";
+import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 
 type ProfileDetailsBody = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -185,6 +186,12 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                 <nav.Icon /> {nav?.label}
               </Link>
             )
+          )}
+
+          {user?.id && (
+            // <div className="flex items-center justify-center">
+            <ThemeSwitcher />
+            // </div>
           )}
         </div>
 
