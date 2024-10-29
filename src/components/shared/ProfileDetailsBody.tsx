@@ -14,7 +14,7 @@ import {
   financeAdminPopUpLinks,
   popupLinksForUser,
   popupNavbarLinks,
-  prAdminPopUpLinks,
+  prAdminPopUpLinks
 } from "./NavbarData";
 import { useGetSingleUserBusinessKycQuery } from "@/redux/features/businesskyc/businesskycApi";
 import { badgeTitleShow } from "@/utils/badgeTitleShow";
@@ -95,19 +95,16 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                 </div>
               )}
             </h4>
-            {user?.role === UserRole.Seller &&
-              (!user?.isVerifiedByAdmin ||
-                !user?.isVerifiedByAdmin ||
-                !user?.isBusinessVerified) && (
-                <button
-                  onClick={openModal}
-                  className="appOutlineBtnSm py-1 px-2 text-xs rounded hidden md:block"
-                >
-                  {user?.isVerifiedByAdmin && !user?.isBusinessVerified
-                    ? "Register as business"
-                    : "Become Verified"}
-                </button>
-              )}
+            {user?.role === UserRole.Seller && !user?.isBusinessVerified && (
+              <button
+                onClick={openModal}
+                className="appOutlineBtnSm py-1 px-2 text-xs rounded hidden md:block"
+              >
+                {user?.isVerifiedByAdmin && !user?.isBusinessVerified
+                  ? "Register as business"
+                  : "Become Verified"}
+              </button>
+            )}
           </div>
 
           <p className="textG hidden md:block">{user?.email}</p>
