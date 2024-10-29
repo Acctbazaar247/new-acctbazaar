@@ -82,15 +82,15 @@ const Marketplace = () => {
         >
           {/* this is top section div  */}
           <AppAlert isShow={isShow} setIsShow={setIsShow} message={message} />
-          <div className="flex  flex-col md:flex-row justify-between md:gap-1 md:py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto max-sm:h-20 fixed bg-background md:static z-40">
+          <div className="flex flex-col md:flex-row justify-between md:gap-1 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto fixed bg-background md:static z-40">
             <div className="md:pl-4 2xl:pl-6">
               <h2 className="title">Marketplace</h2>
-              <p className="text-textGrey text-[11px] md:text-sm">
+              <p className="text-textGrey text-xs md:text-sm">
                 Access all products on the marketplace by our verified sellers
               </p>
             </div>
 
-            <div className="w-full md:w-1/4 pt-2 md:pt-0 flex items-center gap-2 md:gap-3">
+            <div className="w-full md:w-1/4 pt-3 md:pt-0 flex items-center gap-2 md:gap-3">
               <AppInput
                 onChange={handleSearchChange}
                 type="text"
@@ -118,12 +118,11 @@ const Marketplace = () => {
             </div>
             <div className="hidden md:block border border-borderColor"></div>
 
-            <div className="w-full px-2 md:px-4 2xl:px-6">
-              <h2 className="text-lg font-semibold md:text-xl md:font-bold max-sm:pt-4">
-                Latest account
-              </h2>
-
-              <div className="h-[calc(100dvh-270px)] md:h-[calc(100dvh-290px)] lg:h-[calc(100dvh-290px)] xl:h-[calc(100dvh-300px)] 2xl:h-[calc(100dvh-335px)] overflow-y-auto">
+            <div className="w-full px-4 lg:px-5 2xl:px-6">
+              <div className="h-[calc(100dvh-225px)] md:h-[calc(100dvh-290px)] lg:h-[calc(100dvh-290px)] xl:h-[calc(100dvh-300px)] 2xl:h-[calc(100dvh-335px)] overflow-y-auto">
+                <h2 className="text-xl font-semibold md:font-bold max-sm:pt-10">
+                  Latest account
+                </h2>
                 {data?.data?.length === 0 ? (
                   <Empty
                     description="No Data Found"
