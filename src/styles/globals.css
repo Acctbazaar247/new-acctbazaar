@@ -394,6 +394,7 @@ html {
     border-radius: 8px !important;
   }
 }
+
 /* Assuming your Select component has a className of 'my-select' */
 .my-select .ant-select-selection-placeholder {
   /* color: #1b1818; */
@@ -406,6 +407,10 @@ html {
 .my-date-picker .ant-picker-input > input {
   /* color: #1b1818; */
   font-weight: 400;
+}
+
+.my-date-picker .ant-picker-suffix {
+  color: #c0baba !important;
 }
 .ant-table-cell,
 .ant-table-cell > div {
