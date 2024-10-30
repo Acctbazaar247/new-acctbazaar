@@ -1,13 +1,15 @@
-import { EBadge, EBadgeTitle, UserRole } from "@/types/common";
-import Link from "next/link";
+import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { EBadge, EBadgeTitle, UserRole } from "@/types/common";
+import { badgeTitleShow } from "@/utils/badgeTitleShow";
 import Image from "next/image";
-import AppModal from "../ui/AppModal";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
-import AvatarComponent from "./AvatarComponent";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import AppModal from "../ui/AppModal";
+import AvatarComponent from "./AvatarComponent";
 import {
   PopupLinksSuperAdmin,
   ccAdminPopUpLinks,
@@ -16,9 +18,6 @@ import {
   popupNavbarLinks,
   prAdminPopUpLinks,
 } from "./NavbarData";
-import { useGetSingleUserBusinessKycQuery } from "@/redux/features/businesskyc/businesskycApi";
-import { badgeTitleShow } from "@/utils/badgeTitleShow";
-import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 
 type ProfileDetailsBody = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -77,15 +76,18 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
               {user?.name}
               {user?.role === UserRole.Seller && user?.isVerifiedByAdmin && (
                 <div className="flex items-center gap-1">
-                  {user?.badge !== EBadge.noBadge && (
-                    <RiVerifiedBadgeFill
-                      className={`2xl:text-lg bg-background rounded-full ${
-                        (user?.badge == "blue" && "text-blue") ||
-                        (user?.badge == "gold" && "text-amber-400")
-                      }`}
-                    />
-                  )}
-                  {user?.badgeTitle &&
+                  {user?.isVerifiedByAdmin &&
+                    user?.badge &&
+                    user?.badge !== EBadge.noBadge && (
+                      <RiVerifiedBadgeFill
+                        className={`2xl:text-lg bg-background rounded-full ${
+                          (user?.badge == "blue" && "text-blue") ||
+                          (user?.badge == "gold" && "text-amber-400")
+                        }`}
+                      />
+                    )}
+                  {user?.isVerifiedByAdmin &&
+                    user?.badgeTitle &&
                     user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
                       <p
                         className={`capitalize font-medium px-0.5 rounded md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}
@@ -118,15 +120,18 @@ const ProfileDetailsBody = ({ setOpen }: ProfileDetailsBody) => {
                   {user?.role === UserRole.Seller &&
                     user?.isVerifiedByAdmin && (
                       <div className="flex items-center gap-1">
-                        {user?.badge !== "noBadge" && (
-                          <RiVerifiedBadgeFill
-                            className={`2xl:text-lg bg-background rounded-full ${
-                              (user?.badge == "blue" && "text-blue") ||
-                              (user?.badge == "gold" && "text-amber-400")
-                            }`}
-                          />
-                        )}
-                        {user?.badgeTitle &&
+                        {user?.isVerifiedByAdmin &&
+                          user?.badge &&
+                          user?.badge !== EBadge.noBadge && (
+                            <RiVerifiedBadgeFill
+                              className={`2xl:text-lg bg-background rounded-full ${
+                                (user?.badge == "blue" && "text-blue") ||
+                                (user?.badge == "gold" && "text-amber-400")
+                              }`}
+                            />
+                          )}
+                        {user?.isVerifiedByAdmin &&
+                          user?.badgeTitle &&
                           user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
                             <p
                               className={`capitalize font-medium px-0.5 md:px-1.5 w-fit text-[10px] md:text-xs text-primary bg-primary/5 border border-primary`}

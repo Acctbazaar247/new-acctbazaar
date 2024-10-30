@@ -54,16 +54,19 @@ const AvatarComponent = ({
 
           {user?.isVerifiedByAdmin && (
             <div className="flex items-center gap-1">
-              {user?.badge !== EBadge.noBadge && (
-                <RiVerifiedBadgeFill
-                  className={`2xl:text-lg bg-background rounded-full ${
-                    (user?.badge == "blue" && "text-blue") ||
-                    (user?.badge == "gold" && "text-amber-400")
-                  }`}
-                />
-              )}
+              {user?.isVerifiedByAdmin &&
+                user?.badge &&
+                user?.badge !== EBadge.noBadge && (
+                  <RiVerifiedBadgeFill
+                    className={`2xl:text-lg bg-background rounded-full ${
+                      (user?.badge == "blue" && "text-blue") ||
+                      (user?.badge == "gold" && "text-amber-400")
+                    }`}
+                  />
+                )}
 
               {!onlyBatch &&
+                user?.isVerifiedByAdmin &&
                 user?.badgeTitle &&
                 user?.badgeTitle !== EBadgeTitle.noBadgeTitle && (
                   <p
@@ -85,16 +88,18 @@ const AvatarComponent = ({
             alt="country icon"
           />
 
-          {user?.isVerifiedByAdmin && user?.badge !== EBadge.noBadge && (
-            <div className="absolute -bottom-0.5 md:-bottom-0.5 right-0 md:-right-1">
-              <RiVerifiedBadgeFill
-                className={`text-sm md:text-base 2xl:text-lg bg-background rounded-full ${
-                  (user?.badge == "blue" && "text-blue") ||
-                  (user?.badge == "gold" && "text-amber-400")
-                }`}
-              />
-            </div>
-          )}
+          {user?.isVerifiedByAdmin &&
+            user?.badge &&
+            user?.badge !== EBadge.noBadge && (
+              <div className="absolute -bottom-0.5 md:-bottom-0.5 right-0 md:-right-1">
+                <RiVerifiedBadgeFill
+                  className={`text-sm md:text-base 2xl:text-lg bg-background rounded-full ${
+                    (user?.badge == "blue" && "text-blue") ||
+                    (user?.badge == "gold" && "text-amber-400")
+                  }`}
+                />
+              </div>
+            )}
         </div>
       )}
     </div>
