@@ -29,7 +29,7 @@ const Wallet = () => {
     const info = {
       page,
       limit: 10,
-      ownById: user?.id,
+      ownById: user?.id
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -45,7 +45,7 @@ const Wallet = () => {
     const info = {
       page: page2,
       limit: 10,
-      ownById: user?.id,
+      ownById: user?.id
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -62,6 +62,11 @@ const Wallet = () => {
 
   const columnsMobile = [
     {
+      title: "ID",
+      dataIndex: "id"
+      //   key: "amount",
+    },
+    {
       title: "Date",
       className: "min-w-[80px]",
       dataIndex: "createdAt",
@@ -71,7 +76,7 @@ const Wallet = () => {
             {dateFormat(createdAt, appDateFormate)}
           </div>
         );
-      },
+      }
     },
     {
       title: "P.t",
@@ -87,7 +92,7 @@ const Wallet = () => {
               : "Bank"}
           </div>
         );
-      },
+      }
     },
     // {
     //   title: "Address",
@@ -99,7 +104,7 @@ const Wallet = () => {
     // },
     {
       title: "Amount",
-      dataIndex: "amount",
+      dataIndex: "amount"
     },
     {
       title: "Status",
@@ -119,10 +124,15 @@ const Wallet = () => {
             </p>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
   const columnsPc = [
+    {
+      title: "ID",
+      dataIndex: "id"
+      //   key: "amount",
+    },
     {
       title: "Date",
       dataIndex: "createdAt",
@@ -133,7 +143,7 @@ const Wallet = () => {
             {dateFormat(createdAt, appDateFormate)}
           </div>
         );
-      },
+      }
     },
     {
       title: "Payment type",
@@ -149,7 +159,7 @@ const Wallet = () => {
               : "Bank"}
           </div>
         );
-      },
+      }
     },
     {
       title: "Address",
@@ -157,12 +167,12 @@ const Wallet = () => {
       className: "capitalize",
       render: (current: any, fullData: any) => {
         return <div>{current || fullData.bankName}</div>;
-      },
+      }
     },
     {
       title: "Amount",
       dataIndex: "amount",
-      className: "min-w-[150px]",
+      className: "min-w-[150px]"
     },
     {
       title: "Status",
@@ -183,8 +193,8 @@ const Wallet = () => {
             </p>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
   const currencyRequestColumnPc = [
     {
@@ -206,12 +216,12 @@ const Wallet = () => {
             </div>
           </div>
         );
-      },
+      }
     },
     {
       title: "Amount",
       dataIndex: "amount",
-      className: "md:min-w-[150px]  ",
+      className: "md:min-w-[150px]  "
     },
     {
       title: "Status",
@@ -232,8 +242,8 @@ const Wallet = () => {
             </p>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
 
   return (
@@ -299,7 +309,7 @@ const Wallet = () => {
             {/* this is table div  */}
             <div className="md:w-3/4">
               <h2 className="text-md 2xl:text-[22px] text-textGrey pb-2 md:pb-4 ">
-                <span>Showing Details of {user?.role} </span>
+                {/* <span>Showing Details of {user?.role} </span> */}
                 {user?.role === UserRole.User ? (
                   "Add money"
                 ) : showWithdraw ? (
@@ -307,14 +317,14 @@ const Wallet = () => {
                     onClick={() => setShowWithdraw(false)}
                     className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
                   >
-                    Withdraw money
+                    See withdrawal history
                   </button>
                 ) : (
                   <button
                     onClick={() => setShowWithdraw(true)}
                     className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
                   >
-                    Added money
+                    See deposit history
                   </button>
                 )}
               </h2>
@@ -336,7 +346,7 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false,
+                                showSizeChanger: false
                               }}
                             />
                           );
@@ -358,7 +368,7 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false,
+                                showSizeChanger: false
                               }}
                             />
                           );
@@ -382,7 +392,7 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false,
+                                showSizeChanger: false
                               }}
                             />
                           );
@@ -404,7 +414,7 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false,
+                                showSizeChanger: false
                               }}
                             />
                           );

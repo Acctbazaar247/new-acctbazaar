@@ -49,6 +49,11 @@ const ManageFund = () => {
 
   const columns: TableColumnsType<IWithdrawalRequest> = [
     {
+      title: "ID",
+      dataIndex: "id"
+      //   key: "amount",
+    },
+    {
       title: "Amount",
       dataIndex: "amount"
       //   key: "amount",
@@ -213,17 +218,14 @@ const ManageFund = () => {
 
   return (
     <AdminsLayout roles={[UserRole.FinanceAdmin]}>
-
       <h2 className="title text-center mb-10">Manage Fund</h2>
 
-      <div className='h-[70dvh] overflow-auto'>
+      <div className="h-[70dvh] overflow-auto">
         <AppTable
           infoQuery={queryInfo}
           columns={columns}
           setPage={setPage}
-          loadingComponent={
-            <TableLoading columnNumber={columns.length} />
-          }
+          loadingComponent={<TableLoading columnNumber={columns.length} />}
         />
       </div>
     </AdminsLayout>

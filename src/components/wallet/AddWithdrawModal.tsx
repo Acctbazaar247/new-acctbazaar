@@ -90,7 +90,7 @@ export default function AddWithdrawModal() {
     handleSubmit,
     reset,
     watch,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -109,7 +109,7 @@ export default function AddWithdrawModal() {
         accountNumber: data?.accountNumber,
         fullName: data?.accountName,
         bankName: data.bankName,
-        amount,
+        amount
       });
       setShowPinModal(true);
     } else if (cryptoW) {
@@ -120,7 +120,7 @@ export default function AddWithdrawModal() {
       setWithdrawData({
         isTrc: tronSelect,
         address: data.address,
-        amount,
+        amount
       });
       setShowPinModal(true);
     }
@@ -138,7 +138,7 @@ export default function AddWithdrawModal() {
   const banksOption = data?.data
     ? data?.data?.data?.map((single: any) => ({
         value: single?.name,
-        label: single?.name,
+        label: single?.name
       }))
     : [];
 
@@ -306,6 +306,10 @@ export default function AddWithdrawModal() {
                           Withdraw
                         </button>
                       </div>
+                      <h3 className="text-textBlack font-medium">
+                        Withdrawals to commercial banks are processed instantly,
+                        while microfinance banks may take a bit longer.
+                      </h3>
                     </form>
                   </motion.div>
                 </AnimatePresence>
