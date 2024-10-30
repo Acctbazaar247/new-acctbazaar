@@ -23,27 +23,28 @@ export default function AddMoneyModal() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handlePay = () => {
-    if (amount < config.fundMinMoney) {
-      toast.error(`Minimum amount is ${config.fundMinMoney}$`);
-      return;
+    if (amount < 50) {
+      return toast.error(`Minimum amount is $50`, { toastId: 1 });
     }
     addRequest({ amount })
       .unwrap()
       .then((res: any) => {
         if (res.error) {
-          toast.error(res?.data?.message || "something went wrong ");
+          toast.error(res?.data?.message || "something went wrong ", {
+            toastId: 1,
+          });
         } else {
           router.push(res.data?.url);
         }
       })
       .catch(() => {
-        toast.error("something went wrong");
+        toast.error("something went wrong", { toastId: 1 });
       });
   };
 
   const handllePayWithPayStack = () => {
     if (amount < config.fundMinMoney) {
-      toast.error(`Minimum amount is ${config.fundMinMoney}$`);
+      toast.error(`Minimum amount is ${config.fundMinMoney}$`, { toastId: 1 });
       return;
     }
     addRequestWithPayStack({ amount })
@@ -56,9 +57,12 @@ export default function AddMoneyModal() {
         }
       })
       .catch((err) => {
-        toast.error(err.data?.message || "something went wrong");
+        toast.error(err.data?.message || "something went wrong", {
+          toastId: 1,
+        });
       });
   };
+
   const handleSubmit = (data: any): void => {
     if (!selectedOption) {
       toast.error("Select a payment ");
