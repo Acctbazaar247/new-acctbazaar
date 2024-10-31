@@ -29,7 +29,7 @@ const Wallet = () => {
     const info = {
       page,
       limit: 10,
-      ownById: user?.id
+      ownById: user?.id,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -45,7 +45,7 @@ const Wallet = () => {
     const info = {
       page: page2,
       limit: 10,
-      ownById: user?.id
+      ownById: user?.id,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];
@@ -63,7 +63,7 @@ const Wallet = () => {
   const columnsMobile = [
     {
       title: "ID",
-      dataIndex: "id"
+      dataIndex: "id",
       //   key: "amount",
     },
     {
@@ -76,7 +76,7 @@ const Wallet = () => {
             {dateFormat(createdAt, appDateFormate)}
           </div>
         );
-      }
+      },
     },
     {
       title: "P.t",
@@ -92,7 +92,7 @@ const Wallet = () => {
               : "Bank"}
           </div>
         );
-      }
+      },
     },
     // {
     //   title: "Address",
@@ -104,7 +104,7 @@ const Wallet = () => {
     // },
     {
       title: "Amount",
-      dataIndex: "amount"
+      dataIndex: "amount",
     },
     {
       title: "Status",
@@ -124,13 +124,14 @@ const Wallet = () => {
             </p>
           </div>
         );
-      }
-    }
+      },
+    },
   ];
+
   const columnsPc = [
     {
       title: "ID",
-      dataIndex: "id"
+      dataIndex: "id",
       //   key: "amount",
     },
     {
@@ -143,7 +144,7 @@ const Wallet = () => {
             {dateFormat(createdAt, appDateFormate)}
           </div>
         );
-      }
+      },
     },
     {
       title: "Payment type",
@@ -159,20 +160,20 @@ const Wallet = () => {
               : "Bank"}
           </div>
         );
-      }
+      },
     },
     {
-      title: "Address",
+      title: "Designation",
       dataIndex: "walletAddress",
       className: "capitalize",
       render: (current: any, fullData: any) => {
         return <div>{current || fullData.bankName}</div>;
-      }
+      },
     },
     {
       title: "Amount",
       dataIndex: "amount",
-      className: "min-w-[150px]"
+      className: "min-w-[150px]",
     },
     {
       title: "Status",
@@ -184,8 +185,8 @@ const Wallet = () => {
             <p
               className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
                 (text === "pending" && "text-brown bg-yellowShadow") ||
-                (text === "failed" && "text-red bg-red/10") ||
-                (text === "success" && "text-success bg-success/10")
+                (text === "denied" && "text-red bg-red/10") ||
+                (text === "approved" && "text-success bg-success/10")
               }`}
             >
               <GoDotFill />
@@ -193,10 +194,16 @@ const Wallet = () => {
             </p>
           </div>
         );
-      }
-    }
+      },
+    },
   ];
+
   const currencyRequestColumnPc = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      //   key: "amount",
+    },
     {
       title: "Date",
       dataIndex: "createdAt",
@@ -216,12 +223,12 @@ const Wallet = () => {
             </div>
           </div>
         );
-      }
+      },
     },
     {
       title: "Amount",
       dataIndex: "amount",
-      className: "md:min-w-[150px]  "
+      className: "md:min-w-[150px]  ",
     },
     {
       title: "Status",
@@ -242,8 +249,8 @@ const Wallet = () => {
             </p>
           </div>
         );
-      }
-    }
+      },
+    },
   ];
 
   return (
@@ -317,14 +324,14 @@ const Wallet = () => {
                     onClick={() => setShowWithdraw(false)}
                     className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
                   >
-                    See withdrawal history
+                    See deposit history
                   </button>
                 ) : (
                   <button
                     onClick={() => setShowWithdraw(true)}
                     className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
                   >
-                    See deposit history
+                    See withdrawal history
                   </button>
                 )}
               </h2>
@@ -332,7 +339,7 @@ const Wallet = () => {
               <div className="border mb-4 md:mb-5 border-borderLight rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
                 {showWithdraw ? (
                   <>
-                    <div className="hidden md:block">
+                    <div className="hidden md:block overflow-x-auto">
                       <AppRenderReduxData
                         queryData={queryData}
                         showData={(data) => {
@@ -346,14 +353,15 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false
+                                showSizeChanger: false,
                               }}
                             />
                           );
                         }}
                       />
                     </div>
-                    <div className="block md:hidden">
+
+                    <div className="block md:hidden overflow-x-auto">
                       <AppRenderReduxData
                         queryData={queryData}
                         showData={(data) => {
@@ -368,7 +376,7 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false
+                                showSizeChanger: false,
                               }}
                             />
                           );
@@ -378,7 +386,7 @@ const Wallet = () => {
                   </>
                 ) : (
                   <>
-                    <div className="hidden md:block">
+                    <div className="hidden md:block overflow-x-auto">
                       <AppRenderReduxData
                         queryData={currencyQuery}
                         showData={(data) => {
@@ -392,14 +400,14 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false
+                                showSizeChanger: false,
                               }}
                             />
                           );
                         }}
                       />
                     </div>
-                    <div className="block md:hidden">
+                    <div className="block md:hidden overflow-x-auto">
                       <AppRenderReduxData
                         queryData={currencyQuery}
                         showData={(data) => {
@@ -414,7 +422,7 @@ const Wallet = () => {
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,
                                 current: data?.meta?.page,
-                                showSizeChanger: false
+                                showSizeChanger: false,
                               }}
                             />
                           );
