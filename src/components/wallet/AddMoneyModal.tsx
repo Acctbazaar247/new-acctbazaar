@@ -1,6 +1,6 @@
 import {
   useAddCurrencyRequestMutation,
-  useAddCurrencyRequestWithPayStackMutation,
+  useAddCurrencyRequestWithPayStackMutation
 } from "@/redux/features/currencyRequest/currencyRequestApi";
 import { useAppSelector } from "@/redux/hook";
 import config from "@/utils/config";
@@ -23,15 +23,15 @@ export default function AddMoneyModal() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handlePay = () => {
-    if (amount < 150) {
-      return toast.error(`Minimum amount is $150`, { toastId: 1 });
+    if (amount < 8) {
+      return toast.error(`Minimum amount is $8`, { toastId: 1 });
     }
     addRequest({ amount })
       .unwrap()
       .then((res: any) => {
         if (res.error) {
           toast.error(res?.data?.message || "something went wrong ", {
-            toastId: 1,
+            toastId: 1
           });
         } else {
           router.push(res.data?.url);
@@ -58,7 +58,7 @@ export default function AddMoneyModal() {
       })
       .catch((err) => {
         toast.error(err.data?.message || "something went wrong", {
-          toastId: 1,
+          toastId: 1
         });
       });
   };
