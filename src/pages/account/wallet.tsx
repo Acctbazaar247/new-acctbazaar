@@ -309,7 +309,7 @@ const Wallet = () => {
             {/* this is table div  */}
             <div className="md:w-3/4">
               <h2 className="text-md 2xl:text-[22px] text-textGrey pb-2 md:pb-4 ">
-                {/* <span>Showing Details of {user?.role} </span> */}
+                <span>Showing Details of {user?.role} </span>
                 {user?.role === UserRole.User ? (
                   "Add money"
                 ) : showWithdraw ? (
@@ -317,14 +317,14 @@ const Wallet = () => {
                     onClick={() => setShowWithdraw(false)}
                     className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
                   >
-                    See withdrawal history
+                    View withdrawal history
                   </button>
                 ) : (
                   <button
                     onClick={() => setShowWithdraw(true)}
                     className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
                   >
-                    See deposit history
+                    View deposit history
                   </button>
                 )}
               </h2>
