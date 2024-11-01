@@ -1,16 +1,16 @@
-import Image from "next/image";
-import AppModal from "../ui/AppModal";
-import AppInput from "../ui/AppInput";
-import { PiCurrencyDollarBold } from "react-icons/pi";
-import config from "@/utils/config";
-import { toast } from "react-toastify";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { useAppSelector } from "@/redux/hook";
 import {
   useAddCurrencyRequestMutation,
   useAddCurrencyRequestWithPayStackMutation,
 } from "@/redux/features/currencyRequest/currencyRequestApi";
+import { useAppSelector } from "@/redux/hook";
+import config from "@/utils/config";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { PiCurrencyDollarBold } from "react-icons/pi";
+import { toast } from "react-toastify";
+import AppInput from "../ui/AppInput";
+import AppModal from "../ui/AppModal";
 
 export default function AddMoneyModal() {
   const [amount, setAmount] = useState(0);
@@ -23,8 +23,8 @@ export default function AddMoneyModal() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handlePay = () => {
-    if (amount < 50) {
-      return toast.error(`Minimum amount is $50`, { toastId: 1 });
+    if (amount < 150) {
+      return toast.error(`Minimum amount is $150`, { toastId: 1 });
     }
     addRequest({ amount })
       .unwrap()
@@ -75,6 +75,7 @@ export default function AddMoneyModal() {
       handlePay();
     }
   };
+
   return (
     <AppModal
       button={

@@ -127,6 +127,7 @@ const Wallet = () => {
       }
     }
   ];
+
   const columnsPc = [
     {
       title: "ID",
@@ -162,7 +163,7 @@ const Wallet = () => {
       }
     },
     {
-      title: "Address",
+      title: "Designation",
       dataIndex: "walletAddress",
       className: "capitalize",
       render: (current: any, fullData: any) => {
@@ -184,8 +185,8 @@ const Wallet = () => {
             <p
               className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
                 (text === "pending" && "text-brown bg-yellowShadow") ||
-                (text === "failed" && "text-red bg-red/10") ||
-                (text === "success" && "text-success bg-success/10")
+                (text === "denied" && "text-red bg-red/10") ||
+                (text === "approved" && "text-success bg-success/10")
               }`}
             >
               <GoDotFill />
@@ -196,7 +197,13 @@ const Wallet = () => {
       }
     }
   ];
+
   const currencyRequestColumnPc = [
+    {
+      title: "ID",
+      dataIndex: "id"
+      //   key: "amount",
+    },
     {
       title: "Date",
       dataIndex: "createdAt",
@@ -332,7 +339,7 @@ const Wallet = () => {
               <div className="border mb-4 md:mb-5 border-borderLight rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
                 {showWithdraw ? (
                   <>
-                    <div className="hidden md:block">
+                    <div className="hidden md:block overflow-x-auto">
                       <AppRenderReduxData
                         queryData={queryData}
                         showData={(data) => {
@@ -353,7 +360,8 @@ const Wallet = () => {
                         }}
                       />
                     </div>
-                    <div className="block md:hidden">
+
+                    <div className="block md:hidden overflow-x-auto">
                       <AppRenderReduxData
                         queryData={queryData}
                         showData={(data) => {
@@ -378,7 +386,7 @@ const Wallet = () => {
                   </>
                 ) : (
                   <>
-                    <div className="hidden md:block">
+                    <div className="hidden md:block overflow-x-auto">
                       <AppRenderReduxData
                         queryData={currencyQuery}
                         showData={(data) => {
@@ -399,7 +407,7 @@ const Wallet = () => {
                         }}
                       />
                     </div>
-                    <div className="block md:hidden">
+                    <div className="block md:hidden overflow-x-auto">
                       <AppRenderReduxData
                         queryData={currencyQuery}
                         showData={(data) => {
