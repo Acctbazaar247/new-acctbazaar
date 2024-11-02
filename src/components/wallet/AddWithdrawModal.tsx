@@ -282,7 +282,7 @@ export default function AddWithdrawModal() {
                       <AppFormInput
                         label="Account Number"
                         name="accountNumber"
-                        type="text"
+                        type="number"
                         placeholder="Type your Account Number here"
                         register={register}
                         required
