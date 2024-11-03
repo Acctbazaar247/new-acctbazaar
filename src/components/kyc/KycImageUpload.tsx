@@ -1,4 +1,5 @@
 import { useUploadImageMutation } from "@/redux/features/user/userApi";
+import Image from "next/image";
 import NextImage from "next/image";
 import { useState } from "react";
 import { Control, Controller } from "react-hook-form";
@@ -108,7 +109,7 @@ const KycImageUpload = ({
                       </p>
                     </div>
                   ) : (
-                    <NextImage
+                    <Image
                       width={600}
                       height={200}
                       src={image}
