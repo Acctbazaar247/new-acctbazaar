@@ -106,7 +106,7 @@ export default function AddWithdrawModal() {
       toast.error(`Amount can not be more than ${config.withdrawalMaxMoney}`);
     } else if (bankW && data.bankName && data.accountNumber) {
       setWithdrawData({
-        accountNumber: data?.accountNumber,
+        accountNumber: data?.accountNumber.toString(),
         fullName: data?.accountName,
         bankName: data.bankName,
         amount
