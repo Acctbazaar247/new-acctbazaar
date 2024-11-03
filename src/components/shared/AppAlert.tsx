@@ -5,7 +5,7 @@ import { RxCross2 } from "react-icons/rx";
 const AppAlert = ({
   message,
   isShow,
-  setIsShow,
+  setIsShow
 }: {
   message: string | undefined;
   isShow: boolean;
@@ -15,7 +15,7 @@ const AppAlert = ({
     <>
       {isShow && message && (
         // <div className="absolute top-0 md:top-16 right-0 left-0  md:container">
-        <div className="max-sm:absolute top-0 left-0 z-[999] bg-primary flex font-bold items-center gap-2 text-white rounded px-2 md:px-4 text-xs md:text-lg py-1.5 md:py-2">
+        <div className="max-sm:abdsolute top-0 left-0 z-[999] bg-primary flex font-bold items-center gap-2 text-white rounded px-2 md:px-4 text-xs md:text-lg py-1.5 md:py-2">
           <FiBell className="text-xl md:text-2xl font-bold xl:text-[30px] w-[40px]" />{" "}
           <span
             style={{ wordSpacing: "7px" }}

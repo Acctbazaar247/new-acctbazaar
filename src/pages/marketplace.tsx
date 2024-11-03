@@ -49,7 +49,7 @@ const Marketplace = () => {
       approvedForSale: "approved",
       limit: 150,
       page,
-      searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
+      searchTerm: debouncedSearch.length ? debouncedSearch : undefined
     };
 
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -73,7 +73,7 @@ const Marketplace = () => {
   return (
     <HomeLayout>
       <PrivateLayout>
-        <div className="layout h-[calc(100dvh-105px)] md:h-custom-dvh-md 2xl:h-custom-dvh overflow-hidden">
+        <div className="layout h-[calc(100dvh-105px)]   md:h-custom-dvh-md 2xl:h-custom-dvh overflow-hidden">
           {/* this is top section div  */}
           <AppAlert message={message} isShow={isShow} setIsShow={setIsShow} />
           <div className="flex flex-col md:flex-row justify-between gap-1 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-background md:static z-40">
@@ -105,7 +105,7 @@ const Marketplace = () => {
           </div>
 
           {/* this is main div  */}
-          <div className="flex gap-4 bg-background max-h-[calc(100dvh-240px)] 2xl:max-h-[72dvh] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
+          <div className="flex gap-4 bg-background  max-h-[calc(100dvh-240px)] 2xl:max-h-[72dvh] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
             <div className="hidden md:block md:w-[30%] min-w-[330px] max-h-[72dvh] md:max-h-[68dvh] lg:max-h-[68dvh] 2xl:max-h-[72dvh] overflow-hidden xl:overflow-auto 2xl:overflow-hidden">
               {/* <Sticky
                 topOffset={-40}

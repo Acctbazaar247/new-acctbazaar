@@ -8,18 +8,18 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
 
     // Or if using src directory:
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
     extend: {
       height: {
         "custom-dvh": "calc(100dvh - 80px)",
         "custom-dvh-md": "calc(100dvh - 64px)",
-        "custom-dvh-sm": "calc(100dvh - 56px)",
+        "custom-dvh-sm": "calc(100dvh - 56px)"
       },
       screens: {
         xxs: "385px",
-        "3xl": "1600px",
+        "3xl": "1600px"
       },
       // colors: {
       //   primary: "#FF5A35",
@@ -51,10 +51,10 @@ module.exports = {
           // sm: "2rem",
           // lg: "2rem",
           xl: "2rem",
-          "2xl": "1rem",
-        },
-      },
-    },
+          "2xl": "1rem"
+        }
+      }
+    }
   },
   plugins: [
     createThemes({
@@ -82,7 +82,7 @@ module.exports = {
         borderColor: "#D5D8DB",
         borderLight: "#F2F4F7",
         success: "#2AAE09",
-        red: "#E11C1B",
+        red: "#E11C1B"
       },
       dark: {
         loader: "#FFFFFF",
@@ -108,8 +108,8 @@ module.exports = {
         borderColor: "#374151", // Dark border
         borderLight: "#1F2937", // Even darker border for subtle effects
         success: "#22C55E", // Bright green for success
-        red: "#DC2626", // Strong red for errors or alerts
-      },
-    }),
-  ],
+        red: "#DC2626" // Strong red for errors or alerts
+      }
+    })
+  ]
 };
