@@ -1,5 +1,6 @@
 import { BsClipboardCheck } from "react-icons/bs";
 import { FiHome } from "react-icons/fi";
+import { GiCrystalGrowth } from "react-icons/gi";
 import { IoSettingsOutline, IoWalletOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdSwitchAccount, MdWorkspacePremium } from "react-icons/md";
@@ -116,6 +117,11 @@ export const popupNavbarLinks = [
     Icon: IoSettingsOutline
   },
   {
+    label: "Boosting panel",
+    path: "https://www.acctpanel.com/",
+    Icon: GiCrystalGrowth
+  },
+  {
     label: "Log out",
     path: "/",
     Icon: TbLogout2
@@ -133,6 +139,11 @@ export const popupLinksForUser = [
     label: "Account settings",
     path: "/account/account-setting",
     Icon: IoSettingsOutline
+  },
+  {
+    label: "Boosting panel",
+    path: "https://www.acctpanel.com/",
+    Icon: GiCrystalGrowth
   },
   {
     label: "Log out",
@@ -158,6 +169,11 @@ export const PopupLinksSuperAdmin = [
     Icon: IoSettingsOutline
   },
   {
+    label: "Boosting panel",
+    path: "https://www.acctpanel.com/",
+    Icon: GiCrystalGrowth
+  },
+  {
     label: "Log out",
     v: "/",
     Icon: TbLogout2
@@ -168,7 +184,7 @@ export const prAdminPopUpLinks = [
   {
     label: "My Account Dashboard",
     path: "/dashboard/allService",
-    Icon: LuLayoutDashboard,
+    Icon: LuLayoutDashboard
   },
   {
     label: "Account settings",
@@ -180,7 +196,7 @@ export const prAdminPopUpLinks = [
     path: "/",
     Icon: TbLogout2
   }
-]
+];
 
 export const ccAdminPopUpLinks = [
   {

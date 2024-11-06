@@ -10,13 +10,15 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import AppModal from "../ui/AppModal";
 import AvatarComponent from "./AvatarComponent";
+import { GiCrystalGrowth } from "react-icons/gi";
+
 import {
   PopupLinksSuperAdmin,
   ccAdminPopUpLinks,
   financeAdminPopUpLinks,
   popupLinksForUser,
   popupNavbarLinks,
-  prAdminPopUpLinks,
+  prAdminPopUpLinks
 } from "./NavbarData";
 
 type ProfileDetailsBody = {

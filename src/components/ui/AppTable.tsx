@@ -29,7 +29,7 @@ const AppTable = ({
   onInputChange,
   loadingComponent,
   setPage,
-  tabs,
+  tabs
 }: TTableProps) => {
   const [input, setInput] = useState("");
   const debounceInput = useDebounce(input, 500);
@@ -83,7 +83,6 @@ const AppTable = ({
             loadingComponent={loadingComponent || <AppTableSkeleton />}
             queryData={infoQuery}
             showData={(data) => {
-              // console.log(data);
               return (
                 <Table
                   showHeader={header}
@@ -99,7 +98,7 @@ const AppTable = ({
                           pageSize: data?.meta?.limit,
                           total: data?.meta?.total,
                           current: data?.meta?.page,
-                          showSizeChanger: false,
+                          showSizeChanger: false
                         }
                       : false
                   }
