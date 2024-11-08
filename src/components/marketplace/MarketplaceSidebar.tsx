@@ -7,7 +7,7 @@ import {
   SocialMediaCategories,
   // ToolsAndResources,
   VpnCategories,
-  WebsitesCategories,
+  WebsitesCategories
 } from "@/shared";
 import { AccountCategory } from "@/types/common";
 import MarketPlaceSidebarFilterElement from "./MarketPlaceSidebarFilterElement";
@@ -21,42 +21,42 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
     {
       imageUrl: "/assets/icons/like.png",
       label: "Social Media",
-      children: SocialMediaCategories,
+      children: SocialMediaCategories
     },
     {
       imageUrl: "/assets/icons/email.png",
       label: "Emails & Messaging Service ",
-      children: EmailMessagingCategories,
+      children: EmailMessagingCategories
     },
     {
       imageUrl: "/assets/icons/gift.png",
       label: "Giftcards",
-      children: GiftCardCategories,
+      children: GiftCardCategories
     },
     {
       imageUrl: "/assets/icons/vpn.png",
       label: "VPN & PROXYs",
-      children: VpnCategories,
+      children: VpnCategories
     },
     {
       imageUrl: "/assets/product/internet-websites.png",
       label: "Websites",
-      children: WebsitesCategories,
+      children: WebsitesCategories
     },
     {
       imageUrl: "/assets/icons/ecart.png",
       label: "E-commerce Platforms",
-      children: EcommerceCategories,
+      children: EcommerceCategories
     },
     {
       imageUrl: "/assets/icons/game.png",
       label: "Gaming",
-      children: GamingAccountCategories,
+      children: GamingAccountCategories
     },
     {
       imageUrl: "/assets/icons/tag-user.png",
       label: "Accounts & Subscriptions",
-      children: AccountsSubscriptionsCategories,
+      children: AccountsSubscriptionsCategories
     },
     // {
     //   imageUrl: "/assets/icons/toolsandre.png",
@@ -70,10 +70,10 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
         {
           label: "Other",
           value: AccountCategory.Other,
-          imageUrl: "/assets/icons/other.png",
-        },
-      ],
-    },
+          imageUrl: "/assets/icons/other.png"
+        }
+      ]
+    }
   ];
 
   const selectedCategories = useAppSelector(
@@ -82,7 +82,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="h-[calc(100dvh-200px)] overflow-auto no-scrollbar">
+    <div className="  overflow-auto no-scrollbar">
       {!isHideTitle && (
         <h2 className="font-bold text-textBlack 2xl:text-lg pb-2 px-6">
           Filter
@@ -95,7 +95,7 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
           Account Category
         </h3>
 
-        <div className="pt-2 h-[40dvh] lg:h-[35dvh] 2xl:h-[calc(100dvh-500px)] no-scrollbar overflow-y-auto">
+        <div className="pt-2   no-scrollbar overflow-y-auto">
           {sidebarMenu.map((sidebar: any) => (
             <MarketPlaceSidebarFilterElement
               key={sidebar?.label}

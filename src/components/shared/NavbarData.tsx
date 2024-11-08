@@ -1,6 +1,6 @@
 import { BsClipboardCheck } from "react-icons/bs";
 import { FiHome } from "react-icons/fi";
-import { GiCrystalGrowth } from "react-icons/gi";
+import { IoIosRocket } from "react-icons/io";
 import { IoSettingsOutline, IoWalletOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdSwitchAccount, MdWorkspacePremium } from "react-icons/md";
@@ -119,7 +119,7 @@ export const popupNavbarLinks = [
   {
     label: "Boosting panel",
     path: "https://www.acctpanel.com/",
-    Icon: GiCrystalGrowth
+    Icon: IoIosRocket
   },
   {
     label: "Log out",
@@ -143,7 +143,7 @@ export const popupLinksForUser = [
   {
     label: "Boosting panel",
     path: "https://www.acctpanel.com/",
-    Icon: GiCrystalGrowth
+    Icon: IoIosRocket
   },
   {
     label: "Log out",
@@ -171,7 +171,7 @@ export const PopupLinksSuperAdmin = [
   {
     label: "Boosting panel",
     path: "https://www.acctpanel.com/",
-    Icon: GiCrystalGrowth
+    Icon: IoIosRocket
   },
   {
     label: "Log out",
