@@ -23,8 +23,10 @@ export default function AddMoneyModal() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handlePay = () => {
-    if (amount < 8) {
-      return toast.error(`Minimum amount is $8`, { toastId: 1 });
+    if (amount < config.fundMinMoney) {
+      return toast.error(`Minimum amount is ${config.fundMinMoney}`, {
+        toastId: 1
+      });
     }
     addRequest({ amount })
       .unwrap()
