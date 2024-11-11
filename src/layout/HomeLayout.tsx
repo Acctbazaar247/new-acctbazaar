@@ -20,6 +20,8 @@ const HomeLayout = ({ children }: Props) => {
         className={`bg-background min-h-screen md:bg-borderLight ${
           user?.id && router.pathname === "/marketplace"
             ? "px-5 mb-0 md:mb-0 md:px-0 pt-11 md:pt-14 lg:pt-16 2xl:pt-20 "
+            : router.pathname === "/"
+            ? "px-0 mb-10 md:mb-0 md:px-0 pt-11 md:pt-14 lg:pt-16 2xl:pt-20 "
             : "px-5 mb-10 md:mb-0 md:px-0 pt-11 md:pt-14 lg:pt-16 2xl:pt-20 "
         }`}
       >

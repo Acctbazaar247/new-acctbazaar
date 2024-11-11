@@ -15,7 +15,7 @@ export default function MyPurchase() {
   const queryString = useMemo(() => {
     const info = {
       page,
-      limit: 50,
+      limit: 50
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       if (key === "isSold") {
@@ -50,6 +50,15 @@ export default function MyPurchase() {
               // variant="outline"
               size="medium"
             />
+          </div>
+
+          <div className="p-3 rounded bg-yellow-100 mt-4 text-xs text-black">
+            <p>
+              Customers are not eligible for a refund on any social media
+              product that is not returned within 24 hours of purchase if it is
+              found to be defective. Please report any defective product
+              immediately after purchase to ensure prompt assistance.
+            </p>
           </div>
 
           {/* this is main div  */}
