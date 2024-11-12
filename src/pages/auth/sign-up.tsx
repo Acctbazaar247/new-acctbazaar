@@ -28,7 +28,7 @@ const SignUp = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>();
 
   const router = useRouter();
@@ -52,7 +52,7 @@ const SignUp = () => {
     let submittedData = {
       ...rest,
       role: UserRole.User,
-      ...(referralId && { referralId }),
+      ...(referralId && { referralId })
     };
 
     dispatch(createUser(submittedData as any));
@@ -75,7 +75,7 @@ const SignUp = () => {
 
   return (
     <AppCaptcha>
-      <div className="flex bg-background  lg:h-[100vh]">
+      <div className="flex bg-background  h-[100vh]">
         {/* this is left side div  */}
         <LeftSideAuthComponent />
 
@@ -92,8 +92,8 @@ const SignUp = () => {
                   href={{
                     pathname: "/auth/sign-in",
                     query: router.query?.from && {
-                      from: router.query?.from || "",
-                    },
+                      from: router.query?.from || ""
+                    }
                   }}
                 >
                   Login
@@ -128,7 +128,7 @@ const SignUp = () => {
               <Controller
                 name="phoneNumber"
                 rules={{
-                  required: true,
+                  required: true
                 }}
                 control={control}
                 render={({ field: { name, onBlur, onChange, ref, value } }) => (
@@ -144,7 +144,7 @@ const SignUp = () => {
                       name,
                       onBlur,
                       ref,
-                      onChange,
+                      onChange
                     }}
                   />
                 )}
@@ -189,7 +189,7 @@ const SignUp = () => {
                 <div className=" contact-input-label   flex items-center">
                   <input
                     {...register("accept", {
-                      required: true,
+                      required: true
                     })}
                     required
                     type="checkbox"

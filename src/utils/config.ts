@@ -2,6 +2,9 @@
 
 const config = {
   fundMinMoney: parseFloat(process.env.NEXT_PUBLIC_MIN_ADDFOUND as string),
+  fundBtcMinMoney: parseFloat(
+    (process.env.NEXT_PUBLIC_MIN_ADDFOUND_BITCOIN as string) || "150"
+  ),
   sellerPay: parseFloat(process.env.NEXT_PUBLIC_SELLER_PAY as string),
   serverUrl: process.env.NEXT_PUBLIC_SERVER_URL,
   withdrawalPercentage: parseFloat(
