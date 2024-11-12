@@ -11,7 +11,7 @@ import { PiCurrencyDollarBold } from "react-icons/pi";
 import { toast } from "react-toastify";
 import AppInput from "../ui/AppInput";
 import AppModal from "../ui/AppModal";
-
+import { FaBitcoin } from "react-icons/fa";
 export default function AddMoneyModal() {
   const [amount, setAmount] = useState(0);
   const router = useRouter();
@@ -23,12 +23,18 @@ export default function AddMoneyModal() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handlePay = () => {
-    if (amount < config.fundMinMoney) {
+    if (selectedOption === "btc") {
+      if (amount < config.fundBtcMinMoney) {
+        return toast.error(`Minimum amount is ${config.fundBtcMinMoney}`, {
+          toastId: 1
+        });
+      }
+    } else if (amount < config.fundMinMoney) {
       return toast.error(`Minimum amount is ${config.fundMinMoney}`, {
         toastId: 1
       });
     }
-    addRequest({ amount })
+    addRequest({ amount, pay_currency_btc: selectedOption === "btc" })
       .unwrap()
       .then((res: any) => {
         if (res.error) {
@@ -119,7 +125,7 @@ export default function AddMoneyModal() {
           <div className="space-y-1">
             <h3 className="text-textBlack font-bold">Bank / Card payment</h3>
             <p className="text-sm text-textGrey">
-              Make deposit using either your card or transfer to our local bank
+              Deposit funds directly using Bank transfer or card payment.
             </p>
           </div>
         </button>
@@ -138,10 +144,25 @@ export default function AddMoneyModal() {
             alt="bank payment"
           />
           <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Crypto</h3>
+            <h3 className="text-textBlack font-bold">Other Cryptocurrencies</h3>
             <p className="text-sm text-textGrey">
-              Make payment using any of the crypto exchange platform to deposit
-              to an address
+              Fund your wallet with popular cryptocurrencies like USDT, ETH,
+              BNB, SOL and more.
+            </p>
+          </div>
+        </button>
+        <button
+          onClick={() => setSelectedOption("btc")}
+          className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+            selectedOption === "btc" ? "border-orange-400" : ""
+          }`}
+        >
+          <FaBitcoin className={`text-[30px] text-orange-400`}></FaBitcoin>
+
+          <div className="space-y-1">
+            <h3 className="text-textBlack font-bold">Bitcoin Deposit</h3>
+            <p className="text-sm text-textGrey">
+              Make a deposit exclusively using Bitcoin.
             </p>
           </div>
         </button>
