@@ -120,11 +120,13 @@ const ManageDeposit = (props: Props) => {
         icon={<IoSearch />}
         onChange={(e) => setSearchTerm(e?.target?.value)}
       />
-      <AppTable
-        setPage={setPage}
-        columns={columns}
-        infoQuery={transactionsQuery}
-      />
+      <div className="h-[65dvh] overflow-auto">
+        <AppTable
+          setPage={setPage}
+          columns={columns}
+          infoQuery={transactionsQuery}
+        />
+      </div>
     </AdminsLayout>
   );
 };
