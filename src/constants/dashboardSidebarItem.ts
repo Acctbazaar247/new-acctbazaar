@@ -185,7 +185,12 @@ export const adminItems: TNavItemsList[] = [
         path: "/dashboard/manageFund",
         Icon: RiRefund2Fill
       },
-      common[2]
+      common[2],
+      {
+        label: "Manage deposit",
+        path: "/dashboard/manageDeposit",
+        Icon: FaMoneyBillTransfer
+      }
     ]
   },
   {
@@ -292,6 +297,11 @@ const financeAdminItems: TNavItemsList[] = [
         label: "Topup User",
         path: "/dashboard/topUpToUser",
         Icon: FaTicket
+      },
+      {
+        label: "Manage deposit",
+        path: "/dashboard/manageDeposit",
+        Icon: FaMoneyBillTransfer
       }
     ]
   },

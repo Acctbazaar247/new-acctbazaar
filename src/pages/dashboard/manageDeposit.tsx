@@ -104,7 +104,14 @@ const ManageDeposit = (props: Props) => {
 
   const transactionsQuery = useGetCurrencyRequestsQuery(queryString);
   return (
-    <AdminsLayout roles={[UserRole.SuperAdmin]}>
+    <AdminsLayout
+      roles={[
+        UserRole.SuperAdmin,
+        UserRole.Admin,
+        UserRole.FinanceAdmin,
+        UserRole.CCAdmin
+      ]}
+    >
       <h1 className="heading pb-10">Transactions</h1>
       <AppInput
         placeholder="Search By ID"
