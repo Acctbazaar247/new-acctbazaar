@@ -151,7 +151,7 @@ export default function AddMoneyModal() {
             </p>
           </div>
         </button>
-        <button
+        {/* <button
           onClick={() => setSelectedOption("btc")}
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "btc" ? "border-orange-400" : ""
@@ -165,7 +165,7 @@ export default function AddMoneyModal() {
               Make a deposit exclusively using Bitcoin.
             </p>
           </div>
-        </button>
+        </button> */}
         {/* <p className=" ">
           For naira payment, DM
           <a href="https://t.me/acctbazaar1" className="text-blue-500">

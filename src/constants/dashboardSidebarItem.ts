@@ -9,38 +9,39 @@ import {
   MdEmail,
   MdSwitchAccount,
   MdVerified,
-  MdWorkspacePremium,
+  MdWorkspacePremium
 } from "react-icons/md";
 import { RiRefund2Fill, RiVerifiedBadgeLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
 
 const common: any[] = [
   {
     label: "Overview",
     path: "/dashboard",
-    Icon: RxDashboard,
+    Icon: RxDashboard
   },
   {
     label: "profile settings",
     path: "/dashboard/profileSetting",
-    Icon: IoSettingsSharp,
+    Icon: IoSettingsSharp
   },
   {
     label: "Withdraw Fund",
     path: "/dashboard/withdrawFund",
-    Icon: BiMoneyWithdraw,
+    Icon: BiMoneyWithdraw
   },
   {
     label: "Home",
     path: "/",
-    Icon: IoHome,
-  },
+    Icon: IoHome
+  }
 ];
 
 export const supperItems: TNavItemsList[] = [
   {
     item: "",
-    navItems: [common[3], common[0]],
+    navItems: [common[3], common[0]]
   },
   {
     item: "Account",
@@ -48,14 +49,14 @@ export const supperItems: TNavItemsList[] = [
       {
         label: "Add Accounts",
         path: "/dashboard/addService",
-        Icon: MdAddToPhotos,
+        Icon: MdAddToPhotos
       },
       {
         label: "Manage Account",
         path: "/dashboard/allService",
-        Icon: MdSwitchAccount,
-      },
-    ],
+        Icon: MdSwitchAccount
+      }
+    ]
   },
   {
     item: "Manage User",
@@ -63,29 +64,29 @@ export const supperItems: TNavItemsList[] = [
       {
         label: "Manage Users",
         path: "/dashboard/manageAllUser",
-        Icon: FaUsers,
+        Icon: FaUsers
       },
       {
         label: "Topup User",
         path: "/dashboard/topUpToUser",
-        Icon: FaTicket,
+        Icon: FaTicket
       },
       {
         label: "Manage Admin",
         path: "/dashboard/manageAdmin",
-        Icon: MdAdminPanelSettings,
+        Icon: MdAdminPanelSettings
       },
       {
         label: "Make Admin",
         path: "/dashboard/addAdmin",
-        Icon: IoPersonAddSharp,
+        Icon: IoPersonAddSharp
       },
       {
         label: "Send Email",
         path: "/dashboard/send-email",
-        Icon: MdEmail,
-      },
-    ],
+        Icon: MdEmail
+      }
+    ]
   },
   {
     item: "Fund",
@@ -93,10 +94,15 @@ export const supperItems: TNavItemsList[] = [
       {
         label: "Manage Fund",
         path: "/dashboard/manageFund",
-        Icon: RiRefund2Fill,
+        Icon: RiRefund2Fill
       },
       common[2],
-    ],
+      {
+        label: "Manage deposit",
+        path: "/dashboard/manageDeposit",
+        Icon: FaMoneyBillTransfer
+      }
+    ]
   },
   {
     item: "Others",
@@ -104,32 +110,32 @@ export const supperItems: TNavItemsList[] = [
       {
         label: "Manage KYC",
         path: "/dashboard/manage-kyc",
-        Icon: RiVerifiedBadgeLine,
+        Icon: RiVerifiedBadgeLine
       },
       {
         label: "Manage Business KYC",
         path: "/dashboard/manage-business-kyc",
-        Icon: MdVerified,
+        Icon: MdVerified
       },
       {
         label: "Manage Order",
         path: "/dashboard/manage-order",
-        Icon: FaCartShopping,
+        Icon: FaCartShopping
       },
       {
         label: "Manage Plans",
         path: "/dashboard/manage-plans",
-        Icon: MdWorkspacePremium,
+        Icon: MdWorkspacePremium
       },
-      common[1],
-    ],
-  },
+      common[1]
+    ]
+  }
 ];
 
 export const adminItems: TNavItemsList[] = [
   {
     item: "",
-    navItems: [common[3], common[0]],
+    navItems: [common[3], common[0]]
   },
   {
     item: "Account",
@@ -137,14 +143,14 @@ export const adminItems: TNavItemsList[] = [
       {
         label: "Add Accounts",
         path: "/dashboard/addService",
-        Icon: MdAddToPhotos,
+        Icon: MdAddToPhotos
       },
       {
         label: "Manage Account",
         path: "/dashboard/allService",
-        Icon: MdSwitchAccount,
-      },
-    ],
+        Icon: MdSwitchAccount
+      }
+    ]
   },
   {
     item: "Manage User",
@@ -152,24 +158,24 @@ export const adminItems: TNavItemsList[] = [
       {
         label: "Manage Users",
         path: "/dashboard/manageAllUser",
-        Icon: FaUsers,
+        Icon: FaUsers
       },
       {
         label: "Topup User",
         path: "/dashboard/topUpToUser",
-        Icon: FaTicket,
+        Icon: FaTicket
       },
       {
         label: "Manage Admin",
         path: "/dashboard/manageAdmin",
-        Icon: MdAdminPanelSettings,
+        Icon: MdAdminPanelSettings
       },
       {
         label: "Make Admin",
         path: "/dashboard/addAdmin",
-        Icon: IoPersonAddSharp,
-      },
-    ],
+        Icon: IoPersonAddSharp
+      }
+    ]
   },
   {
     item: "Fund",
@@ -177,10 +183,10 @@ export const adminItems: TNavItemsList[] = [
       {
         label: "Manage Fund",
         path: "/dashboard/manageFund",
-        Icon: RiRefund2Fill,
+        Icon: RiRefund2Fill
       },
-      common[2],
-    ],
+      common[2]
+    ]
   },
   {
     item: "Others",
@@ -188,27 +194,27 @@ export const adminItems: TNavItemsList[] = [
       {
         label: "Manage KYC",
         path: "/dashboard/manage-kyc",
-        Icon: MdVerified,
+        Icon: MdVerified
       },
       {
         label: "Manage Order",
         path: "/dashboard/manage-order",
-        Icon: FaCartShopping,
+        Icon: FaCartShopping
       },
       {
         label: "Manage Plans",
         path: "/dashboard/manage-plans",
-        Icon: MdWorkspacePremium,
+        Icon: MdWorkspacePremium
       },
-      common[1],
-    ],
-  },
+      common[1]
+    ]
+  }
 ];
 
 const prAdminItems: TNavItemsList[] = [
   {
     item: "",
-    navItems: [common[3]],
+    navItems: [common[3]]
   },
   {
     item: "Account",
@@ -216,16 +222,16 @@ const prAdminItems: TNavItemsList[] = [
       {
         label: "Manage Account",
         path: "/dashboard/allService",
-        Icon: MdSwitchAccount,
-      },
-    ],
-  },
+        Icon: MdSwitchAccount
+      }
+    ]
+  }
 ];
 
 const ccAdminItems: TNavItemsList[] = [
   {
     item: "",
-    navItems: [common[3]],
+    navItems: [common[3]]
   },
   {
     item: "Account",
@@ -233,9 +239,9 @@ const ccAdminItems: TNavItemsList[] = [
       {
         label: "Manage Account",
         path: "/dashboard/allService",
-        Icon: MdSwitchAccount,
-      },
-    ],
+        Icon: MdSwitchAccount
+      }
+    ]
   },
   {
     item: "Manage User",
@@ -243,9 +249,9 @@ const ccAdminItems: TNavItemsList[] = [
       {
         label: "Manage Users",
         path: "/dashboard/manageAllUser",
-        Icon: FaUsers,
-      },
-    ],
+        Icon: FaUsers
+      }
+    ]
   },
   {
     item: "Order",
@@ -253,16 +259,16 @@ const ccAdminItems: TNavItemsList[] = [
       {
         label: "Manage Order",
         path: "/dashboard/manage-order",
-        Icon: FaCartShopping,
-      },
-    ],
-  },
+        Icon: FaCartShopping
+      }
+    ]
+  }
 ];
 
 const financeAdminItems: TNavItemsList[] = [
   {
     item: "",
-    navItems: [common[3]],
+    navItems: [common[3]]
   },
   {
     item: "Manage User",
@@ -270,9 +276,9 @@ const financeAdminItems: TNavItemsList[] = [
       {
         label: "Manage Users",
         path: "/dashboard/manageAllUser",
-        Icon: FaUsers,
-      },
-    ],
+        Icon: FaUsers
+      }
+    ]
   },
   {
     item: "Fund",
@@ -280,14 +286,14 @@ const financeAdminItems: TNavItemsList[] = [
       {
         label: "Manage Fund",
         path: "/dashboard/manageFund",
-        Icon: RiRefund2Fill,
+        Icon: RiRefund2Fill
       },
       {
         label: "Topup User",
         path: "/dashboard/topUpToUser",
-        Icon: FaTicket,
-      },
-    ],
+        Icon: FaTicket
+      }
+    ]
   },
   {
     item: "Order",
@@ -295,10 +301,10 @@ const financeAdminItems: TNavItemsList[] = [
       {
         label: "Manage Order",
         path: "/dashboard/manage-order",
-        Icon: FaCartShopping,
-      },
-    ],
-  },
+        Icon: FaCartShopping
+      }
+    ]
+  }
 ];
 
 export const dashboardSidebarItem = {
@@ -306,5 +312,5 @@ export const dashboardSidebarItem = {
   supperItems,
   prAdminItems,
   ccAdminItems,
-  financeAdminItems,
+  financeAdminItems
 };
