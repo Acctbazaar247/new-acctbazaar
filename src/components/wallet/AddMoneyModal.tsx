@@ -20,7 +20,7 @@ export default function AddMoneyModal() {
     useAddCurrencyRequestMutation();
   const [addRequestWithPayStack, { isLoading: isPayStackLoading }] =
     useAddCurrencyRequestWithPayStackMutation();
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>("crypto");
 
   const handlePay = () => {
     if (selectedOption === "btc") {
@@ -109,7 +109,7 @@ export default function AddMoneyModal() {
           value={amount.toString()}
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
-        <button
+        {/* <button
           // onClick={() => setSelectedOption("bank")}
           onClick={() =>
             toast.error("Currently not available", { toastId: "1" })
@@ -131,7 +131,7 @@ export default function AddMoneyModal() {
               Deposit funds directly using Bank transfer or card payment.
             </p>
           </div>
-        </button>
+        </button> */}
 
         <button
           onClick={() => setSelectedOption("crypto")}
@@ -147,7 +147,7 @@ export default function AddMoneyModal() {
             alt="bank payment"
           />
           <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Other Cryptocurrencies</h3>
+            <h3 className="text-textBlack font-bold">Crypto Deposit</h3>
             <p className="text-sm text-textGrey">
               Fund your wallet with popular cryptocurrencies like USDT, ETH,
               BNB, SOL and more.
