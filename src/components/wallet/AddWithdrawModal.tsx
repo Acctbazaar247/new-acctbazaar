@@ -341,7 +341,7 @@ export default function AddWithdrawModal() {
 
               {cryptoW && (
                 <AnimatePresence>
-                  {/* {!withdrawData?.address ? (
+                  {!withdrawData?.address ? (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -349,7 +349,9 @@ export default function AddWithdrawModal() {
                       transition={{ duration: 0.3 }}
                     >
                       <form onSubmit={handleSubmit(onSubmit)}>
-                        <h4>USDT Only (minimum <b>$100</b>) </h4>
+                        <h4>
+                          USDT Only (minimum <b>$20</b>){" "}
+                        </h4>
                         <div className="pt-3">
                           <p className="textG text-sm pb-1">Choose Network</p>
                           <div className="grid grid-cols-2 gap-3">
@@ -391,8 +393,8 @@ export default function AddWithdrawModal() {
                                   TRON network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match. A network fee of $6 will be deducted from
-                                your transaction
+                                doesn’t match. A network fee of $6 will be
+                                deducted from your transaction
                               </p>
                             )}
                             {bnbSelect && (
@@ -405,8 +407,8 @@ export default function AddWithdrawModal() {
                                   BNB Smart Chain network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match. A network fee of $6 will be deducted from
-                                your transaction
+                                doesn’t match. A network fee of $6 will be
+                                deducted from your transaction
                               </p>
                             )}
                             <div className="col-span-2">
@@ -442,10 +444,7 @@ export default function AddWithdrawModal() {
                         </div>
                       </form>
                     </motion.div>
-                  ) : null} */}
-                  <h3 className="text-textBlack font-medium">
-                    Currently unavailable
-                  </h3>
+                  ) : null}
                 </AnimatePresence>
               )}
             </div>
