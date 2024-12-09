@@ -393,7 +393,7 @@ export default function AddWithdrawModal() {
                                   TRON network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match. A network fee of $6 will be
+                                doesn’t match. A network fee of $3 will be
                                 deducted from your transaction
                               </p>
                             )}
