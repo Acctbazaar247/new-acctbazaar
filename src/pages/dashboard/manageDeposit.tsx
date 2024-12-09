@@ -20,7 +20,8 @@ const ManageDeposit = (props: Props) => {
   const queryString = useMemo(() => {
     const info = {
       page,
-      id: searchTerm
+      id: searchTerm,
+      limit: 30
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
       const value = info[key as keyof typeof info];

@@ -110,7 +110,10 @@ export default function AddMoneyModal() {
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
         <button
-          onClick={() => setSelectedOption("bank")}
+          // onClick={() => setSelectedOption("bank")}
+          onClick={() =>
+            toast.error("Currently not available", { toastId: "1" })
+          }
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "bank" ? "border-orange-400" : ""
           }`}
