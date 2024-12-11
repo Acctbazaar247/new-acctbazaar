@@ -24,20 +24,20 @@ export default function SellYourAccount() {
   const { data: UploadLeftOnCurrentPlan, refetch } =
     useGetUploadLeftOnCurrentPlanQuery("");
 
-  useEffect(() => {
-    if (user?.role && sellAccountState === 1) {
-      if (user.role === UserRole.User) {
-        setSellAccountState(1);
-      } else if (user.role === UserRole.Seller) {
-        setSellAccountState(2);
-      } else {
-        setSellAccountState(0);
-        toast.error("Admin cannot access sell product page", { toastId: "1" });
-        router.push("/");
-      }
-    }
-    refetch();
-  }, [user, router, sellAccountState, refetch]);
+  // useEffect(() => {
+  //   if (user?.role && sellAccountState === 1) {
+  //     if (user.role === UserRole.User) {
+  //       setSellAccountState(1);
+  //     } else if (user.role === UserRole.Seller) {
+  //       setSellAccountState(2);
+  //     } else {
+  //       setSellAccountState(0);
+  //       toast.error("Admin cannot access sell product page", { toastId: "1" });
+  //       router.push("/");
+  //     }
+  //   }
+  //   refetch();
+  // }, [user, router, sellAccountState, refetch]);
 
   return (
     <HomeLayout>

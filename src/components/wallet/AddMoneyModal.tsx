@@ -109,11 +109,8 @@ export default function AddMoneyModal() {
           value={amount.toString()}
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
-        {/* <button
-          // onClick={() => setSelectedOption("bank")}
-          onClick={() =>
-            toast.error("Currently not available", { toastId: "1" })
-          }
+        <button
+          onClick={() => setSelectedOption("bank")}
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "bank" ? "border-orange-400" : ""
           }`}
@@ -131,7 +128,7 @@ export default function AddMoneyModal() {
               Deposit funds directly using Bank transfer or card payment.
             </p>
           </div>
-        </button> */}
+        </button>
 
         <button
           onClick={() => setSelectedOption("crypto")}
