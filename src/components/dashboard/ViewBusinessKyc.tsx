@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TBusinessKyc } from "../../types/common";
+import AppModal from "@/components/ui/AppModal";
 
 type TEditUserProps = {
   record: TBusinessKyc;
@@ -135,13 +136,25 @@ const ViewBusinessKyc = ({ record }: TEditUserProps) => {
             <div key={data?.label}>
               <p className="text-textDarkGrey">{data?.label}</p>
 
-              <Image
-                src={data?.value || ""}
-                alt="identity image"
-                className="w-full rounded min-h-24 max-h-36 object-cover"
-                width={180}
-                height={180}
-              />
+              <AppModal
+                button={
+                  <Image
+                    src={data?.value || ""}
+                    alt="identity image"
+                    className="w-full rounded min-h-24 max-h-36 object-cover"
+                    width={180}
+                    height={180}
+                  />
+                }
+              >
+                <Image
+                  src={data?.value || ""}
+                  alt="identity image"
+                  className="w-full rounded max-h-[50dvh] object-cover"
+                  width={600}
+                  height={400}
+                />
+              </AppModal>
             </div>
           ))}
         </div>

@@ -20,7 +20,7 @@ export default function AddMoneyModal() {
     useAddCurrencyRequestMutation();
   const [addRequestWithPayStack, { isLoading: isPayStackLoading }] =
     useAddCurrencyRequestWithPayStackMutation();
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>("crypto");
 
   const handlePay = () => {
     if (selectedOption === "btc") {
@@ -109,8 +109,11 @@ export default function AddMoneyModal() {
           value={amount.toString()}
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
-        <button
-          onClick={() => setSelectedOption("bank")}
+        {/* <button
+          // onClick={() => setSelectedOption("bank")}
+          onClick={() =>
+            toast.error("Currently not available", { toastId: "1" })
+          }
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "bank" ? "border-orange-400" : ""
           }`}
@@ -128,7 +131,7 @@ export default function AddMoneyModal() {
               Deposit funds directly using Bank transfer or card payment.
             </p>
           </div>
-        </button>
+        </button> */}
 
         <button
           onClick={() => setSelectedOption("crypto")}
@@ -144,14 +147,14 @@ export default function AddMoneyModal() {
             alt="bank payment"
           />
           <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Other Cryptocurrencies</h3>
+            <h3 className="text-textBlack font-bold">Crypto Deposit</h3>
             <p className="text-sm text-textGrey">
               Fund your wallet with popular cryptocurrencies like USDT, ETH,
               BNB, SOL and more.
             </p>
           </div>
         </button>
-        <button
+        {/* <button
           onClick={() => setSelectedOption("btc")}
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "btc" ? "border-orange-400" : ""
@@ -165,7 +168,7 @@ export default function AddMoneyModal() {
               Make a deposit exclusively using Bitcoin.
             </p>
           </div>
-        </button>
+        </button> */}
         {/* <p className=" ">
           For naira payment, DM
           <a href="https://t.me/acctbazaar1" className="text-blue-500">
