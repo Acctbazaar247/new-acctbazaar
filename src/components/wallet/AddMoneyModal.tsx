@@ -20,7 +20,7 @@ export default function AddMoneyModal() {
     useAddCurrencyRequestMutation();
   const [addRequestWithPayStack, { isLoading: isPayStackLoading }] =
     useAddCurrencyRequestWithPayStackMutation();
-  const [selectedOption, setSelectedOption] = useState<string | null>("crypto");
+  const [selectedOption, setSelectedOption] = useState<string | null>();
 
   const handlePay = () => {
     if (selectedOption === "btc") {
