@@ -307,8 +307,9 @@ export default function AddWithdrawModal() {
                         </button>
                       </div>
                       <h3 className="text-textBlack font-medium">
-                        Withdrawals to commercial banks are processed instantly,
-                        while microfinance banks may take a bit longer.
+                        Merchant payouts are reviewed to ensure all products
+                        sold meet requirements. Payments are processed after
+                        verification.
                       </h3>
                     </form>
                   </motion.div>
