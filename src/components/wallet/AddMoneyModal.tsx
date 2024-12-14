@@ -130,6 +130,13 @@ export default function AddMoneyModal() {
           </div>
         </button>
 
+        {/* Conditionally render the note below the button */}
+        {selectedOption === "bank" && (
+          <p className="text-sm text-textGrey mt-2">
+            <strong>Note:</strong> Transaction charges for bank deposits or card payments, as directed by CBN, are to be covered by the customer.
+          </p>
+        )}
+
         <button
           onClick={() => setSelectedOption("crypto")}
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
@@ -141,39 +148,17 @@ export default function AddMoneyModal() {
             height={32}
             className="size-8"
             src={"/assets/icons/doller-recive.png"}
-            alt="bank payment"
+            alt="crypto payment"
           />
           <div className="space-y-1">
             <h3 className="text-textBlack font-bold">Crypto Deposit</h3>
             <p className="text-sm text-textGrey">
-              Fund your wallet with popular cryptocurrencies like USDT, ETH,
-              BNB, SOL and more.
+              Fund your wallet with popular cryptocurrencies like USDT, ETH, BNB,
+              SOL and more.
             </p>
           </div>
         </button>
-        {/* <button
-          onClick={() => setSelectedOption("btc")}
-          className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
-            selectedOption === "btc" ? "border-orange-400" : ""
-          }`}
-        >
-          <FaBitcoin className={`text-[30px] text-orange-400`}></FaBitcoin>
 
-          <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Bitcoin Deposit</h3>
-            <p className="text-sm text-textGrey">
-              Make a deposit exclusively using Bitcoin.
-            </p>
-          </div>
-        </button> */}
-        {/* <p className=" ">
-          For naira payment, DM
-          <a href="https://t.me/acctbazaar1" className="text-blue-500">
-            {" "}
-            @acctbazaar1
-          </a>{" "}
-           on telegram
-        </p> */}
         <div className="flex justify-center">
           <button
             onClick={handleSubmit}
@@ -184,6 +169,7 @@ export default function AddMoneyModal() {
           </button>
         </div>
       </div>
+
     </AppModal>
   );
 }
