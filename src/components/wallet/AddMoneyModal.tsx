@@ -102,13 +102,14 @@ export default function AddMoneyModal() {
       subTitle="Fund your wallet with any of these two channels"
     >
       <div className="space-y-4 pt-4 md:w-[520px]">
-        <AppInput
+      <AppInput
           icon={<PiCurrencyDollarBold />}
           type="number"
           placeholder="Enter Amount"
           value={amount.toString()}
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
+        {/* Bank / Card payment button */}
         <button
           onClick={() => setSelectedOption("bank")}
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
@@ -130,13 +131,14 @@ export default function AddMoneyModal() {
           </div>
         </button>
 
-        {/* Conditionally render the note below the button */}
+        {/* Note for Bank / Card payment */}
         {selectedOption === "bank" && (
           <p className="text-sm text-textGrey mt-2">
             <strong>Note:</strong> Transaction charges for bank deposits or card payments, as directed by CBN, are to be covered by the customer.
           </p>
         )}
 
+        {/* Crypto Deposit button */}
         <button
           onClick={() => setSelectedOption("crypto")}
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
@@ -159,6 +161,13 @@ export default function AddMoneyModal() {
           </div>
         </button>
 
+        {/* Message for Crypto Deposit */}
+        {selectedOption === "crypto" && (
+          <p className="text-sm text-textGrey mt-2">
+            <strong>Important:</strong> Please ensure you copy and send the exact amount displayed when making your payment to guarantee the successful processing of your deposit.
+          </p>
+        )}
+
         <div className="flex justify-center">
           <button
             onClick={handleSubmit}
@@ -169,7 +178,6 @@ export default function AddMoneyModal() {
           </button>
         </div>
       </div>
-
     </AppModal>
   );
 }
