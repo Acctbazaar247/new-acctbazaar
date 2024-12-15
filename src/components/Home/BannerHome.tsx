@@ -13,8 +13,8 @@ export default function BannerHome() {
     <div className="flex relative h-[120dvh] xl:h-[110dvh] overflow-hidden ">
       <img className="w-1/2" src="/assets/home/shadowLeft.png" alt="" />
       <img className="w-1/2" src="/assets/home/shadowRight.png" alt="" />
-
-      <div className="absolute top-0 left-0 w-full h-full pt-20">
+      {/* Added the mt-[-220px] class to move the banner to the top */}
+      <div className="absolute top-0 left-0 w-full h-full pt-20 lg:mt-[-220px]">
         <div
           className="container px-4 w-full h-full flex flex-col lg:flex-row mx-auto"
           data-aos="fade-up"
@@ -22,8 +22,9 @@ export default function BannerHome() {
         >
           <div className="w-full lg:w-1/2 my-auto">
             <h2 className="hidden lg:block font-bold text-3xl lg:text-5xl leading-loose 2xl:text-[54px] pb-3">
-              <p>Discover Unique Accounts</p>{" "}
-              <p className="mt-3">in our Marketplace</p>
+              {/* Added font-bold to the paragraph */}
+              <p className="font-bold">Discover Unique Accounts</p>{" "}
+              <p className="font-bold mt-3">in our Marketplace</p>
             </h2>
             <h2 className="lg:hidden font-bold text-4xl leading-[47px] pb-3 pr-8">
               Discover Unique Accounts In Our Marketplace
