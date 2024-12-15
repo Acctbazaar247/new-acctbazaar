@@ -14,7 +14,7 @@ export default function BannerHome() {
       <img className="w-1/2" src="/assets/home/shadowLeft.png" alt="" />
       <img className="w-1/2" src="/assets/home/shadowRight.png" alt="" />
       {/* Added the mt-[-220px] class to move the banner to the top */}
-      <div className="absolute top-0 left-0 w-full h-full pt-20 lg:mt-[-220px]">
+      <div className="absolute top-0 left-0 w-full h-full pt-20 lg:mt-[-150px]">
         <div
           className="container px-4 w-full h-full flex flex-col lg:flex-row mx-auto"
           data-aos="fade-up"
