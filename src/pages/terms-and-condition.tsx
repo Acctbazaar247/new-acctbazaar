@@ -7,9 +7,9 @@ type Props = {};
 const TermsAndCondition = (props: Props) => {
   return (
     <HomeLayout>
-      <section className="flex_center">
+      <section className="flex_center px-4 sm:px-2 md:px-10 lg:px-10">
         <div className="tc_main !mt-0">
-          <div className="tc_content">
+          <div className="tc_content px-4 sm:px-2 md:px-10 lg:px-10">
             <div className="tc_top !m-0">
               <div className="flex justify-center">
                 <Image
@@ -17,176 +17,121 @@ const TermsAndCondition = (props: Props) => {
                   height={200}
                   className="!w-[200px] lg:!w-[240px]"
                   src="/fav-icon.png"
-                  alt=""
+                  alt="AcctBazaar Logo"
                 />
               </div>
-              <div className="title mt-5">
-                <p>Terms of serivce</p>
+              <div className="title mt-5 text-center">
+                <p>AcctBazaar Terms and Conditions</p>
               </div>
-              <h3>Last Updated: [December 2023]</h3>
-              <div className="info">
-                Welcome to AcctBazaar, an online peer-to-peer marketplace for
-                social media a ccounts, VPN accounts, email services accounts,
-                and gaming accounts. These Terms and Conditions outline the
-                rules and regulations for the use of the AcctBazaar platform. By
-                accessing this website and using our services, you agree to
-                accept and abide by these terms. Please read them carefully.
+              <h3 className="text-center">Last Updated: 20th March 2024</h3>
+              <div className="info mt-5">
+                Welcome to AcctBazaar, Nigeria’s leading Peer-to-Peer (P2P) digital marketplace. AcctBazaar facilitates seamless transactions between buyers and sellers of digital products, including but not limited to gift cards, VPN subscriptions, gaming accounts, and social media logins. By accessing our platform, you acknowledge and agree to these terms and conditions, which govern your use of the website, services, and applications associated with AcctBazaar.
+
+                These Terms and Conditions form a legally binding agreement between you (“the User”) and AcctBazaar. If you disagree with any part of these terms, you must immediately discontinue your use of the platform.
               </div>
             </div>
-            <div className="tc_bottom">
-              <div className="title my-5 !mb-5">
-                <p>please go through the terms before Accepting it.</p>
-              </div>
-              <div className="info">
-                <ul>
-                  <li>
-                    <h3>1. Acceptance of Terms</h3>
-                    <div>
-                      <p>
-                        By accessing or using the AcctBazaar platform, you agree
-                        to be bound by these Terms and Conditions. If you do not
-                        agree to all the terms and conditions of this agreement,
-                        you must not access the website or use our services.
-                      </p>
-                    </div>
+            <div className="tc_bottom mt-8 mb-20">
+              <div className="info text-left">
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">1. Introduction</h3>
+                <p>AcctBazaar serves as a neutral intermediary connecting buyers and sellers of digital goods. We are committed to providing a secure, user-friendly environment that simplifies transactions and fosters trust between users. While AcctBazaar operates primarily in the Nigerian market, our platform is accessible to users globally.</p>
+                <ul className="list-disc ml-5">
+                  <li className="font-bold mt-3">What We Do:
+                    <ul className="list-circle ml-4">
+                      <li>Facilitate transactions of digital products in a secure P2P environment.</li>
+                      <li>Provide optional KYC verification for merchants to boost credibility.</li>
+                      <li>Offer transparent transaction processing and a dispute resolution mechanism.</li>
+                    </ul>
                   </li>
-                  <li>
-                    <h3>2. Account Registration</h3>
-                    <div>
-                      <p>
-                        To use certain features of AcctBazaar, you may be
-                        required to register for an account. You must provide
-                        accurate, current, and complete information during the
-                        registration process and update such information to keep
-                        it accurate, current, and complete.
-                      </p>
-                      <p>
-                        You are responsible for maintaining the confidentiality
-                        of your account and password and for restricting access
-                        to your computer or device. You agree to accept
-                        responsibility for all activities that occur under your
-                        account or password.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <h3>3. Prohibited Activities</h3>
-                    <div>
-                      <p>
-                        You agree not to engage in any of the following
-                        activities on the AcctBazaar platform:
-                      </p>
-                      <ol>
-                        <li>
-                          a. Violating any applicable laws or regulations.
-                        </li>
-                        <li>
-                          b. Infringing on the intellectual property rights of
-                          others.
-                        </li>
-                        <li>
-                          c. Distributing spam, viruses, or any other
-                          technologies that may harm AcctBazaar, or the
-                          interests or property of its users.
-                        </li>
-                        <li>
-                          d. Engaging in fraudulent, deceptive, or unethical
-                          practices.
-                        </li>
-                        <li>
-                          e. Selling accounts that violate the terms of service
-                          of the respective platform or service provider.
-                        </li>
-                      </ol>
-                    </div>
-                  </li>
-                  <li>
-                    <h3>4. Listing and Selling Accounts</h3>
-                    <div>
-                      <p>
-                        Sellers on AcctBazaar must accurately represent the
-                        accounts they are selling, including information about
-                        followers, engagement, and any other relevant details.
-                      </p>
-                      <p>
-                        Sellers are responsible for ensuring that the sale of
-                        accounts complies with the terms of service of the
-                        respective platform or service provider.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <h3>5. Fees and Payments</h3>
-                    <div>
-                      <p>
-                        AcctBazaar may charge fees for certain services, and
-                        these fees will be clearly disclosed. Sellers are
-                        responsible for paying any applicable fees associated
-                        with the use of our platform.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <h3>6. Dispute Resolution</h3>
-                    <div>
-                      <p>
-                        In the event of a dispute between buyers and sellers,
-                        AcctBazaar may, at its discretion, provide assistance in
-                        resolving the dispute.
-                      </p>
-                      <p>
-                        AcctBazaar is not responsible for the quality or
-                        authenticity of the accounts listed on the platform.
-                        Users are encouraged to communicate and verify details
-                        before making a purchase.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <h3>7. Termination of Account</h3>
-                    <div>
-                      <p>
-                        AcctBazaar reserves the right to terminate or suspend
-                        your account at any time and for any reason, without
-                        prior notice.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <h3>8. Changes to Terms and Conditions</h3>
-                    <div>
-                      <p>
-                        AcctBazaar reserves the right to modify these Terms and
-                        Conditions at any time. Changes will be effective
-                        immediately upon posting on the website. It is your
-                        responsibility to review these Terms and Conditions
-                        regularly to stay informed of updates.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <h3>9. Contact Information</h3>
-                    <div>
-                      <p>
-                        If you have any questions or concerns about these Terms
-                        and Conditions, please contact us at{" "}
-                        <a
-                          className="telegram-link"
-                          href="https://t.me/acctbazaar"
-                        >
-                          @acctbazaar1{" "}
-                        </a>
-                      </p>
-                    </div>
+                  <li className="font-bold mt-3">What We Don’t Do:
+                    <ul className="list-circle ml-4">
+                      <li>Monitor or control how products listed on the platform are used.</li>
+                      <li>Guarantee the legality or authenticity of any products.</li>
+                      <li>Participate in or endorse activities, whether legal or illegal, involving the listed products.</li>
+                    </ul>
                   </li>
                 </ul>
+
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">2. User Registration and Verification</h3>
+                <ul className="list-disc ml-5">
+                  <li className="font-bold mt-3">Registration Requirements:
+                    <ul className="list-circle ml-4">
+                      <li>All users must register with a valid email address and phone number.</li>
+                      <li>No additional personal information is required for basic access to the platform.</li>
+                    </ul>
+                  </li>
+                  <li className="font-bold mt-3">Merchant Verification:
+                    <ul className="list-circle ml-4">
+                      <li>Merchants may choose to submit Know Your Customer (KYC) documents for optional verification.</li>
+                      <li>Verified merchants are awarded a badge to signify enhanced credibility.</li>
+                    </ul>
+                  </li>
+                  <li className="font-bold mt-3">User Obligations:
+                    <ul className="list-circle ml-4">
+                      <li>Users must provide accurate and up-to-date information during registration.</li>
+                      <li>Misrepresentation of information may lead to suspension or permanent banning from the platform.</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">3. Prohibited Activities</h3>
+                <p>Users are prohibited from engaging in the following activities on AcctBazaar:</p>
+                <ul className="list-disc ml-5">
+                  <li>Listing, purchasing, or facilitating the trade of illegal, counterfeit, or stolen products.</li>
+                  <li>Fraudulent activities or scams targeting other users.</li>
+                  <li>Misrepresenting product descriptions or intentionally deceiving other users.</li>
+                  <li>Using the platform for money laundering or any criminal purposes.</li>
+                  <li>Attempting to exploit platform vulnerabilities or disrupt its services.</li>
+                </ul>
+                <p className="mt-3">Important Notice: AcctBazaar operates as a marketplace and is not responsible for the actions of buyers or sellers. All users are solely accountable for ensuring their activities comply with local and international laws.</p>
+
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">4. Transactions on AcctBazaar</h3>
+                <ul className="list-disc ml-5">
+                  <li className="font-bold mt-3">Payment and Fees:
+                    <ul className="list-circle ml-4">
+                      <li>AcctBazaar charges a nominal transaction fee for completed sales.</li>
+                      <li>The fee structure is transparent and displayed before transactions are finalized.</li>
+                    </ul>
+                  </li>
+                  <li className="font-bold mt-3">Currency:
+                    <ul className="list-circle ml-4">
+                      <li>Transactions on AcctBazaar are conducted in USD.</li>
+                      <li>Users may need to convert their local currency to USD to access the platform.</li>
+                    </ul>
+                  </li>
+                  <li className="font-bold mt-3">Dispute Resolution:
+                    <ul className="list-circle ml-4">
+                      <li>In the event of a dispute between buyers and sellers, AcctBazaar provides mediation services.</li>
+                      <li>Disputes must be reported within 48 hours of the transaction for investigation.</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">5. Disclaimer of Liability</h3>
+                <p>AcctBazaar assumes no responsibility for the following:</p>
+                <ul className="list-disc ml-5">
+                  <li>The legality, authenticity, or intended use of products traded on the platform.</li>
+                  <li>Losses resulting from disputes, fraud, or misuse of the platform by users.</li>
+                  <li>Any penalties or legal consequences users may face due to the misuse of digital products.</li>
+                </ul>
+
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">6. Indemnity Clause</h3>
+                <p>By using AcctBazaar, you agree to indemnify and hold harmless AcctBazaar, its affiliates, and its operators against any claims, damages, liabilities, or legal proceedings arising from:</p>
+                <ul className="list-disc ml-5">
+                  <li>Your use or misuse of the platform.</li>
+                  <li>Transactions conducted on AcctBazaar, whether lawful or unlawful.</li>
+                  <li>Violations of these Terms and Conditions.</li>
+                </ul>
+
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">7. Governing Law</h3>
+                <p>These Terms and Conditions are governed by the laws of the Federal Republic of Nigeria. Any legal disputes shall be resolved in Nigerian courts.</p>
+      
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">Contact Us</h3>
+                <p>If you have any questions or concerns about these Terms and Conditions, please contact us at:</p>
+                <p>Email: help@acctbazaar.com</p>
+                <p>Phone: +234 707 382 3800</p>
               </div>
             </div>
           </div>
-          {/* <div className="tc_btns">
-            <button className="accept">Accept</button>
-            <button className="decline">Decline</button>
-          </div> */}
         </div>
       </section>
     </HomeLayout>

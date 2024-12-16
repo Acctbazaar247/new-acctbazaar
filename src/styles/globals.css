@@ -202,11 +202,10 @@ html {
   justify-content: center;
 }
 
-.tc_main {
+/* .tc_main {
   margin: 20px 0;
-  width: 80%;
+  width: 90%;
   max-width: 100%;
-  /* height: 570px; */
   background: var(--white);
   text-align: center;
   border-radius: 3px;
@@ -229,7 +228,6 @@ html {
 .tc_main .tc_content {
   width: 100%;
   margin: 35px 0;
-  /* height: calc(550px - 150px); */
 }
 
 .tc_main .tc_btns {
@@ -240,19 +238,15 @@ html {
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.tc_main .tc_content .tc_top {
-  /* margin: 0 35px 35px !important; */
-}
 
 .tc_main .tc_content .tc_bottom {
-  padding: 0 35px;
+  padding: 0 10px;
   overflow: auto;
   height: calc(100% - 210px);
 }
 
 .tc_main .tc_content .tc_top .icon {
   width: 290px;
-  /* height: 80px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -327,7 +321,7 @@ html {
 
 .tc_main .tc_btns button.accept:hover {
   background: var(--btn-hvr-clr);
-}
+} */
 
 .account-reel th.ant-table-cell {
   @apply !text-[10px] md:!text-base;

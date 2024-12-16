@@ -34,7 +34,7 @@ const Footer = (props: Props) => {
             <div className="space-y-3 flex flex-col font-normal">
               <Link
                 className="text-nowrap text-sm sm:text-md font-normal"
-                href="/signIn"
+                href="/terms-and-condition"
               >
                 About
               </Link>
