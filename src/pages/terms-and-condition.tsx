@@ -21,7 +21,7 @@ const TermsAndCondition = (props: Props) => {
                 />
               </div>
               <div className="title mt-5 text-center">
-                <p>AcctBazaar Terms and Conditions</p>
+                <h2>AcctBazaar Terms and Conditions with Privacy Policy</h2>
               </div>
               <h3 className="text-center">Last Updated: 20th March 2024</h3>
               <div className="info mt-5">
