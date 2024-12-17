@@ -126,8 +126,13 @@ const TermsAndCondition = (props: Props) => {
                 <h3 className="font-bold mt-6 mb-2 text-[18px]">8. Governing Law</h3>
                 <p>These Terms and Conditions are governed by the laws of the Federal Republic of Nigeria. Any legal disputes shall be resolved in Nigerian courts.</p>
 
+                <h3 className="font-bold mt-6 mb-2 text-[18px]">Contact Us</h3>
+                <p>If you have any questions or concerns about these Terms and Conditions, please contact us at:</p>
+                <p>Email: help@acctbazaar.com</p>
+                <p>Phone: +234 707 382 3800</p>
+
                 {/* New "About Us" Section */}
-                <h3 className="font-bold mt-6 mb-2 text-[18px]">About Us</h3>
+                <h3 className="font-bold mt-8 mb-6 text-[24px] text-center">About Us</h3>
                 <p>
                   AcctBazaar is a Nigerian-owned platform revolutionizing digital commerce in Africa. Founded with the mission of simplifying P2P transactions, we provide a secure and transparent marketplace where users can buy and sell a wide range of digital products.
                 </p>
@@ -178,10 +183,75 @@ const TermsAndCondition = (props: Props) => {
                   AcctBazaar cooperates fully with Nigerian authorities and international law enforcement agencies when required.
                 </p>
       
-                <h3 className="font-bold mt-6 mb-2 text-[18px]">Contact Us</h3>
-                <p>If you have any questions or concerns about these Terms and Conditions, please contact us at:</p>
-                <p>Email: help@acctbazaar.com</p>
-                <p>Phone: +234 707 382 3800</p>
+                {/* Privacy Policy Section */}
+                <div className="text-center mb-4">
+                  <h3 className="font-bold mt-10 mb-2 text-[24px]">Privacy Policy</h3>
+                  <h4 className="font-bold mt-4">Effective Date: 14th December 2024</h4>
+                  <h4 className="font-bold">Last Updated: 20th March 2024</h4>
+                </div>
+                <p>
+                  At AcctBazaar, we are committed to safeguarding the privacy and personal information of our users. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you access or use our platform. By using AcctBazaar, you agree to the terms outlined in this policy.
+                </p>
+
+                <h4 className="font-bold mt-4">1. Information We Collect</h4>
+                <ul className="list-disc ml-5">
+                  <li>Personal Information: Email address and phone number (mandatory for account creation).</li>
+                  <li>Transaction Information: Details about the digital goods you buy or sell.</li>
+                  <li>Usage Data: Information on platform usage like logins and activities.</li>
+                  <li>Device Information: IP address, browser type, and operating system.</li>
+                </ul>
+
+                <h4 className="font-bold mt-4">2. How We Use Your Information</h4>
+                <ul className="list-disc ml-5">
+                  <li>Facilitate transactions between buyers and sellers.</li>
+                  <li>Ensure the platform’s security and prevent fraud.</li>
+                  <li>Improve the platform’s functionality and user experience.</li>
+                  <li>Communicate updates, offers, and important notices.</li>
+                  <li>Resolve disputes and provide customer support.</li>
+                </ul>
+
+                <h4 className="font-bold mt-4">3. How We Protect Your Information</h4>
+                <p>
+                  We implement stringent security measures, including encryption, secure storage, and monitoring for vulnerabilities. Users should protect account details and report suspicious activity.
+                </p>
+
+                <h4 className="font-bold mt-4">4. Sharing Your Information</h4>
+                <p>
+                  We do not sell or rent your data but may share it with service providers, legal authorities, or to protect the platform.
+                </p>
+
+                <h4 className="font-bold mt-4">5. Cookies and Tracking Technologies</h4>
+                <p>
+                  We use cookies to improve user experience. Disabling cookies may limit platform functionality.
+                </p>
+
+                <h4 className="font-bold mt-4">6. Your Rights</h4>
+                <ul className="list-disc ml-5">
+                  <li>Access, correct, or delete your personal information.</li>
+                  <li>Opt-out of promotional communications.</li>
+                </ul>
+
+                <h4 className="font-bold mt-4">7. Data Retention</h4>
+                <p>
+                  We retain data as long as necessary for service delivery, legal compliance, and dispute resolution.
+                </p>
+
+                <h4 className="font-bold mt-4">8. Third-Party Links</h4>
+                <p>
+                  We are not responsible for third-party privacy practices. Review their policies before engaging.
+                </p>
+
+                <h4 className="font-bold mt-4">9. Changes to this Privacy Policy</h4>
+                <p>
+                  Updates will be posted here. Continued use signifies agreement to changes.
+                </p>
+
+                <h4 className="font-bold mt-4">10. Contact Us</h4>
+                <p>
+                  For questions, contact us at:<br />
+                  <strong>Email:</strong> help@acctbazaar.com<br />
+                  <strong>Phone:</strong> +234 707 382 3800
+                </p>
               </div>
             </div>
           </div>
