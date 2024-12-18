@@ -59,6 +59,14 @@ const ManageFund = () => {
       //   key: "amount",
     },
     {
+      title: "Dollar Rate",
+      dataIndex: "dollarRate",
+      className: "whitespace-nowrap",
+      render: (current: number | undefined | null, fulldata: any) => {
+        return <div className="text-xs">{current || "Not Applicable"}</div>;
+      }
+    },
+    {
       title: "Status",
       dataIndex: "status",
       className: "capitalize"

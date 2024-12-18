@@ -4,49 +4,58 @@ export const currencyRequestApi = apiSlice.injectEndpoints({
     getCurrencyRequests: builder.query({
       query: (query) => {
         return {
-          url: `/currency-request?${query}`,
+          url: `/currency-request?${query}`
         };
-      },
+      }
     }),
     getCurrencyRequestById: builder.query({
-      query: (id) => `/currency-request/${id}`,
+      query: (id) => `/currency-request/${id}`
     }),
     addCurrencyRequest: builder.mutation({
       query: (info) => {
         return {
           url: "/currency-request",
           method: "POST",
-          body: info,
+          body: info
         };
-      },
+      }
     }),
     addCurrencyRequestWithPayStack: builder.mutation({
       query: (info) => {
         return {
           url: "/currency-request/paystack",
           method: "POST",
-          body: info,
+          body: info
         };
-      },
+      }
+    }),
+    addCurrencyRequestWithKoraPay: builder.mutation({
+      query: (info) => {
+        return {
+          url: "/currency-request/kora-pay",
+          method: "POST",
+          body: info
+        };
+      }
     }),
     editCurrencyRequest: builder.mutation({
       query: (info) => {
         return {
           url: `/currency-request/${info._id}`,
           method: "PATCH",
-          body: info,
+          body: info
         };
-      },
+      }
     }),
     deleteCurrencyRequest: builder.mutation({
       query: (id) => {
         return {
           url: `/currency-request/${id}`,
-          method: "DELETE",
+          method: "DELETE"
         };
-      },
-    }),
-  }),
+      }
+    })
+  })
 });
 export const {
   useGetCurrencyRequestsQuery,
@@ -55,4 +64,5 @@ export const {
   useEditCurrencyRequestMutation,
   useGetCurrencyRequestByIdQuery,
   useAddCurrencyRequestWithPayStackMutation,
+  useAddCurrencyRequestWithKoraPayMutation
 } = currencyRequestApi;

@@ -1,5 +1,6 @@
 import {
   useAddCurrencyRequestMutation,
+  useAddCurrencyRequestWithKoraPayMutation,
   useAddCurrencyRequestWithPayStackMutation
 } from "@/redux/features/currencyRequest/currencyRequestApi";
 import { useAppSelector } from "@/redux/hook";
@@ -20,8 +21,10 @@ export default function AddMoneyModal() {
     useAddCurrencyRequestMutation();
   const [addRequestWithPayStack, { isLoading: isPayStackLoading }] =
     useAddCurrencyRequestWithPayStackMutation();
+  const [addRequestWithKoraPay, { isLoading: isKoraPayLoading }] =
+    useAddCurrencyRequestWithKoraPayMutation();
   const [selectedOption, setSelectedOption] = useState<string | null>();
-
+  const [isBank, setIsBank] = useState(false);
   const handlePay = () => {
     if (selectedOption === "btc") {
       if (amount < config.fundBtcMinMoney) {
@@ -70,6 +73,26 @@ export default function AddMoneyModal() {
         });
       });
   };
+  const handllePayWithKoraPay = () => {
+    if (amount < config.fundMinMoney) {
+      toast.error(`Minimum amount is ${config.fundMinMoney}$`, { toastId: 1 });
+      return;
+    }
+    addRequestWithKoraPay({ amount })
+      .unwrap()
+      .then((res: any) => {
+        if (res.success) {
+          router.push(res.data?.url);
+        } else {
+          toast.error("something went wrong");
+        }
+      })
+      .catch((err) => {
+        toast.error(err.data?.message || "something went wrong", {
+          toastId: 1
+        });
+      });
+  };
 
   const handleSubmit = (data: any): void => {
     if (!selectedOption) {
@@ -79,6 +102,8 @@ export default function AddMoneyModal() {
 
     if (selectedOption === "bank") {
       handllePayWithPayStack();
+    } else if (selectedOption === "bank-kora") {
+      handllePayWithKoraPay();
     } else {
       handlePay();
     }
@@ -102,7 +127,7 @@ export default function AddMoneyModal() {
       subTitle="Fund your wallet with any of these two channels"
     >
       <div className="space-y-4 pt-4 md:w-[520px]">
-      <AppInput
+        <AppInput
           icon={<PiCurrencyDollarBold />}
           type="number"
           placeholder="Enter Amount"
@@ -110,37 +135,85 @@ export default function AddMoneyModal() {
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
         {/* Bank / Card payment button */}
-        <button
-          onClick={() => setSelectedOption("bank")}
-          className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
-            selectedOption === "bank" ? "border-orange-400" : ""
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsBank(true);
+            setSelectedOption("");
+          }}
+          className={` gap-5 p-4 border border-borderColor  rounded-lg transition-all w-full text-left ${
+            isBank ? "border-orange-400" : ""
           }`}
         >
-          <Image
-            width={32}
-            height={32}
-            className="size-8"
-            src={"/assets/icons/card-receive.png"}
-            alt="bank payment"
-          />
-          <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Bank / Card payment</h3>
-            <p className="text-sm text-textGrey">
-              Deposit funds directly using Bank transfer or card payment.
-            </p>
+          <div className="flex gap-5">
+            <Image
+              width={32}
+              height={32}
+              className="size-8"
+              src={"/assets/icons/card-receive.png"}
+              alt="bank payment"
+            />
+            <div className="space-y-1">
+              <h3 className="text-textBlack font-bold">
+                Bank / Card payment with korapay
+              </h3>
+              <p className="text-sm text-textGrey">
+                Deposit funds directly using Bank transfer or card payment.
+              </p>
+            </div>
           </div>
-        </button>
-
-        {/* Note for Bank / Card payment */}
+          {isBank && (
+            <div className=" mt-5  flex gap-5">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedOption("bank");
+                }}
+                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+                  selectedOption === "bank" ? "border-orange-400" : ""
+                }`}
+              >
+                <div className="space-y-1 text-center w-full">
+                  <h3 className="text-textBlack  font-bold">Flutterwave</h3>
+                </div>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedOption("bank-kora");
+                }}
+                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+                  selectedOption === "bank-kora" ? "border-orange-400" : ""
+                }`}
+              >
+                <div className="space-y-1 w-full text-center">
+                  <h3 className="text-textBlack font-bold">KoraPay</h3>
+                </div>
+              </button>
+            </div>
+          )}
+        </div>
         {selectedOption === "bank" && (
           <p className="text-sm text-textGrey mt-2">
-            <strong>Note:</strong> Transaction charges for bank deposits or card payments, as directed by CBN, are to be covered by the customer.
+            <strong>Note:</strong> Transaction charges for bank deposits or card
+            payments, as directed by CBN, are to be covered by the customer.
+          </p>
+        )}
+
+        {/* Note for Bank / Card payment */}
+        {selectedOption == "bank-kora" && (
+          <p className="text-sm text-textGrey mt-2">
+            <strong>Note:</strong> Transaction charges for bank deposits or card
+            payments, as directed by CBN, are to be covered by the customer.
           </p>
         )}
 
         {/* Crypto Deposit button */}
         <button
-          onClick={() => setSelectedOption("crypto")}
+          onClick={() => {
+            setSelectedOption("crypto");
+            setIsBank(false);
+          }}
           className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             selectedOption === "crypto" ? "border-orange-400" : ""
           }`}
@@ -155,8 +228,8 @@ export default function AddMoneyModal() {
           <div className="space-y-1">
             <h3 className="text-textBlack font-bold">Crypto Deposit</h3>
             <p className="text-sm text-textGrey">
-              Fund your wallet with popular cryptocurrencies like USDT, ETH, BNB,
-              SOL and more.
+              Fund your wallet with popular cryptocurrencies like USDT, ETH,
+              BNB, SOL and more.
             </p>
           </div>
         </button>
@@ -164,17 +237,21 @@ export default function AddMoneyModal() {
         {/* Message for Crypto Deposit */}
         {selectedOption === "crypto" && (
           <p className="text-sm text-textGrey mt-2">
-            <strong>Important:</strong> Please ensure you copy and send the exact amount displayed when making your payment to guarantee the successful processing of your deposit.
+            <strong>Important:</strong> Please ensure you copy and send the
+            exact amount displayed when making your payment to guarantee the
+            successful processing of your deposit.
           </p>
         )}
 
         <div className="flex justify-center">
           <button
             onClick={handleSubmit}
-            disabled={isLoading || isPayStackLoading}
+            disabled={isLoading || isPayStackLoading || isKoraPayLoading}
             className="mt-4 rounded-lg  px-7 py-2 bg-orange-500 text-white  hover:opacity-80 transition-all disabled:opacity-80"
           >
-            {isLoading || isPayStackLoading ? "Loading" : "Continue"}
+            {isLoading || isPayStackLoading || isKoraPayLoading
+              ? "Loading"
+              : "Continue"}
           </button>
         </div>
       </div>

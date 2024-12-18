@@ -103,6 +103,14 @@ const Wallet = () => {
     //   },
     // },
     {
+      title: "Dollar Rate",
+      dataIndex: "dollarRate",
+      className: "whitespace-nowrap",
+      render: (current: number | undefined | null, fulldata: any) => {
+        return <div className="text-xs">{current || "Not Applicable"}</div>;
+      }
+    },
+    {
       title: "Amount",
       dataIndex: "amount"
     },
@@ -149,7 +157,7 @@ const Wallet = () => {
     {
       title: "Payment type",
       dataIndex: "walletAddress",
-      className: "capitalize",
+      className: "capitalize min-w-[150px]",
       render: (current: any, fullData: any) => {
         return (
           <div>
@@ -173,7 +181,15 @@ const Wallet = () => {
     {
       title: "Amount",
       dataIndex: "amount",
-      className: "min-w-[150px]"
+      className: "min-w-[100px]"
+    },
+    {
+      title: "Dollar Rate",
+      dataIndex: "dollarRate",
+      className: "whitespace-nowrap",
+      render: (current: number | undefined | null, fulldata: any) => {
+        return <div>{current || "Not Applicable"}</div>;
+      }
     },
     {
       title: "Status",
@@ -181,7 +197,7 @@ const Wallet = () => {
       className: "min-w-[150px]",
       render: (text: string, record: any) => {
         return (
-          <div className="flex items-center justify-start">
+          <div className="flex items-center  justify-start">
             <p
               className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
                 (text === "pending" && "text-brown bg-yellowShadow") ||
