@@ -1,3 +1,4 @@
+import FixedContactButton from "@/components/FixedContactButton/FixedContactButton";
 import { authKey } from "@/constants/storageKey";
 import {
   loginUserWithToken,
@@ -86,6 +87,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
         toastStyle={{ background: "#ff5a35" }}
         pauseOnFocusLoss={false}
       />
+      <FixedContactButton></FixedContactButton>
     </ConfigProvider>
   );
 };
