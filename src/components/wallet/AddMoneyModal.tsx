@@ -167,19 +167,6 @@ export default function AddMoneyModal() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSelectedOption("bank");
-                }}
-                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
-                  selectedOption === "bank" ? "border-orange-400" : ""
-                }`}
-              >
-                <div className="space-y-1 text-center w-full">
-                  <h3 className="text-textBlack  font-bold">Flutterwave</h3>
-                </div>
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
                   setSelectedOption("bank-kora");
                 }}
                 className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
@@ -188,6 +175,23 @@ export default function AddMoneyModal() {
               >
                 <div className="space-y-1 w-full text-center">
                   <h3 className="text-textBlack font-bold">KoraPay</h3>
+                  <span className="text-xs">(Nigeria only)</span>
+                </div>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedOption("bank");
+                }}
+                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+                  selectedOption === "bank" ? "border-orange-400" : ""
+                }`}
+              >
+                <div className="space-y-1 text-center w-full">
+                  <h3 className="text-textBlack  font-bold">Flutterwave</h3>
+                  <span className="text-xs">
+                    (Nigeria & other African countries)
+                  </span>
                 </div>
               </button>
             </div>
