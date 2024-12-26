@@ -154,9 +154,7 @@ export default function AddMoneyModal() {
               alt="bank payment"
             />
             <div className="space-y-1">
-              <h3 className="text-textBlack font-bold">
-                Bank / Card payment with korapay
-              </h3>
+              <h3 className="text-textBlack font-bold">Bank / Card payment</h3>
               <p className="text-sm text-textGrey">
                 Deposit funds directly using Bank transfer or card payment.
               </p>

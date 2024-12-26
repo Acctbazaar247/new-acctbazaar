@@ -1,14 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { motion, AnimatePresence, easeIn } from "framer-motion";
+import { useRouter, usePathname } from "next/navigation";
 
 const FixedContactButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const router = useRouter();
+  const location = usePathname();
+  if (location === "/") {
+    return null;
+  }
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden hidden md:block">
       <AnimatePresence>
         {isOpen && (
           <motion.div
