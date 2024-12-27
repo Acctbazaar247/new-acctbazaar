@@ -141,7 +141,7 @@ export default function AddMoneyModal() {
             setIsBank(true);
             setSelectedOption("");
           }}
-          className={` gap-5 p-4 border border-borderColor  rounded-lg transition-all w-full text-left ${
+          className={`gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
             isBank ? "border-orange-400" : ""
           }`}
         >
@@ -161,13 +161,13 @@ export default function AddMoneyModal() {
             </div>
           </div>
           {isBank && (
-            <div className=" mt-5  flex gap-5">
+            <div className="mt-5 flex justify-center">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedOption("bank-kora");
                 }}
-                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left ${
                   selectedOption === "bank-kora" ? "border-orange-400" : ""
                 }`}
               >
@@ -176,6 +176,8 @@ export default function AddMoneyModal() {
                   <span className="text-xs">(Nigeria only)</span>
                 </div>
               </button>
+              {/* Commented out Flutterwave button */}
+              {/*
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -186,21 +188,21 @@ export default function AddMoneyModal() {
                 }`}
               >
                 <div className="space-y-1 text-center w-full">
-                  <h3 className="text-textBlack  font-bold">Flutterwave</h3>
-                  <span className="text-xs">
-                    (Nigeria & other African countries)
-                  </span>
+                  <h3 className="text-textBlack font-bold">Flutterwave</h3>
+                  <span className="text-xs">(Nigeria & other African countries)</span>
                 </div>
               </button>
+              */}
             </div>
           )}
         </div>
-        {selectedOption === "bank" && (
+        {selectedOption === "bank-kora" && (
           <p className="text-sm text-textGrey mt-2">
             <strong>Note:</strong> Transaction charges for bank deposits or card
             payments, as directed by CBN, are to be covered by the customer.
           </p>
         )}
+
 
         {/* Note for Bank / Card payment */}
         {selectedOption == "bank-kora" && (
