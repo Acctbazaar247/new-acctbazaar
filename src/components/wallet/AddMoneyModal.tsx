@@ -176,7 +176,6 @@ export default function AddMoneyModal() {
                   <span className="text-xs">(Nigeria only)</span>
                 </div>
               </button>
-              {/* Commented out Flutterwave button */}
 
               <button
                 onClick={(e) => {
