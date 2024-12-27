@@ -161,13 +161,13 @@ export default function AddMoneyModal() {
             </div>
           </div>
           {isBank && (
-            <div className="mt-5 flex justify-center">
+            <div className="mt-5 flex gap-3 md:gap-4 justify-center">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedOption("bank-kora");
                 }}
-                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left ${
+                className={`flex gap-5 p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left ${
                   selectedOption === "bank-kora" ? "border-orange-400" : ""
                 }`}
               >
@@ -182,7 +182,7 @@ export default function AddMoneyModal() {
                   e.stopPropagation();
                   setSelectedOption("bank");
                 }}
-                className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+                className={`flex gap-5 p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
                   selectedOption === "bank" ? "border-orange-400" : ""
                 }`}
               >
@@ -204,7 +204,7 @@ export default function AddMoneyModal() {
         )}
 
         {/* Note for Bank / Card payment */}
-        {selectedOption == "bank-kora" && (
+        {selectedOption == "bank" && (
           <p className="text-sm text-textGrey mt-2">
             <strong>Note:</strong> Transaction charges for bank deposits or card
             payments, as directed by CBN, are to be covered by the customer.
