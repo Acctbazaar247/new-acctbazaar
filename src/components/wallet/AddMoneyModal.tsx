@@ -177,7 +177,7 @@ export default function AddMoneyModal() {
                 </div>
               </button>
               {/* Commented out Flutterwave button */}
-              {/*
+
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -189,10 +189,11 @@ export default function AddMoneyModal() {
               >
                 <div className="space-y-1 text-center w-full">
                   <h3 className="text-textBlack font-bold">Flutterwave</h3>
-                  <span className="text-xs">(Nigeria & other African countries)</span>
+                  <span className="text-xs">
+                    (Nigeria & other African countries)
+                  </span>
                 </div>
               </button>
-              */}
             </div>
           )}
         </div>
@@ -202,7 +203,6 @@ export default function AddMoneyModal() {
             payments, as directed by CBN, are to be covered by the customer.
           </p>
         )}
-
 
         {/* Note for Bank / Card payment */}
         {selectedOption == "bank-kora" && (
