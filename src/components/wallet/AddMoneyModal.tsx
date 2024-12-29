@@ -189,7 +189,7 @@ export default function AddMoneyModal() {
                 <div className="space-y-1 text-center w-full">
                   <h3 className="text-textBlack font-bold">Flutterwave</h3>
                   <span className="text-xs">
-                    (Nigeria & other African countries)
+                    (Nigeria, Africa, UK and  EU)
                   </span>
                 </div>
               </button>
