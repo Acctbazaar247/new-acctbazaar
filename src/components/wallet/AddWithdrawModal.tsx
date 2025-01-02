@@ -351,7 +351,7 @@ export default function AddWithdrawModal() {
                     >
                       <form onSubmit={handleSubmit(onSubmit)}>
                         <h4>
-                          USDT Only (minimum <b>$20</b>){" "}
+                          USDT Only (minimum <b>$100</b>){" "}
                         </h4>
                         <div className="pt-3">
                           <p className="textG text-sm pb-1">Choose Network</p>
@@ -394,7 +394,7 @@ export default function AddWithdrawModal() {
                                   TRON network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match. A network fee of $4 will be
+                                doesn’t match. A network fee of $6 will be
                                 deducted from your transaction
                               </p>
                             )}
@@ -408,7 +408,7 @@ export default function AddWithdrawModal() {
                                   BNB Smart Chain network
                                 </span>
                                 . you will potentially lose your assets if it
-                                doesn’t match. A network fee of $6 will be
+                                doesn’t match. A network fee of $5 will be
                                 deducted from your transaction
                               </p>
                             )}
