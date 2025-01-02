@@ -49,6 +49,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
       becomeASeller({ payWith: "nowpay" })
         .unwrap()
         .then((res: ResponseSuccessType) => {
+         
           if (!res?.data) {
             toast.error(res?.data?.message || "something went wrong ", {
               toastId: 1,
@@ -58,6 +59,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
           }
         })
         .catch((err) => {
+          console.log(err)
           toast.error(err?.data?.message || "something went wrong", {
             toastId: 1,
           });
@@ -70,8 +72,8 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
 
           dispatch(setMakeSeller());
         })
-        .catch((err) => {
-          toast.error(err?.message || "something went wrong", { toastId: 1 });
+        .catch((err) => { 
+          toast.error(err?.data?.message || "something went wrong 1", { toastId: 1 });
         });
     } else {
       toast.warn("Select any one Payment option", { toastId: 1 });
