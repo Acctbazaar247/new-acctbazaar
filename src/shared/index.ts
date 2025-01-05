@@ -608,7 +608,7 @@ export const AccountsSubscriptionsCategories: IProduct_Category[] = [
   {
     label: "Kick",
     value: AccountCategory.Kick,
-    imageUrl: "/assets/product/kick.png"
+    imageUrl: "/assets/product/kick.jpg"
   },
   {
     label: "Damus",
@@ -623,7 +623,7 @@ export const AccountsSubscriptionsCategories: IProduct_Category[] = [
   {
     label: "Gowalla",
     value: AccountCategory.Gowalla,
-    imageUrl: "/assets/product/gowalla.png"
+    imageUrl: "/assets/product/gowalla.jpeg"
   },
   {
     label: "Yandex",
@@ -648,7 +648,7 @@ export const AccountsSubscriptionsCategories: IProduct_Category[] = [
   {
     label: "BlaBlaCar",
     value: AccountCategory.BlaBlaCar,
-    imageUrl: "/assets/product/blablacar.png"
+    imageUrl: "/assets/product/blablacar.jpeg"
   },
   {
     label: "inDriver",
