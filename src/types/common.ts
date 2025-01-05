@@ -197,6 +197,18 @@ export enum AccountCategory {
   Okcupid = "Okcupid",
   SMSmode = "SMSmode",
 
+  Noplace = "Noplace",
+  TenTen = "TenTen",
+  BeReal = "BeReal",
+  Airchat = "Airchat",
+  YikYak = "YikYak",
+  SubstackNotes = "SubstackNotes",
+  Coverstar = "Coverstar",
+  Jagat = "Jagat",
+  Fizz = "Fizz",
+  Lemon8 = "Lemon8",
+  Lapse = "Lapse",
+
   // Gaming accounts
   Playstation = "Playstation",
   CallOfDuty = "CallOfDuty",
@@ -238,6 +250,15 @@ export enum AccountCategory {
   Amazon = "Amazon",
   Shopify = "Shopify",
   Ebay = "Ebay",
+  Shopee = "Shopee",
+  OZON = "OZON",
+  RedBook = "RedBook",
+  OLX = "OLX",
+  Vinted = "Vinted",
+  YoulaRu = "YoulaRu",
+  JDcom = "JDcom",
+  Magicbricks = "Magicbricks",
+  Wish = "Wish",
 
   // Accounts & Subscriptions
   Netflix = "Netflix",
@@ -255,6 +276,23 @@ export enum AccountCategory {
   ChatGPT = "ChatGPT",
   Office365 = "Office365",
   Paypal = "Paypal",
+  // new
+
+  Bluesky = "Bluesky",
+  QQ = "QQ",
+  Kick = "Kick",
+  Damus = "Damus",
+  RTRO = "RTRO",
+  Gowalla = "Gowalla",
+  Yandex = "Yandex",
+  Uber = "Uber",
+  Grab = "Grab",
+  Bolt = "Bolt",
+  BlaBlaCar = "BlaBlaCar",
+  inDriver = "inDriver",
+  Careem = "Careem",
+  OnTaxi = "OnTaxi",
+  Gett = "Gett",
 
   // Gift card accounts
   AmazonGiftCard = "AmazonGiftCard",
