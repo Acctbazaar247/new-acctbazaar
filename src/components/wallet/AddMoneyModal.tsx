@@ -240,9 +240,9 @@ export default function AddMoneyModal() {
         {/* Message for Crypto Deposit */}
         {selectedOption === "crypto" && (
           <p className="text-sm text-textGrey mt-2">
-            <strong>Important:</strong> Please ensure you copy and send the
-            exact amount displayed when making your payment to guarantee the
-            successful processing of your deposit.
+            <strong>Important:</strong> Please send the exact amount displayed when making 
+            your payment to ensure successful processing. Overpayment 
+            will not result in extra credit, and underpayment will lead to insufficient funding.
           </p>
         )}
 
