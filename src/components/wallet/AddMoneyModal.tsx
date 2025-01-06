@@ -177,7 +177,7 @@ export default function AddMoneyModal() {
                 </div>
               </button>
 
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedOption("bank");
@@ -192,7 +192,7 @@ export default function AddMoneyModal() {
                     (Nigeria, Africa, UK and  EU)
                   </span>
                 </div>
-              </button>
+              </button> */}
             </div>
           )}
         </div>
