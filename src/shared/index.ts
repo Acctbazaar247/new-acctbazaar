@@ -236,7 +236,64 @@ export const SocialMediaCategories: IProduct_Category[] = [
     label: "SMSmode",
     value: AccountCategory.SMSmode,
     imageUrl: "/assets/product/sMSmode.png"
+  },
+  // new  
+  {
+    label: "Noplace",
+    value: AccountCategory.Noplace,
+    imageUrl: "/assets/product/noplace.png"
+  },
+  {
+    label: "TenTen",
+    value: AccountCategory.TenTen,
+    imageUrl: "/assets/product/tenten.png"
+  },
+  {
+    label: "BeReal",
+    value: AccountCategory.BeReal,
+    imageUrl: "/assets/product/bereal.png"
+  },
+  {
+    label: "Airchat",
+    value: AccountCategory.Airchat,
+    imageUrl: "/assets/product/airchat.png"
+  },
+  {
+    label: "YikYak",
+    value: AccountCategory.YikYak,
+    imageUrl: "/assets/product/yik-yak.png"
+  },
+  {
+    label: "SubstackNotes",
+    value: AccountCategory.SubstackNotes,
+    imageUrl: "/assets/product/substack.png"
+  },
+  {
+    label: "Coverstar",
+    value: AccountCategory.Coverstar,
+    imageUrl: "/assets/product/coverstar.png"
+  },
+  {
+    label: "Jagat",
+    value: AccountCategory.Jagat,
+    imageUrl: "/assets/product/jagat.png"
+  },
+  {
+    label: "Fizz",
+    value: AccountCategory.Fizz,
+    imageUrl: "/assets/product/fizz.jpg"
+  },
+  {
+    label: "Lemon8",
+    value: AccountCategory.Lemon8,
+    imageUrl: "/assets/product/lemon8.png"
+  },
+  {
+    label: "Lapse",
+    value: AccountCategory.Lapse,
+    imageUrl: "/assets/product/lapse.jpeg"
   }
+  
 ];
 
 export const GamingAccountCategories = [
@@ -417,7 +474,53 @@ export const EcommerceCategories: IProduct_Category[] = [
     label: "Ebay",
     value: AccountCategory.Ebay,
     imageUrl: "/assets/product/ebay.png"
+  },
+  {
+    label: "Shopee",
+    value: AccountCategory.Shopee,
+    imageUrl: "/assets/product/shopee.png"
+  },
+  {
+    label: "OZON",
+    value: AccountCategory.OZON,
+    imageUrl: "/assets/product/ozon.png"
+  },
+  {
+    label: "RedBook",
+    value: AccountCategory.RedBook,
+    imageUrl: "/assets/product/redbook.png"
+  },
+  {
+    label: "OLX",
+    value: AccountCategory.OLX,
+    imageUrl: "/assets/product/olx.png"
+  },
+  {
+    label: "Vinted",
+    value: AccountCategory.Vinted,
+    imageUrl: "/assets/product/vinted.png"
+  },
+  {
+    label: "youla.ru",
+    value: AccountCategory.YoulaRu,
+    imageUrl: "/assets/product/youla.jpeg"
+  },
+  {
+    label: "JDcom",
+    value: AccountCategory.JDcom,
+    imageUrl: "/assets/product/jdcom.png"
+  },
+  {
+    label: "Magicbricks",
+    value: AccountCategory.Magicbricks,
+    imageUrl: "/assets/product/magicbricks.png"
+  },
+  {
+    label: "Wish",
+    value: AccountCategory.Wish,
+    imageUrl: "/assets/product/wish.png"
   }
+  
 ];
 
 export const AccountsSubscriptionsCategories: IProduct_Category[] = [
@@ -490,7 +593,84 @@ export const AccountsSubscriptionsCategories: IProduct_Category[] = [
     label: "Paypal",
     value: AccountCategory.Paypal,
     imageUrl: "/assets/product/paypal.png"
+  },
+  // new 
+  {
+    label: "Bluesky",
+    value: AccountCategory.Bluesky,
+    imageUrl: "/assets/product/bluesky.png"
+  },
+  {
+    label: "QQ",
+    value: AccountCategory.QQ,
+    imageUrl: "/assets/product/qq.png"
+  },
+  {
+    label: "Kick",
+    value: AccountCategory.Kick,
+    imageUrl: "/assets/product/kick.jpg"
+  },
+  {
+    label: "Damus",
+    value: AccountCategory.Damus,
+    imageUrl: "/assets/product/damus.png"
+  },
+  {
+    label: "RTRO",
+    value: AccountCategory.RTRO,
+    imageUrl: "/assets/product/rtro.png"
+  },
+  {
+    label: "Gowalla",
+    value: AccountCategory.Gowalla,
+    imageUrl: "/assets/product/gowalla.jpeg"
+  },
+  {
+    label: "Yandex",
+    value: AccountCategory.Yandex,
+    imageUrl: "/assets/product/yandex.png"
+  },
+  {
+    label: "Uber",
+    value: AccountCategory.Uber,
+    imageUrl: "/assets/product/uber.png"
+  },
+  {
+    label: "Grab",
+    value: AccountCategory.Grab,
+    imageUrl: "/assets/product/grab.png"
+  },
+  {
+    label: "Bolt",
+    value: AccountCategory.Bolt,
+    imageUrl: "/assets/product/bolt.png"
+  },
+  {
+    label: "BlaBlaCar",
+    value: AccountCategory.BlaBlaCar,
+    imageUrl: "/assets/product/blablacar.jpeg"
+  },
+  {
+    label: "inDriver",
+    value: AccountCategory.inDriver,
+    imageUrl: "/assets/product/indriver.png"
+  },
+  {
+    label: "Careem",
+    value: AccountCategory.Careem,
+    imageUrl: "/assets/product/careem.png"
+  },
+  {
+    label: "OnTaxi",
+    value: AccountCategory.OnTaxi,
+    imageUrl: "/assets/product/ontaxi.png"
+  },
+  {
+    label: "Gett",
+    value: AccountCategory.Gett,
+    imageUrl: "/assets/product/gett.png"
   }
+  
 ];
 export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
   ...SocialMediaCategories,
