@@ -133,23 +133,30 @@ const MarketplaceAccountCard = ({
             <></>
           ) : (
             <div>
-              <Tooltip title="View account details">
+              <button
+                  disabled={isLoading}
+                  onClick={() => setIsModalOpen(true)}
+                  className="md:hidden"
+                >
+                  <FaRegEye className="text-textGrey text-lg mt-1" />
+                </button>
+              <Tooltip className="md:block hidden" title="View account details">
                 <button
                   disabled={isLoading}
                   onClick={() => setIsModalOpen(true)}
                 >
                   <FaRegEye className="text-textGrey text-lg mt-1" />
                 </button>
-              </Tooltip>
+              </Tooltip> 
 
-              <AccountDetailsModal
+<AccountDetailsModal
                 {...account}
                 isModalOpen={isModalOpen}
                 handleCancel={() => setIsModalOpen(false)}
                 handelOk={() => setIsModalOpen(false)}
                 existOnCart={existOnCart}
                 handleAddCart={handleAddCart}
-              ></AccountDetailsModal>
+              ></AccountDetailsModal> 
             </div>
             // <AppModal
             //   title="Account Details"

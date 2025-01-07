@@ -78,11 +78,11 @@ const AccountDetailsModal = ({
       open={isModalOpen}
       onOk={handelOk}
       onCancel={handleCancel}
-      footer={null}
+      footer={null} 
       centered
     >
-      <div className="flex max-sm:flex-col items-center ">
-        <div className="md:gap-2 2xl:gap-3 flex gap-5 items-start mt-5 w-full min-w-[320px] lg:w-[600px]">
+      <div className="flex max-sm:flex-col items-center relative z-[33000000] ">
+        <div className="md:gap-2 2xl:gap-3 flex gap-5 items-start mt-5 w-full min-w-[250px] md:min-w-[320px] lg:w-[600px]">
           <Image
             src={findImageUrlByCategory(category)}
             className="size-9 md:size-10 lg:size-14 2xl:size-16"
