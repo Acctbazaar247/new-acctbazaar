@@ -9,11 +9,12 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import CurrencyLogo from "../CurrencyLogo/CurrencyLogo";
 import AvatarComponent from "../shared/AvatarComponent";
-import { FaRegEye } from "react-icons/fa6";
+import { FaRegEye, FaX } from "react-icons/fa6";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import AppButton from "@/components/ui/AppButton";
 import useIsMobile from "@/hooks/useIsMobile";
 import { setModalOpen } from "@/redux/features/marketplace/marketplaceSlice";
+import { FaClosedCaptioning } from "react-icons/fa";
 
 type Props = {
   isModalOpen: boolean;
@@ -78,7 +79,7 @@ const AccountDetailsModal = ({
       open={isModalOpen}
       onOk={handelOk}
       onCancel={handleCancel}
-      footer={null} 
+      footer={null}  
       centered
     >
       <div className="flex max-sm:flex-col items-center relative z-[33000000] ">
