@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaTelegram } from "react-icons/fa6";
 
 type Props = {};
 
@@ -92,15 +92,18 @@ const Footer = (props: Props) => {
 
               <Link
                 target="_blank"
-                href="http://T.me/acctbazaarchannel"
+                href="https://t.me/acctbazaar1"
                 className="text-white mr-4 "
               >
-                <Image
+                <FaTelegram 
+                className="text-[24px]"
+                />
+                {/* <Image
                   width={24}
                   height={24}
                   alt="telegram"
                   src="/assets/home/telegram.png"
-                ></Image>
+                ></Image> */}
               </Link>
 
               <Link
