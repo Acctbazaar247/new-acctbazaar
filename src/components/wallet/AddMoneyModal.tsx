@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import AppInput from "../ui/AppInput";
 import AppModal from "../ui/AppModal";
 import { FaBitcoin } from "react-icons/fa";
+import Swal from "sweetalert2";
 export default function AddMoneyModal() {
   const [amount, setAmount] = useState(0);
   const router = useRouter();
@@ -135,7 +136,7 @@ export default function AddMoneyModal() {
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
         {/* Bank / Card payment button */}
-        <div
+        {/* <div
           onClick={(e) => {
             e.stopPropagation();
             setIsBank(true);
@@ -177,7 +178,7 @@ export default function AddMoneyModal() {
                 </div>
               </button>
 
-              {/* <button
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedOption("bank");
@@ -192,7 +193,7 @@ export default function AddMoneyModal() {
                     (Nigeria, Africa, UK and  EU)
                   </span>
                 </div>
-              </button> */}
+              </button>
             </div>
           )}
         </div>
@@ -201,7 +202,61 @@ export default function AddMoneyModal() {
             <strong>Note:</strong> Transaction charges for bank deposits or card
             payments, as directed by CBN, are to be covered by the customer.
           </p>
-        )}
+        )} */}
+        {/* Bank / Card payment button */}
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            Swal.fire({
+              icon: "info",
+              title: "Service Unavailable",
+              text: "Bank deposit is currently down. Please try again later.",
+              confirmButtonColor: "#f97316", // Orange color for the button
+            });
+          }}
+          className={`gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+            isBank ? "border-orange-400" : ""
+          }`}
+        >
+          <div className="flex gap-5">
+            <Image
+              width={32}
+              height={32}
+              className="size-8"
+              src={"/assets/icons/card-receive.png"}
+              alt="bank payment"
+            />
+            <div className="space-y-1">
+              <h3 className="text-textBlack font-bold">Bank / Card payment</h3>
+              <p className="text-sm text-textGrey">
+                Deposit funds directly using Bank transfer or card payment.
+              </p>
+            </div>
+          </div>
+          {isBank && (
+            <div className="mt-5 flex gap-3 md:gap-4 justify-center">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  Swal.fire({
+                    icon: "info",
+                    title: "Service Unavailable",
+                    text: "Currently Unavailable",
+                    confirmButtonColor: "#f97316", // Orange color for the button
+                  });
+                }}
+                className={`flex gap-5 p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left ${
+                  selectedOption === "bank-kora" ? "border-orange-400" : ""
+                }`}
+              >
+                <div className="space-y-1 w-full text-center">
+                  <h3 className="text-textBlack font-bold">KoraPay</h3>
+                  <span className="text-xs">(Nigeria only)</span>
+                </div>
+              </button>
+            </div>
+          )}
+        </div>
 
         {/* Note for Bank / Card payment */}
         {selectedOption == "bank" && (
