@@ -136,7 +136,7 @@ export default function AddMoneyModal() {
           onChange={(e) => setAmount(parseFloat(e.target.value))}
         />
         {/* Bank / Card payment button */}
-        {/* <div
+        <div
           onClick={(e) => {
             e.stopPropagation();
             setIsBank(true);
@@ -178,7 +178,7 @@ export default function AddMoneyModal() {
                 </div>
               </button>
 
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedOption("bank");
@@ -193,7 +193,7 @@ export default function AddMoneyModal() {
                     (Nigeria, Africa, UK and  EU)
                   </span>
                 </div>
-              </button>
+              </button> */}
             </div>
           )}
         </div>
@@ -202,16 +202,17 @@ export default function AddMoneyModal() {
             <strong>Note:</strong> Transaction charges for bank deposits or card
             payments, as directed by CBN, are to be covered by the customer.
           </p>
-        )} */}
+        )}
+
         {/* Bank / Card payment button */}
-        <div
+        {/* <div
           onClick={(e) => {
             e.stopPropagation();
             Swal.fire({
               icon: "info",
               title: "Service Unavailable",
               text: "Bank deposit is currently down. Please try again later.",
-              confirmButtonColor: "#f97316", // Orange color for the button
+              confirmButtonColor: "#f97316", 
             });
           }}
           className={`gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
@@ -242,7 +243,7 @@ export default function AddMoneyModal() {
                     icon: "info",
                     title: "Service Unavailable",
                     text: "Currently Unavailable",
-                    confirmButtonColor: "#f97316", // Orange color for the button
+                    confirmButtonColor: "#f97316", 
                   });
                 }}
                 className={`flex gap-5 p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left ${
@@ -256,7 +257,7 @@ export default function AddMoneyModal() {
               </button>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Note for Bank / Card payment */}
         {selectedOption == "bank" && (
