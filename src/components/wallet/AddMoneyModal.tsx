@@ -27,7 +27,7 @@ export default function AddMoneyModal() {
   const [selectedOption, setSelectedOption] = useState<string | null>();
   const [isBank, setIsBank] = useState(false);
   const handlePay = () => {
-    if (selectedOption === "btc") {
+    if (selectedOption === "crypto") { 
       if (amount < config.fundBtcMinMoney) {
         return toast.error(`Minimum amount is ${config.fundBtcMinMoney}`, {
           toastId: 1
