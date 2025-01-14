@@ -157,7 +157,7 @@ const Footer = (props: Props) => {
 
       <div className="container flex flex-col-reverse lg:flex-row justify-between items-center px-4 lg:pt-9 pb-12">
         <p className="text-sm">
-          Copyright &copy; 2024 Acctbazaar. All rights reserved !
+          Copyright &copy; 2025 Acctbazaar. All rights reserved !
         </p>
         <div className="lg:hidden container px-4 py-6">
           <hr className="bg-darkishGrey" />
