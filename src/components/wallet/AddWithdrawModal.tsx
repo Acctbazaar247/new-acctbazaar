@@ -271,13 +271,14 @@ export default function AddWithdrawModal() {
                       className="space-y-2 py-2"
                       onSubmit={handleSubmit(onSubmit)}
                     >
-                      <AppFormSelect
-                        control={control}
-                        placeholder="Select Bank"
+                      <AppFormInput
+                        label="Bank Name"
+                        placeholder="Enter Bank Name"
                         name="bankName"
                         required={true}
-                        showSearch={true}
-                        options={banksOption}
+                        type="text"
+                        register={register}
+                        error={errors?.bankName}
                       />
                       <AppFormInput
                         label="Account Number"
