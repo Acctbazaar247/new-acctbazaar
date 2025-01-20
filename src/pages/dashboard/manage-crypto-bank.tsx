@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 
 type Props = {}
 
-const manageCryptoBank = (props: Props) => {
+const ManageCryptoBank = (props: Props) => {
     const [page,setPage] = useState(1) 
     const cryptoBankQuery = useGetCryptoBanksQuery({page,})    
     const [editCryptoBank,{isLoading:editCryptoBankLoading}] = useEditCryptoBankMutation()
@@ -117,4 +117,4 @@ const manageCryptoBank = (props: Props) => {
   )
 }
 
-export default manageCryptoBank
+export default ManageCryptoBank
