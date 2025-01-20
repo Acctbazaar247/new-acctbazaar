@@ -90,6 +90,10 @@ const ManualPaymentViewModal = ({data}: Props) => {
                         <p>{data.transactionHash}</p>
 
                     </div>
+                    <div className='flex flex-col gap-2 border rounded-md p-2 mt-2 items-center'>
+                        <h2>Our Wallet Address</h2>
+                        <p>{data.cryptoBank?.walletAddress}</p>
+                    </div>
                 </div>
             }
 

@@ -114,7 +114,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                 .unwrap()
                 .then((res)=>{
                     toast.success("Manual payment request submitted successfully")
-                    // setStep(4)
+                    setStep(4)
                 })
                 .catch((err)=>{
                     toast.error(err?.data?.message || "Something went wrong")
@@ -453,6 +453,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             onClick={()=>{
                 if(step === 4){
                     setModalOpen(false)
+                    setPaymentType(null)
                 }else{
                     handleContinue()
                 }
