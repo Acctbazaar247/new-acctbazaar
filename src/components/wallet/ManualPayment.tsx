@@ -328,7 +328,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                                 <h3 className='text font-bold text-center'>Select a {cryptoType} Crypto Wallet Address</h3> 
                             {
                                 availableCrypto.map((crypto:CryptoBank)=>{
-                                    return <div onClick={()=>{
+                                    return <div key={crypto.id} onClick={()=>{
                                         setCryptoInfo(crypto)
                                     }} className={` border p-2 rounded-lg mb-2 mt-2 cursor-pointer ${cryptoInfo?.id === crypto.id ? "border-orange-500" : "border-borderColor"} `}>
                                         <h3 >{crypto.walletAddress}</h3> 
