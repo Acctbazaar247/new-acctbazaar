@@ -387,9 +387,9 @@ const Wallet = () => {
               <div>
                 {/* this is tab */}
                 <div className="flex pb-2 text-sm  gap-4">
-                  <button className={`${tab === "deposit" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-full`} onClick={() => setTab("deposit")}>Online Deposit</button>
-                  <button className={`${tab === "manual" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-full`} onClick={() => setTab("manual")}>Manual Deposit</button>
-                  <button className={`${tab === "withdraw" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-full`} onClick={() => setTab("withdraw")}>Withdraw</button>
+                  <button className={`${tab === "deposit" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-md`} onClick={() => setTab("deposit")}>Online Deposit</button>
+                  <button className={`${tab === "manual" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-md`} onClick={() => setTab("manual")}>Manual Deposit</button>
+                  <button className={`${tab === "withdraw" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-md`} onClick={() => setTab("withdraw")}>Withdraw</button>
                 </div>
               </div>
 
