@@ -30,6 +30,7 @@ export default function AddMoneyModal() {
     useAddCurrencyRequestWithKoraPayMutation();
   const [selectedOption, setSelectedOption] = useState<string | null>();
   const [isBank, setIsBank] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false)
   const handlePay = () => {
     if (selectedOption === "crypto") { 
       if (amount < config.fundBtcMinMoney) {
@@ -116,8 +117,10 @@ export default function AddMoneyModal() {
 
   return (
     <AppModal
+    setModalOpen={setModalOpen}
+    modalOpen={modalOpen}
       button={
-        <div className="flex items-center justify-center flex-col space-y-2">
+        <div onClick={()=>setModalOpen(true)} className="flex items-center justify-center flex-col space-y-2">
           <Image
             width={60}
             height={60}
@@ -163,7 +166,7 @@ export default function AddMoneyModal() {
               </button>
           </div>
         </div>
-      </div>: paymentType === "manual" ? <ManualPayment setPaymentType={setPaymentType} /> : <div>
+      </div>: paymentType === "manual" ? <ManualPayment setModalOpen={setModalOpen} setPaymentType={setPaymentType} /> : <div>
       <div className="space-y-4 pt-4 md:w-[520px]">
         <AppInput
           icon={<PiCurrencyDollarBold />}

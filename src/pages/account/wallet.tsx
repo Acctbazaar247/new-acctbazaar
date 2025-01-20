@@ -7,9 +7,10 @@ import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
 import { useGetCurrencyRequestsQuery } from "@/redux/features/currencyRequest/currencyRequestApi";
+import { useGetManualCurrencyRequestsQuery } from "@/redux/features/manualCurrencyRequest/manualCurrencyRequestApi";
 import { useGetWithdrawFundsQuery } from "@/redux/features/withdrawFund/withdrawFundApi";
 import { useAppSelector } from "@/redux/hook";
-import { UserRole } from "@/types/common";
+import { ManualCurrencyRequest, UserRole } from "@/types/common";
 import appDateFormate from "@/utils/appDateFormate";
 import { Table } from "antd";
 import dateFormat from "dateformat";
@@ -19,10 +20,10 @@ import { GoDotFill } from "react-icons/go";
 const Wallet = () => {
   const [page, setPage] = useState<number>(1);
   const [page2, setPage2] = useState<number>(1);
+  const [page3, setPage3] = useState<number>(1);
   const user = useAppSelector((state) => state.user.user);
-  const [showWithdraw, setShowWithdraw] = useState(
-    user?.role !== UserRole.User ? false : true
-  );
+   
+  const [tab, setTab] = useState<"deposit" | "withdraw" | "manual">("deposit");
   const { data, isLoading } = useGetCurrencyOfLoggedInUserQuery("");
 
   const queryString = useMemo(() => {
@@ -59,7 +60,7 @@ const Wallet = () => {
 
   const currencyQuery = useGetCurrencyRequestsQuery(queryStringCurrencyRequest);
   const queryData = useGetWithdrawFundsQuery(queryString);
-
+  const manualQuery = useGetManualCurrencyRequestsQuery({page:page3,limit:10,ownById:user?.id});
   const columnsMobile = [
     {
       title: "ID",
@@ -269,6 +270,58 @@ const Wallet = () => {
     }
   ];
 
+  const manualColumns = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      className: "max-w-[150px]"
+    },
+    {
+      title: "Date",
+      dataIndex: "createdAt",
+      className: "min-w-[150px]",
+      render: (createdAt: string, record: any) => {
+        return (
+          <div className="flex items-center gap-1">
+            {dateFormat(createdAt, appDateFormate)}
+          </div>
+        );
+      }
+    },
+    {
+      title: "Requested  Amount",
+      dataIndex: "requestedAmount",
+      className: "min-w-[150px]"
+    },
+    {
+      title:"Type",
+      dataIndex:"id",
+      render:(text:string,record:ManualCurrencyRequest)=>{
+        return <div> 
+          {record.bankId?"Bank":"Crypto"}
+        </div>
+      }
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (text: string, record: any) => {
+        return (
+          <div className="flex items-center justify-start">
+            <p className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
+                (text === "pending" && "text-brown bg-yellowShadow") ||
+                (text === "failed" && "text-red bg-red/10") ||
+                (text === "success" && "text-success bg-success/10")
+              }`}>
+              <GoDotFill />
+              {text}
+            </p>
+          </div>
+        );
+      }
+    }
+  ]
+
   return (
     <HomeLayout>
       <PrivateLayout>
@@ -331,28 +384,17 @@ const Wallet = () => {
 
             {/* this is table div  */}
             <div className="md:w-3/4">
-              <h2 className="text-md 2xl:text-[22px] text-textGrey pb-2 md:pb-4 ">
-                {user?.role === UserRole.User ? (
-                  "Add money"
-                ) : showWithdraw ? (
-                  <button
-                    onClick={() => setShowWithdraw(false)}
-                    className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
-                  >
-                    View deposit history
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => setShowWithdraw(true)}
-                    className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
-                  >
-                    View withdrawal history
-                  </button>
-                )}
-              </h2>
+              <div>
+                {/* this is tab */}
+                <div className="flex pb-2 text-sm  gap-4">
+                  <button className={`${tab === "deposit" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-full`} onClick={() => setTab("deposit")}>Online Deposit</button>
+                  <button className={`${tab === "manual" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-full`} onClick={() => setTab("manual")}>Manual Deposit</button>
+                  <button className={`${tab === "withdraw" ? "bg-primary text-white" : "bg-background text-textGrey"} px-4 py-1 rounded-full`} onClick={() => setTab("withdraw")}>Withdraw</button>
+                </div>
+              </div>
 
               <div className="border mb-4 md:mb-5 border-borderLight rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
-                {showWithdraw ? (
+                {tab === "withdraw" ? (
                   <>
                     <div className="hidden md:block overflow-x-auto">
                       <AppRenderReduxData
@@ -399,7 +441,7 @@ const Wallet = () => {
                       />
                     </div>
                   </>
-                ) : (
+                ) : tab === "deposit" ? (
                   <>
                     <div className="hidden md:block overflow-x-auto">
                       <AppRenderReduxData
@@ -445,7 +487,28 @@ const Wallet = () => {
                       />
                     </div>
                   </>
-                )}
+                ):<div>
+                 <AppRenderReduxData
+                        queryData={manualQuery}
+                        showData={(data) => {
+                          // console.log(data);
+                          return (
+                            <Table
+                              columns={manualColumns}
+                              dataSource={data?.data}
+                              size="small"
+                              pagination={{
+                                onChange: (value) => setPage3(value),
+                                pageSize: data?.meta?.limit,
+                                total: data?.meta?.total,
+                                current: data?.meta?.page,
+                                showSizeChanger: false
+                              }}
+                            />
+                          );
+                        }}
+                      />
+                  </div>}
               </div>
               <AppButton label="Report transaction" href="/contactus" />
             </div>

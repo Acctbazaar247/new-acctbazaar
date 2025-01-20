@@ -102,6 +102,12 @@ export const supperItems: TNavItemsList[] = [
         path: "/dashboard/manageDeposit",
         Icon: FaMoneyBillTransfer
       }
+      ,
+      {
+        label:"Manage manual payment",
+        path:"/dashboard/manage-manual-payment",
+        Icon: FaMoneyBillTransfer
+      }
     ]
   },
   {
@@ -204,6 +210,11 @@ export const adminItems: TNavItemsList[] = [
       {
         label: "Manage deposit",
         path: "/dashboard/manageDeposit",
+        Icon: FaMoneyBillTransfer
+      },
+      {
+        label:"Manage manual payment",
+        path:"/dashboard/manage-manual-payment",
         Icon: FaMoneyBillTransfer
       }
     ]
@@ -332,7 +343,13 @@ const financeAdminItems: TNavItemsList[] = [
         label: "Manage deposit",
         path: "/dashboard/manageDeposit",
         Icon: FaMoneyBillTransfer
+      },
+      {
+        label:"Manage manual payment",
+        path:"/dashboard/manage-manual-payment",
+        Icon: FaMoneyBillTransfer
       }
+
     ]
   },
   {

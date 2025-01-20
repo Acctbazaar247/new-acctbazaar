@@ -13,5 +13,6 @@ export enum tagTypes {
   Review = "Review",
   bank = "bank",
   cryptoBank = "cryptoBank",
+  manualPayment="manualPayment"
 }
 export const tagTypesList = Object.values(tagTypes);

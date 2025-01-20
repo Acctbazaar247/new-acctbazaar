@@ -686,8 +686,31 @@ export interface CryptoBank {
   updatedAt: Date; // Updated automatically
   manualCurrencyRequests?: ManualCurrencyRequest[]; // Related entries
 }
-
+export enum EStatusOfManualCurrencyRequest {
+  pending = "pending",
+  approved = "approved",
+  denied = "denied",
+}
 // Interface for ManualCurrencyRequest
 export interface ManualCurrencyRequest {
   // Define this based on your Prisma schema if available
+  id: string; // UUID
+  message?: string; // Optional
+  image?: string; // Optional
+  requestedAmount: number; // Required
+  receivedAmount?: number; // Optional
+  ownById: string; // Related User ID
+  status: EStatusOfManualCurrencyRequest; // Default: pending
+  accountName?: string; // Optional
+  accountNumber?: string; // Optional
+  bankName?: string; // Optional
+  transactionHash?: string; // Optional
+  dollarRate?: number; // Optional
+  ownBy: IUser; // Relation to User model
+  createdAt: Date; // Default: now()
+  updatedAt: Date; // Updated automatically
+  bankId?: string; // Optional, related Bank ID
+  bank?: Bank; // Optional relation to Bank model
+  cryptoBankId?: string; // Optional, related CryptoBank ID
+  cryptoBank?: CryptoBank; // Optional relation to CryptoBank model
 }
