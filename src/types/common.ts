@@ -627,3 +627,67 @@ export enum EReviewStatus {
   POSITIVE = "positive",
   NEGATIVE = "negative",
 }
+
+
+
+// Enum for ECryptoType
+export enum ECryptoType {
+  USDT = "USDT",
+  USDC = "USDC",
+  BTC = "BTC",
+  SOLANA = "SOLANA",
+}
+
+// TypeScript interface for Bank model
+export interface Bank {
+  id: string; // UUID
+  accountNumber: string;
+  accountName: string;
+  bankName: string;
+  isActive: boolean; // Default: true
+  createdAt: Date; // Default: now()
+  updatedAt: Date; // Updated automatically
+  manualCurrencyRequests?: ManualCurrencyRequest[]; // Related entries
+}
+
+// TypeScript interface for CryptoBank model
+export interface CryptoBank {
+  id: string; // UUID
+  walletAddress: string;
+  cryptoType: ECryptoType;
+  isTrc?: boolean; // Optional
+  isActive: boolean; // Default: true
+  createdAt: Date; // Default: now()
+  updatedAt: Date; // Updated automatically
+  manualCurrencyRequests?: ManualCurrencyRequest[]; // Related entries
+}
+ 
+
+// TypeScript interface for Bank model
+export interface Bank {
+  id: string; // UUID
+  accountNumber: string;
+  accountName: string;
+  bankName: string;
+  isActive: boolean; // Default: true
+  createdAt: Date; // Default: now()
+  updatedAt: Date; // Updated automatically
+  manualCurrencyRequests?: ManualCurrencyRequest[]; // Related entries
+}
+
+// TypeScript interface for CryptoBank model
+export interface CryptoBank {
+  id: string; // UUID
+  walletAddress: string;
+  cryptoType: ECryptoType;
+  isTrc?: boolean; // Optional
+  isActive: boolean; // Default: true
+  createdAt: Date; // Default: now()
+  updatedAt: Date; // Updated automatically
+  manualCurrencyRequests?: ManualCurrencyRequest[]; // Related entries
+}
+
+// Interface for ManualCurrencyRequest
+export interface ManualCurrencyRequest {
+  // Define this based on your Prisma schema if available
+}

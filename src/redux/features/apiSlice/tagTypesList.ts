@@ -11,5 +11,7 @@ export enum tagTypes {
   referral = "referral",
   plan = "plan",
   Review = "Review",
+  bank = "bank",
+  cryptoBank = "cryptoBank",
 }
 export const tagTypesList = Object.values(tagTypes);

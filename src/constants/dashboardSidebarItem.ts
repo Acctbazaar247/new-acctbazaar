@@ -105,6 +105,21 @@ export const supperItems: TNavItemsList[] = [
     ]
   },
   {
+    item: "Bank",
+    navItems: [
+      {
+        label: "Naira Bank",
+        path: "/dashboard/manage-bank",
+        Icon: FaMoneyBillTransfer
+      },
+      {
+        label: "Crypto Bank",
+        path: "/dashboard/manage-crypto-bank",
+        Icon: FaMoneyBillTransfer
+      }
+    ]
+  },
+  {
     item: "Others",
     navItems: [
       {
@@ -189,6 +204,21 @@ export const adminItems: TNavItemsList[] = [
       {
         label: "Manage deposit",
         path: "/dashboard/manageDeposit",
+        Icon: FaMoneyBillTransfer
+      }
+    ]
+  },
+  {
+    item: "Bank",
+    navItems: [
+      {
+        label: "Naira Bank",
+        path: "/dashboard/manage-bank",
+        Icon: FaMoneyBillTransfer
+      },
+      {
+        label: "Crypto Bank",
+        path: "/dashboard/manage-crypto-bank",
         Icon: FaMoneyBillTransfer
       }
     ]
@@ -301,6 +331,21 @@ const financeAdminItems: TNavItemsList[] = [
       {
         label: "Manage deposit",
         path: "/dashboard/manageDeposit",
+        Icon: FaMoneyBillTransfer
+      }
+    ]
+  },
+  {
+    item: "Bank",
+    navItems: [
+      {
+        label: "Naira Bank",
+        path: "/dashboard/manage-bank",
+        Icon: FaMoneyBillTransfer
+      },
+      {
+        label: "Crypto Bank",
+        path: "/dashboard/manage-crypto-bank",
         Icon: FaMoneyBillTransfer
       }
     ]

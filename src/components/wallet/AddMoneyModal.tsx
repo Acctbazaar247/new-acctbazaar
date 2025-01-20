@@ -14,8 +14,12 @@ import AppInput from "../ui/AppInput";
 import AppModal from "../ui/AppModal";
 import { FaBitcoin } from "react-icons/fa";
 import Swal from "sweetalert2";
+import ManualPayment from "./ManualPayment";
+import { MdOnlinePrediction } from "react-icons/md";
+import { GiGears } from "react-icons/gi";
 export default function AddMoneyModal() {
   const [amount, setAmount] = useState(0);
+  const [paymentType, setPaymentType] = useState<string | null>(null);
   const router = useRouter();
   const user = useAppSelector((state) => state.user.user);
   const [addRequest, { isLoading, isError, isSuccess, error }] =
@@ -124,9 +128,42 @@ export default function AddMoneyModal() {
           <h4>Add Money</h4>
         </div>
       }
-      title="Fund your wallet"
+      title={!paymentType ?"Choose Payment Type":
+         paymentType==="online" ? "Fund your wallet with Online Payment" : "Fund your wallet with Manual Payment" }
       subTitle="Fund your wallet with any of these two channels"
     >
+     {
+      !paymentType ?<div>
+        <div> 
+          {/* two option online or manual */}
+          <div className=" flex mt-5 w-[400px] gap-5">
+            <button className="p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400" onClick={() => setPaymentType("online")}>
+              <div>
+                <div className="flex justify-center items-center">
+                <MdOnlinePrediction className="size-10 group-hover:text-orange-400 transition-all"></MdOnlinePrediction>
+
+                </div>
+                <div>
+                  <h3 className="text-textBlack mt-2 group-hover:text-orange-400 font-bold transition-all">Online payment</h3>
+                  <p className="text-xs md:text-sm text-textGrey">For online payment with Bank/Card or Crypto</p>
+                </div>
+              </div>
+            </button>
+            <button className="gap-5 p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400" onClick={() => setPaymentType("manual")}>
+              <div className="w-full">
+                <div className="flex justify-center items-center">
+                <GiGears className="size-10 group-hover:text-orange-400 transition-all"></GiGears>
+
+                </div>
+                <div>
+                  <h3 className="text-textBlack mt-2 group-hover:text-orange-400 font-bold transition-all">Manual payment</h3>
+                  <p className="text-xs md:text-sm text-textGrey">For manual payment Naira/Crypto </p>
+                </div>
+              </div>
+              </button>
+          </div>
+        </div>
+      </div>: paymentType === "manual" ? <ManualPayment setPaymentType={setPaymentType} /> : <div>
       <div className="space-y-4 pt-4 md:w-[520px]">
         <AppInput
           icon={<PiCurrencyDollarBold />}
@@ -302,11 +339,13 @@ export default function AddMoneyModal() {
           </p>
         )}
 
-        <div className="flex justify-center">
+        <div className="flex mt-4 gap-3">
+          {/* back button */}
+          <button className="border border-gray-600 text-textBlack  px-4 py-2 rounded-lg" onClick={() => setPaymentType(null)}>Back</button>
           <button
             onClick={handleSubmit}
             disabled={isLoading || isPayStackLoading || isKoraPayLoading}
-            className="mt-4 rounded-lg  px-7 py-2 bg-orange-500 text-white  hover:opacity-80 transition-all disabled:opacity-80"
+            className=" rounded-lg  px-7 py-2 bg-orange-500 text-white  hover:opacity-80 transition-all disabled:opacity-80"
           >
             {isLoading || isPayStackLoading || isKoraPayLoading
               ? "Loading"
@@ -314,6 +353,8 @@ export default function AddMoneyModal() {
           </button>
         </div>
       </div>
+      </div>
+     }
     </AppModal>
   );
 }
