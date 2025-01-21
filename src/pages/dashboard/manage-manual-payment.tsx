@@ -11,6 +11,7 @@ import AppButton from '@/components/ui/AppButton'
 import AppModal from '@/components/ui/AppModal'
 import ManualPaymentViewModal from '@/components/dashboard/ManualPaymentViewModal'
 import AppInput from '@/components/ui/AppInput'
+import { FaDollarSign } from 'react-icons/fa'
 type Props = {}
 
 const ManageManualPayment = (props: Props) => {
@@ -46,7 +47,7 @@ const ManageManualPayment = (props: Props) => {
             className:"min-w-[150px]",
             render: (requestedAmount: number, record: ManualCurrencyRequest) => {
                 return (
-                    <p className="line-clamp-1 flex items-center gap-1 text-base"><FaNairaSign/><span>{requestedAmount}</span></p>
+                    <p className="line-clamp-1 flex items-center gap-1 text-base"><FaDollarSign/><span>{requestedAmount}</span></p>
                 )
             }
         },   
@@ -55,7 +56,7 @@ const ManageManualPayment = (props: Props) => {
             dataIndex:"receivedAmount",
             render: (receivedAmount: number, record: ManualCurrencyRequest) => {
                 return (
-                    <p className="line-clamp-1 flex items-center gap-1 text-base"><FaNairaSign/><span>{receivedAmount || "Not Added"}</span></p>
+                    <p className="line-clamp-1 flex items-center gap-1 text-base"><FaDollarSign/><span>{receivedAmount || "Not Added"}</span></p>
                 )
             }
         },
