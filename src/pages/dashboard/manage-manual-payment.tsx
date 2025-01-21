@@ -67,7 +67,7 @@ const ManageManualPayment = (props: Props) => {
             className:"min-w-[150px]",
             render: (status: string, record: ManualCurrencyRequest) => {
                 return (
-                    <p className="line-clamp-1  text-base">{status}</p>
+                    <p className={`line-clamp-1 capitalize text-base ${status === 'pending' ? 'text-yellow-500' : status === 'approved' ? 'text-green-500' : 'text-orange-500'}`}>{status}</p>
                 )
             }
         },
