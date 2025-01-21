@@ -233,12 +233,16 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             <div>
                 {
                     
-                    cryptoLoading ? <Spin className="h-10 w-full"/> : <div className='w-full mt-2'>
-                            <Select value={cryptoType} onChange={e=>{setCryptoType(e)}} showSearch className='my-select w-full h-10 mt-1' placeholder='Select Bank'   options={cryptoBankUniqOption.map((type) => ({
-                        label: type,
-                        value: type , 
-                      }))}/>
-                    </div>
+                   selectedOption === "crypto" ? <div>
+                {
+                     cryptoLoading ? <Spin className="h-10 w-full"/> : <div className='w-full mt-2'>
+                     <Select value={cryptoType} onChange={e=>{setCryptoType(e)}} showSearch className='my-select w-full h-10 mt-1' placeholder='Select Bank'   options={cryptoBankUniqOption.map((type) => ({
+                 label: type,
+                 value: type , 
+               }))}/>
+             </div>
+                }
+                   </div> : null
                 }
                 {
                     cryptoType === ECryptoType.USDT && <div>
@@ -431,7 +435,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
 
 
   return (
-    <div className='w-[500px] space-y-4 pt-3'>
+    <div className='md:w-[500px] space-y-4 pt-3'>
         {
             step === 1 ? STEP_1 : step === 2 ? STEP_2 : step === 3 ? STEP_3 : STEP_4
         }

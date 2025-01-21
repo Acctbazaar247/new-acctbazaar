@@ -17,6 +17,7 @@ import Swal from "sweetalert2";
 import ManualPayment from "./ManualPayment";
 import { MdOnlinePrediction } from "react-icons/md";
 import { GiGears } from "react-icons/gi";
+import { BsBank2, BsCashCoin } from "react-icons/bs";
 export default function AddMoneyModal() {
   const [amount, setAmount] = useState(0);
   const [paymentType, setPaymentType] = useState<string | null>(null);
@@ -139,11 +140,11 @@ export default function AddMoneyModal() {
       !paymentType ?<div>
         <div> 
           {/* two option online or manual */}
-          <div className=" flex mt-5 w-[400px] gap-5">
-            <button className="p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400" onClick={() => setPaymentType("online")}>
+          <div className=" flex mt-5 flex-col md:flex-row md:w-[400px] gap-2 md:gap-5">
+            <button className="p-2 py-4 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400" onClick={() => setPaymentType("online")}>
               <div>
                 <div className="flex justify-center items-center">
-                <MdOnlinePrediction className="size-10 group-hover:text-orange-400 transition-all"></MdOnlinePrediction>
+                <BsCashCoin className="size-10 group-hover:text-orange-400 transition-all"></BsCashCoin>
 
                 </div>
                 <div>
@@ -152,10 +153,10 @@ export default function AddMoneyModal() {
                 </div>
               </div>
             </button>
-            <button className="gap-5 p-2 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400" onClick={() => setPaymentType("manual")}>
+            <button className="gap-5 p-2 py-4 md:p-4 border border-borderColor rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400" onClick={() => setPaymentType("manual")}>
               <div className="w-full">
                 <div className="flex justify-center items-center">
-                <GiGears className="size-10 group-hover:text-orange-400 transition-all"></GiGears>
+                <BsBank2 className="size-10 group-hover:text-orange-400 transition-all"></BsBank2>
 
                 </div>
                 <div>

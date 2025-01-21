@@ -35,10 +35,10 @@ const ManageCryptoBank = (props: Props) => {
         },
         {
             title:"Network",
-            dataIndex:"isTrc20",
+            dataIndex:"isTrc",
             className:"min-w-[150px]",
-            render: (isTrc20:boolean,record:CryptoBank) => {
-                return <span className='capitalize'>{record.cryptoType === ECryptoType.USDT ?isTrc20 ? "TRC20" : "BEP20": "Not Applicable"}</span>
+            render: (isTrc:boolean,record:CryptoBank) => {
+                return <span className='capitalize'>{record.cryptoType === ECryptoType.USDT ?isTrc ? "TRC" : "BEP": "Not Applicable"}</span>
             }
         }
         ,
