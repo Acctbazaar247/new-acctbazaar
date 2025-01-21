@@ -33,7 +33,7 @@ const ManageCryptoBank = (props: Props) => {
             render: (walletAddress:string) => {
                 return <span className='capitalize'>{walletAddress}</span>
             }
-            }, 
+        }, 
             
         {
             title:"Status",
@@ -77,7 +77,7 @@ const ManageCryptoBank = (props: Props) => {
                         }).catch((error) => {
                             toast.error(error?.data?.message || "Something went wrong")
                         })
-                    }} className='bg-red-600 text-white px-2 py-1 rounded-md flex items-center gap-2'> <FaTrash/> Delete</button>
+                    }} className='bg-red-600 text-textBlack px-2 py-1 rounded-md flex items-center gap-2'> <FaTrash/> Delete</button>
                 </div>
             }
         }

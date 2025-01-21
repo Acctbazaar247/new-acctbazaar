@@ -148,8 +148,8 @@ export default function AddMoneyModal() {
 
                 </div>
                 <div>
-                  <h3 className="text-textBlack mt-2 group-hover:text-orange-400 font-bold transition-all">Online payment</h3>
-                  <p className="text-xs md:text-sm text-textGrey">For online payment with Bank/Card or Crypto</p>
+                  <h3 className="text-center text-textBlack mt-2 group-hover:text-orange-400 font-bold transition-all">Online payment</h3>
+                  <p className="text-xs md:text-sm text-center text-textGrey">For online payment with Bank/Card or Crypto</p>
                 </div>
               </div>
             </button>
@@ -160,8 +160,8 @@ export default function AddMoneyModal() {
 
                 </div>
                 <div>
-                  <h3 className="text-textBlack mt-2 group-hover:text-orange-400 font-bold transition-all">Manual payment</h3>
-                  <p className="text-xs md:text-sm text-textGrey">For manual payment Naira/Crypto </p>
+                  <h3 className="text-textBlack  text-center mt-2 group-hover:text-orange-400 font-bold transition-all">Manual payment</h3>
+                  <p className="text-xs text-center md:text-sm text-textGrey">For manual payment Naira/Crypto </p>
                 </div>
               </div>
               </button>
