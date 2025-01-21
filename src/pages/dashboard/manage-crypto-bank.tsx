@@ -3,7 +3,7 @@ import AppModal from '@/components/ui/AppModal'
 import AppSwitch from '@/components/ui/AppSwitch'
 import AppTable from '@/components/ui/AppTable'
 import AdminsLayout from '@/layout/AdminsLayout'
-import { useEditCryptoBankMutation, useGetCryptoBanksQuery } from '@/redux/features/cryptoBank/cryptoBankApi'
+import { useDeleteCryptoBankMutation, useEditCryptoBankMutation, useGetCryptoBanksQuery } from '@/redux/features/cryptoBank/cryptoBankApi'
 import { CryptoBank, ECryptoType, UserRole } from '@/types/common'
 import { Switch } from 'antd'
 import React, { useState } from 'react'
@@ -16,10 +16,11 @@ const ManageCryptoBank = (props: Props) => {
     const [page,setPage] = useState(1) 
     const cryptoBankQuery = useGetCryptoBanksQuery({page,})    
     const [editCryptoBank,{isLoading:editCryptoBankLoading}] = useEditCryptoBankMutation()
+    const [deleteCryptoBank,{isLoading:deleteCryptoBankLoading}] = useDeleteCryptoBankMutation()
     const columns = [
         {
             title:"Crypto Bank Name",
-            dataIndex:"cryptoType",
+            dataIndex:"name",
             className:"min-w-[150px]",
             render: (cryptoType:string) => {
                 return <span className='capitalize'>{cryptoType}</span>
@@ -32,16 +33,8 @@ const ManageCryptoBank = (props: Props) => {
             render: (walletAddress:string) => {
                 return <span className='capitalize'>{walletAddress}</span>
             }
-        },
-        {
-            title:"Network",
-            dataIndex:"isTrc",
-            className:"min-w-[150px]",
-            render: (isTrc:boolean,record:CryptoBank) => {
-                return <span className='capitalize'>{record.cryptoType === ECryptoType.USDT ?isTrc ? "TRC" : "BEP": "Not Applicable"}</span>
-            }
-        }
-        ,
+            }, 
+            
         {
             title:"Status",
             dataIndex:"isActive",
@@ -78,7 +71,13 @@ const ManageCryptoBank = (props: Props) => {
                             <CryptoInfoForm id={record.id} defaultValues={record}/>
                         </div>
                     </AppModal>
-                    <button className='bg-red-600 text-white px-2 py-1 rounded-md flex items-center gap-2'> <FaTrash/> Delete</button>
+                    <button disabled={deleteCryptoBankLoading} onClick={()=>{
+                        deleteCryptoBank(record.id).unwrap().then(() => {
+                            toast.success("Crypto Bank deleted successfully",{toastId:"1"})
+                        }).catch((error) => {
+                            toast.error(error?.data?.message || "Something went wrong")
+                        })
+                    }} className='bg-red-600 text-white px-2 py-1 rounded-md flex items-center gap-2'> <FaTrash/> Delete</button>
                 </div>
             }
         }

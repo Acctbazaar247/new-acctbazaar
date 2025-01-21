@@ -27,18 +27,15 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
     const [step,setStep] = useState(1)
     const [amount, setAmount] = useState(0); 
     const [selectedOption, setSelectedOption] = useState<"bank" | "crypto" | null>(null)
-    const [cryptoInfo,setCryptoInfo] = useState<CryptoBank | null>(null)
-    const [cryptoType,setCryptoType] = useState<ECryptoType | null>(null)
+    const [cryptoInfo,setCryptoInfo] = useState<CryptoBank | null>(null) 
     const [bankInfo,setBankInfo] = useState<Bank | null>(null)
     const [userBankInfo,setUserBankInfo] = useState<UserBankInfo | null>(null)
     const [isBank, setIsBank] = useState(false)
     const [imageLoading, setImageLoading] = useState(false)
     const [image, setImage] = useState<string | null>(null)
-    const [transactionHash, setTransactionHash] = useState<string | null>("")
-    const [isTrc,setIsTrc] = useState<boolean | null>(null)
+    const [transactionHash, setTransactionHash] = useState<string | null>("") 
     const {data: cryptoBanks,isLoading: cryptoLoading} = useGetCryptoBanksQuery({limit: 1000,isActive: true},)
-    const {data: bankBanks,isLoading: bankLoading} = useGetBanksQuery({limit: 1000,isActive: true})
-    const [cryptoBankUniqOption,setCryptoBankUniqOption] = useState<string[]>([])
+    const {data: bankBanks,isLoading: bankLoading} = useGetBanksQuery({limit: 1000,isActive: true}) 
     const [submitManualPayment, {isLoading: submitManualPaymentLoading}] = useAddManualCurrencyRequestMutation()
     const handleContinue = () => {
         if(step === 1){
@@ -53,14 +50,10 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                 }
                 setStep(2)
             }else{
-                if(!cryptoType){
-                    toast.error("Please select a crypto type")
+                if(!cryptoInfo?.id){
+                    toast.error("Please select a crypto ")
                     return
-                }
-                if(isTrc === null && cryptoType === ECryptoType.USDT){
-                    toast.error("Please select a network")
-                    return
-                }
+                } 
                 // check amount
                 if(amount < config.fundMinMoney){
                     toast.error(`Minimum amount is ${config.fundMinMoney}`,{toastId:"min-amount"})
@@ -85,8 +78,29 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                 if(!cryptoInfo?.id){
                     toast.error("Please select a crypto type")
                     return
+                } {
+                    if(!transactionHash){
+                        toast.error("Please enter your transaction hash")
+                        return
+                    }
+                    if(!cryptoInfo?.id){
+                        toast.error("Please select a crypto type")
+                        return
+                    }
+                    submitManualPayment({
+                        requestedAmount: amount,
+                        cryptoBankId: cryptoInfo?.id, 
+                        transactionHash: transactionHash
+                    })
+                    .unwrap()
+                    .then((res)=>{
+                        toast.success("Manual payment request submitted successfully")
+                        setStep(3)
+                    })
+                    .catch((err)=>{
+                        toast.error(err?.data?.message || "Something went wrong")
+                    }) 
                 }
-                setStep(3)
             }
         }else if(step === 3){
             // check is bank
@@ -120,45 +134,10 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                     toast.error(err?.data?.message || "Something went wrong")
                 })
 
-            }else if(selectedOption === "crypto"){
-                if(!transactionHash){
-                    toast.error("Please enter your transaction hash")
-                    return
-                }
-                if(!cryptoInfo?.id){
-                    toast.error("Please select a crypto type")
-                    return
-                }
-                submitManualPayment({
-                    requestedAmount: amount,
-                    cryptoBankId: cryptoInfo?.id, 
-                    transactionHash: transactionHash
-                })
-                .unwrap()
-                .then((res)=>{
-                    toast.success("Manual payment request submitted successfully")
-                    setStep(4)
-                })
-                .catch((err)=>{
-                    toast.error(err?.data?.message || "Something went wrong")
-                })
             }
         }
     }
-   
-    useEffect(()=>{
-        if(cryptoBanks?.data){
-            // find all unique type of crypto
-            const allType = cryptoBanks?.data?.map((bank:CryptoBank) => bank.cryptoType)
-            const uniqueType = allType.reduce((acc:string[],curr:string)=>{ 
-                if(!acc.includes(curr)){
-                    acc.push(curr)
-                }
-                return acc
-            },[])
-            setCryptoBankUniqOption(uniqueType)
-        }
-    },[cryptoBanks])
+    
     const STEP_1=(<>
           <AppInput
           icon={<PiCurrencyDollarBold />}
@@ -236,65 +215,18 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                    selectedOption === "crypto" ? <div>
                 {
                      cryptoLoading ? <Spin className="h-10 w-full"/> : <div className='w-full mt-2'>
-                     <Select value={cryptoType} onChange={e=>{setCryptoType(e)}} showSearch className='my-select w-full h-10 mt-1' placeholder='Select Bank'   options={cryptoBankUniqOption.map((type) => ({
-                 label: type,
-                 value: type , 
-               }))}/>
+                     <Select value={cryptoInfo?.id || null} onChange={e=>{setCryptoInfo(cryptoBanks?.data?.find((bank:CryptoBank) => bank.id === e) || null)}} showSearch className='my-select w-full h-10 mt-1' placeholder='Select Bank'   options={cryptoBanks?.data?.map((bank:CryptoBank) => ({
+                        label: bank.name,
+                        value: bank.id , 
+                      }))}/>
              </div>
                 }
                    </div> : null
-                }
-                {
-                    cryptoType === ECryptoType.USDT && <div>
-                 <div className='grid grid-cols-2 mt-2 gap-2'>
-                 <div
-                              onClick={() => setIsTrc(true)}
-                              className={`border cursor-pointer rounded-md py-3 px-4 ${
-                                
-                                isTrc === true
-                                  ? "border-primary"
-                                  : "border-borderColor"
-                              }`}
-                            >
-                              <h4 className="font-normal">Tron (TRC20)</h4>
-                              <p className="textG text-xs">
-                                Est. arrival ~ 2 mins
-                              </p>
-                            </div>
-                            <div
-                              onClick={() => setIsTrc(false)}
-                              className={`border cursor-pointer rounded-md py-3 px-4 ${
-                                isTrc === false
-                                  ? "border-primary"
-                                  : "border-borderColor"
-                              }`}
-                            >
-                              <h4 className="font-normal">
-                                BNB Smart Chain (BEP20)
-                              </h4>
-                              <p className="textG text-xs">
-                                Est. arrival ~ 3 mins
-                              </p>
-                            </div>
-                    </div>
-                 </div>
-                }
+                } 
             </div>
           </div>
         </button>
-    </>)
-    const availableCrypto = cryptoBanks?.data?.reduce((acc:CryptoBank[],curr:CryptoBank)=>{
-        if(curr.cryptoType === cryptoType){
-            if(cryptoType === ECryptoType.USDT){
-                if(isTrc === curr.isTrc){
-                    acc.push(curr)
-                }
-            }else{
-                acc.push(curr)
-            }
-        }
-        return acc
-    },[])
+    </>) 
     const STEP_2=(<div>
         {
             selectedOption === "bank" ? <div>
@@ -325,29 +257,47 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                     </div>
                 </div>
             </div> : <div>
-            
-                <div>
-                    {
-                        availableCrypto?.length > 0 ? <div>
-                                <h3 className='text font-bold text-center'>Select a {cryptoType} Crypto Wallet Address</h3> 
-                            {
-                                availableCrypto.map((crypto:CryptoBank)=>{
-                                    return <div key={crypto.id} onClick={()=>{
-                                        setCryptoInfo(crypto)
-                                    }} className={` border p-2 rounded-lg mb-2 mt-2 cursor-pointer ${cryptoInfo?.id === crypto.id ? "border-orange-500" : "border-borderColor"} `}>
-                                        <h3 >{crypto.walletAddress}</h3> 
-                                    </div>
-                                }) 
-                            }
-                        </div>: <div className='flex flex-col py-4 justify-center items-center h-full'>
-                            <FaExclamationCircle className='text-orange-500 text-6xl' />
-                             <p className='text-center text-sm text-textGrey mt-2'>No wallet address found</p>
-                        </div>
-                    }
+            <div className='flex flex-col items-center justify-center w-full bg-yellowShadow  py-4 rounded'>
+                <p className='text-2xl font-bold flex gap-2 mb-2 text-orange-500 items-center'> <FaDollarSign /> {amount}</p>
+                <p className='text-sm text-textGrey'>You have to transfer <span className='text-orange-500'>{amount }</span> {cryptoInfo?.name} to the selected crypto wallet</p> 
                 </div>
+
+                <div className='mt-5'>
+                    <h2 className='text-center font-bold'>Wallet Address</h2>
+                    <div className='flex justify-center items-center'>
+                        <QRCode value={cryptoInfo?.walletAddress || ""} />
+                    </div>
+                    <p onClick={()=>{
+                        navigator?.clipboard?.writeText(cryptoInfo?.walletAddress || "")
+                        .then(() => toast.success("Copied to clipboard", {toastId: 'copy-wallet-address'}))
+                    }} className='text-center cursor-pointer mt-2 py-2 bg-yellowShadow rounded  text-sm text-textBlack'>{cryptoInfo?.walletAddress}</p>
+
+                </div>
+                {/* add input for taking transaction hash */}
+                <div className='mt-5'>
+                    <h2 className='mb-1 font-bold'>Enter your Transaction Hash</h2>
+                    <AppInput
+                      icon={<FaCalculator />}
+                      type="text"
+                      placeholder="Transaction Hash"
+                      value={transactionHash || ""}
+                      onChange={(e) => setTransactionHash(e.target.value)}
+                    />
+                </div> 
             </div>
         }
     </div>)
+
+const STEP_4=(<div className='flex justify-center py-10 items-center flex-col gap-2 '>
+    <div className='flex justify-center items-center flex-col gap-2 '>
+        <FaCheckCircle className='text-orange-500 text-6xl' />
+
+    </div>
+    <h3 className='text-xl font-bold'>Payment Request Submitted</h3>
+    <p className='text-sm text-textGrey w-[80%] text-center'>Your payment request has been submitted successfully. We will review your request and notify you via email once it is approved.</p>
+</div>)
+
+
  
     const STEP_3=(
         <div>
@@ -391,48 +341,12 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                 </div>
                 </div> 
             </div>:<div>
-            <div className='flex flex-col items-center justify-center w-full bg-yellowShadow  py-4 rounded'>
-                <p className='text-2xl font-bold flex gap-2 mb-2 text-orange-500 items-center'> <FaDollarSign /> {amount}</p>
-                <p className='text-sm text-textGrey'>You have to transfer <span className='text-orange-500'>{amount }</span> {cryptoType} to the selected crypto wallet</p> 
-                </div>
-
-                <div className='mt-5'>
-                    <h2 className='text-center font-bold'>Wallet Address</h2>
-                    <div className='flex justify-center items-center'>
-                        <QRCode value={cryptoInfo?.walletAddress || ""} />
-                    </div>
-                    <p onClick={()=>{
-                        navigator?.clipboard?.writeText(cryptoInfo?.walletAddress || "")
-                        .then(() => toast.success("Copied to clipboard", {toastId: 'copy-wallet-address'}))
-                    }} className='text-center cursor-pointer mt-2 py-2 bg-yellowShadow rounded  text-sm text-textBlack'>{cryptoInfo?.walletAddress}</p>
-
-                </div>
-                {/* add input for taking transaction hash */}
-                <div className='mt-5'>
-                    <h2 className='mb-1 font-bold'>Enter your Transaction Hash</h2>
-                    <AppInput
-                      icon={<FaCalculator />}
-                      type="text"
-                      placeholder="Transaction Hash"
-                      value={transactionHash || ""}
-                      onChange={(e) => setTransactionHash(e.target.value)}
-                    />
-                </div>
+            {STEP_4}
             </div>
-            }
+        }
         </div>
     
 )
-
-    const STEP_4=(<div className='flex justify-center py-10 items-center flex-col gap-2 '>
-        <div className='flex justify-center items-center flex-col gap-2 '>
-            <FaCheckCircle className='text-orange-500 text-6xl' />
-
-        </div>
-        <h3 className='text-xl font-bold'>Payment Request Submitted</h3>
-        <p className='text-sm text-textGrey w-[80%] text-center'>Your payment request has been submitted successfully. We will review your request and notify you via email once it is approved.</p>
-    </div>)
-
 
   return (
     <div className='md:w-[500px] space-y-4 pt-3'>
@@ -455,17 +369,27 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
           disabled={imageLoading || submitManualPaymentLoading}
             className=" rounded-lg  px-7 py-2 bg-orange-500 text-white  hover:opacity-80 transition-all disabled:opacity-80"
             onClick={()=>{
-                if(step === 4){
-                    setModalOpen(false)
-                    setPaymentType(null)
-                }else{
+                if(step === 4){ 
+                        setModalOpen(false)
+                        setPaymentType(null)
+                    
+                }
+                else if(step===3){
+                    if(selectedOption === "crypto"){
+                        setModalOpen(false)
+                        setPaymentType(null)
+                    }
+                }
+                else{
                     handleContinue()
                 }
 
             }}
           >
           {
-            submitManualPaymentLoading ? <Spin /> : step === 3 ? "Submit" : step===4?"Close": "Continue"
+            submitManualPaymentLoading ? <Spin /> : 
+            step===2?"submit":
+            step === 3 ?  "Submit" : step===4?"Close": "Continue"
           }
           </button>
         </div>

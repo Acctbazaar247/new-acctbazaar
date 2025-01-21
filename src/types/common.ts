@@ -679,8 +679,7 @@ export interface Bank {
 export interface CryptoBank {
   id: string; // UUID
   walletAddress: string;
-  cryptoType: ECryptoType;
-  isTrc?: boolean; // Optional
+  name: string; 
   isActive: boolean; // Default: true
   createdAt: Date; // Default: now()
   updatedAt: Date; // Updated automatically

@@ -17,13 +17,13 @@ const CryptoInfoForm = (props: Props) => {
     const [editCryptoBank,{isLoading:editCryptoBankLoading}] = useEditCryptoBankMutation()
     const onSubmit = (data:any) => {    
         if(props.id){
-            editCryptoBank({...data,id:props.id,isTrc:data.cryptoType === ECryptoType.USDT ? data.isTrc : null}).unwrap().then(() => {
+            editCryptoBank({...data,id:props.id}).unwrap().then(() => {
                 toast.success("Crypto Bank updated successfully",{toastId:"1"})
             }).catch((error) => {
                 toast.error(error?.data?.message || "Something went wrong")
             })
         }else{
-            addCryptoBank({...data,isTrc:data.cryptoType === ECryptoType.USDT ? data.isTrc : null}).unwrap().then(() => {
+            addCryptoBank({...data}).unwrap().then(() => {
                 toast.success("Crypto Bank added successfully",{toastId:"1"})
                 reset()
             }).catch((error) => {
@@ -35,16 +35,14 @@ const CryptoInfoForm = (props: Props) => {
         <div className='lg:w-[700px] py-4'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid grid-cols-1 gap-5'>
-          <AppFormSelect
-            control={control} 
-            options={Object.values(ECryptoType).map((cryptoType) => ({
-                label: cryptoType,
-                value: cryptoType
-            }))}
-            label="Crypto Type"
-            name="cryptoType"
+          <AppFormInput
+            error={errors?.name?.message}
+            label="Crypto Bank Name"
+            name="name"
+            type='text'
             placeholder="Enter crypto bank name" 
             required={true} 
+            register={register}
             /> 
             <AppFormInput
             error={errors?.walletAddress?.message}
@@ -55,21 +53,7 @@ const CryptoInfoForm = (props: Props) => {
             required={true}
             register={register}
             />
-            {
-                watch("cryptoType") === ECryptoType.USDT && (
-                    <Controller
-                    control={control}
-                    name="isTrc"
-                    render={({field:{onChange,value},fieldState:{error},formState:{errors}}) => (
-                       <div className='flex gap-4'>
-                        <button className={`border w-full border-gray-500 rounded-md px-2 py-3 ${value ? "bg-orange-600 border-transparent text-white" : ""}`} type='button' onClick={() => onChange(true)}>TRC 20</button>
-                        <button className={`border w-full border-gray-500 rounded-md px-2 py-3 ${value ? "" : "bg-orange-600 text-white"}`} type='button' onClick={() => onChange(false)}>BEP 20</button>
-
-                       </div>
-                    )}
-                    />
-                )
-            }
+             
           </div>
             <button type='submit'  disabled={addCryptoBankLoading} className='bg-green-600  mt-5 text-white px-3 py-2  rounded-md flex items-center gap-2 disabled:opacity-55 transition-all'>  {props.id ? "Update Crypto Bank" : "Add Crypto Bank"}</button>
         </form>
