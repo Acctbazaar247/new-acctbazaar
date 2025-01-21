@@ -75,7 +75,9 @@ const Marketplace = () => {
       <PrivateLayout>
         <div className="layout h-[calc(100dvh-105px)]   md:h-custom-dvh-md 2xl:h-custom-dvh overflow-hidden">
           {/* this is top section div  */}
-          <AppAlert message={message} isShow={isShow} setIsShow={setIsShow} />
+       {
+        !message?.startsWith(" ") && <AppAlert message={message} isShow={isShow} setIsShow={setIsShow} />
+       }
           <div className="flex flex-col md:flex-row justify-between gap-1 py-4 2xl:py-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-background md:static max-w-[385px] sm:max-w-[645px] md:max-w-full z-40">
             <div className="md:pl-4">
               <h2 className="title">Marketplace</h2>

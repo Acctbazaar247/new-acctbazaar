@@ -211,17 +211,17 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             </p>
             <div>
                 {
-                    
-                   selectedOption === "crypto" ? <div>
-                {
-                     cryptoLoading ? <Spin className="h-10 w-full"/> : <div className='w-full mt-2'>
-                     <Select value={cryptoInfo?.id || null} onChange={e=>{setCryptoInfo(cryptoBanks?.data?.find((bank:CryptoBank) => bank.id === e) || null)}} showSearch className='my-select w-full h-10 mt-1' placeholder='Select Bank'   options={cryptoBanks?.data?.map((bank:CryptoBank) => ({
-                        label: bank.name,
-                        value: bank.id , 
-                      }))}/>
-             </div>
-                }
-                   </div> : null
+                        
+                    selectedOption === "crypto" ? <div>
+                    {
+                        cryptoLoading ? <Spin className="h-10 w-full"/> : <div className='w-full mt-2'>
+                        <Select value={cryptoInfo?.id || null} onChange={e=>{setCryptoInfo(cryptoBanks?.data?.find((bank:CryptoBank) => bank.id === e) || null)}} showSearch className='my-select w-full h-10 mt-1' placeholder='Select crypto'   options={cryptoBanks?.data?.map((bank:CryptoBank) => ({
+                            label: bank.name,
+                            value: bank.id , 
+                        }))}/>
+                        </div>
+                    }
+                    </div> : null
                 } 
             </div>
           </div>
