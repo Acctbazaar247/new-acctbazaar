@@ -7,6 +7,8 @@ import { FaDollarSign, FaMoneyBill } from 'react-icons/fa'
 import Image from 'next/image'
 import { useEditManualCurrencyRequestMutation } from '@/redux/features/manualCurrencyRequest/manualCurrencyRequestApi'
 import { toast } from 'react-toastify'
+import Loading from '../ui/Loading'
+import { Spin } from 'antd'
 
 type Props = {
     data:ManualCurrencyRequest
@@ -90,8 +92,9 @@ const ManualPaymentViewModal = ({data}: Props) => {
                         <p>{data.transactionHash}</p>
 
                     </div>
+                        <h2 className='text-lg font-bold pt-5 pb-2'>Selected Crypto</h2>
                     <div className='flex flex-col gap-2 border rounded-md p-2 mt-2 items-center'>
-                        <h2>Our Wallet Address</h2>
+                        <h2>{data.cryptoBank?.name}</h2>
                         <p>{data.cryptoBank?.walletAddress}</p>
                     </div>
                 </div>
@@ -100,6 +103,7 @@ const ManualPaymentViewModal = ({data}: Props) => {
 
            </div>
             {
+                isLoading?<Spin/>:
                 data.status === "pending" && <div className='flex gap-2 mt-4'>
                     <button disabled={isLoading} onClick={()=>handleUpDate("approved")} className='bg-primary text-white px-2 py-1 rounded-md'>Approve</button>
                     <button disabled={isLoading} onClick={()=>handleUpDate("denied")} className='bg-red text-white px-2 py-1 rounded-md'>Reject</button>
