@@ -44,8 +44,8 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                     toast.error("Please select a bank")
                     return
                 }
-                if(amount < config.fundMinMoney){
-                    toast.error(`Minimum amount is ${config.fundMinMoney}`,{toastId:"min-amount"})
+                if(amount < config.manualDepositMinMoney){
+                    toast.error(`Minimum amount is ${config.manualDepositMinMoney}`,{toastId:"min-amount"})
                     return
                 }
                 setStep(2)
@@ -55,8 +55,8 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                     return
                 } 
                 // check amount
-                if(amount < config.fundMinMoney){
-                    toast.error(`Minimum amount is ${config.fundMinMoney}`,{toastId:"min-amount"})
+                if(amount < config.manualDepositMinMoney){
+                    toast.error(`Minimum amount is ${config.manualDepositMinMoney}`,{toastId:"min-amount"})
                     return
                 }
                 setStep(2)
@@ -69,8 +69,8 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                     toast.error("Please select a bank")
                     return
                 }
-                if(amount < config.fundMinMoney){
-                    toast.error(`Minimum amount is ${config.fundMinMoney}`,{toastId:"min-amount"})
+                if(amount < config.manualDepositMinMoney){
+                    toast.error(`Minimum amount is ${config.manualDepositMinMoney}`,{toastId:"min-amount"})
                     return
                 }
                 setStep(3)
@@ -164,9 +164,9 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
               alt="bank payment"
             />
             <div className="space-y-1 w-full">
-              <h3 className="text-textBlack font-bold">Bank / Card payment</h3>
+              <h3 className="text-textBlack font-bold">Bank Transfer</h3>
               <p className="text-sm text-textGrey">
-                Deposit funds directly using Bank transfer .
+              Make a deposit using bank transfer to our available bank options.
               </p>
             {
                 selectedOption === "bank" && (
@@ -204,10 +204,9 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             alt="crypto payment"
           />
           <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">Crypto Deposit</h3>
+            <h3 className="text-textBlack font-bold">Crypto Payment</h3>
             <p className="text-sm text-textGrey">
-              Fund your wallet with popular cryptocurrencies like USDT, ETH,
-              BNB, SOL and more.
+            Deposit popular cryptocurrencies like BTC, USDT, BNB, and more.
             </p>
             <div>
                 {
@@ -259,7 +258,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             </div> : <div>
             <div className='flex flex-col items-center justify-center w-full bg-yellowShadow  py-4 rounded'>
                 <p className='text-2xl font-bold flex gap-2 mb-2 text-orange-500 items-center'> <FaDollarSign /> {amount}</p>
-                <p className='text-sm text-textGrey'>You have to transfer <span className='text-orange-500'>{amount }</span> {cryptoInfo?.name} to the selected crypto wallet</p> 
+                <p className='text-sm text-textGrey'>Please transfer <span className='text-orange-500'>{amount }</span> {cryptoInfo?.name} to the designated crypto wallet provided.</p> 
                 </div>
 
                 <div className='mt-5'>
@@ -357,7 +356,7 @@ const STEP_4=(<div className='flex justify-center py-10 items-center flex-col ga
         <div className="flex mt-4 gap-3">
           {/* back button */}
           {
-            step !== 4 && <button className="border  border-gray-600 text-textBlack px-4 py-2 rounded-lg" onClick={() => {
+            step === 4 || (selectedOption==="crypto" && (step === 3)) ?null: <button className="border  border-gray-600 text-textBlack px-4 py-2 rounded-lg" onClick={() => {
                 if(step === 1){
                     setPaymentType(null)
                 }else{
@@ -378,6 +377,8 @@ const STEP_4=(<div className='flex justify-center py-10 items-center flex-col ga
                     if(selectedOption === "crypto"){
                         setModalOpen(false)
                         setPaymentType(null)
+                    }else{
+                        handleContinue()
                     }
                 }
                 else{
@@ -388,8 +389,8 @@ const STEP_4=(<div className='flex justify-center py-10 items-center flex-col ga
           >
           {
             submitManualPaymentLoading ? <Spin /> : 
-            step===2?"submit":
-            step === 3 ?  "Submit" : step===4?"Close": "Continue"
+            step===2 && selectedOption==="bank"?"I’ve made payment.":
+            step === 3 ? selectedOption==="crypto"?"Close": " Submit" : step===4?"Close": "Continue"
           }
           </button>
         </div>

@@ -487,7 +487,7 @@ const Wallet = () => {
                       />
                     </div>
                   </>
-                ):<div>
+                ):<div className="overflow-x-auto">
                  <AppRenderReduxData
                         queryData={manualQuery}
                         showData={(data) => {

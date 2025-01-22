@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-const config = {
+const   config = {
   fundMinMoney: parseFloat(process.env.NEXT_PUBLIC_MIN_ADDFOUND as string),
   fundBtcMinMoney: parseFloat(
     (process.env.NEXT_PUBLIC_MIN_ADDFOUND_BITCOIN as string) || "150"
@@ -24,6 +24,9 @@ const config = {
   ),
   accountSellPercentage: parseFloat(
     process.env.NEXT_PUBLIC_ACCOUNT_SELL_PERCENTAGE as string
+  ),
+  manualDepositMinMoney: parseFloat(
+    process.env.NEXT_PUBLIC_MANUAL_DEPOSIT_MIN_MONEY as string
   ),
   topupMax: parseFloat(process.env.NEXT_PUBLIC_TOPUP_MAX as string),
   dollarRate: parseFloat(process.env.NEXT_PUBLIC_DOLLAR_RATE as string),

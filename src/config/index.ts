@@ -22,7 +22,10 @@ export const config = {
   proPlusPlanDays: parseInt(
     process.env.NEXT_PUBLIC_PRO_PLUS_PLAN_DAYS as string
   ),
-
+  manualDepositMinMoney: parseFloat(
+    process.env.NEXT_PUBLIC_MANUAL_DEPOSIT_MIN_MONEY as string
+  ),
   referralBonus: process.env.NEXT_PUBLIC_REFERRAL_BONUS,
   referralPurchaseAmount: process.env.NEXT_PUBLIC_REFERRAL_PURCHASE_AMOUNT,
 };
+
