@@ -33,7 +33,7 @@ const   config = {
   captcha: process.env.NEXT_PUBLIC_CAPTCHA,
   oneSignalAppId: process.env.NEXT_PUBLIC_ONE_SIGNAL_APP_ID as string,
   onDevelopment: JSON.parse(process.env.NEXT_PUBLIC_ON_DEVELOPMENT || ""),
-  manualDollarRate: parseFloat(process.env.NEXT_PUBLIC_MANUAL_DOLLAR_RATE as string),
+  manualDollarRate: parseFloat(process.env.NEXT_PUBLIC_MANUAL_DEPOSIT_DOLLAR_RATE as string),
 };
 
 export default config;
