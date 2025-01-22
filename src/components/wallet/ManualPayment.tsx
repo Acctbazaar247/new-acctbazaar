@@ -120,7 +120,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                 submitManualPayment({
                     requestedAmount: amount,
                     bankId: bankInfo?.id,
-                    bankName: bankInfo?.bankName,
+                    bankName: userBankInfo?.bankName,
                     accountName: userBankInfo?.accountName,
                     accountNumber: userBankInfo?.accountNumber,
                     image: image
