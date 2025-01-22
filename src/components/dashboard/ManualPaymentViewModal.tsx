@@ -49,7 +49,7 @@ const ManualPaymentViewModal = ({data}: Props) => {
 
                             </div>
                             <div className='flex border border-borderColor rounded-md p-2 mt-2 items-center flex-col gap-2'>
-                                <h2>Bank Account Name</h2>
+                                <h2>Sender Name</h2>
                                 <p>{data.accountName}</p>
 
                             </div>
