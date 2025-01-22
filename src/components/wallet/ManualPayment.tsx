@@ -230,8 +230,8 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
         {
             selectedOption === "bank" ? <div>
                 <div className='flex flex-col items-center justify-center w-full bg-yellowShadow  py-4 rounded'>
-                <p className='text-2xl font-bold flex gap-2 items-center text-orange-500'> <FaNairaSign /> {amount*config.dollarRate}</p>
-                <p className='text-sm text-textGrey'>You have to transfer <span className='text-orange-500'>{amount*config.dollarRate}</span> Naira to the selected bank</p>
+                <p className='text-2xl font-bold flex gap-2 items-center text-orange-500'> <FaNairaSign /> {amount*config.manualDollarRate}</p>
+                <p className='text-sm text-textGrey'>You have to transfer $<span className='text-orange-500'>{amount*config.manualDollarRate}</span> Naira to the selected bank</p>
 
                 </div>
                 <div className='space-y-2 mt-4' >
@@ -274,7 +274,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                 </div>
                 {/* add input for taking transaction hash */}
                 <div className='mt-5'>
-                    <h2 className='mb-1 font-bold'>Enter your Transaction Hash</h2>
+                    <h2 className='mb-1 font-bold'>Enter your Transaction Hash or TXID</h2>
                     <AppInput
                       icon={<FaCalculator />}
                       type="text"

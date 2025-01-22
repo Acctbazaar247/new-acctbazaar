@@ -129,7 +129,7 @@ export default function AddMoneyModal() {
             alt=""
             className="size-14 rounded-lg border border-brown/10 hover:bg-primary/15 cursor-pointer"
           />
-          <h4>Add Money</h4>
+          <h4>Deposit</h4>
         </div>
       }
       title={!paymentType ?"Choose Payment Type":

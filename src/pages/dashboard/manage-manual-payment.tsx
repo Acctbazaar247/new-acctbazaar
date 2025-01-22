@@ -60,6 +60,10 @@ const ManageManualPayment = (props: Props) => {
                 )
             }
         },
+        {
+            title: "Dollar Rate",
+            dataIndex:"dollarRate", 
+        },
 
         {
             title:"Status",
