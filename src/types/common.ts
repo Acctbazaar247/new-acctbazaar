@@ -704,7 +704,7 @@ export interface ManualCurrencyRequest {
   accountNumber?: string; // Optional
   bankName?: string; // Optional
   transactionHash?: string; // Optional
-  dollarRate?: number; // Optional
+  dollarRate: number; // Optional
   ownBy: IUser; // Relation to User model
   createdAt: Date; // Default: now()
   updatedAt: Date; // Updated automatically

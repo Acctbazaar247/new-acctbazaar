@@ -151,7 +151,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             e.stopPropagation();
             setSelectedOption("bank");
           }}
-          className={`gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+          className={`gap-5 p-4 border border-borderColor cursor-pointer rounded-lg transition-all w-full text-left ${
             selectedOption === "bank" ? "border-orange-400" : ""
           }`}
         >
@@ -231,22 +231,31 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             selectedOption === "bank" ? <div>
                 <div className='flex flex-col items-center justify-center w-full bg-yellowShadow  py-4 rounded'>
                 <p className='text-2xl font-bold flex gap-2 items-center text-orange-500'> <FaNairaSign /> {amount*config.manualDollarRate}</p>
-                <p className='text-sm text-textGrey'>You have to transfer $<span className='text-orange-500'>{amount*config.manualDollarRate}</span> Naira to the selected bank</p>
+                <p className='text-sm text-textGrey'>You have to transfer <span className='text-orange-500'>{amount*config.manualDollarRate}</span> Naira to the selected bank</p>
 
                 </div>
                 <div className='space-y-2 mt-4' >
                     <h2 className='text-center text-xl font-bold'>Bank Details</h2>
                     <div className='grid grid-cols-2 gap-2'>
-                        <div className='border border-borderColor text-center   p-2 rounded-lg'>
+                        <div onClick={()=>{
+                            navigator?.clipboard?.writeText(bankInfo?.bankName || "")
+                            .then(() => toast.success("Copied to clipboard", {toastId: 'copy-bank-name'}))
+                        }} className='border cursor-pointer  border-borderColor text-center   p-2 rounded-lg'>
                             <h3 className='font-semibold '>Bank Name</h3>
                             <p>{bankInfo?.bankName}</p>
                         </div>
                         
-                        <div className='border border-borderColor text-center p-2 rounded-lg'>
+                        <div onClick={()=>{
+                            navigator?.clipboard?.writeText(bankInfo?.accountName || "")
+                            .then(() => toast.success("Copied to clipboard", {toastId: 'copy-account-name'}))
+                        }} className='border cursor-pointer border-borderColor text-center p-2 rounded-lg'>
                             <h3 className='font-semibold text-center'>Account Name</h3>
                             <p>{bankInfo?.accountName}</p>
                         </div>
-                        <div className='border border-borderColor col-span-2 p-2 text-center rounded-lg'>
+                        <div onClick={()=>{
+                            navigator?.clipboard?.writeText(bankInfo?.accountNumber || "")
+                            .then(() => toast.success("Copied to clipboard", {toastId: 'copy-account-number'}))
+                        }} className='border cursor-pointer border-borderColor col-span-2 p-2 text-center rounded-lg'>
                             <h3 className='font-semibold text-center'>Account Number</h3>
                             <p>{bankInfo?.accountNumber}</p>
                         </div>
@@ -258,7 +267,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
             </div> : <div>
             <div className='flex flex-col items-center justify-center w-full bg-yellowShadow  py-4 rounded'>
                 <p className='text-2xl font-bold flex gap-2 mb-2 text-orange-500 items-center'> <FaDollarSign /> {amount}</p>
-                <p className='text-sm text-textGrey'>Please transfer <span className='text-orange-500'>{amount }</span> {cryptoInfo?.name} to the designated crypto wallet provided.</p> 
+                <p className='text-sm text-textGrey'>Please transfer <span className='text-orange-500'>${amount }</span> {cryptoInfo?.name} to the designated crypto wallet provided.</p> 
                 </div>
 
                 <div className='mt-5'>

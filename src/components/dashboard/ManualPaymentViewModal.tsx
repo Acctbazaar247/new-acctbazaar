@@ -9,6 +9,7 @@ import { useEditManualCurrencyRequestMutation } from '@/redux/features/manualCur
 import { toast } from 'react-toastify'
 import Loading from '../ui/Loading'
 import { Spin } from 'antd'
+import { FaNairaSign } from 'react-icons/fa6'
 
 type Props = {
     data:ManualCurrencyRequest
@@ -33,11 +34,14 @@ const ManualPaymentViewModal = ({data}: Props) => {
         <div>
             <h1 className=' mb-2 font-bold'>Enter received amount</h1>
            <AppInput icon={<FaDollarSign/>} type='number' value={receivedAmount} onChange={(e)=>setReceivedAmount(Number(e.target.value))}></AppInput>
+
            <div className='py-3 text-center'>
             <h2 className='text-lg'>User Submitted Info</h2>
             
             {
                 data.bankId?<div>
+                    <p>The Dollar Rate is <span className='text-orange-500'>{data.dollarRate}</span> <br /> The amount they have to pay in naira is  <span className='text-orange-500'>  {data.requestedAmount*data.dollarRate}</span>
+                    </p>
                         <div className='grid grid-cols-2 gap-2'>
                             <div className='flex items-center border border-borderColor rounded-md p-2 mt-2 flex-col gap-2'>
                                 <h2>Bank Name</h2>
