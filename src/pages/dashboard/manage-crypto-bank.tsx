@@ -86,9 +86,7 @@ const ManageCryptoBank = (props: Props) => {
   return (
     <AdminsLayout   
       roles={[
-        UserRole.SuperAdmin,
-        UserRole.Admin,
-        UserRole.FinanceAdmin, 
+        UserRole.SuperAdmin, 
       ]}
     >
         <div className='flex justify-between items-center'>

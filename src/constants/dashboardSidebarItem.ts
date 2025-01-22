@@ -218,22 +218,7 @@ export const adminItems: TNavItemsList[] = [
         Icon: FaMoneyBillTransfer
       }
     ]
-  },
-  {
-    item: "Bank",
-    navItems: [
-      {
-        label: "Naira Bank",
-        path: "/dashboard/manage-bank",
-        Icon: FaMoneyBillTransfer
-      },
-      {
-        label: "Crypto Bank",
-        path: "/dashboard/manage-crypto-bank",
-        Icon: FaMoneyBillTransfer
-      }
-    ]
-  },
+  }, 
   {
     item: "Others",
     navItems: [
@@ -352,21 +337,7 @@ const financeAdminItems: TNavItemsList[] = [
 
     ]
   },
-  {
-    item: "Bank",
-    navItems: [
-      {
-        label: "Naira Bank",
-        path: "/dashboard/manage-bank",
-        Icon: FaMoneyBillTransfer
-      },
-      {
-        label: "Crypto Bank",
-        path: "/dashboard/manage-crypto-bank",
-        Icon: FaMoneyBillTransfer
-      }
-    ]
-  },
+ 
   {
     item: "Order",
     navItems: [
