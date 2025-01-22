@@ -27,5 +27,8 @@ export const config = {
   ),
   referralBonus: process.env.NEXT_PUBLIC_REFERRAL_BONUS,
   referralPurchaseAmount: process.env.NEXT_PUBLIC_REFERRAL_PURCHASE_AMOUNT,
+  isManualDepositActive: JSON.parse(
+    process.env.NEXT_PUBLIC_IS_MANUAL_DEPOSIT_ACTIVE as string
+  ),
 };
 
