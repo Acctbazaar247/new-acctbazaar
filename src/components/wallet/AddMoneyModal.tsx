@@ -153,7 +153,7 @@ export default function AddMoneyModal() {
                 </div>
               </div>
             </button>
-            <button disabled={config.isManualDepositActive} className="gap-5 p-2 py-4 md:p-4 border  disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-borderColor disabled:hover:text-textGrey rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400 border-borderColor" onClick={() => setPaymentType("manual")}>
+            <button disabled={!config.isManualDepositActive} className="gap-5 p-2 py-4 md:p-4 border  disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-borderColor disabled:hover:text-textGrey rounded-lg transition-all w-full max-w-sm text-left group hover:border-orange-400 border-borderColor" onClick={() => setPaymentType("manual")}>
               <div className="w-full">
                 <div className="flex justify-center items-center">
                 <BsBank2 className="size-10 group-hover:text-orange-400 transition-all"></BsBank2>
