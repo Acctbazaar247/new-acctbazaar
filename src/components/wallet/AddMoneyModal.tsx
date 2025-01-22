@@ -160,7 +160,7 @@ export default function AddMoneyModal() {
 
                 </div>
                 <div>
-                  <h3 className="text-textBlack  text-center mt-2 group-hover:text-orange-400 font-bold transition-all">Manual payment</h3>
+                  <h3 className="text-textBlack  text-center mt-2 group-hover:text-orange-400 font-bold transition-all">Manual Deposit</h3>
                   <p className="text-xs text-center md:text-sm text-textGrey">Deposits processed within 3-5 minutes via direct bank transfers or crypto payments.</p>
                 </div>
               </div>

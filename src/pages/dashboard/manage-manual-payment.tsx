@@ -59,12 +59,7 @@ const ManageManualPayment = (props: Props) => {
                     <p className="line-clamp-1 flex items-center gap-1 text-base"><FaDollarSign/><span>{receivedAmount || "Not Added"}</span></p>
                 )
             }
-        },
-        {
-            title: "Dollar Rate",
-            dataIndex:"dollarRate", 
-        },
-
+        }, 
         {
             title:"Status",
             dataIndex:"status",

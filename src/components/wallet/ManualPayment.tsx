@@ -261,7 +261,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                         </div>
                     </div>
                     <div className=' py-2'>
-                        <p className='text-sm text-textGrey'> <span className='text-orange-500'>*</span> By clicking continue, you agree that you have sent the money to the selected bank and have your payment receipt.</p>
+                        <p className='text-sm text-textGrey'> <span className='text-orange-500'>*</span> {`By clicking I've made payment, you agree that you have sent the money to the selected bank and have your payment receipt.`}</p>
                     </div>
                 </div>
             </div> : <div>
