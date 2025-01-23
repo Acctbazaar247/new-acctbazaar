@@ -6,7 +6,8 @@ export const manualCurrencyRequestApi = apiSlice.injectEndpoints({
     getManualCurrencyRequests: builder.query({
       query: (query) => {
         return {
-          url: `/manual-currency-request?${query}`,
+          url: `/manual-currency-request`,
+          params:query
         };
         
       },

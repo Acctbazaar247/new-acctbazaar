@@ -17,7 +17,7 @@ type Props = {}
 const ManageManualPayment = (props: Props) => {
     const [page,setPage] = useState(1) 
     const [search,setSearch] = useState("")
-    const requestQuery = useGetManualCurrencyRequestsQuery({page,searchTerm:search})   
+    const requestQuery = useGetManualCurrencyRequestsQuery({page,searchTerm:search,limit:20})   
     const columns = useMemo(() => [
         {
             title:"Request ID",
