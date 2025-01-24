@@ -134,7 +134,7 @@ export default function AddMoneyModal() {
       }
       title={!paymentType ?"Choose Payment Type":
          paymentType==="online" ? "Automatic Deposit" : "Manual Deposit" }
-      subTitle="Fund your wallet with any of these two channels"
+      subTitle="Fund your wallet via two channels. Manual deposit is ideal for crypto."
     >
      {
       !paymentType ?<div>
@@ -161,7 +161,7 @@ export default function AddMoneyModal() {
                 </div>
                 <div>
                   <h3 className="text-textBlack  text-center mt-2 group-hover:text-orange-400 font-bold transition-all">Manual Deposit</h3>
-                  <p className="text-xs text-center md:text-sm text-textGrey">Deposits processed within 3-5 minutes via direct bank transfers or crypto payments.</p>
+                  <p className="text-xs text-center md:text-sm text-textGrey">Processed in 3-5 minutes via bank transfer or crypto. Best for crypto payments.</p>
                 </div>
               </div>
               </button>
