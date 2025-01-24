@@ -76,7 +76,7 @@ const ManageManualPayment = (props: Props) => {
             className:"min-w-[150px]",
             render: (createdAt: string, record: any) => {
                 return (
-                    <p className="line-clamp-1  text-base"> 
+                    <p className="   text-xs"> 
                     {dateFormat(createdAt, appDateFormate)}
                     </p>
                 )

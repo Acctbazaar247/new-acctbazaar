@@ -11,8 +11,7 @@ type Props = {
 
 const HomeLayout = ({ children }: Props) => {
   const user = useAppSelector((state) => state.user.user);
-  const router = useRouter();
-  console.log(router.pathname);
+  const router = useRouter(); 
   return (
     <>
       <Navbar />

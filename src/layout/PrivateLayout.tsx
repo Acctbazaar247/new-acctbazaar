@@ -19,6 +19,7 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
       });
     }
   }, [user, router, isLoading]);
+  
   useEffect(() => {
     if (user?.isBlocked) {
       setTimeout(() => {
