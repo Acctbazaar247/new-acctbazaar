@@ -292,6 +292,15 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                       onChange={(e) => setTransactionHash(e.target.value)}
                     />
                 </div> 
+                <div className='flex border border-orange-300 rounded-lg p-2 items-center gap-2 mt-3'>
+                    {/* <span className='text-red-500'>*</span> */}
+                    <div className=' md:min-w-[20px]'>
+                    <FaExclamationCircle className='text-orange-500  text md:text-2xl' />
+
+                    </div>
+                    <p className='text-xs text-textGrey'>Submit this receipt only once with the transaction reference to receive your deposit. Submitting twice or with another account may result in a block and loss of funds.</p>
+
+                </div>
             </div>
         }
     </div>)
@@ -348,6 +357,15 @@ const STEP_4=(<div className='flex justify-center py-10 items-center flex-col ga
                     <AppImageUpload placeholder='Upload Bank Receipt'  name="bank-receipt" onChange={setImage} setImageLoading={setImageLoading} />
                 </div>
                 </div> 
+                <div className='flex border border-orange-300 rounded-lg p-2 items-center gap-2 mt-3'>
+                    {/* <span className='text-red-500'>*</span> */}
+                    <div className=' md:min-w-[20px]'>
+                    <FaExclamationCircle className='text-orange-500  text md:text-2xl' />
+
+                    </div>
+                    <p className='text-xs text-textGrey'>Submit this receipt only once with the transaction reference to receive your deposit. Submitting twice or with another account may result in a block and loss of funds.</p>
+
+                </div>
             </div>:<div>
             {STEP_4}
             </div>
