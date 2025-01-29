@@ -417,6 +417,7 @@ const STEP_4=(<div className='flex justify-center py-10 items-center flex-col ga
           {
             submitManualPaymentLoading ? <Spin /> : 
             step===2 && selectedOption==="bank"?"I’ve made payment.":
+            step ===2 && selectedOption==="crypto"?"Submit":
             step === 3 ? selectedOption==="crypto"?"Close": " Submit" : step===4?"Close": "Continue"
           }
           </button>
