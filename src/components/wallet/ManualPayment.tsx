@@ -298,7 +298,7 @@ const ManualPayment = ({setPaymentType, setModalOpen}: Props) => {
                     <FaExclamationCircle className='text-orange-500  text md:text-2xl' />
 
                     </div>
-                    <p className='text-xs text-textGrey'>Submit this receipt only once with the transaction reference to receive your deposit. Submitting twice or with another account may result in a block and loss of funds.</p>
+                    <p className='text-xs text-textGrey'>Submit the transaction hash only once to receive your deposit. Submitting it twice or with another account may result in a block and loss of funds.</p>
 
                 </div>
             </div>
