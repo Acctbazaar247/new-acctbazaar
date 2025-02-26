@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { apiSlice } from "../apiSlice/apiSlice";
 export const currencyRequestApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -38,6 +39,16 @@ export const currencyRequestApi = apiSlice.injectEndpoints({
         };
       }
     }),
+    addCurrencyRequestWithOx: builder.mutation({
+      query: (info) => {
+        return {
+          url: "/currency-request/ox-process",
+          method: "POST",
+          body: info
+        };
+      }
+    }),
+    
     editCurrencyRequest: builder.mutation({
       query: (info) => {
         return {
@@ -64,5 +75,6 @@ export const {
   useEditCurrencyRequestMutation,
   useGetCurrencyRequestByIdQuery,
   useAddCurrencyRequestWithPayStackMutation,
-  useAddCurrencyRequestWithKoraPayMutation
+  useAddCurrencyRequestWithKoraPayMutation,
+  useAddCurrencyRequestWithOxMutation
 } = currencyRequestApi;

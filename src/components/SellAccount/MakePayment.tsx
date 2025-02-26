@@ -13,6 +13,8 @@ import { IoWalletOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setUser } from "@/redux/features/user/userSlice";
 import { setMakeSeller } from "@/redux/features/auth/authSlice";
+import { Select } from "antd";
+import { oxDepositOption } from "@/utils";
 type TMakePayment = {
   updateProgress: Dispatch<SetStateAction<number>>;
 };
@@ -20,6 +22,7 @@ type TMakePayment = {
 export default function MakePayment({ updateProgress }: TMakePayment) {
   const [selectedOption, setSelectedOption] = useState<string>("bank");
   const router = useRouter();
+  const [oxType,setOxType] = useState<string| null>();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state?.user);
 
@@ -64,7 +67,31 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
             toastId: 1,
           });
         });
-    } else if (selectedOption === "wallet") {
+    } 
+    
+    else if(selectedOption === "crypto-btc"){
+      if(oxType === null){
+        toast.warn("Select a Network", { toastId: 1 });
+        return;
+      }
+      becomeASeller({ payWith:"oxProcessing", currency: oxType })
+       .unwrap()
+       .then((res: ResponseSuccessType) => {
+        if (!res?.data) {
+          toast.error(res?.data?.message || "something went wrong ", {
+            toastId: 1,
+          });
+        } else {
+          router.push(res.data.txId);
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.data?.message || "something went wrong", {
+          toastId: 1,
+        });
+      });
+    }
+    else if (selectedOption === "wallet") {
       becomeASellerWithWallet("")
         .unwrap()
         .then((res: ResponseSuccessType) => {
@@ -129,6 +156,37 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
           </div>
         </div>
 
+        <button
+          onClick={() => {
+            setSelectedOption("crypto-btc"); 
+          }}
+          className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+            selectedOption === "crypto-btc" ? "border-orange-400" : ""
+          }`}
+        >
+          <Image
+            width={32}
+            height={32}
+            className="size-8"
+            src={"/assets/icons/doller-recive.png"}
+            alt="crypto payment"
+          />
+          <div className="space-y-1">
+            <h3 className="text-textBlack font-bold">OX Deposit</h3>
+            <p className="text-sm text-textGrey">
+              Fund your wallet with popular cryptocurrencies like USDT, ETH,
+              BNB, SOL and more.
+            </p>
+            {
+              selectedOption === "crypto-btc" && (
+                <div className="w-full pt-2">
+                  <Select className="w-full" placeholder="Select a Network" options={oxDepositOption} onChange={setOxType} value={oxType}></Select>
+                </div>
+              )
+            }
+          </div>
+
+        </button>
         <div
           onClick={() => setSelectedOption("wallet")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${

@@ -2,7 +2,32 @@ export const optionCreator = (single: string) => ({
   label: single.split("_").join(" ").toLowerCase(),
   value: single,
 });
-
+export const oxDepositOption=[
+  {
+    label:"BTC",
+    value:"BTC"
+  },
+  {
+    label:"ETH",
+    value:"ETH"
+  },
+  {
+    label:"USDT (ERC20)",
+    value:"USDT (ERC20)"
+  },
+  {
+    label:"USDT (TRC20)",
+    value:"USDT (TRC20)"
+  },
+  {
+    label:"USDC",
+    value:"USDC"
+  },
+  {
+    label:"BNB",
+    value:"BNB"
+  }
+]
 export const normalizeScrollValue = (
   smoothedScrollY: number,
   minValue: number,

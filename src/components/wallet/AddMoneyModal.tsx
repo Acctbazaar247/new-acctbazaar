@@ -1,6 +1,7 @@
 import {
   useAddCurrencyRequestMutation,
   useAddCurrencyRequestWithKoraPayMutation,
+  useAddCurrencyRequestWithOxMutation,
   useAddCurrencyRequestWithPayStackMutation
 } from "@/redux/features/currencyRequest/currencyRequestApi";
 import { useAppSelector } from "@/redux/hook";
@@ -18,9 +19,12 @@ import ManualPayment from "./ManualPayment";
 import { MdOnlinePrediction } from "react-icons/md";
 import { GiGears } from "react-icons/gi";
 import { BsBank2, BsCashCoin } from "react-icons/bs";
+import { Select } from "antd";
+import { oxDepositOption } from "@/utils";
 export default function AddMoneyModal() {
   const [amount, setAmount] = useState(0);
   const [paymentType, setPaymentType] = useState<string | null>(null);
+  const [oxType, setOxType] = useState<string | null>(null);
   const router = useRouter();
   const user = useAppSelector((state) => state.user.user);
   const [addRequest, { isLoading, isError, isSuccess, error }] =
@@ -29,6 +33,7 @@ export default function AddMoneyModal() {
     useAddCurrencyRequestWithPayStackMutation();
   const [addRequestWithKoraPay, { isLoading: isKoraPayLoading }] =
     useAddCurrencyRequestWithKoraPayMutation();
+    const [addRequestWithOx, { isLoading: isOxLoading }] =useAddCurrencyRequestWithOxMutation()
   const [selectedOption, setSelectedOption] = useState<string | null>();
   const [isBank, setIsBank] = useState(false);
   const [modalOpen, setModalOpen] = useState(false)
@@ -100,7 +105,31 @@ export default function AddMoneyModal() {
         });
       });
   };
-
+const handlePayWithBtc=()=>{
+  if (amount < config.fundBtcMinMoney) {
+    toast.error(`Minimum amount is ${config.fundBtcMinMoney}$`, { toastId: 1 });
+    return;
+  }
+  if(!oxType){
+    toast.error("Select a payment type");
+    return;
+  }
+  addRequestWithOx({ amount, pay_currency_btc: true,currency:oxType })
+    .unwrap()
+    .then((res: any) => {
+      if (res.error) {
+        console.log(res);
+        toast.error(res?.data?.message || "something went wrong ", {
+          toastId: 1
+        });
+      } else {
+        router.push(res.data?.url);
+      }
+    })
+    .catch((err) => {
+      toast.error(err?.data?.message ||"something went wrong", { toastId: 1 });
+    });
+}
   const handleSubmit = (data: any): void => {
     if (!selectedOption) {
       toast.error("Select a payment ");
@@ -111,7 +140,11 @@ export default function AddMoneyModal() {
       handllePayWithPayStack();
     } else if (selectedOption === "bank-kora") {
       handllePayWithKoraPay();
-    } else {
+    } 
+    else if(selectedOption==="crypto-btc"){
+      handlePayWithBtc()
+    }
+    else {
       handlePay();
     }
   };
@@ -343,15 +376,48 @@ export default function AddMoneyModal() {
           </p>
         )}
 
+
+<button
+          onClick={() => {
+            setSelectedOption("crypto-btc");
+            setIsBank(false);
+          }}
+          className={`flex gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
+            selectedOption === "crypto-btc" ? "border-orange-400" : ""
+          }`}
+        >
+          <Image
+            width={32}
+            height={32}
+            className="size-8"
+            src={"/assets/icons/doller-recive.png"}
+            alt="crypto payment"
+          />
+          <div className="space-y-1">
+            <h3 className="text-textBlack font-bold">OX Deposit</h3>
+            <p className="text-sm text-textGrey">
+              Fund your wallet with popular cryptocurrencies like USDT, ETH,
+              BNB, SOL and more.
+            </p>
+            {
+              selectedOption === "crypto-btc" && (
+                <div className="w-full pt-2">
+                  <Select className="w-full" placeholder="Select a Network" options={oxDepositOption} onChange={setOxType} value={oxType}></Select>
+                </div>
+              )
+            }
+          </div>
+
+        </button>
         <div className="flex mt-4 gap-3">
           {/* back button */}
           <button className="border border-gray-600 text-textBlack  px-4 py-2 rounded-lg" onClick={() => setPaymentType(null)}>Back</button>
           <button
             onClick={handleSubmit}
-            disabled={isLoading || isPayStackLoading || isKoraPayLoading}
+            disabled={isLoading || isPayStackLoading || isKoraPayLoading || isOxLoading}
             className=" rounded-lg  px-7 py-2 bg-orange-500 text-white  hover:opacity-80 transition-all disabled:opacity-80"
           >
-            {isLoading || isPayStackLoading || isKoraPayLoading
+            {isLoading || isPayStackLoading || isKoraPayLoading || isOxLoading
               ? "Loading"
               : "Continue"}
           </button>
