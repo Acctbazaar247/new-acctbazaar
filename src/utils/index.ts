@@ -2,6 +2,7 @@ export const optionCreator = (single: string) => ({
   label: single.split("_").join(" ").toLowerCase(),
   value: single,
 });
+// on label add div ith image and text after it
 export const oxDepositOption=[
   {
     label:"BTC",

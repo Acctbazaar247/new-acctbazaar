@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { setUser } from "@/redux/features/user/userSlice";
 import { setMakeSeller } from "@/redux/features/auth/authSlice";
 import { Select } from "antd";
-import { oxDepositOption } from "@/utils";
+import { oxDepositOption } from "@/shared/btcOption";
 type TMakePayment = {
   updateProgress: Dispatch<SetStateAction<number>>;
 };

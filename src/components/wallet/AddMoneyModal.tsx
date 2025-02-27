@@ -20,7 +20,7 @@ import { MdOnlinePrediction } from "react-icons/md";
 import { GiGears } from "react-icons/gi";
 import { BsBank2, BsCashCoin } from "react-icons/bs";
 import { Select } from "antd";
-import { oxDepositOption } from "@/utils";
+import { oxDepositOption } from "@/shared/btcOption";
 export default function AddMoneyModal() {
   const [amount, setAmount] = useState(0);
   const [paymentType, setPaymentType] = useState<string | null>(null);
