@@ -172,7 +172,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
             alt="crypto payment"
           />
           <div className="space-y-1">
-            <h3 className="text-textBlack font-bold">OX Deposit</h3>
+            <h3 className="text-textBlack font-bold">Crypto Deposit</h3>
             <p className="text-sm text-textGrey">
               Fund your wallet with popular cryptocurrencies like USDT, ETH,
               BNB, SOL and more.
