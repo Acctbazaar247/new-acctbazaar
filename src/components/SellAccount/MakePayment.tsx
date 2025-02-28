@@ -132,7 +132,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
           </div>
         </div>
 
-        <div
+        {/* <div
           onClick={() => setSelectedOption("crypto")}
           className={`flex gap-5 p-4 md:p-6 border  rounded-lg hover:bg-primary/5 cursor-pointer ${
             selectedOption === "crypto"
@@ -154,7 +154,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
               to an address
             </p>
           </div>
-        </div>
+        </div> */}
 
         <button
           onClick={() => {

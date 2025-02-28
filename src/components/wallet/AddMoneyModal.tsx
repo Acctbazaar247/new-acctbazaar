@@ -342,7 +342,7 @@ const handlePayWithBtc=()=>{
         )}
 
         {/* Crypto Deposit button */}
-        <button
+        {/* <button
           onClick={() => {
             setSelectedOption("crypto");
             setIsBank(false);
@@ -365,7 +365,7 @@ const handlePayWithBtc=()=>{
               BNB, SOL and more.
             </p>
           </div>
-        </button>
+        </button> */}
 
         {/* Message for Crypto Deposit */}
         {selectedOption === "crypto" && (
