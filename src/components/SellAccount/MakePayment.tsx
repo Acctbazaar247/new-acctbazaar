@@ -71,7 +71,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
     
     else if(selectedOption === "crypto-btc"){
       if(oxType === null){
-        toast.warn("Select a Network", { toastId: 1 });
+        toast.warn("Select a Crypto", { toastId: 1 });
         return;
       }
       becomeASeller({ payWith:"oxProcessing", currency: oxType })
@@ -180,7 +180,7 @@ export default function MakePayment({ updateProgress }: TMakePayment) {
             {
               selectedOption === "crypto-btc" && (
                 <div className="w-full pt-2">
-                  <Select className="w-full" placeholder="Select a Network" options={oxDepositOption} onChange={setOxType} value={oxType}></Select>
+                  <Select className="w-full" placeholder="Select a Crypto" options={oxDepositOption} onChange={setOxType} value={oxType}></Select>
                 </div>
               )
             }

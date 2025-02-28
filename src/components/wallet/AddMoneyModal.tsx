@@ -402,7 +402,7 @@ const handlePayWithBtc=()=>{
             {
               selectedOption === "crypto-btc" && (
                 <div className="w-full pt-2">
-                  <Select className="w-full" placeholder="Select a Network" options={oxDepositOption} onChange={setOxType} value={oxType}></Select>
+                  <Select className="w-full" placeholder="Select a Crypto" options={oxDepositOption} onChange={setOxType} value={oxType}></Select>
                 </div>
               )
             }
