@@ -181,8 +181,8 @@ const handlePayWithBtc=()=>{
 
                 </div>
                 <div>
-                  <h3 className="text-center text-textBlack mt-2 group-hover:text-orange-400 font-bold transition-all">Automatic Deposit</h3>
-                  <p className="text-xs md:text-sm text-center text-textGrey">Instant deposit via Bank, Card, or Crypto.</p>
+                  <h3 className="text-center text-textBlack mt-2 group-hover:text-orange-400 font-bold transition-all">Quick Deposit</h3>
+                  <p className="text-xs md:text-sm text-center text-textGrey">Instant funding via Bank Transfer, Debit/Credit Card, or Crypto.</p>
                 </div>
               </div>
             </button>
