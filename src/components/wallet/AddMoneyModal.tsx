@@ -225,7 +225,7 @@ export default function AddMoneyModal() {
               onClick={(e) => {
                 e.stopPropagation();
                 setIsBank(true);
-                setSelectedOption("");
+                setSelectedOption("bank-kora");
               }}
               className={`gap-5 p-4 border border-borderColor rounded-lg transition-all w-full text-left ${
                 isBank ? "border-orange-400" : ""
@@ -246,7 +246,7 @@ export default function AddMoneyModal() {
                   </p>
                 </div>
               </div>
-              {isBank && (
+              {/* {isBank && (
                 <div className="mt-5 flex gap-3 md:gap-4 justify-center">
                   <button
                     onClick={(e) => {
@@ -263,7 +263,7 @@ export default function AddMoneyModal() {
                     </div>
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
             {selectedOption === "bank-kora" && (
               <p className="text-sm text-textGrey mt-2">
@@ -278,7 +278,7 @@ export default function AddMoneyModal() {
               </p>
             )}
             {/* Message for Crypto Deposit */}
-            {selectedOption === "crypto" && (
+            {selectedOption === "crypto-btc" && (
               <p className="text-sm text-textGrey mt-2">
                 <strong>Important:</strong> Please send the exact amount displayed when making your payment
                 to ensure successful processing. Overpayment will not result in extra credit, and
